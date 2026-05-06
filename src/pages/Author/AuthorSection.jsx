@@ -28,7 +28,7 @@ const AuthorSection = () => {
       <div className="max-w-[1220px] mx-auto px-[20px] md:px-[40px]">
 
         {/* TITLE */}
-        <div className="text-center mb-14">
+        {/* <div className="text-center mb-14">
 
         
 
@@ -44,7 +44,7 @@ const AuthorSection = () => {
             Whether it’s rethinking how organisations use AI, reshaping HR, or exploring new ways to work:
             I am most pleased when my publications encourage you to challenge existing models.
           </p>
-        </div>
+        </div> */}
 
         {/* GRID */}
         <div className="grid md:grid-cols-3 gap-10">

@@ -2,7 +2,7 @@ const About = () => {
   return (
     <section className="bg-white py-[80px]">
 
-      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[40px]">
+      <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
 
         {/* 🔥 MAIN GRID */}
         <div className="grid md:grid-cols-2 gap-10 items-center">
@@ -24,20 +24,19 @@ const About = () => {
             <div className="space-y-5">
 
               <p className="text-[#0a3e40] text-[16px] leading-relaxed font-semibold italic">
-                Shaping digital transformation and AI with integrity, clarity and a long-term vision. Welcome — I’m glad you’re here.
+                Shaping digital transformation and AI with integrity, clarity and a long-term vision.
               </p>
+ <p className="text-[#0a3e40] text-[16px] leading-relaxed">
+Welcome — I’m glad you’re here.              </p>
 
               <p className="text-[#0a3e40] text-[16px] leading-relaxed">
                 I am an expert in AI, HR and business process transformation, and a recognised speaker at international conferences and public forums. As an interim manager, I help organisations translate complexity into practical, AI-driven solutions with real impact.
               </p>
 
               <p className="text-[#0a3e40] text-[16px] leading-relaxed">
-                On this website, you will find everything you need to know about my work, upcoming engagements and publications. In my blog “HR & AI Insights,” I share current perspectives and insights on AI and HR.
-              </p>
+On this website, you will find everything you need to know about my work, upcoming engagements and publications. In my blog “HR & AI Insights,” I share current perspectives and insights on AI and HR. Feel free to subscribe to my newsletter, connect with me on social media, or explore collaboration opportunities. I look forward to hearing from you.               </p>
 
-              <p className="text-[#0a3e40] text-[16px] leading-relaxed">
-                Feel free to subscribe to my newsletter, connect with me on social media, or explore collaboration opportunities. I look forward to hearing from you.
-              </p>
+             
 
             </div>
 

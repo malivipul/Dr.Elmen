@@ -63,26 +63,50 @@ const Header = () => {
               to={item.path}
               onMouseEnter={() => setHoverIndex(i)}
               onMouseLeave={() => setHoverIndex(null)}
-              className="relative overflow-hidden"
+              className="relative flex items-center h-[30px]"
             >
               <span
-                className={`relative inline-block text-[16px] font-semibold tracking-wide transition-all duration-300
-                ${
-                  hoverIndex === i
-                    ? "scale-105 font-['Caveat']"
-                    : "scale-100"
-                }`}
+                className={`
+                  relative
+                  inline-block
+                  text-[16px]
+                  font-semibold
+                  tracking-wide
+                  whitespace-nowrap
+                  transition-all
+                  duration-300
+                  origin-center
+                  ${
+                    hoverIndex === i
+                      ? "font-['Caveat']"
+                      : ""
+                  }
+                `}
+                style={{
+                  transform:
+                    hoverIndex === i
+                      ? "translateY(-1px)"
+                      : "translateY(0px)",
+                }}
               >
                 {item.name}
 
                 {/* UNDERLINE */}
                 <span
-                  className={`absolute left-0 -bottom-1 h-[2px] bg-white transition-all duration-300
-                  ${
-                    hoverIndex === i
-                      ? "w-full"
-                      : "w-0"
-                  }`}
+                  className={`
+                    absolute
+                    left-0
+                    -bottom-1
+                    h-[2px]
+                    bg-white
+                    transition-all
+                    duration-300
+                    ${
+                      hoverIndex === i
+                        ? "w-full"
+                        : "w-0"
+                    }
+                  `}
                 ></span>
               </span>
             </Link>
@@ -108,26 +132,50 @@ const Header = () => {
               to={item.path}
               onMouseEnter={() => setHoverIndex(i + 10)}
               onMouseLeave={() => setHoverIndex(null)}
-              className="relative overflow-hidden"
+              className="relative flex items-center h-[30px]"
             >
               <span
-                className={`relative inline-block text-[16px] font-semibold tracking-wide transition-all duration-300
-                ${
-                  hoverIndex === i + 10
-                    ? "scale-105 font-['Caveat']"
-                    : "scale-100"
-                }`}
+                className={`
+                  relative
+                  inline-block
+                  text-[16px]
+                  font-semibold
+                  tracking-wide
+                  whitespace-nowrap
+                  transition-all
+                  duration-300
+                  origin-center
+                  ${
+                    hoverIndex === i + 10
+                      ? "font-['Caveat']"
+                      : ""
+                  }
+                `}
+                style={{
+                  transform:
+                    hoverIndex === i + 10
+                      ? "translateY(-1px)"
+                      : "translateY(0px)",
+                }}
               >
                 {item.name}
 
                 {/* UNDERLINE */}
                 <span
-                  className={`absolute left-0 -bottom-1 h-[2px] bg-white transition-all duration-300
-                  ${
-                    hoverIndex === i + 10
-                      ? "w-full"
-                      : "w-0"
-                  }`}
+                  className={`
+                    absolute
+                    left-0
+                    -bottom-1
+                    h-[2px]
+                    bg-white
+                    transition-all
+                    duration-300
+                    ${
+                      hoverIndex === i + 10
+                        ? "w-full"
+                        : "w-0"
+                    }
+                  `}
                 ></span>
               </span>
             </Link>
@@ -193,7 +241,7 @@ const Header = () => {
           onClick={toggleLang}
           className="text-sm font-semibold tracking-[2px] hover:opacity-70 transition"
         >
-          {lang}
+          {lang === "EN" ? "DE" : "EN"}
         </button>
       </div>
 
