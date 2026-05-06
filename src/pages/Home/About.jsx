@@ -4,7 +4,7 @@ const About = () => {
 
       <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
 
-        {/* 🔥 MAIN GRID */}
+        {/* MAIN GRID */}
         <div className="grid md:grid-cols-2 gap-10 items-center">
 
           {/* LEFT CONTENT */}
@@ -26,91 +26,115 @@ const About = () => {
               <p className="text-[#0a3e40] text-[16px] leading-relaxed font-semibold italic">
                 Shaping digital transformation and AI with integrity, clarity and a long-term vision.
               </p>
- <p className="text-[#0a3e40] text-[16px] leading-relaxed">
-Welcome — I’m glad you’re here.              </p>
+
+              <p className="text-[#0a3e40] text-[16px] leading-relaxed">
+                Welcome — I’m glad you’re here.
+              </p>
 
               <p className="text-[#0a3e40] text-[16px] leading-relaxed">
                 I am an expert in AI, HR and business process transformation, and a recognised speaker at international conferences and public forums. As an interim manager, I help organisations translate complexity into practical, AI-driven solutions with real impact.
               </p>
 
               <p className="text-[#0a3e40] text-[16px] leading-relaxed">
-On this website, you will find everything you need to know about my work, upcoming engagements and publications. In my blog “HR & AI Insights,” I share current perspectives and insights on AI and HR. Feel free to subscribe to my newsletter, connect with me on social media, or explore collaboration opportunities. I look forward to hearing from you.               </p>
-
-             
+                On this website, you will find everything you need to know about my work, upcoming engagements and publications. In my blog “HR & AI Insights,” I share current perspectives and insights on AI and HR. Feel free to subscribe to my newsletter, connect with me on social media, or explore collaboration opportunities. I look forward to hearing from you.
+              </p>
 
             </div>
 
           </div>
 
-          {/* RIGHT SIDE (IMAGE + BIO CARD) */}
-          <div className="bg-[#f5f3ef] rounded-[18px] p-6 md:p-8 border border-[#e6dfd5] shadow-[0_8px_25px_rgba(0,0,0,0.05)]">
+          {/* RIGHT SIDE */}
+          <div className="bg-[#f5f3ef] rounded-[22px] p-6 md:p-8 border border-[#e6dfd5] shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
 
-  
+            {/* TOP */}
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
 
-            {/* BIO */}
-            <div className="text-center">
+              {/* LEFT SIDE */}
+              <div className="flex flex-col items-center">
 
-              <span className="text-[#b8965a] text-[11px] tracking-[3px] uppercase mb-2 block">
-                vita
-              </span>
+                {/* IMAGE */}
+                <div className="w-[250px] h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
+                  <img
+                    src="/assets/images/2026_03_17_Raphael_Edlmann_About Me.jpg"
+                    className="w-full h-full object-cover"
+                    alt="profile"
+                  />
+                </div>
 
-              <h3 className="title-font text-[22px] md:text-[26px] text-black mb-3">
-               Impactful Leadership
-              </h3>
+                {/* BUTTONS */}
+                <div className="flex flex-col gap-3 mt-6 w-full">
 
+                  <a
+                    href="#"
+                    className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
+                  >
+                    Contact Me
+                  </a>
 
- {/* IMAGE */}
-            <div className="flex justify-center mb-6">
-              <div className="w-[200px] h-[260px] rounded-[16px] overflow-hidden shadow-[0_12px_30px_rgba(0,0,0,0.15)]">
-                <img
-                  src="/assets/images/2026_03_17_Raphael_Edlmann_About Me.jpg"
-                  className="w-full h-full object-cover"
-                  alt="profile"
-                />
+                  <a
+                    href="/assets/files/cv.pdf"
+                    download
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
+                  >
+                    <i className="fa-solid fa-download"></i>
+                    Download CV
+                  </a>
+
+                </div>
+
               </div>
-            </div>
-            {/* SMALL INFO GRID */}
-<div className="flex flex-wrap justify-center gap-8 mb-6 text-center">
 
-  <div>
-    <h4 className="text-[#b8965a] font-semibold">B.Sc.</h4>
-    <p className="text-sm">TU Munich</p>
+              {/* RIGHT CONTENT */}
+              <div className="flex-1 w-full">
+
+                <span className="text-[#b8965a] text-[11px] tracking-[3px] uppercase mb-2 block">
+                  Vita
+                </span>
+
+                <h3 className="title-font text-[24px] md:text-[28px] text-black mb-7 leading-tight">
+                  Impactful Leadership
+                </h3>
+
+              {/* INFO CARDS */}
+<div className="space-y-4 text-center md:text-left">
+
+  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
+    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
+      B.Sc.
+    </h4>
+    <p className="text-[#0a3e40] text-[15px]">
+      TU Munich
+    </p>
   </div>
 
-  <div>
-    <h4 className="text-[#b8965a] font-semibold">M.Sc.</h4>
-    <p className="text-sm">FOM University</p>
+  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
+    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
+      M.Sc.
+    </h4>
+    <p className="text-[#0a3e40] text-[15px]">
+      FOM University
+    </p>
   </div>
 
-  <div>
-    <h4 className="text-[#b8965a] font-semibold">Dr.</h4>
-    <p className="text-sm">Heriot-Watt</p>
+  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
+    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
+      Dr.
+    </h4>
+    <p className="text-[#0a3e40] text-[15px]">
+      Heriot-Watt
+    </p>
   </div>
 
-  <div>
-    <h4 className="text-[#b8965a] font-semibold">ASA</h4>
-    <p className="text-sm">Innovation Task</p>
+  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
+    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
+      ASA
+    </h4>
+    <p className="text-[#0a3e40] text-[15px]">
+      Innovation Task
+    </p>
   </div>
 
 </div>
-              {/* BUTTONS */}
-              <div className="flex flex-wrap justify-center gap-3">
-
-                <a
-                  href="#"
-                  className="px-5 py-2 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
-                >
-                  Contact Me
-                </a>
-
-                <a
-                  href="/assets/files/cv.pdf"
-                  download
-                  className="flex items-center gap-2 px-5 py-2 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
-                >
-                  <i className="fa-solid fa-download"></i>
-                  Download CV
-                </a>
 
               </div>
 

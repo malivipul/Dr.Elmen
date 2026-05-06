@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import About from "./pages/About-Me"; // ✅ new page
 import Vita from "./pages/Vita"; // ✅ new page
 import Author from "./pages/Author"; // ✅ new page
+import Insights from "./pages/insights"; // ✅ new page
+// BLOG DETAILS PAGE
+import BlogDetails from "./pages/blog-details";
 
 function App() {
   return (
@@ -24,6 +27,8 @@ function App() {
         <Route path="/about" element={<About />} /> {/* ✅ added */}
         <Route path="/vita" element={<Vita />} /> {/* ✅ added */}
          <Route path="/author" element={<Author />} /> {/* ✅ added */}
+          <Route path="/insights" element={<Insights />} /> {/* ✅ added */}
+          <Route path="/blog-details" element={<BlogDetails />} />
       </Routes>
 
       {/* Footer */}

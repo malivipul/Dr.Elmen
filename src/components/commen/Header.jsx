@@ -15,12 +15,14 @@ const Header = () => {
         { name: "Author", path: "/author" },
         { name: "Speaker", path: "/speaker" },
       ],
+
       right: [
         { name: "Vita", path: "/vita" },
         { name: "Projects", path: "/projects" },
         { name: "Workshops", path: "/workshops" },
         { name: "Let’s Work", path: "/contact" },
       ],
+
       cta: "LET’S WORK →",
     },
 
@@ -31,12 +33,14 @@ const Header = () => {
         { name: "Autor", path: "/author" },
         { name: "Redner", path: "/speaker" },
       ],
+
       right: [
         { name: "Vita", path: "/vita" },
         { name: "Projekte", path: "/projects" },
         { name: "Workshops", path: "/workshops" },
         { name: "Kontakt", path: "/contact" },
       ],
+
       cta: "ZUSAMMENARBEIT →",
     },
   };
@@ -75,23 +79,13 @@ const Header = () => {
                   whitespace-nowrap
                   transition-all
                   duration-300
-                  origin-center
                   ${
-                    hoverIndex === i
-                      ? "font-['Caveat']"
-                      : ""
+                    hoverIndex === i ? "font-['Caveat']" : ""
                   }
                 `}
-                style={{
-                  transform:
-                    hoverIndex === i
-                      ? "translateY(-1px)"
-                      : "translateY(0px)",
-                }}
               >
                 {item.name}
 
-                {/* UNDERLINE */}
                 <span
                   className={`
                     absolute
@@ -102,12 +96,11 @@ const Header = () => {
                     transition-all
                     duration-300
                     ${
-                      hoverIndex === i
-                        ? "w-full"
-                        : "w-0"
+                      hoverIndex === i ? "w-full" : "w-0"
                     }
                   `}
                 ></span>
+
               </span>
             </Link>
           ))}
@@ -117,8 +110,10 @@ const Header = () => {
         {/* LOGO */}
         <div className="mx-10 shrink-0">
           <Link to="/">
-            <h1 className="text-[24px] md:text-[30px] font-bold font-serif tracking-[1px] whitespace-nowrap">
-              Dr. Raphael Edlmann
+            <h1 className="text-[20px] md:text-[30px] font-bold font-serif leading-tight">
+              Dr. Raphael
+              <br className="block md:hidden" />
+              <span className="md:ml-2">Edlmann</span>
             </h1>
           </Link>
         </div>
@@ -144,23 +139,13 @@ const Header = () => {
                   whitespace-nowrap
                   transition-all
                   duration-300
-                  origin-center
                   ${
-                    hoverIndex === i + 10
-                      ? "font-['Caveat']"
-                      : ""
+                    hoverIndex === i + 10 ? "font-['Caveat']" : ""
                   }
                 `}
-                style={{
-                  transform:
-                    hoverIndex === i + 10
-                      ? "translateY(-1px)"
-                      : "translateY(0px)",
-                }}
               >
                 {item.name}
 
-                {/* UNDERLINE */}
                 <span
                   className={`
                     absolute
@@ -171,22 +156,21 @@ const Header = () => {
                     transition-all
                     duration-300
                     ${
-                      hoverIndex === i + 10
-                        ? "w-full"
-                        : "w-0"
+                      hoverIndex === i + 10 ? "w-full" : "w-0"
                     }
                   `}
                 ></span>
+
               </span>
             </Link>
           ))}
 
         </div>
 
-        {/* MOBILE MENU BUTTON */}
+        {/* MOBILE MENU ICON */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="lg:hidden absolute right-[20px] text-[30px]"
+          className="lg:hidden absolute right-[20px] top-5 text-[28px] text-white"
         >
           ☰
         </button>
@@ -195,48 +179,79 @@ const Header = () => {
 
       {/* MOBILE MENU */}
       <div
-        className={`fixed top-0 left-0 h-full w-[300px] bg-[#f5f3ef] z-[100] transition-all duration-500 ${
-          menuOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed inset-0 z-[100] transition-all duration-500 ${
+          menuOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible"
         }`}
       >
 
-        {/* CLOSE BUTTON */}
-        <button
+        {/* OVERLAY */}
+        <div
+          className="absolute inset-0 bg-black/40"
           onClick={() => setMenuOpen(false)}
-          className="absolute top-5 right-5 text-3xl text-black"
+        ></div>
+
+        {/* MENU BOX */}
+        <div
+          className={`
+            absolute
+            top-[70px]
+            left-[20px]
+            w-[280px]
+            bg-[#f5f3ef]
+            rounded-[28px]
+            p-8
+            transition-all
+            duration-500
+            ${
+              menuOpen
+                ? "translate-x-0"
+                : "-translate-x-[120%]"
+            }
+          `}
         >
-          ×
-        </button>
 
-        <div className="pt-24 px-8 text-black">
-
-          {[...menuLeft, ...menuRight].map((item, i) => (
-            <Link
-              key={i}
-              to={item.path}
-              onClick={() => setMenuOpen(false)}
-            >
-              <p className="mb-6 text-[18px] font-medium hover:translate-x-2 transition-all duration-300">
-                {item.name}
-              </p>
-            </Link>
-          ))}
-
-          {/* CTA */}
-          <Link
-            to="/contact"
+          {/* CLOSE */}
+          <button
             onClick={() => setMenuOpen(false)}
-            className="block mt-8 bg-[#b8965a] text-white text-center py-4 rounded-full font-semibold tracking-wide hover:opacity-90 transition"
+            className="absolute top-5 right-5 text-[28px] text-black"
           >
-            {content[lang].cta}
-          </Link>
+            ×
+          </button>
+
+          {/* MENU ITEMS */}
+          <div className="pt-6">
+
+            {[...menuLeft, ...menuRight].map((item, i) => (
+              <Link
+                key={i}
+                to={item.path}
+                onClick={() => setMenuOpen(false)}
+              >
+                <p className="text-black text-[16px] font-semibold  mb-4 tracking-[1px]">
+                  {item.name}
+                </p>
+              </Link>
+            ))}
+
+            {/* CTA */}
+            <Link
+              to="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="block mt-8 bg-[#b8965a] text-white text-center py-4 rounded-full text-sm font-semibold tracking-wide"
+            >
+              {content[lang].cta}
+            </Link>
+
+          </div>
 
         </div>
 
       </div>
 
       {/* LANGUAGE TOGGLE */}
-      <div className="absolute top-5 right-[70px] md:right-[40px] z-50">
+      <div className="absolute top-5 right-[65px] md:right-[40px] z-50">
         <button
           onClick={toggleLang}
           className="text-sm font-semibold tracking-[2px] hover:opacity-70 transition"

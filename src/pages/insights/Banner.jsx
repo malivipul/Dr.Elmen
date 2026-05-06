@@ -38,14 +38,16 @@ const AboutBanner = () => {
             <span>›</span>
 
             <span className="font-semibold">
-              Author
+          HR & AI Insights
+
             </span>
 
           </div>
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-            Author
+         HR & AI Insights
+
           </h1>
 
         </div>

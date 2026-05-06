@@ -149,20 +149,70 @@ Key Achievements:
           ))}
         </Swiper>
 
-        {/* CONTROLS */}
-        <div className="flex items-center justify-between mt-12">
+       {/* CONTROLS */}
+<div className="flex flex-col md:flex-row items-center justify-between gap-5 mt-12">
 
-          <button className="prev-btn w-11 h-11 rounded-full border border-gray-300 flex items-center justify-center text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition">
-            <i className="fa-solid fa-arrow-left"></i>
-          </button>
+ {/* LEFT BUTTON */}
+<button className="prev-btn hidden md:flex w-11 h-11 rounded-full border border-gray-300 items-center justify-center text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition shrink-0">
+  <i className="fa-solid fa-arrow-left"></i>
+</button>
 
-          <div className="custom-dots flex justify-center items-center gap-2"></div>
+  {/* CENTER DOTS */}
+  <div className="custom-dots flex justify-center items-center gap-2 flex-1"></div>
 
-          <button className="next-btn w-11 h-11 rounded-full bg-[#b8965a] text-white flex items-center justify-center hover:opacity-80 transition">
-            <i className="fa-solid fa-arrow-right"></i>
-          </button>
+ {/* RIGHT SIDE */}
+<div className="w-full md:w-auto">
 
-        </div>
+  {/* MOBILE VIEW */}
+  <div className="flex md:hidden items-center justify-center gap-3 w-full">
+
+    {/* LEFT BUTTON */}
+    <button className="prev-btn w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition shrink-0">
+      <i className="fa-solid fa-arrow-left text-sm"></i>
+    </button>
+
+    {/* DOWNLOAD BUTTON */}
+    <a
+      href="/assets/files/cv.pdf"
+      download
+      className="flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 whitespace-nowrap"
+    >
+      <i className="fa-solid fa-download"></i>
+
+      <span>Download CV</span>
+    </a>
+
+    {/* RIGHT BUTTON */}
+    <button className="next-btn w-10 h-10 rounded-full bg-[#b8965a] text-white flex items-center justify-center hover:opacity-80 transition shrink-0">
+      <i className="fa-solid fa-arrow-right text-sm"></i>
+    </button>
+
+  </div>
+
+  {/* DESKTOP VIEW */}
+  <div className="hidden md:flex items-center gap-4">
+
+    {/* DOWNLOAD BUTTON */}
+    <a
+      href="/assets/files/cv.pdf"
+      download
+      className="flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 whitespace-nowrap"
+    >
+      <i className="fa-solid fa-download"></i>
+
+      <span>Download CV</span>
+    </a>
+
+    {/* RIGHT BUTTON */}
+    <button className="next-btn w-11 h-11 rounded-full bg-[#b8965a] text-white flex items-center justify-center hover:opacity-80 transition shrink-0">
+      <i className="fa-solid fa-arrow-right"></i>
+    </button>
+
+  </div>
+
+</div>
+
+</div>
 
       </div>
 
