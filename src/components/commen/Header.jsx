@@ -6,7 +6,7 @@ const Header = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
   const [lang, setLang] = useState("EN");
 
-  // 🔥 CONTENT (same structure)
+  // CONTENT
   const content = {
     EN: {
       left: [
@@ -23,6 +23,7 @@ const Header = () => {
       ],
       cta: "LET’S WORK →",
     },
+
     DE: {
       left: [
         { name: "Über mich", path: "/about" },
@@ -43,64 +44,101 @@ const Header = () => {
   const menuLeft = content[lang].left;
   const menuRight = content[lang].right;
 
-  const menuStyle = (index) => ({
-    fontFamily: hoverIndex === index ? "Caveat, cursive" : "sans-serif",
-    transform: hoverIndex === index ? "scale(1.05)" : "scale(1)",
-    borderBottom: hoverIndex === index ? "2px solid white" : "none",
-    transition: "0.3s",
-  });
-
   const toggleLang = () => {
     setLang(lang === "EN" ? "DE" : "EN");
   };
 
   return (
-    <header className="absolute top-[20px] left-0 w-full z-50 text-white">
+    <header className="absolute top-0 left-0 w-full z-50 text-white">
 
-      {/* SAME HEADER — NO CHANGE */}
-      <div className="max-w-[1420px] mx-auto px-[20px] md:px-[40px] py-4 flex items-center justify-center">
+      {/* HEADER */}
+      <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-between relative">
 
         {/* LEFT MENU */}
-        <div className="hidden lg:flex items-center gap-12 mr-8 font-semibold">
+        <div className="hidden lg:flex items-center gap-9 flex-1 justify-end">
+
           {menuLeft.map((item, i) => (
             <Link
               key={i}
               to={item.path}
               onMouseEnter={() => setHoverIndex(i)}
               onMouseLeave={() => setHoverIndex(null)}
+              className="relative overflow-hidden"
             >
-              <span style={menuStyle(i)}>{item.name}</span>
+              <span
+                className={`relative inline-block text-[16px] font-semibold tracking-wide transition-all duration-300
+                ${
+                  hoverIndex === i
+                    ? "scale-105 font-['Caveat']"
+                    : "scale-100"
+                }`}
+              >
+                {item.name}
+
+                {/* UNDERLINE */}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-white transition-all duration-300
+                  ${
+                    hoverIndex === i
+                      ? "w-full"
+                      : "w-0"
+                  }`}
+                ></span>
+              </span>
             </Link>
           ))}
+
         </div>
 
         {/* LOGO */}
-        <div className="mx-12">
+        <div className="mx-10 shrink-0">
           <Link to="/">
-            <h1 className="text-lg md:text-2xl font-bold font-serif tracking-wide">
+            <h1 className="text-[24px] md:text-[30px] font-bold font-serif tracking-[1px] whitespace-nowrap">
               Dr. Raphael Edlmann
             </h1>
           </Link>
         </div>
 
         {/* RIGHT MENU */}
-        <div className="hidden lg:flex items-center gap-12 ml-8 font-semibold ">
+        <div className="hidden lg:flex items-center gap-9 flex-1 justify-start">
+
           {menuRight.map((item, i) => (
             <Link
               key={i}
               to={item.path}
               onMouseEnter={() => setHoverIndex(i + 10)}
               onMouseLeave={() => setHoverIndex(null)}
+              className="relative overflow-hidden"
             >
-              <span style={menuStyle(i + 10)}>{item.name}</span>
+              <span
+                className={`relative inline-block text-[16px] font-semibold tracking-wide transition-all duration-300
+                ${
+                  hoverIndex === i + 10
+                    ? "scale-105 font-['Caveat']"
+                    : "scale-100"
+                }`}
+              >
+                {item.name}
+
+                {/* UNDERLINE */}
+                <span
+                  className={`absolute left-0 -bottom-1 h-[2px] bg-white transition-all duration-300
+                  ${
+                    hoverIndex === i + 10
+                      ? "w-full"
+                      : "w-0"
+                  }`}
+                ></span>
+              </span>
             </Link>
           ))}
+
         </div>
 
-        {/* MOBILE BUTTON */}
+        {/* MOBILE MENU BUTTON */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="text-2xl lg:hidden absolute right-[20px]"
+          className="lg:hidden absolute right-[20px] text-[30px]"
         >
           ☰
         </button>
@@ -108,26 +146,52 @@ const Header = () => {
       </div>
 
       {/* MOBILE MENU */}
-      <div className={`fixed top-[90px] left-0 w-[300px] z-[100] transition ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}>
-        <div className="bg-[#f5f3ef] p-6 text-black">
+      <div
+        className={`fixed top-0 left-0 h-full w-[300px] bg-[#f5f3ef] z-[100] transition-all duration-500 ${
+          menuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+
+        {/* CLOSE BUTTON */}
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="absolute top-5 right-5 text-3xl text-black"
+        >
+          ×
+        </button>
+
+        <div className="pt-24 px-8 text-black">
 
           {[...menuLeft, ...menuRight].map((item, i) => (
-            <Link key={i} to={item.path} onClick={() => setMenuOpen(false)}>
-              <p className="mb-4">{item.name}</p>
+            <Link
+              key={i}
+              to={item.path}
+              onClick={() => setMenuOpen(false)}
+            >
+              <p className="mb-6 text-[18px] font-medium hover:translate-x-2 transition-all duration-300">
+                {item.name}
+              </p>
             </Link>
           ))}
 
-          <Link className="block mt-6 bg-[#b8965a] text-white text-center py-3 rounded-full">
+          {/* CTA */}
+          <Link
+            to="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="block mt-8 bg-[#b8965a] text-white text-center py-4 rounded-full font-semibold tracking-wide hover:opacity-90 transition"
+          >
             {content[lang].cta}
           </Link>
+
         </div>
+
       </div>
 
-      {/* 🔥 LANGUAGE TOGGLE (ONLY ADD THIS) */}
-      <div className="absolute top-[-10px] right-[20px] md:right-[40px] z-50">
+      {/* LANGUAGE TOGGLE */}
+      <div className="absolute top-5 right-[70px] md:right-[40px] z-50">
         <button
           onClick={toggleLang}
-          className="text-sm font-semibold tracking-wide"
+          className="text-sm font-semibold tracking-[2px] hover:opacity-70 transition"
         >
           {lang}
         </button>
