@@ -24,7 +24,7 @@ const InsightsSection = () => {
     {
       category: "case",
       title: "HR Case Study",
-      img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
+      img: "/assets/images/blog3.png",
       desc: "Real transformation example.",
       link: "/blog-details",
     },
@@ -32,7 +32,7 @@ const InsightsSection = () => {
     {
       category: "guides",
       title: "Digital HR Strategy",
-      img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
+      img: "/assets/images/blog2.png",
       desc: "Modern workforce transformation strategies.",
       link: "/blog-details",
     },
@@ -40,7 +40,7 @@ const InsightsSection = () => {
     {
       category: "opinions",
       title: "Future of AI in Business",
-      img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
+      img: "/assets/images/blo1.png",
       desc: "Exploring innovation and automation.",
       link: "/blog-details",
     },
@@ -48,7 +48,7 @@ const InsightsSection = () => {
     {
       category: "case",
       title: "Enterprise AI Solutions",
-      img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
+      img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
       desc: "Real-world AI implementation case study.",
       link: "/blog-details",
     },

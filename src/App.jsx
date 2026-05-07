@@ -16,6 +16,9 @@ import Workshops from "./pages/Workshops";
 import WorkshopsDetails from "./pages/Workshops-details";
 import BlogDetails from "./pages/blog-details";
 import Contact from "./pages/Contact";
+import Imprint from "./pages/Imprint";
+import PrivacyPolicy from "./pages/Privacy-policy";
+
 
 /* HASH SCROLL */
 function ScrollToHash() {
@@ -59,6 +62,8 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/workshops" element={<Workshops />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/imprint" element={<Imprint/>} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         <Route
           path="/workshops-details/:slug"

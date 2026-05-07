@@ -107,8 +107,8 @@ const Footer = () => {
           </p>
 
           <div className="flex gap-6 justify-center">
-            <a href="#" className="hover:text-[#b8965a]">Imprint</a>
-            <a href="#" className="hover:text-[#b8965a]">Privacy Policy</a>
+            <a href="/imprint" className="hover:text-[#b8965a]">Imprint</a>
+            <a href="/privacy-policy" className="hover:text-[#b8965a]">Privacy Policy</a>
           </div>
 
         </div>
