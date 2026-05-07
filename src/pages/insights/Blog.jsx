@@ -44,7 +44,6 @@ const InsightsSection = () => {
       desc: "Exploring innovation and automation.",
       link: "/blog-details",
     },
-
     {
       category: "case",
       title: "Enterprise AI Solutions",
