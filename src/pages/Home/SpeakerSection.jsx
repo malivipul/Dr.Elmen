@@ -1,6 +1,6 @@
 const SpeakerSection = () => {
   return (
-    <section className="relative w-full py-[40px]">
+    <section id="speaker-section" className="relative w-full py-[40px]">
 
       {/* BG IMAGE */}
       <div className="absolute inset-0">

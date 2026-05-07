@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 import Header from "./components/commen/Header";
 import Footer from "./components/commen/Footer";
@@ -6,20 +7,43 @@ import ScrollToTop from "./components/commen/ScrollToTop";
 
 // Pages
 import Home from "./pages/Home";
-import About from "./pages/About-Me"; // ✅ new page
-import Vita from "./pages/Vita"; // ✅ new page
-import Author from "./pages/Author"; // ✅ new page
-import Insights from "./pages/insights"; // ✅ new page
-import Projects from "./pages/Projects"; // ✅ new page
-import Workshops from "./pages/Workshops"; // ✅ new page
-import WorkshopsDetails from "./pages/Workshops-details"; // ✅ new page
-// BLOG DETAILS PAGE
+import About from "./pages/About-Me";
+import Vita from "./pages/Vita";
+import Author from "./pages/Author";
+import Insights from "./pages/insights";
+import Projects from "./pages/Projects";
+import Workshops from "./pages/Workshops";
+import WorkshopsDetails from "./pages/Workshops-details";
 import BlogDetails from "./pages/blog-details";
+import Contact from "./pages/Contact";
+
+/* HASH SCROLL */
+function ScrollToHash() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.querySelector(hash);
+
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
+      }
+    }
+  }, [hash]);
+
+  return null;
+}
 
 function App() {
   return (
     <>
       <ScrollToTop />
+      <ScrollToHash />
 
       {/* Header */}
       <Header />
@@ -27,13 +51,15 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} /> {/* ✅ added */}
-        <Route path="/vita" element={<Vita />} /> {/* ✅ added */}
-        <Route path="/author" element={<Author />} /> {/* ✅ added */}
-        <Route path="/insights" element={<Insights />} /> {/* ✅ added */}
+        <Route path="/about" element={<About />} />
+        <Route path="/vita" element={<Vita />} />
+        <Route path="/author" element={<Author />} />
+        <Route path="/insights" element={<Insights />} />
         <Route path="/blog-details" element={<BlogDetails />} />
-        <Route path="/projects" element={<Projects />} /> {/* ✅ added */}
-        <Route path="/workshops" element={<Workshops />} /> {/* ✅ added */}
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/workshops" element={<Workshops />} />
+        <Route path="/contact" element={<Contact />} />
+
         <Route
           path="/workshops-details/:slug"
           element={<WorkshopsDetails />}
