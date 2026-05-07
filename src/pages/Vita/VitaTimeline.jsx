@@ -77,7 +77,20 @@ Key Achievements:
 
   return (
     <section className="bg-[#f4f4f4] py-[60px]">
+{/* TOP */}
+      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] text-center mb-14">
+        <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
+          Vita
+        </span>
 
+        <h2 className="title-font text-3xl md:text-[40px] text-black mt-2 mb-2">
+          Together Through the Years
+        </h2>
+
+        <p className="text-[#0a3e40] text-[16px] max-w-xl mx-auto leading-relaxed">
+          A professional journey shaped by leadership, innovation, and continuous transformation across AI, HR, and business process management.
+        </p>
+      </div>
 
       {/* SLIDER */}
       <div className="max-w-[1250px] mx-auto px-[20px]">

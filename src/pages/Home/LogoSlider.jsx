@@ -5,14 +5,14 @@ import "swiper/css";
 
 const LogoSlider = () => {
   const logos = [
-    "/assets/images/Picture1.jpg",
-    "/assets/images/Picture2.jpg",
-    "/assets/images/Picture3.jpg",
-    "/assets/images/Picture4.jpg",
-    "/assets/images/Picture5.jpg",
-    "/assets/images/Picture6.jpg",
-    "/assets/images/Picture7.jpg",
-    "/assets/images/Picture8.jpg",
+    "/assets/images/Picture1.png",
+    "/assets/images/Picture2.png",
+    "/assets/images/Picture3.png",
+    "/assets/images/Picture4.png",
+    "/assets/images/Picture5.png",
+    "/assets/images/Picture6.png",
+    "/assets/images/Picture7.png",
+    "/assets/images/Picture8.png",
   ];
 
   return (

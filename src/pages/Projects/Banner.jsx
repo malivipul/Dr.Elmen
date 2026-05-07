@@ -38,7 +38,7 @@ const AboutBanner = () => {
             <span>›</span>
 
             <span className="font-semibold">
-              HR & AI Insights
+          projects
 
             </span>
 
@@ -46,7 +46,7 @@ const AboutBanner = () => {
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-            HR & AI Insights
+        projects
 
           </h1>
 

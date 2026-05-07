@@ -70,7 +70,18 @@ const InsightsSection = () => {
 
   return (
     <section className="bg-[#f5f3ef] py-[70px]">
+      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] text-center mb-10">
+        <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
+          Articles
+        </span>
 
+        <h2 className="title-font text-3xl md:text-[40px] text-black mt-2 mb-2">
+          HR & AI Insights
+        </h2>
+
+        <p className="text-[#0a3e40] text-[16px] max-w-xl mx-auto leading-relaxed">
+          Insights, strategies, and practical knowledge.        </p>
+      </div>
       <div className="max-w-[1420px] mx-auto px-[20px] md:px-[40px]">
 
         {/* TABS */}
@@ -89,10 +100,9 @@ const InsightsSection = () => {
                 font-medium
                 transition-all
                 duration-300
-                ${
-                  active === tab.value
-                    ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
-                    : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
+                ${active === tab.value
+                  ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
+                  : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
                 }
               `}
             >

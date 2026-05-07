@@ -11,12 +11,13 @@ const AboutBanner = () => {
         <img
           src="/assets/images/25.png"
           alt="About Banner"
-          className="w-full h-full object-cover md:object-cover object-center"
+          className="w-full h-full object-cover object-center"
         />
 
-        {/* OVERLAY */}
+        {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/35"></div>
 
+      
       </div>
 
       {/* CONTENT */}
@@ -38,16 +39,14 @@ const AboutBanner = () => {
             <span>›</span>
 
             <span className="font-semibold">
-              HR & AI Insights
-
+             Workshops
             </span>
 
           </div>
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-            HR & AI Insights
-
+            Workshops
           </h1>
 
         </div>

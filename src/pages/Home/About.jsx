@@ -95,43 +95,77 @@ const About = () => {
                   Impactful Leadership
                 </h3>
 
-              {/* INFO CARDS */}
-<div className="space-y-4 text-center md:text-left">
+   {/* INFO CARDS */}
+<div className="space-y-6 mt-8">
 
-  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
-    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
-      B.Sc.
-    </h4>
-    <p className="text-[#0a3e40] text-[15px]">
-      TU Munich
-    </p>
+  {/* ITEM */}
+  <div className="flex items-start gap-5 pb-6 border-b border-[#ddd5ca]">
+
+    {/* LEFT LINE */}
+    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+
+    {/* CONTENT */}
+    <div>
+      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+        B.Sc.
+      </h4>
+
+      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+        TU Munich
+      </p>
+    </div>
+
   </div>
 
-  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
-    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
-      M.Sc.
-    </h4>
-    <p className="text-[#0a3e40] text-[15px]">
-      FOM University
-    </p>
+  {/* ITEM */}
+  <div className="flex items-start gap-5 pb-6 border-b border-[#ddd5ca]">
+
+    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+
+    <div>
+      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+        M.Sc.
+      </h4>
+
+      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+        FOM University
+      </p>
+    </div>
+
   </div>
 
-  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
-    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
-      Dr.
-    </h4>
-    <p className="text-[#0a3e40] text-[15px]">
-      Heriot-Watt
-    </p>
+  {/* ITEM */}
+  <div className="flex items-start gap-5 pb-6 border-b border-[#ddd5ca]">
+
+    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+
+    <div>
+      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+        Dr.
+      </h4>
+
+      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+        Heriot-Watt
+      </p>
+    </div>
+
   </div>
 
-  <div className="bg-white rounded-[14px] px-5 py-4 border border-[#e5ddd2] shadow-sm">
-    <h4 className="text-[#b8965a] text-[18px] font-semibold mb-1">
-      ASA
-    </h4>
-    <p className="text-[#0a3e40] text-[15px]">
-      Innovation Task
-    </p>
+  {/* ITEM */}
+  <div className="flex items-start gap-5">
+
+    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+
+    <div>
+      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+        ASA
+      </h4>
+
+      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+        Innovation Task
+      </p>
+    </div>
+
   </div>
 
 </div>
