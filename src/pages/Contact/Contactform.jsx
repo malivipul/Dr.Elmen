@@ -1,4 +1,6 @@
 // ContactForm.jsx
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 const ContactForm = () => {
   return (
@@ -24,7 +26,7 @@ const ContactForm = () => {
                 Contact
               </span>
 
-              <h2 className="title-font text-[34px] md:text-[52px] leading-[1.05] text-black mt-3 mb-4">
+              <h2 className="title-font text-[26px] md:text-[38px] leading-[1.05] text-black mt-3 mb-4">
                 Let’s Start a
                 <br />
                 Conversation
@@ -91,14 +93,14 @@ const ContactForm = () => {
 
           {/* RIGHT SIDE */}
           <div className="relative overflow-hidden rounded-[34px] bg-[#0a3e40] p-6 md:p-9 min-h-[720px] flex flex-col justify-between">
-{/* BG TEXT */}
-<div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            {/* BG TEXT */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
 
-  <div className="text-center text-[45px] md:text-[70px] font-bold text-white/5 leading-none select-none">
-    Dr. Raphael Edlmann
-  </div>
+              <div className="text-center text-[45px] md:text-[70px] font-bold text-white/5 leading-none select-none">
+                Dr. Raphael Edlmann
+              </div>
 
-</div>
+            </div>
             {/* TOP CONTENT */}
             <div className="relative z-10 max-w-[500px]">
 
@@ -106,13 +108,13 @@ const ContactForm = () => {
                 Get In Touch
               </span>
 
-              <h3 className="title-font text-[38px] md:text-[60px] text-white leading-[1.02] mt-4 mb-5">
+              <h3 className="title-font text-[26px] md:text-[38px] text-white leading-[1.02] mt-4 mb-5">
                 Let’s Build
                 <br />
                 Something Great
               </h3>
 
-              <p className="text-[16px] md:text-[17px] text-white/75 leading-[33px]">
+              <p className="text-[14px] md:text-[16px] text-white/75 leading-[33px]">
                 I collaborate with organizations, leaders, and teams to
                 create impactful workshops, speaking sessions, and
                 transformation initiatives that drive meaningful results.
@@ -130,7 +132,7 @@ const ContactForm = () => {
               >
 
                 {/* ICON */}
-                <div className="w-[88px] h-[88px] rounded-full bg-white/70 flex items-center justify-center text-[#0a3e40] text-[38px] font-semibold transition-all duration-500 group-hover:scale-110">
+                <div className="w-[66px] h-[66px] rounded-full bg-white/70 flex items-center justify-center text-[#0a3e40] text-[38px] font-semibold transition-all duration-500 group-hover:scale-110">
                   ✦
                 </div>
 
@@ -141,22 +143,27 @@ const ContactForm = () => {
                     Follow & Connect
                   </p>
 
-                  <div className="flex flex-wrap gap-3 text-[14px] text-white/70">
 
-                    <span className="hover:text-[#b8965a] transition-all duration-300">
-                      Instagram
-                    </span>
+                  <div className="flex items-center gap-2.5 mt-2">
 
-                    <span className="hover:text-[#b8965a] transition-all duration-300">
-                      Facebook
-                    </span>
+                    {/* INSTAGRAM */}
+                    <a
+                      href="#"
+                      className="w-[32px] h-[32px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[13px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
+                    >
+                      <FaInstagram />
+                    </a>
 
-                    <span className="hover:text-[#b8965a] transition-all duration-300">
-                      Twitter
-                    </span>
+                    {/* FACEBOOK */}
+                    <a
+                      href="#"
+                      className="w-[32px] h-[32px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[13px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
+                    >
+                      <FaFacebookF />
+                    </a>
 
+                    
                   </div>
-
                 </div>
 
               </a>
@@ -168,7 +175,7 @@ const ContactForm = () => {
               >
 
                 {/* ICON */}
-                <div className="w-[88px] h-[88px] rounded-full bg-white/70 flex items-center justify-center text-[#0a3e40] text-[38px] font-semibold transition-all duration-500 group-hover:scale-110">
+                <div className="w-[66px] h-[66px] rounded-full bg-white/70 flex items-center justify-center text-[#0a3e40] text-[38px] font-semibold transition-all duration-500 group-hover:scale-110">
                   ↗
                 </div>
 
@@ -179,19 +186,23 @@ const ContactForm = () => {
                     Professional Network
                   </p>
 
-                  <div className="flex flex-wrap gap-3 text-[14px] text-white/70">
+                  <div className="flex items-center gap-2.5 mt-2">
 
-                    <span className="hover:text-[#b8965a] transition-all duration-300">
-                      LinkedIn
-                    </span>
+                    {/* LINKEDIN */}
+                    <a
+                      href="#"
+                      className="w-[32px] h-[32px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[13px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
+                    >
+                      <FaLinkedinIn />
+                    </a>
 
-                    <span className="hover:text-[#b8965a] transition-all duration-300">
-                      Threads
-                    </span>
-
-                    <span className="hover:text-[#b8965a] transition-all duration-300">
-                      X
-                    </span>
+                    {/* X / TWITTER */}
+                    <a
+                      href="#"
+                      className="w-[32px] h-[32px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[13px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
+                    >
+                      <FaXTwitter />
+                    </a>
 
                   </div>
 

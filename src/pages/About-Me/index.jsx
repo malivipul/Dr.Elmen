@@ -1,14 +1,11 @@
 import AboutBanner from "./AboutBanner";
+import AboutProfile from "./AboutProfile";
 
 const About = () => {
   return (
     <>
       <AboutBanner />
-
-      {/* 🔽 बाकी content */}
-      <section className="py-[80px]">
-        {/* your about content */}
-      </section>
+      <AboutProfile />
     </>
   );
 };
