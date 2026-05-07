@@ -1,5 +1,5 @@
 import Banner from "./Banner";
-import ContactForm from "./ContactForm";
+import ContactForm from "./Contactform";
 
 
 const About = () => {
