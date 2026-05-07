@@ -6,6 +6,7 @@ const About = () => {
     <>
       <AboutBanner />
       <AboutProfile />
+      
     </>
   );
 };
