@@ -66,13 +66,15 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
+
   const [flippedCard, setFlippedCard] = useState(null);
 
   return (
     <section className="py-[60px] bg-[#f4f4f4] overflow-hidden">
-      
+
       {/* TOP */}
       <div className="text-center mb-14 px-5 md:px-0">
+
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
           Projects
         </span>
@@ -86,25 +88,19 @@ export default function ProjectsSection() {
           implementations, and business transformation projects focused on AI,
           HR innovation, automation, and operational excellence.
         </p>
+
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
 
         {/* GRID */}
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-7">
+        <div className="grid lg:grid-cols-2 gap-7">
 
           {projects.map((item, index) => (
 
             <div
               key={index}
-              className={`
-                group perspective-[2000px]
-                ${
-                  flippedCard === index
-                    ? "min-h-[760px] sm:min-h-[700px] md:min-h-[560px]"
-                    : "min-h-[500px] sm:min-h-[480px] md:min-h-[430px]"
-                }
-              `}
+              className="group perspective-[2000px]"
               onClick={() =>
                 setFlippedCard(flippedCard === index ? null : index)
               }
@@ -113,8 +109,9 @@ export default function ProjectsSection() {
               {/* FLIP CARD */}
               <div
                 className={`
-                  relative w-full h-full
+                  relative w-full
                   transition-all duration-700
+                  md:h-[430px]
                   [transform-style:preserve-3d]
 
                   lg:group-hover:[transform:rotateY(180deg)]
@@ -128,48 +125,38 @@ export default function ProjectsSection() {
               >
 
                 {/* FRONT SIDE */}
-                <div className="
-                  absolute inset-0
-                  bg-white
-                  rounded-[24px]
-                  p-5 sm:p-6 md:p-8
-                  shadow-[0_4px_20px_rgba(0,0,0,0.03)]
-                  [backface-visibility:hidden]
-                  overflow-hidden
-                ">
+                <div
+                  className={`
+                    bg-white
+                    rounded-[20px]
+                    p-7 md:p-8
+                    shadow-[0_4px_20px_rgba(0,0,0,0.03)]
+                    overflow-hidden
+
+                    md:absolute md:inset-0
+                    [backface-visibility:hidden]
+
+                    ${
+                      flippedCard === index
+                        ? "hidden md:block"
+                        : "block"
+                    }
+                  `}
+                >
 
                   {/* LOGOS */}
-                  <div className="
-                    flex items-center gap-3
-                    flex-nowrap
-                    mb-6
-                    overflow-x-auto
-                    scrollbar-hide
-                  ">
+                  <div className="flex items-center gap-2 md:gap-3 flex-nowrap mb-7 relative z-10 overflow-x-auto scrollbar-hide">
 
                     {item.logos.map((logo, i) => (
                       <div
                         key={i}
-                        className="
-                          bg-[#f4f4f4]
-                          rounded-[16px]
-                          px-3 py-3
-                          md:px-5 md:py-4
-                          border border-[#ece6dc]
-                          shrink-0
-                        "
+                        className="bg-[#f4f4f4] rounded-[16px] md:rounded-[20px] px-3 md:px-5 py-3 md:py-4 border border-[#f4f4f4] shrink-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                       >
 
                         <img
                           src={logo}
                           alt="logo"
-                          className="
-                            h-[30px]
-                            sm:h-[34px]
-                            md:h-[46px]
-                            w-auto
-                            object-contain
-                          "
+                          className="h-[32px] md:h-[46px] w-auto object-contain"
                         />
 
                       </div>
@@ -178,28 +165,12 @@ export default function ProjectsSection() {
                   </div>
 
                   {/* TITLE */}
-                  <h3 className="
-                    title-font
-                    text-[22px]
-                    sm:text-[24px]
-                    md:text-[26px]
-                    text-black
-                    leading-[1.4]
-                    mb-4
-                  ">
+                  <h3 className="title-font text-[20px] md:text-[26px] text-black leading-[1.45] mb-4 relative z-10">
                     {item.title}
                   </h3>
 
                   {/* ROLE */}
-                  <p className="
-                    text-[12px]
-                    sm:text-[13px]
-                    uppercase
-                    tracking-[2px]
-                    text-[#b8965a]
-                    mb-5
-                    leading-[1.8]
-                  ">
+                  <p className="text-[13px] uppercase tracking-[2px] text-[#b8965a] mb-5 relative z-10">
                     {item.role}
                   </p>
 
@@ -207,47 +178,42 @@ export default function ProjectsSection() {
                   <div className="w-full h-[1px] bg-[#ece6dc] mb-5"></div>
 
                   {/* DESCRIPTION */}
-                  <p className="
-                    text-[15px]
-                    sm:text-[16px]
-                    text-[#0a3e40]
-                    leading-[30px]
-                  ">
+                  <p className="text-[16px] text-[#0a3e40] leading-[29px] relative z-10">
                     {item.description}
                   </p>
 
                 </div>
 
                 {/* BACK SIDE */}
-                <div className="
-                  absolute inset-0
-                  bg-[#111111]
-                  rounded-[24px]
-                  p-5 sm:p-6 md:p-8
-                  [transform:rotateY(180deg)]
-                  [backface-visibility:hidden]
-                  overflow-hidden
-                  shadow-[0_15px_40px_rgba(0,0,0,0.18)]
-                ">
+                <div
+                  className={`
+                    bg-[#111111]
+                    rounded-[30px]
+                    p-7 md:p-8
+                    shadow-[0_15px_40px_rgba(0,0,0,0.18)]
+
+                    /* MOBILE AUTO HEIGHT */
+                    relative h-auto
+
+                    /* DESKTOP FLIP */
+                    md:absolute md:inset-0
+                    md:h-full
+                    [transform:rotateY(180deg)]
+                    [backface-visibility:hidden]
+
+                    ${
+                      flippedCard === index
+                        ? "block"
+                        : "hidden md:block"
+                    }
+                  `}
+                >
 
                   {/* GLOW */}
-                  <div className="
-                    absolute bottom-[-70px] right-[-70px]
-                    w-[180px] h-[180px]
-                    bg-[#d4b17d]/10
-                    rounded-full blur-[80px]
-                  "></div>
+                  <div className="absolute bottom-[-70px] right-[-70px] w-[180px] h-[180px] bg-[#d4b17d]/10 rounded-full blur-[80px]"></div>
 
                   {/* TITLE */}
-                  <h3 className="
-                    title-font
-                    text-[20px]
-                    md:text-[23px]
-                    text-white
-                    mb-6
-                    leading-[1.4]
-                    relative z-10
-                  ">
+                  <h3 className="title-font text-[21px] md:text-[23px] text-white mb-7 relative z-10">
                     Key Responsibilities & Achievements
                   </h3>
 
@@ -261,14 +227,7 @@ export default function ProjectsSection() {
                       >
 
                         {/* ICON */}
-                        <div className="
-                          min-w-[22px]
-                          h-[22px]
-                          rounded-full
-                          bg-[#d4b17d]
-                          flex items-center justify-center
-                          mt-1
-                        ">
+                        <div className="min-w-[22px] h-[22px] rounded-full bg-[#d4b17d] flex items-center justify-center mt-1">
 
                           <span className="text-white text-[10px]">
                             ✔
@@ -277,12 +236,7 @@ export default function ProjectsSection() {
                         </div>
 
                         {/* TEXT */}
-                        <p className="
-                          text-[14px]
-                          sm:text-[15px]
-                          text-[#e5e5e5]
-                          leading-[28px]
-                        ">
+                        <p className="text-[13px] text-[#e5e5e5] leading-[27px]">
                           {p}
                         </p>
 
@@ -302,6 +256,7 @@ export default function ProjectsSection() {
         </div>
 
       </div>
+
     </section>
   );
 }
