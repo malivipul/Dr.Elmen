@@ -39,7 +39,7 @@ const ContactForm = () => {
             Something Great
           </h3>
 
-          <p className="text-[14px] md:text-[15px] text-black/60 leading-[26px]">
+          <p className="text-[14px] md:text-[16px] text-black/60 leading-[26px]">
             I collaborate with organizations, leaders, and teams to
             create impactful workshops, speaking sessions, and
             transformation initiatives that drive meaningful results.
@@ -47,43 +47,42 @@ const ContactForm = () => {
 
         </div>
 
-        {/* SOCIAL ICONS */}
-        <div className="relative z-10 flex items-center gap-3 mt-7 flex-wrap">
+      {/* SOCIAL ICONS */}
+<div className="relative z-10 flex items-center gap-4 mt-7 flex-wrap">
 
-          {/* INSTAGRAM */}
-          <Link
-            to="#"
-            className="group w-[42px] h-[42px] rounded-full bg-gradient-to-br from-[#feda75] via-[#d62976] to-[#962fbf] flex items-center justify-center text-white text-[16px] shadow-md transition-all duration-500 hover:-translate-y-1 hover:scale-105"
-          >
-            <FaInstagram />
-          </Link>
+  {/* LINKEDIN */}
+  <Link
+    to="#"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
+  >
+    <FaLinkedinIn className="text-[14px] text-black" />
+  </Link>
 
-          {/* FACEBOOK */}
-          <Link
-            to="#"
-            className="group w-[42px] h-[42px] rounded-full bg-[#1877F2] flex items-center justify-center text-white text-[16px] shadow-md transition-all duration-500 hover:-translate-y-1 hover:scale-105"
-          >
-            <FaFacebookF />
-          </Link>
+  {/* X / TWITTER */}
+  <Link
+    to="#"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
+  >
+    <FaXTwitter className="text-[14px] text-black" />
+  </Link>
 
-          {/* LINKEDIN */}
-          <Link
-            to="#"
-            className="group w-[42px] h-[42px] rounded-full bg-[#0A66C2] flex items-center justify-center text-white text-[16px] shadow-md transition-all duration-500 hover:-translate-y-1 hover:scale-105"
-          >
-            <FaLinkedinIn />
-          </Link>
+  {/* FACEBOOK */}
+  <Link
+    to="#"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
+  >
+    <FaFacebookF className="text-[14px] text-black" />
+  </Link>
 
-          {/* X / TWITTER */}
-          <Link
-            to="#"
-            className="group w-[42px] h-[42px] rounded-full bg-black flex items-center justify-center text-white text-[16px] shadow-md transition-all duration-500 hover:-translate-y-1 hover:scale-105"
-          >
-            <FaXTwitter />
-          </Link>
+  {/* INSTAGRAM */}
+  <Link
+    to="#"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
+  >
+    <FaInstagram className="text-[14px] text-black" />
+  </Link>
 
-        </div>
-
+</div>
       </div>
 
       {/* LEFT SIDE SECOND */}
