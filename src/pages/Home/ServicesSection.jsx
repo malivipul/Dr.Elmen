@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 const ServicesSection = () => {
 
   const services = [
@@ -79,9 +82,9 @@ const ServicesSection = () => {
 
         {services.map((service, index) => (
 
-          <a
+          <Link
             key={index}
-            href={service.slug}
+            to={service.slug}
             onClick={() =>
               window.scrollTo({
                 top: 0,
@@ -146,7 +149,7 @@ const ServicesSection = () => {
 
             </div>
 
-          </a>
+          </Link>
 
         ))}
 

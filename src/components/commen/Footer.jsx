@@ -1,3 +1,7 @@
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-black text-white pt-[60px] pb-[30px] rounded-t-[40px]">
@@ -23,21 +27,42 @@ const Footer = () => {
               Interim Manager • AI, HR & Business Transformation — Helping organisations transform with practical, high-impact strategies.
             </p>
 
-            {/* SOCIAL */}
-            <div className="flex gap-4 pt-3 justify-center md:justify-start">
-              <a href="#" className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition">
-                <i className="fa-brands fa-linkedin-in text-[14px]"></i>
-              </a>
-              <a href="#" className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition">
-                <i className="fa-brands fa-x-twitter text-[14px]"></i>
-              </a>
-              <a href="#" className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition">
-                <i className="fa-brands fa-facebook-f text-[14px]"></i>
-              </a>
-              <a href="#" className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition">
-                <i className="fa-brands fa-instagram text-[14px]"></i>
-              </a>
-            </div>
+           {/* SOCIAL */}
+<div className="flex gap-4 pt-3 justify-center md:justify-start">
+
+  <Link
+    to="https://linkedin.com"
+    target="_blank"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+  >
+    <i className="fa-brands fa-linkedin-in text-[14px]"></i>
+  </Link>
+
+  <Link
+    to="https://x.com"
+    target="_blank"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+  >
+    <i className="fa-brands fa-x-twitter text-[14px]"></i>
+  </Link>
+
+  <Link
+    to="https://facebook.com"
+    target="_blank"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+  >
+    <i className="fa-brands fa-facebook-f text-[14px]"></i>
+  </Link>
+
+  <Link
+    to="https://instagram.com"
+    target="_blank"
+    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+  >
+    <i className="fa-brands fa-instagram text-[14px]"></i>
+  </Link>
+
+</div>
 
           </div>
 
@@ -48,72 +73,72 @@ const Footer = () => {
     Quick Links
   </h4>
 
-  <ul className="space-y-3 text-sm text-white/60">
+ <ul className="space-y-3 text-sm text-white/60">
 
-    <li>
-      <a
-        href="/about"
-        className="hover:text-[#b8965a] transition"
-      >
-        About Me
-      </a>
-    </li>
+  <li>
+    <Link
+      to="/about"
+      className="hover:text-[#b8965a] transition"
+    >
+      About Me
+    </Link>
+  </li>
 
-    <li>
-      <a
-        href="/insights"
-        className="hover:text-[#b8965a] transition"
-      >
-        HR & AI Insights
-      </a>
-    </li>
+  <li>
+    <Link
+      to="/insights"
+      className="hover:text-[#b8965a] transition"
+    >
+      HR & AI Insights
+    </Link>
+  </li>
 
-    <li>
-      <a
-        href="/author"
-        className="hover:text-[#b8965a] transition"
-      >
-        Author
-      </a>
-    </li>
+  <li>
+    <Link
+      to="/author"
+      className="hover:text-[#b8965a] transition"
+    >
+      Author
+    </Link>
+  </li>
 
-    <li>
-      <a
-        href="/#speaker-section"
-        className="hover:text-[#b8965a] transition"
-      >
-        Speaker
-      </a>
-    </li>
+  <li>
+    <Link
+      to="/#speaker-section"
+      className="hover:text-[#b8965a] transition"
+    >
+      Speaker
+    </Link>
+  </li>
 
-    <li>
-      <a
-        href="/vita"
-        className="hover:text-[#b8965a] transition"
-      >
-        Vita
-      </a>
-    </li>
+  <li>
+    <Link
+      to="/vita"
+      className="hover:text-[#b8965a] transition"
+    >
+      Vita
+    </Link>
+  </li>
 
-    <li>
-      <a
-        href="/projects"
-        className="hover:text-[#b8965a] transition"
-      >
-        Projects
-      </a>
-    </li>
+  <li>
+    <Link
+      to="/projects"
+      className="hover:text-[#b8965a] transition"
+    >
+      Projects
+    </Link>
+  </li>
 
-    <li>
-      <a
-        href="/workshops"
-        className="hover:text-[#b8965a] transition"
-      >
-        Workshops & Consulting
-      </a>
-    </li>
+  <li>
+    <Link
+      to="/workshops"
+      className="hover:text-[#b8965a] transition"
+    >
+      Workshops & Consulting
+    </Link>
+  </li>
 
-  </ul>
+</ul>
 
 </div>
 
@@ -127,39 +152,39 @@ const Footer = () => {
   <ul className="space-y-3 text-sm text-white/60">
 
     <li>
-      <a
-        href="/workshops"
+      <Link
+        to="/workshops"
         className="hover:text-[#b8965a] transition"
       >
         AI Strategy Workshop for HR
-      </a>
+      </Link>
     </li>
 
     <li>
-      <a
-        href="/workshops"
+      <Link
+        to="/workshops"
         className="hover:text-[#b8965a] transition"
       >
         Digital Transformation Workshop
-      </a>
+      </Link>
     </li>
 
     <li>
-      <a
-        href="/workshops"
+      <Link
+        to="/workshops"
         className="hover:text-[#b8965a] transition"
       >
         Process Modelling & Automation
-      </a>
+      </Link>
     </li>
 
     <li>
-      <a
-        href="/workshops"
+      <Link
+        to="/workshops"
         className="hover:text-[#b8965a] transition"
       >
         Interim Management Services
-      </a>
+      </Link>
     </li>
 
   </ul>
@@ -211,14 +236,18 @@ const Footer = () => {
 
           <p>
             © 2026 Dr. Raphael Edlmann. All rights reserved. Designed by{" "}
-            <a href="https://anaxistech.com" target="_blank" className="text-[#d4872a] font-semibold">
+            <Link to="https://anaxistech.com" target="_blank" className="text-[#d4872a] font-semibold">
               Anaxistech
-            </a>
+            </Link>
           </p>
 
           <div className="flex gap-6 justify-center">
-            <a href="/imprint" className="hover:text-[#b8965a]">Imprint</a>
-            <a href="/privacy-policy" className="hover:text-[#b8965a]">Privacy Policy</a>
+            <Link to="/imprint" className="hover:text-[#b8965a]">
+              Imprint
+            </Link>
+            <Link to="/privacy-policy" className="hover:text-[#b8965a]">
+              Privacy Policy
+            </Link>
           </div>
 
         </div>

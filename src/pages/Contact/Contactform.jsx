@@ -137,8 +137,8 @@ const ContactForm = () => {
             <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-3 mt-8">
 
               {/* SOCIAL BOX 1 */}
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="group relative overflow-hidden rounded-[22px] bg-white/10 backdrop-blur-xl border border-white/10 p-4 min-h-[160px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:bg-white/15"
               >
 
@@ -156,29 +156,29 @@ const ContactForm = () => {
 
                   <div className="flex items-center gap-2 mt-2">
 
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="w-[28px] h-[28px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[11px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
                     >
                       <FaInstagram />
-                    </a>
+                    </Link>
 
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="w-[28px] h-[28px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[11px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
                     >
                       <FaFacebookF />
-                    </a>
+                    </Link>
 
                   </div>
 
                 </div>
 
-              </a>
+              </Link>
 
               {/* SOCIAL BOX 2 */}
-              <a
-                href="#"
+              <Link
+                to="#"
                 className="group relative overflow-hidden rounded-[22px] bg-white/10 backdrop-blur-xl border border-white/10 p-4 min-h-[160px] flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:bg-white/15"
               >
 
@@ -196,25 +196,25 @@ const ContactForm = () => {
 
                   <div className="flex items-center gap-2 mt-2">
 
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="w-[28px] h-[28px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[11px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
                     >
                       <FaLinkedinIn />
-                    </a>
+                    </Link>
 
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="w-[28px] h-[28px] rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white/70 text-[11px] hover:bg-[#b8965a] hover:text-white transition-all duration-300"
                     >
                       <FaXTwitter />
-                    </a>
+                    </Link>
 
                   </div>
 
                 </div>
 
-              </a>
+              </Link>
 
             </div>
 

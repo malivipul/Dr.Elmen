@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AuthorSection = () => {
+``
   const [activeIndex, setActiveIndex] = useState(null);
 
   const books = [
@@ -107,8 +109,8 @@ const AuthorSection = () => {
                 >
 
                   {/* BUTTON */}
-                  <a
-                    href={book.link}
+                  <Link
+                    to={book.link}
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -129,7 +131,7 @@ const AuthorSection = () => {
                     >
                       Order now →
                     </span>
-                  </a>
+                  </Link>
 
                 </div>
 

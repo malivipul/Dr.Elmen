@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const About = () => {
   return (
     <section className="bg-white py-[60px]">
@@ -64,21 +66,22 @@ const About = () => {
                 {/* BUTTONS */}
                 <div className="flex flex-col gap-3 mt-6 w-full">
 
-                  <a
-                    href="/contact"
+                  <Link
+                    to="/contact"
                     className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
                     Contact Me
-                  </a>
+                  </Link>
 
-                  <a
-                    href="/assets/files/cv.pdf"
-                    download
+                  <Link
+                    to="/assets/files/cv.pdf"
+                    target="_blank"
                     className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
                     <i className="fa-solid fa-download"></i>
+
                     Download CV
-                  </a>
+                  </Link>
 
                 </div>
 
@@ -95,80 +98,80 @@ const About = () => {
                   Impactful Leadership
                 </h3>
 
-{/* INFO CARDS */}
-<div className="grid grid-cols-2 md:grid-cols-1 gap-5 mt-8">
+                {/* INFO CARDS */}
+                <div className="grid grid-cols-2 md:grid-cols-1 gap-5 mt-8">
 
-  {/* ITEM */}
-  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
+                  {/* ITEM */}
+                  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
 
-    {/* LEFT LINE */}
-    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
+                    {/* LEFT LINE */}
+                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
-    {/* CONTENT */}
-    <div>
-      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-        B.Sc.
-      </h4>
+                    {/* CONTENT */}
+                    <div>
+                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
+                        B.Sc.
+                      </h4>
 
-      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-        TU Munich
-      </p>
-    </div>
+                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
+                        TU Munich
+                      </p>
+                    </div>
 
-  </div>
+                  </div>
 
-  {/* ITEM */}
-  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
+                  {/* ITEM */}
+                  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
 
-    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
+                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
-    <div>
-      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-        M.Sc.
-      </h4>
+                    <div>
+                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
+                        M.Sc.
+                      </h4>
 
-      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-        FOM University
-      </p>
-    </div>
+                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
+                        FOM University
+                      </p>
+                    </div>
 
-  </div>
+                  </div>
 
-  {/* ITEM */}
-  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
+                  {/* ITEM */}
+                  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
 
-    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
+                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
-    <div>
-      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-        Dr.
-      </h4>
+                    <div>
+                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
+                        DBA
+                      </h4>
 
-      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-        Heriot-Watt
-      </p>
-    </div>
+                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
+                        Heriot-Watt
+                      </p>
+                    </div>
 
-  </div>
+                  </div>
 
-  {/* ITEM */}
-  <div className="flex items-start gap-3 pb-4 md:pb-0 border-b md:border-b-0 border-[#ddd5ca]">
+                  {/* ITEM */}
+                  <div className="flex items-start gap-3 pb-4 md:pb-0 border-b md:border-b-0 border-[#ddd5ca]">
 
-    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
+                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
-    <div>
-      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-        ASA
-      </h4>
+                    <div>
+                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
+                        ASA
+                      </h4>
 
-      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-        Innovation Task
-      </p>
-    </div>
+                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
+                        Innovation Task
+                      </p>
+                    </div>
 
-  </div>
+                  </div>
 
-</div>
+                </div>
 
               </div>
 

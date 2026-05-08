@@ -32,7 +32,7 @@ const InsightsSection = () => {
     {
       category: "guides",
       title: "Digital HR Strategy",
-      img: "/assets/images/blog2.png",
+      img: "/assets/images/blo1.png",
       desc: "Modern workforce transformation strategies.",
       link: "/blog-details",
     },
@@ -40,14 +40,14 @@ const InsightsSection = () => {
     {
       category: "opinions",
       title: "Future of AI in Business",
-      img: "/assets/images/blo1.png",
+      img: "/assets/images/blog2.png",
       desc: "Exploring innovation and automation.",
       link: "/blog-details",
     },
     {
       category: "case",
       title: "Enterprise AI Solutions",
-      img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
+      img: "/assets/images/hrandinsight (1).jpg",
       desc: "Real-world AI implementation case study.",
       link: "/blog-details",
     },

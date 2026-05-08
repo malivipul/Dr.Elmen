@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [hover, setHover] = useState(false);
@@ -44,30 +45,30 @@ const Hero = () => {
           <div className="flex items-center gap-3 flex-wrap">
 
           {/* BUTTON */}
-<a
-  href="/contact"
-  className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:border-white hover:text-white transition duration-300"
->
-  Let’s work together
-</a>
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:border-white hover:text-white transition duration-300"
+          >
+            Let’s work together
+          </Link>
 
             {/* EMAIL */}
-            <a
-              href="mailto:your@email.com"
+            <Link
+              to="mailto:your@email.com"
               className="w-12 h-12 rounded-full flex items-center justify-center bg-white text-black hover:bg-gray-200 transition"
             >
               <i className="fa-solid fa-envelope"></i>
-            </a>
+            </Link>
 
             {/* WHATSAPP */}
-            <a
-              href="https://wa.me/your-number"
+            <Link
+              to="https://wa.me/your-number"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full flex items-center justify-center text-white bg-[#25D366] hover:opacity-80 transition"
             >
               <i className="fa-brands fa-whatsapp"></i>
-            </a>
+            </Link>
 
           </div>
         </div>

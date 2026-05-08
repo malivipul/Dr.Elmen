@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 const SpeakerSection = () => {
   return (
     <section id="speaker-section" className="relative w-full py-[40px]">
@@ -52,12 +55,12 @@ const SpeakerSection = () => {
             </p>
 
             {/* BUTTON */}
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="inline-block text-[#b8965a] text-sm font-medium hover:underline transition duration-300"
             >
               Work with me →
-            </a>
+            </Link>
 
           </div>
 

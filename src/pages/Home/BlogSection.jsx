@@ -12,7 +12,7 @@ const BlogSection = () => {
     {
       category: "guides",
       title: "AI Implementation in HR",
-      img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
+      img: "/assets/images/blog2.png",
       desc: "AI integration in HR systems.",
       link: "/blog-details",
     },

@@ -95,30 +95,26 @@ const AuthorSection = () => {
                   `}
                 >
 
-                  {/* BUTTON */}
-                  <a
-                    href={book.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <span
-                      className="
-                        px-8 py-3
-                        rounded-full
-                        bg-[#b8965a]
-                        text-white
-                        text-sm
-                        font-medium
-                        border border-[#b8965a]
-                        hover:bg-white
-                        hover:text-[#b8965a]
-                        transition duration-300
-                        inline-block
-                      "
-                    >
-                      Order now →
-                    </span>
-                  </a>
+                {/* BUTTON */}
+<Link
+  to={book.link}
+  target="_blank"
+  className="
+    px-8 py-3
+    rounded-full
+    bg-[#b8965a]
+    text-white
+    text-sm
+    font-medium
+    border border-[#b8965a]
+    hover:bg-white
+    hover:text-[#b8965a]
+    transition duration-300
+    inline-block
+  "
+>
+  Order now →
+</Link>
 
                 </div>
 
