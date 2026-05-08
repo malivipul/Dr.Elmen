@@ -67,7 +67,7 @@ const Blogsdetails = () => {
             </div>
 
             {/* CONTENT */}
-            <div className="space-y-7 text-[#0a3e40] text-[16px] md:text-[17px] leading-[1.95]">
+            <div className="space-y-7 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.95]">
 
               <p>
                 Artificial Intelligence is transforming the future of human resources and workforce management.
@@ -131,7 +131,7 @@ const Blogsdetails = () => {
           <div className="lg:sticky lg:top-[120px] h-fit text-left">
 
             {/* CATEGORY */}
-            <div className="bg-white rounded-[28px] p-6 md:p-8 mb-7 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
+            <div className="bg-[#e7dfd7] rounded-[28px] p-6 md:p-8 mb-7 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
 
               <h3 className="title-font text-[24px] md:text-[28px] text-black mb-6 text-left">
                 Category
@@ -156,7 +156,7 @@ const Blogsdetails = () => {
             </div>
 
             {/* TAGS */}
-            <div className="bg-white rounded-[28px] p-6 md:p-8 mb-7 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
+            <div className="bg-[#e7dfd7] rounded-[28px] p-6 md:p-8 mb-7 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
 
               <h3 className="title-font text-[24px] md:text-[28px] text-black mb-6 text-left">
                 Tags
@@ -185,7 +185,7 @@ const Blogsdetails = () => {
             </div>
 
             {/* RECENT POSTS */}
-            <div className="bg-white rounded-[28px] p-6 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
+            <div className="bg-[#e7dfd7] rounded-[28px] p-6 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
 
               <h3 className="title-font text-[24px] md:text-[28px] text-black mb-7 text-left">
                 Recent Posts

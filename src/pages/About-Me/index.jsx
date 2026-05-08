@@ -1,5 +1,8 @@
 import AboutBanner from "./AboutBanner";
 import AboutProfile from "./AboutProfile";
+import ExpertiseSection from "./ExpertiseSection";
+import SectorsSection from "./SectorsSection";
+import ContactCTASection from "./ContactCTASection";
 
 
 const About = () => {
@@ -7,6 +10,9 @@ const About = () => {
     <>
       <AboutBanner />
       <AboutProfile />
+      <ExpertiseSection />
+      <SectorsSection />
+      <ContactCTASection />
       
     </>
   );
