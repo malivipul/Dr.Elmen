@@ -53,7 +53,7 @@ const SpeakerSection = () => {
 
             {/* BUTTON */}
             <a
-              href="#"
+              href="/contact"
               className="inline-block text-[#b8965a] text-sm font-medium hover:underline transition duration-300"
             >
               Work with me →

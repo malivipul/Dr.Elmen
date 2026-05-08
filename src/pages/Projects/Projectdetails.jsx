@@ -70,10 +70,9 @@ export default function ProjectsSection() {
   const [flippedCard, setFlippedCard] = useState(null);
 
   return (
-    <section className="py-20 bg-[#f4f4f4] overflow-hidden">
+   <section className="py-[60px]  bg-[#f4f4f4] overflow-hidden">
   {/* TOP */}
-        <div className="text-center mb-14">
-
+<div className="text-center mb-14 px-5 md:px-0">
           <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
            Projects
           </span>

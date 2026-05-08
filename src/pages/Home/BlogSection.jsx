@@ -13,6 +13,7 @@ const BlogSection = () => {
       title: "AI Implementation in HR",
       img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
       desc: "AI integration in HR systems.",
+      link: "/blog-details",
     },
 
     {
@@ -20,6 +21,7 @@ const BlogSection = () => {
       title: "AI Leadership",
       img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
       desc: "Future leadership with AI.",
+      link: "/blog-details",
     },
 
     {
@@ -27,6 +29,7 @@ const BlogSection = () => {
       title: "HR Case Study",
       img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
       desc: "Real transformation example.",
+      link: "/blog-details",
     },
   ];
 
@@ -141,7 +144,10 @@ const BlogSection = () => {
 };
 
 const Card = ({ item }) => (
-  <div className="group cursor-pointer transition duration-300 hover:-translate-y-1">
+  <a
+    href={item.link}
+    className="group cursor-pointer transition duration-300 hover:-translate-y-1 block"
+  >
 
     {/* IMAGE */}
     <div className="overflow-hidden rounded-[18px] relative mb-4">
@@ -160,16 +166,18 @@ const Card = ({ item }) => (
     <span className="text-xs text-[#b8965a] uppercase tracking-[2px]">
       {item.category}
     </span>
-{/* TITLE */}
-<h3 className="title-font text-[20px] text-black mt-2">
-  {item.title}
-</h3>
 
-{/* DESC */}
-<p className="text-[#0a3e40] text-[16px] mt-2 leading-relaxed">
-  {item.desc}
-</p>
-  </div>
+    {/* TITLE */}
+    <h3 className="title-font text-[20px] text-black mt-2">
+      {item.title}
+    </h3>
+
+    {/* DESC */}
+    <p className="text-[#0a3e40] text-[16px] mt-2 leading-relaxed">
+      {item.desc}
+    </p>
+
+  </a>
 );
 
 export default BlogSection;

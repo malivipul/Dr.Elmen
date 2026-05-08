@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <section className="bg-white py-[80px]">
+    <section className="bg-white py-[60px]">
 
       <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
 
@@ -65,7 +65,7 @@ const About = () => {
                 <div className="flex flex-col gap-3 mt-6 w-full">
 
                   <a
-                    href="#"
+                    href="/contact"
                     className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
                     Contact Me
@@ -95,22 +95,22 @@ const About = () => {
                   Impactful Leadership
                 </h3>
 
-   {/* INFO CARDS */}
-<div className="space-y-6 mt-8">
+{/* INFO CARDS */}
+<div className="grid grid-cols-2 md:grid-cols-1 gap-5 mt-8">
 
   {/* ITEM */}
-  <div className="flex items-start gap-5 pb-6 border-b border-[#ddd5ca]">
+  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
 
     {/* LEFT LINE */}
-    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
     {/* CONTENT */}
     <div>
-      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
         B.Sc.
       </h4>
 
-      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
         TU Munich
       </p>
     </div>
@@ -118,16 +118,16 @@ const About = () => {
   </div>
 
   {/* ITEM */}
-  <div className="flex items-start gap-5 pb-6 border-b border-[#ddd5ca]">
+  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
 
-    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
     <div>
-      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
         M.Sc.
       </h4>
 
-      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
         FOM University
       </p>
     </div>
@@ -135,16 +135,16 @@ const About = () => {
   </div>
 
   {/* ITEM */}
-  <div className="flex items-start gap-5 pb-6 border-b border-[#ddd5ca]">
+  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
 
-    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
     <div>
-      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
         Dr.
       </h4>
 
-      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
         Heriot-Watt
       </p>
     </div>
@@ -152,16 +152,16 @@ const About = () => {
   </div>
 
   {/* ITEM */}
-  <div className="flex items-start gap-5">
+  <div className="flex items-start gap-3 pb-4 md:pb-0 border-b md:border-b-0 border-[#ddd5ca]">
 
-    <div className="w-[2px] h-[50px] bg-[#b8965a] rounded-full"></div>
+    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
 
     <div>
-      <h4 className="text-[#b8965a] text-[20px] font-semibold leading-none mb-3">
+      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
         ASA
       </h4>
 
-      <p className="text-[#0a3e40] text-[16px] tracking-[0.3px]">
+      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
         Innovation Task
       </p>
     </div>

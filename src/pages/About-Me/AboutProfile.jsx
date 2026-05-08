@@ -8,7 +8,7 @@ const AboutSection = () => {
       {/* SECTION 02 */}
       {/* ========================= */}
 
-      <section className="bg-white py-[60px] md:py-[60px]">
+      <section className="bg-[#f4f4f4] py-[60px] md:py-[60px] ">
 {/* TOP */}
 <div className="max-w-[900px] mx-auto text-center mb-12 flex flex-col items-center px-4 md:px-0">
 
@@ -104,9 +104,9 @@ const AboutSection = () => {
                     className="flex items-center gap-4"
                   >
 
-                    <div className="w-[32px] h-[32px] rounded-full bg-[#b8965a]/10 flex items-center justify-center text-[#b8965a] text-[14px]">
-                      ✓
-                    </div>
+  <span className="text-[#b8965a] text-[20px] mt-[1px]">
+    ✔
+  </span>
 
                     <p className="text-[16px] text-[#0a3e40]">
                       {item}

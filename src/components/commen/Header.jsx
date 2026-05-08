@@ -56,7 +56,7 @@ const Header = () => {
     <header className="absolute top-0 left-0 w-full z-50 text-white">
 
       {/* HEADER */}
-      <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-between relative">
+      <div className="max-w-[1450px] mx-auto px-[0px] md:px-[40px] py-6 flex items-center justify-between relative">
 
         {/* LEFT MENU */}
         <div className="hidden lg:flex items-center gap-9 flex-1 justify-end">
@@ -236,13 +236,13 @@ const Header = () => {
             ))}
 
             {/* CTA */}
-            <Link
+            {/* <Link
               to="/contact"
               onClick={() => setMenuOpen(false)}
               className="block mt-8 bg-[#b8965a] text-white text-center py-4 rounded-full text-sm font-semibold tracking-wide"
             >
               {content[lang].cta}
-            </Link>
+            </Link> */}
 
           </div>
 
@@ -251,7 +251,7 @@ const Header = () => {
       </div>
 
       {/* LANGUAGE TOGGLE */}
-      <div className="absolute top-5 right-[65px] md:right-[40px] z-50">
+      <div className="absolute top-[30px] right-[80px] md:right-[58px] z-50">
         <button
           onClick={toggleLang}
           className="text-sm font-semibold tracking-[2px] hover:opacity-70 transition"

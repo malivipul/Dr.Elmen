@@ -41,58 +41,168 @@ const Footer = () => {
 
           </div>
 
-          {/* QUICK LINKS */}
-          <div className="text-center md:text-left">
-            <h4 className="font-semibold mb-5">Quick Links</h4>
+         {/* QUICK LINKS */}
+<div className="text-center md:text-left">
 
-            <ul className="space-y-3 text-sm text-white/60">
-              <li><a href="#" className="hover:text-[#b8965a]">About Me</a></li>
-              <li><a href="#" className="hover:text-[#b8965a]">HR & AI Insights</a></li>
-              <li><a href="#" className="hover:text-[#b8965a]">Author</a></li>
-              <li><a href="#" className="hover:text-[#b8965a]">Speaker</a></li>
-              <li><a href="#" className="hover:text-[#b8965a]">Vita</a></li>
-              <li><a href="#" className="hover:text-[#b8965a]">Projects</a></li>
-              <li><a href="#" className="hover:text-[#b8965a]">Workshops & Consulting</a></li>
-            </ul>
-          </div>
+  <h4 className="font-semibold mb-5">
+    Quick Links
+  </h4>
 
-          {/* SERVICES */}
-          <div className="text-center md:text-left">
-            <h4 className="font-semibold mb-5">Services</h4>
+  <ul className="space-y-3 text-sm text-white/60">
 
-            <ul className="space-y-3 text-sm text-white/60">
-              <li>AI Strategy Workshop for HR</li>
-              <li>Digital Transformation Workshop</li>
-              <li>Process Modelling & Automation</li>
-              <li>Interim Management Services</li>
-            </ul>
-          </div>
+    <li>
+      <a
+        href="/about"
+        className="hover:text-[#b8965a] transition"
+      >
+        About Me
+      </a>
+    </li>
 
-          {/* CONTACT */}
-          <div className="text-center md:text-left">
-            <h4 className="font-semibold mb-5">Contact</h4>
+    <li>
+      <a
+        href="/insights"
+        className="hover:text-[#b8965a] transition"
+      >
+        HR & AI Insights
+      </a>
+    </li>
 
-            <div className="space-y-4 text-sm text-white/60">
+    <li>
+      <a
+        href="/author"
+        className="hover:text-[#b8965a] transition"
+      >
+        Author
+      </a>
+    </li>
 
-              {/* EMAIL */}
-              <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 justify-center md:justify-start">
-                <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg">
-                  <i className="fa-regular fa-envelope text-[#b8965a]"></i>
-                </div>
-                <span>contact@edlmann.com</span>
-              </div>
+    <li>
+      <a
+        href="/#speaker-section"
+        className="hover:text-[#b8965a] transition"
+      >
+        Speaker
+      </a>
+    </li>
 
-              {/* PHONE */}
-              <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 justify-center md:justify-start">
-                <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg">
-                  <i className="fa-solid fa-phone text-[#b8965a]"></i>
-                </div>
-                <span>+49 162 523 50 273</span>
-              </div>
+    <li>
+      <a
+        href="/vita"
+        className="hover:text-[#b8965a] transition"
+      >
+        Vita
+      </a>
+    </li>
 
-            </div>
+    <li>
+      <a
+        href="/projects"
+        className="hover:text-[#b8965a] transition"
+      >
+        Projects
+      </a>
+    </li>
 
-          </div>
+    <li>
+      <a
+        href="/workshops"
+        className="hover:text-[#b8965a] transition"
+      >
+        Workshops & Consulting
+      </a>
+    </li>
+
+  </ul>
+
+</div>
+
+         {/* SERVICES */}
+<div className="text-center md:text-left">
+
+  <h4 className="font-semibold mb-5">
+    Services
+  </h4>
+
+  <ul className="space-y-3 text-sm text-white/60">
+
+    <li>
+      <a
+        href="/workshops"
+        className="hover:text-[#b8965a] transition"
+      >
+        AI Strategy Workshop for HR
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/workshops"
+        className="hover:text-[#b8965a] transition"
+      >
+        Digital Transformation Workshop
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/workshops"
+        className="hover:text-[#b8965a] transition"
+      >
+        Process Modelling & Automation
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/workshops"
+        className="hover:text-[#b8965a] transition"
+      >
+        Interim Management Services
+      </a>
+    </li>
+
+  </ul>
+
+</div>
+         {/* CONTACT */}
+<div className="text-center md:text-left">
+
+  <h4 className="font-semibold mb-5">
+    Contact
+  </h4>
+
+  <div className="space-y-4 text-sm text-white/60">
+
+    {/* EMAIL */}
+    <div className="flex items-center gap-3 justify-center md:justify-start">
+
+      <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg shrink-0">
+        <i className="fa-regular fa-envelope text-[#b8965a]"></i>
+      </div>
+
+      <span>
+        contact@edlmann.com
+      </span>
+
+    </div>
+
+    {/* PHONE */}
+    <div className="flex items-center gap-3 justify-center md:justify-start">
+
+      <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg shrink-0">
+        <i className="fa-solid fa-phone text-[#b8965a]"></i>
+      </div>
+
+      <span>
+        +49 162 523 50 273
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
 
         </div>
 

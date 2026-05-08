@@ -57,7 +57,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="bg-[#f5f3ef] py-[80px] overflow-hidden">
+    <section className="bg-[#f4f4f4] py-[60px] overflow-hidden">
 {/* TOP */}
       <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] text-center mb-14">
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">

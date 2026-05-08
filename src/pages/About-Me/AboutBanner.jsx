@@ -9,13 +9,13 @@ const AboutBanner = () => {
       <div className="absolute inset-0">
 
         <img
-          src="/assets/images/25.png"
+          src="/assets/images/about.png"
           alt="About Banner"
           className="w-full h-full object-cover object-center"
         />
 
         {/* DARK OVERLAY */}
-        <div className="absolute inset-0 bg-black/35"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
 
        
       </div>

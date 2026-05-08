@@ -19,32 +19,37 @@ const Hero = () => {
       {/* CONTENT */}
       <div className="relative max-w-[1420px] mx-auto px-[20px] md:px-[40px] w-full text-center md:text-left mb-[75px] md:mb-0">
 
-       <h2
-  className="text-white font-medium leading-tight text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide"
-  style={{
-    fontFamily: hover
-      ? "Caveat, cursive"
-      : "Playfair Display, serif",
-    letterSpacing: hover ? "1px" : "0px",
-    transition: "0.4s ease",
-  }}
-  onMouseEnter={() => setHover(true)}
-  onMouseLeave={() => setHover(false)}
->
-  Dr. Raphael Edlmann
-</h2>
+        <h2
+          className="text-white font-medium leading-tight text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide"
+          style={{
+            fontFamily: hover
+              ? "Caveat, cursive"
+              : "Playfair Display, serif",
+            letterSpacing: hover ? "1px" : "0px",
+            transition: "0.4s ease",
+          }}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          Dr. Raphael Edlmann
+        </h2>
+
         {/* SUBTEXT */}
         <p className="text-white mt-3 text-base md:text-lg lg:text-xl">
           Interim Manager. AI, HR & Business Process Expert
         </p>
 
-        {/* BUTTON CENTER */}
-        <div className="w-full flex justify-center mt-8">
-          <div className="flex items-center gap-3">
+        {/* BUTTON + ICONS LEFT ALIGN */}
+        <div className="w-full flex justify-center md:justify-start mt-8">
+          <div className="flex items-center gap-3 flex-wrap">
 
-            <button className="px-8 py-3 rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:border-white hover:text-white transition duration-300">
-              Let’s work together
-            </button>
+          {/* BUTTON */}
+<a
+  href="/contact"
+  className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:border-white hover:text-white transition duration-300"
+>
+  Let’s work together
+</a>
 
             {/* EMAIL */}
             <a

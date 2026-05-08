@@ -27,10 +27,9 @@ const AuthorSection = () => {
   };
 
   return (
-    <section className="bg-white py-[60px]">
+    <section className="bg-[#f4f4f4] py-[60px]">
  {/* TITLE */}
-        <div className="text-center mb-14">
-
+<div className="text-center mb-14 px-[20px] md:px-0">
           <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
             Publications
           </span>
@@ -39,17 +38,9 @@ const AuthorSection = () => {
             Author
           </h2>
 
-          <p className="text-[#0a3e40] max-w-4xl mx-auto text-[16px] leading-relaxed">
-            <span className="font-semibold italic">
-              My research is not just about AI and HR — it’s about opening new perspectives.
-            </span>
-
-            <br />
-
-            Whether it’s rethinking how organisations use AI, reshaping HR, or exploring new ways to work:
-            I am most pleased when my publications encourage you to challenge existing models.
-          </p>
-
+         <p className="text-[#0a3e40] max-w-4xl mx-auto text-[16px] leading-relaxed">
+  My publications explore the intersection of AI, leadership, and digital transformation, offering practical insights and forward-thinking perspectives for modern organizations.
+</p>
         </div>
       <div className="max-w-[1220px] mx-auto px-[20px] md:px-[40px]">
 

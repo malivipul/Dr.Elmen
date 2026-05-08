@@ -145,8 +145,10 @@ export default function WorkshopDetailsPage() {
                             className="flex items-start gap-3"
                           >
 
-                            {/* DOT */}
-                            <span className="min-w-[8px] h-[8px] rounded-full bg-[#b8965a] mt-[11px]"></span>
+                            {/* ICON */}
+                            <span className="text-[#b8965a] mt-[4px]">
+                              ✔
+                            </span>
 
                             <p className="text-[16px] text-[#0a3e40] leading-[29px]">
                               {point}
@@ -179,30 +181,32 @@ export default function WorkshopDetailsPage() {
                   Key Outcomes
                 </h2>
 
-                {/* OUTCOMES GRID */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+             {/* OUTCOMES GRID */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
 
-                  {workshop.outcomes.map((item, index) => (
-                    <div
-                      key={index}
-                      className="group bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-[#d4b17d]/40 rounded-[22px] px-5 py-5 transition-all duration-500 hover:-translate-y-1"
-                    >
+  {workshop.outcomes.map((item, index) => (
+    <div
+      key={index}
+      className="group bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-[#d4b17d]/40 rounded-[22px] px-5 py-5 transition-all duration-500 hover:-translate-y-1"
+    >
 
-                      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-3">
 
-                        {/* DOT */}
-                        <span className="min-w-[8px] h-[8px] rounded-full bg-[#d4b17d] mt-[11px]"></span>
+        {/* ICON */}
+        <span className="text-[#b8965a] mt-[4px]">
+          ✔
+        </span>
 
-                        <p className="text-[16px] text-[#f5f5f5] leading-[30px]">
-                          {item}
-                        </p>
+        <p className="text-[16px] text-[#f5f5f5] leading-[30px]">
+          {item}
+        </p>
 
-                      </div>
+      </div>
 
-                    </div>
-                  ))}
+    </div>
+  ))}
 
-                </div>
+</div>
 
               </div>
 
@@ -224,54 +228,54 @@ export default function WorkshopDetailsPage() {
           </div>
 
           {/* RIGHT STICKY BOX */}
-<div className="lg:sticky lg:top-[120px] h-fit">
+          <div className="lg:sticky lg:top-[120px] h-fit">
 
-  <div className="bg-[#e7dfd7] rounded-[22px] p-6 overflow-hidden relative border border-[#ece6dc]">
+            <div className="bg-[#e7dfd7] rounded-[22px] p-6 overflow-hidden relative border border-[#ece6dc]">
 
-    {/* EFFECT */}
-    <div className="absolute top-[-60px] right-[-60px] w-[150px] h-[150px] bg-[#d4b17d]/10 rounded-full blur-[60px]"></div>
+              {/* EFFECT */}
+              <div className="absolute top-[-60px] right-[-60px] w-[150px] h-[150px] bg-[#d4b17d]/10 rounded-full blur-[60px]"></div>
 
-    {/* TITLE */}
-    <h3 className="title-font text-[28px] text-black mb-6 relative z-10 leading-[1.3]">
-      Workshops & Consulting
-    </h3>
+              {/* TITLE */}
+              <h3 className="title-font text-[28px] text-black mb-6 relative z-10 leading-[1.3]">
+                Workshops & Consulting
+              </h3>
 
-    {/* SERVICES */}
-    <div className="space-y-4 relative z-10">
+              {/* SERVICES */}
+              <div className="space-y-4 relative z-10">
 
-      {[
-        "AI Strategy Consulting",
-        "Technology Advisory",
-        "HR Process Optimization",
-        "Implementation Support",
-      ].map((service, index) => (
-        <div
-          key={index}
-          className="group bg-white hover:bg-[#111111] border border-[#ece6dc] hover:border-[#111111] rounded-[18px] px-5 py-4 transition-all duration-500"
-        >
+                {[
+                  "AI Strategy Consulting",
+                  "Technology Advisory",
+                  "HR Process Optimization",
+                  "Implementation Support",
+                ].map((service, index) => (
+                  <div
+                    key={index}
+                    className="group bg-white hover:bg-[#111111] border border-[#ece6dc] hover:border-[#111111] rounded-[18px] px-5 py-4 transition-all duration-500"
+                  >
 
-          <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center justify-between gap-4">
 
-            {/* TEXT */}
-            <p className="text-[16px] text-[#111111] group-hover:text-white leading-[28px] transition-all duration-500">
-              {service}
-            </p>
+                      {/* TEXT */}
+                      <p className="text-[16px] text-[#111111] group-hover:text-white leading-[28px] transition-all duration-500">
+                        {service}
+                      </p>
 
-            {/* ARROW */}
-            <span className="text-[20px] text-[#b8965a] transition-all duration-500 group-hover:translate-x-1">
-              →
-            </span>
+                      {/* ARROW */}
+                      <span className="text-[20px] text-[#b8965a] transition-all duration-500 group-hover:translate-x-1">
+                        →
+                      </span>
+
+                    </div>
+
+                  </div>
+                ))}
+
+              </div>
+
+            </div>
 
           </div>
-
-        </div>
-      ))}
-
-    </div>
-
-  </div>
-
-</div>
 
         </div>
 

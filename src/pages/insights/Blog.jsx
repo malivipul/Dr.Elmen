@@ -68,7 +68,7 @@ const InsightsSection = () => {
   ];
 
   return (
-    <section className="bg-[#f5f3ef] py-[70px]">
+    <section className="bg-[#f4f4f4] py-[60px]">
       <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] text-center mb-10">
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
           Articles
