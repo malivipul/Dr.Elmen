@@ -64,7 +64,7 @@ const AboutSection = () => {
                   </Link>
 
                   <Link
-                    to="/assets/files/cv.pdf"
+                    to="/assets/images/Professional_CV_English.pdf"
                     target="_blank"
                     className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#b8965a] text-white text-[13px] md:text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
