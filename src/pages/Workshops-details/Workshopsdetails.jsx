@@ -124,17 +124,17 @@ export default function WorkshopDetailsPage() {
                 >
 
                   {/* HEADING */}
-                  <div className="flex items-start gap-3 mb-4">
+<div className="flex items-center gap-3 mb-4">
 
-                    <div className="min-w-[32px] h-[32px] rounded-full bg-[#b8965a] text-white flex items-center justify-center text-[11px] font-semibold">
-                      {index + 1}
-                    </div>
+  <div className="min-w-[32px] w-[32px] h-[32px] rounded-full bg-[#b8965a] text-white flex items-center justify-center text-[11px] font-semibold">
+    {index + 1}
+  </div>
 
-                    <h3 className="title-font !font-['Inter',sans-serif] text-[16px] md:text-[18px] leading-[1.3] text-black">
-                      {section.heading}
-                    </h3>
+  <h3 className="title-font !font-['Inter',sans-serif] text-[16px] md:text-[18px] leading-[1.3] text-black whitespace-nowrap overflow-hidden text-ellipsis">
+    {section.heading}
+  </h3>
 
-                  </div>
+</div>
 
                   {/* POINTS */}
                   <div className="space-y-2.5">
@@ -191,18 +191,19 @@ export default function WorkshopDetailsPage() {
                   className="group bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-[#d4b17d]/40 rounded-[18px] px-4 py-4 transition-all duration-500 hover:-translate-y-1"
                 >
 
-                  <div className="flex items-start gap-3">
+                 <div className="flex items-start gap-3">
 
-                    {/* ICON */}
-                    <span className="text-[#b8965a] text-[13px] mt-[4px]">
-                      ✔
-                    </span>
+  {/* ICON */}
+  <span className="min-w-[22px] w-[22px] h-[22px] rounded-full bg-[#b8965a] flex items-center justify-center text-white text-[11px] mt-[2px]">
+    ✔
+  </span>
 
-                    <p className="text-[14px] md:text-[15px] text-[#f5f5f5] leading-[28px]">
-                      {item}
-                    </p>
+  {/* TEXT */}
+  <p className="text-[14px] md:text-[15px] text-[#f5f5f5] leading-[28px]">
+    {item}
+  </p>
 
-                  </div>
+</div>
 
                 </div>
               ))}
