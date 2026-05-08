@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
+import { Link } from "react-router";
 
 const BlogSection = () => {
   const [active, setActive] = useState("all");
@@ -81,10 +82,9 @@ const BlogSection = () => {
                 font-medium
                 transition-all
                 duration-300
-                ${
-                  active === tab.value
-                    ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
-                    : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
+                ${active === tab.value
+                  ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
+                  : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
                 }
               `}
             >
@@ -114,7 +114,6 @@ const BlogSection = () => {
                 <Card item={item} />
               </SwiperSlide>
             ))}
-
           </Swiper>
 
         </div>
@@ -144,8 +143,8 @@ const BlogSection = () => {
 };
 
 const Card = ({ item }) => (
-  <a
-    href={item.link}
+  <Link
+    to={item.link}
     className="group cursor-pointer transition duration-300 hover:-translate-y-1 block"
   >
 
@@ -177,7 +176,7 @@ const Card = ({ item }) => (
       {item.desc}
     </p>
 
-  </a>
+  </Link>
 );
 
 export default BlogSection;
