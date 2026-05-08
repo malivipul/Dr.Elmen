@@ -97,7 +97,7 @@ export default function WorkshopDetailsPage() {
               {/* OBJECTIVE */}
               <div className="mb-8 relative z-10">
 
-                <h2 className="title-font text-[22px] md:text-[24px] mb-4 text-black">
+                <h2 className="title-font text-[22px] md:text-[26px] mb-4 text-black">
                   Objective
                 </h2>
 
@@ -110,7 +110,7 @@ export default function WorkshopDetailsPage() {
               {/* WORKSHOP STRUCTURE */}
               <div className="relative z-10">
 
-                <h2 className="title-font text-[22px] md:text-[24px] mb-5 text-black">
+                <h2 className="title-font text-[22px] md:text-[26px] mb-5 text-black">
                   Workshop Structure
                 </h2>
 
@@ -130,7 +130,7 @@ export default function WorkshopDetailsPage() {
                           {index + 1}
                         </div>
 
-                        <h3 className="title-font text-[24px] leading-[1.35] text-black">
+                        <h3 className="title-font !font-['Inter',sans-serif] text-[24px] leading-[1.35] text-black">
                           {section.heading}
                         </h3>
 
@@ -181,32 +181,32 @@ export default function WorkshopDetailsPage() {
                   Key Outcomes
                 </h2>
 
-             {/* OUTCOMES GRID */}
-<div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                {/* OUTCOMES GRID */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
 
-  {workshop.outcomes.map((item, index) => (
-    <div
-      key={index}
-      className="group bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-[#d4b17d]/40 rounded-[22px] px-5 py-5 transition-all duration-500 hover:-translate-y-1"
-    >
+                  {workshop.outcomes.map((item, index) => (
+                    <div
+                      key={index}
+                      className="group bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-[#d4b17d]/40 rounded-[22px] px-5 py-5 transition-all duration-500 hover:-translate-y-1"
+                    >
 
-      <div className="flex items-start gap-3">
+                      <div className="flex items-start gap-3">
 
-        {/* ICON */}
-        <span className="text-[#b8965a] mt-[4px]">
-          ✔
-        </span>
+                        {/* ICON */}
+                        <span className="text-[#b8965a] mt-[4px]">
+                          ✔
+                        </span>
 
-        <p className="text-[16px] text-[#f5f5f5] leading-[30px]">
-          {item}
-        </p>
+                        <p className="text-[16px] text-[#f5f5f5] leading-[30px]">
+                          {item}
+                        </p>
 
-      </div>
+                      </div>
 
-    </div>
-  ))}
+                    </div>
+                  ))}
 
-</div>
+                </div>
 
               </div>
 

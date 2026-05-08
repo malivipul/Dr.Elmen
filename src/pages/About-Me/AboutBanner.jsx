@@ -26,23 +26,23 @@ const AboutBanner = () => {
         {/* CONTENT BOX */}
         <div className="max-w-fit">
 
-          {/* BREADCRUMB */}
-          <div className="text-white text-[13px] md:text-sm mb-3 flex items-center gap-2 opacity-90 font-medium">
+         {/* BREADCRUMB */}
+<div className="text-white text-[15px] md:text-sm mb-3 flex items-center gap-2 opacity-90 font-medium">
 
-            <Link
-              to="/"
-              className="hover:underline"
-            >
-              Home
-            </Link>
+  <Link
+    to="/"
+    className="hover:underline"
+  >
+    Home
+  </Link>
 
-            <span>›</span>
+  <span className="text-[16px] leading-none">›</span>
 
-            <span className="font-semibold">
-              About Me
-            </span>
+  <span className="font-semibold">
+    About Me
+  </span>
 
-          </div>
+</div>
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">

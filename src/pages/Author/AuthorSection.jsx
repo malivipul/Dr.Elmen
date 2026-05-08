@@ -6,7 +6,7 @@ const AuthorSection = () => {
 
   const books = [
     {
-      img: "/assets/images/book1.png",
+      img: "/assets/images/book1.jpeg",
       link: "https://link.springer.com/book/10.1007/978-3-030-56441-4",
     },
 

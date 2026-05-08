@@ -32,7 +32,7 @@ const InsightsSection = () => {
     {
       category: "guides",
       title: "Digital HR Strategy",
-      img: "/assets/images/blo1.png",
+      img: "/assets/images/blog8.png",
       desc: "Modern workforce transformation strategies.",
       link: "/blog-details",
     },
