@@ -26,7 +26,7 @@ const About = () => {
             <div className="space-y-5">
 
               <p className="text-[#0a3e40] text-[16px] leading-relaxed font-semibold italic">
-                Shaping digital transformation and AI with integrity, clarity and a long-term vision.
+                "Shaping digital transformation and AI with integrity, clarity and a long-term vision."
               </p>
 
               <p className="text-[#0a3e40] text-[16px] leading-relaxed">
@@ -114,7 +114,7 @@ const About = () => {
                       </h4>
 
                       <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        TU Munich
+                        Technical University of Munich
                       </p>
                     </div>
 
@@ -131,7 +131,7 @@ const About = () => {
                       </h4>
 
                       <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        FOM University
+                        FOM University, Munich
                       </p>
                     </div>
 
@@ -148,7 +148,7 @@ const About = () => {
                       </h4>
 
                       <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        Heriot-Watt
+                        Heriot-Watt University, Edinburgh
                       </p>
                     </div>
 
@@ -165,7 +165,7 @@ const About = () => {
                       </h4>
 
                       <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        Innovation Task
+                        Innovation Task Force Expert
                       </p>
                     </div>
 
