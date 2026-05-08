@@ -1,6 +1,7 @@
 import AboutBanner from "./AboutBanner";
 import AboutProfile from "./AboutProfile";
 
+
 const About = () => {
   return (
     <>

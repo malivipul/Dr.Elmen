@@ -27,39 +27,39 @@ const Footer = () => {
               Interim Manager • AI, HR & Business Transformation — Helping organisations transform with practical, high-impact strategies.
             </p>
 
-           {/* SOCIAL */}
+   {/* SOCIAL */}
 <div className="flex gap-4 pt-3 justify-center md:justify-start">
 
   <Link
     to="https://linkedin.com"
     target="_blank"
-    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-[#0A66C2] text-white shadow-md hover:scale-110 transition-all duration-300"
   >
-    <i className="fa-brands fa-linkedin-in text-[14px]"></i>
+    <i className="fa-brands fa-linkedin-in text-[15px]"></i>
   </Link>
 
   <Link
     to="https://x.com"
     target="_blank"
-    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-white text-black shadow-md hover:scale-110 transition-all duration-300"
   >
-    <i className="fa-brands fa-x-twitter text-[14px]"></i>
+    <i className="fa-brands fa-x-twitter text-[15px]"></i>
   </Link>
 
   <Link
     to="https://facebook.com"
     target="_blank"
-    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-[#1877F2] text-white shadow-md hover:scale-110 transition-all duration-300"
   >
-    <i className="fa-brands fa-facebook-f text-[14px]"></i>
+    <i className="fa-brands fa-facebook-f text-[15px]"></i>
   </Link>
 
   <Link
     to="https://instagram.com"
     target="_blank"
-    className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition"
+    className="w-[45px] h-[45px] flex items-center justify-center rounded-full bg-gradient-to-br from-[#feda75] via-[#d62976] to-[#962fbf] text-white shadow-md hover:scale-110 transition-all duration-300"
   >
-    <i className="fa-brands fa-instagram text-[14px]"></i>
+    <i className="fa-brands fa-instagram text-[15px]"></i>
   </Link>
 
 </div>
