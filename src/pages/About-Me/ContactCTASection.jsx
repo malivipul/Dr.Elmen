@@ -58,7 +58,7 @@ const ContactCTASection = () => {
     to="/contact"
     className="min-w-[220px] h-[50px] rounded-full border border-black/10 hover:bg-black hover:text-white text-black text-[14px] font-medium tracking-[0.5px] transition-all duration-500 inline-flex items-center justify-center"
   >
-    Whatsapp Me
+    WhatsApp Me
   </Link>
 
 </div>
