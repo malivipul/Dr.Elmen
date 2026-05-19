@@ -43,7 +43,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "tools",
       title: "AI Tools for HR Teams",
-      img: "/assets/images/blog2.png",
+      img: "/assets/images/blog3.png",
       desc: "Discover powerful AI tools designed for HR automation, employee analytics, recruitment optimisation, workflow management, and productivity enhancement in modern workplaces.",
       date: "May 08, 2025",
       read: "4 min read",
@@ -53,7 +53,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "guides",
       title: "Digital HR Transformation",
-      img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
+      img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
       desc: "Digital HR transformation combines AI technologies, automation strategies, and modern workforce solutions to improve operational efficiency and employee engagement across organisations.",
       date: "May 06, 2025",
       read: "5 min read",

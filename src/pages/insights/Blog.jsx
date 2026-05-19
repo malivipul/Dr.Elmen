@@ -42,7 +42,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "tools",
       title: "AI Tools for HR Teams",
-      img: "/assets/images/blog2.png",
+      img: "/assets/images/blog3.png",
       desc: "Discover powerful AI tools designed for HR automation, employee analytics, recruitment optimisation, workflow management, and productivity enhancement in modern workplaces.",
       date: "May 08, 2025",
       read: "4 min read",
@@ -52,7 +52,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "guides",
       title: "Digital HR Transformation",
-      img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
+      img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
       desc: "Digital HR transformation combines AI technologies, automation strategies, and modern workforce solutions to improve operational efficiency and employee engagement across organisations.",
       date: "May 06, 2025",
       read: "5 min read",
@@ -62,7 +62,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "opinions",
       title: "Future of AI in Business",
-      img: "/assets/images/blog2.png",
+      img: "/assets/images/2151966708.jpg",
       desc: "Exploring how AI is reshaping business strategy, leadership, and operational efficiency across global industries through innovation and digital transformation.",
       date: "May 03, 2025",
       read: "7 min read",
@@ -72,7 +72,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "tools",
       title: "Top HR Automation Platforms",
-      img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
+      img: "/assets/images/close-up-data-center-programmers-using-pc-visualize-ai-neural-networks (1).jpg",
       desc: "A curated overview of modern HR automation platforms helping organisations streamline workflows and employee management successfully.",
       date: "April 29, 2025",
       read: "4 min read",
@@ -82,7 +82,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "case",
       title: "AI Recruitment Success Story",
-      img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
+      img: "/assets/images/book1.jpeg",
       desc: "How AI recruitment systems improved candidate screening, hiring speed, and workforce planning for enterprise organisations worldwide.",
       date: "April 22, 2025",
       read: "6 min read",
@@ -92,7 +92,7 @@ const BlogSection = ({ setIsOpen }) => {
     {
       category: "guides",
       title: "AI & Workforce Innovation",
-      img: "/assets/images/blog2.png",
+      img: "/assets/images/people-taking-part-high-protocol-event (3) (1).jpg",
       desc: "AI and workforce innovation are transforming organisations through automation, strategic decision-making, and intelligent employee engagement solutions.",
       date: "April 18, 2025",
       read: "5 min read",
