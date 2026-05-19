@@ -78,6 +78,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/about"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   About Me
@@ -87,6 +93,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/insights"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   HR & AI Insights
@@ -96,6 +108,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/author"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   Author
@@ -105,6 +123,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#speaker-section"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   Speaker
@@ -114,6 +138,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/vita"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   Vita
@@ -123,6 +153,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/projects"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   Projects
@@ -132,6 +168,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/workshops"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   Workshops & Consulting
@@ -141,6 +183,12 @@ const Footer = () => {
               <li>
                 <Link
                   to="/contact"
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    })
+                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   Lets Work Together
@@ -254,7 +302,7 @@ const Footer = () => {
               target="_blank"
               className="text-[#d4872a] text-[12px] font-semibold"
             >
-              Anaxistech
+              AnaxisTech
             </Link>
 
           </p>
