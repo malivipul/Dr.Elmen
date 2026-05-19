@@ -4,46 +4,44 @@ import {
   FaCogs,
   FaBullseye,
   FaGraduationCap,
-  FaGlobeEurope,
 } from "react-icons/fa";
 
 const ExpertiseSection = () => {
 
   const expertise = [
     {
-      icon: FaRobot,
-      title: "AI & Digital Transformation",
-      text: "Translating AI strategy into operational reality. Helping organisations adopt AI-driven solutions — from HR technology to enterprise automation — with clarity and accountability.",
-    },
-    {
-      icon: FaUsers,
-      title: "HR Technology & Analytics",
-      text: "Research-backed expertise in AI recruitment technology, predictive HR analytics and workforce transformation. Published in peer-reviewed Springer journals.",
-    },
-    {
-      icon: FaCogs,
-      title: "Business Process & IT Management",
-      text: "Hands-on delivery in SAP ERP automation, IT infrastructure, workload automation and process orchestration for DAX-listed enterprises across key industries.",
-    },
-    {
       icon: FaBullseye,
       title: "Interim Management",
-      text: "Stepping into leadership roles across IT Build & Operations, Project, Service and Transition Management with teams of 5–15. Consistent 96–99% SLA delivery.",
+      text: "I take on interim management roles, filling critical leadership positions during periods of transformation, growth, or transition.",
     },
+
+    {
+      icon: FaCogs,
+      title: "Business Process & IT-Management",
+      text: "I design and optimise business process models and workload automation solutions using Automic Automation (UC4), BMC Control-M, IBM IWS, and SAP ERP.",
+    },
+
+    {
+      icon: FaRobot,
+      title: "AI, HR & Digital Transformation",
+      text: "I support organisations in leveraging AI, modernising HR, and accelerating digital transformation to create sustainable competitive advantage.",
+    },
+
     {
       icon: FaGraduationCap,
       title: "Academic Teaching & Research",
-      text: "Lecturer at Munich University of Applied Sciences. Delivers seminars on digital transformation, AI in e-commerce and business informatics for Bachelor programmes.",
+      text: "I combine academic teaching experience with real-world business expertise to train organisations and teams in AI, HR, and digital transformation.",
     },
+
     {
-      icon: FaGlobeEurope,
-      title: "EU Innovation & Policy",
-      text: "Committee expert at the Automotive Skills Alliance, Brussels. Supporting EU research funding proposals in HRM and AI — bridging academia and industry at policy level.",
+      icon: FaUsers,
+      title: "Keynote Expertise",
+      text: "I provide engaging keynote expertise on AI, HR, and digital transformation, while helping promote your event through my social media reach and professional network.",
     },
   ];
 
   return (
-    <section className="bg-[#f4f4f4]] pb-[60px] md:pb-[60px]">
+    <section className="bg-[#f4f4f4] pb-[60px] md:pb-[60px]">
 
       <div className="max-w-[1320px] mx-auto px-4 md:px-7">
 
@@ -62,42 +60,63 @@ const ExpertiseSection = () => {
 
           {/* TEXT */}
           <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-[30px] md:leading-[34px]">
-            Six core disciplines at the intersection of technology,
-            people and organisational change.
+            Six core disciplines at the intersection of technology, people and
+organisational change to “Five core disciplines at the intersection of technology, people
+and organisational change
           </p>
 
         </div>
 
-       {/* GRID */}
-<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        {/* GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-6 gap-5">
 
-  {expertise.map((item, index) => (
-    <div
-      key={index}
-      className="group bg-white rounded-[24px] p-5 border border-[#ece6dc] hover:border-[#d4b17d] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_35px_rgba(0,0,0,0.05)]"
-    >
+          {expertise.map((item, index) => (
+            <div
+              key={index}
+              className={`
+                group
+                bg-white
+                rounded-[24px]
+                p-5
+                border
+                border-[#ece6dc]
+                hover:border-[#d4b17d]
+                transition-all
+                duration-500
+                hover:-translate-y-2
+                hover:shadow-[0_15px_35px_rgba(0,0,0,0.05)]
 
-      {/* ICON */}
-      <div className="w-[52px] h-[52px] rounded-[16px] bg-[#faf6ef] flex items-center justify-center text-[#b8965a] text-[22px] mb-4 transition-all duration-500 group-hover:bg-[#b8965a] group-hover:text-white">
+                ${
+                  index < 3
+                    ? "xl:col-span-2"
+                    : index === 3
+                    ? "xl:col-start-2 xl:col-span-2"
+                    : "xl:col-span-2"
+                }
+              `}
+            >
 
-        <item.icon />
+              {/* ICON */}
+              <div className="w-[52px] h-[52px] rounded-[16px] bg-[#faf6ef] flex items-center justify-center text-[#b8965a] text-[22px] mb-4 transition-all duration-500 group-hover:bg-[#b8965a] group-hover:text-white">
 
-      </div>
+                <item.icon />
 
-      {/* TITLE */}
-      <h3 className="title-font text-[18px] md:text-[20px] leading-[1.3] text-black mb-3">
-        {item.title}
-      </h3>
+              </div>
 
-      {/* TEXT */}
-      <p className="text-[#0a3e40] text-[14px] md:text-[15px] leading-[28px]">
-        {item.text}
-      </p>
+              {/* TITLE */}
+              <h3 className="title-font text-[18px] md:text-[20px] leading-[1.3] text-black mb-3">
+                {item.title}
+              </h3>
 
-    </div>
-  ))}
+              {/* TEXT */}
+              <p className="text-[#0a3e40] text-[14px] md:text-[15px] leading-[28px]">
+                {item.text}
+              </p>
 
-</div>
+            </div>
+          ))}
+
+        </div>
 
       </div>
 

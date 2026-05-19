@@ -1,6 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Blogsdetails = () => {
+
+  // LIKE
+  const [likes, setLikes] = useState(128);
+
+  // COMMENT
+  const [comments, setComments] = useState([
+    {
+      name: "Michael",
+      text: "Great insights about AI and HR transformation.",
+    },
+  ]);
+
+  const [commentText, setCommentText] = useState("");
+
+  // SHARE URL
+  const articleUrl = window.location.href;
+
+  // ADD COMMENT
+  const handleComment = () => {
+
+    if (commentText.trim() === "") return;
+
+    setComments([
+      ...comments,
+      {
+        name: "Guest",
+        text: commentText,
+      },
+    ]);
+
+    setCommentText("");
+  };
+
   return (
     <section className="bg-[#f4f4f4] pb-[90px]">
 
@@ -102,26 +135,100 @@ const Blogsdetails = () => {
                 in the evolving digital economy.
               </p>
 
-              <p>
-                The future of HR is increasingly connected to data-driven leadership and intelligent systems.
-                Organisations that embrace these changes responsibly can unlock sustainable growth and stronger
-                workforce engagement.
-              </p>
+            </div>
 
-              <p>
-                AI is not replacing human leadership — it is enhancing the ability of leaders to make smarter,
-                faster, and more impactful decisions.
-              </p>
+          {/* LIKE + SHARE */}
+<div className="mt-12 border-t border-[#ddd] pt-8">
 
-              <p>
-                As digital transformation accelerates, HR departments are becoming strategic innovation hubs
-                that shape organisational resilience and future success.
-              </p>
+  <div className="flex items-center justify-between gap-4 flex-nowrap">
 
-              <p>
-                Ultimately, the integration of AI in HR should always support human potential, creativity,
-                and meaningful workplace experiences.
-              </p>
+    {/* LIKE */}
+    <button
+      onClick={() => setLikes(likes + 1)}
+      className="shrink-0 flex items-center gap-2 px-4 md:px-6 py-3 rounded-full bg-white border border-[#d7d1c8] text-[#0a3e40] text-sm font-medium hover:border-[#b8965a] transition"
+    >
+
+      <i className="fa-regular fa-heart text-[#b8965a] text-[14px]"></i>
+
+      {likes} Likes
+
+    </button>
+
+    {/* SHARE */}
+    <div className="flex items-center gap-2 md:gap-4 shrink-0">
+
+      {/* LINKEDIN */}
+      <a
+        href={`https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`}
+        target="_blank"
+        rel="noreferrer"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-black hover:text-white transition duration-300"
+      >
+        <i className="fa-brands fa-linkedin-in"></i>
+      </a>
+
+      {/* X */}
+      <a
+        href={`https://twitter.com/intent/tweet?url=${articleUrl}`}
+        target="_blank"
+        rel="noreferrer"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-black hover:text-white transition duration-300"
+      >
+        <i className="fa-brands fa-x-twitter"></i>
+      </a>
+
+      {/* FACEBOOK */}
+      <a
+        href={`https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`}
+        target="_blank"
+        rel="noreferrer"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-black hover:text-white transition duration-300"
+      >
+        <i className="fa-brands fa-facebook-f"></i>
+      </a>
+
+      {/* INSTAGRAM */}
+      <a
+        href="https://www.instagram.com/"
+        target="_blank"
+        rel="noreferrer"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[13px] hover:bg-black hover:text-white transition duration-300"
+      >
+        <i className="fa-brands fa-instagram"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+            {/* COMMENTS */}
+            <div className="mt-14">
+
+
+              {/* COMMENT BOX */}
+              <div className="bg-white rounded-[28px] p-6 md:p-8 border border-[#e6dfd5]">
+
+                <h3 className="title-font text-[24px] text-black mb-5">
+                  Leave a Comment
+                </h3>
+
+                <textarea
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  placeholder="Write your comment..."
+                  className="w-full h-[160px] rounded-[20px] border border-[#ddd] p-5 outline-none resize-none text-[15px] focus:border-[#b8965a] transition"
+                ></textarea>
+
+                <button
+                  onClick={handleComment}
+                  className="mt-5 px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
+                >
+                  Post Comment
+                </button>
+
+              </div>
 
             </div>
 
@@ -164,26 +271,25 @@ const Blogsdetails = () => {
 
               <div className="flex flex-wrap gap-3">
 
-                <span className="px-5 py-2 rounded-full border border-[#d8d8d8] text-sm text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition duration-300 cursor-pointer">
+                <span className="px-5 py-2 rounded-full bg-[#f5f3ef] text-[#0a3e40] text-sm transition duration-300 hover:bg-[#b8965a] hover:text-white cursor-pointer">
                   Leadership
                 </span>
 
-                <span className="px-5 py-2 rounded-full border border-[#d8d8d8] text-sm text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition duration-300 cursor-pointer">
+                <span className="px-5 py-2 rounded-full bg-[#f5f3ef] text-[#0a3e40] text-sm transition duration-300 hover:bg-[#b8965a] hover:text-white cursor-pointer">
                   Innovation
                 </span>
 
-                <span className="px-5 py-2 rounded-full border border-[#d8d8d8] text-sm text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition duration-300 cursor-pointer">
+                <span className="px-5 py-2 rounded-full bg-[#f5f3ef] text-[#0a3e40] text-sm transition duration-300 hover:bg-[#b8965a] hover:text-white cursor-pointer">
                   Strategy
                 </span>
 
-                <span className="px-5 py-2 rounded-full border border-[#d8d8d8] text-sm text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition duration-300 cursor-pointer">
+                <span className="px-5 py-2 rounded-full bg-[#f5f3ef] text-[#0a3e40] text-sm transition duration-300 hover:bg-[#b8965a] hover:text-white cursor-pointer">
                   Future Work
                 </span>
 
               </div>
 
             </div>
-
             {/* RECENT POSTS */}
             <div className="bg-[#e7dfd7] rounded-[28px] p-6 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
 

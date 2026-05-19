@@ -67,27 +67,21 @@ const AboutSection = () => {
 
               {/* MAIN */}
               <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-[30px] md:leading-[33px]">
-                I am an expert in AI, HR and business process
-                transformation, helping organisations turn
-                complexity into practical AI-driven solutions
-                with real impact.
+                I am an expert in AI, HR, and business process transformation based in Munich, Germany,
+                helping organisations turn complexity into practical AI-driven solutions with real impact.
               </p>
 
               {/* EXPERIENCE */}
               <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-[30px] md:leading-[33px]">
-                With over a decade leading softwarenaut GmbH,
-                I have managed teams of up to 70 professionals,
-                consistently delivering high-performance results
-                across Aerospace, Finance, Automotive and
-                Public Sector organisations.
+                With over 10 years of management and project experience, I have consistently delivered high-performance
+                results across Aerospace, Defence, Finance, Automotive, and Public Sector organisations.
               </p>
 
               {/* RESEARCH */}
               <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-[30px] md:leading-[33px]">
-                My doctoral research at Heriot-Watt University
-                focused on how AI recruitment technology shapes
-                organisational trust — bringing academic rigour
-                into every engagement and strategic decision.
+                My doctoral research at Heriot-Watt University focused on how AI recruitment technology
+                shapes organisational trust — bringing academic rigour into every engagement and strategic
+                decision.
               </p>
 
             </div>
@@ -112,7 +106,7 @@ const AboutSection = () => {
               <div className="bg-white md:bg-transparent rounded-[20px] md:rounded-none border border-[#ece6dc] md:border-0 p-4 md:p-0 text-center md:text-left shadow-[0_8px_20px_rgba(0,0,0,0.03)] md:shadow-none">
 
                 <h3 className="text-[#b8965a] text-[28px] md:text-[34px] font-semibold leading-none mb-2">
-                  70
+                  50
                 </h3>
 
                 <p className="text-[#0a3e40] text-[12px] md:text-[14px] leading-[20px] md:leading-[22px]">
@@ -125,7 +119,7 @@ const AboutSection = () => {
               <div className="bg-white md:bg-transparent rounded-[20px] md:rounded-none border border-[#ece6dc] md:border-0 p-4 md:p-0 text-center md:text-left shadow-[0_8px_20px_rgba(0,0,0,0.03)] md:shadow-none">
 
                 <h3 className="text-[#b8965a] text-[28px] md:text-[34px] font-semibold leading-none mb-2">
-                  99%
+                  95%
                 </h3>
 
                 <p className="text-[#0a3e40] text-[12px] md:text-[14px] leading-[20px] md:leading-[22px]">

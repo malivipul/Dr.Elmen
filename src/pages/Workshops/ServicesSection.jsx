@@ -4,10 +4,23 @@ const ServicesSection = () => {
 
   const services = [
     {
+      title: "Interim Management Services",
+      slug: "/workshops-details/ai-strategy-workshop-for-hr",
+      img: "/assets/images/unrecognizable-businesspeople-studying-statistics-holding-papers-with-hands.jpg",
+      number: "01",
+      points: [
+        "Executive advisory and decision-making support.",
+        "Operational leadership and stabilisation.",
+        "Transformation program leadership.",
+        "Stakeholder alignment and performance management.",
+      ],
+    },
+
+    {
       title: "AI Strategy Workshop for HR",
       slug: "/workshops-details/ai-strategy-workshop-for-hr",
       img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
-      number: "01",
+      number: "02",
       points: [
         "Overview of AI in HR including trends, opportunities, and risks.",
         "Identification and prioritisation of high-impact AI use cases.",
@@ -17,25 +30,12 @@ const ServicesSection = () => {
     },
 
     {
-      title: "Digital Transformation Workshop",
-      slug: "/workshops-details/ai-strategy-workshop-for-hr",
-      img: "/assets/images/man-interacting-with-virtual-interface-modern-workspace.jpg",
-      number: "02",
-      points: [
-        "Analysis of current HR processes and digital maturity.",
-        "Identification of digital transformation opportunities.",
-        "Evaluation of business impact and efficiency.",
-        "Development of roadmap and implementation strategy.",
-      ],
-    },
-
-    {
-      title: "Process Modelling & Automation",
+      title: "Process Modelling & Workload Automation",
       slug: "/workshops-details/ai-strategy-workshop-for-hr",
       img: "/assets/images/close-up-data-center-programmers-using-pc-visualize-ai-neural-networks (1).jpg",
       number: "03",
       points: [
-        "End-to-end modelling of business processes.",
+        "Automic Automation (UC4), BMC Control-M, IWS & SAP ERP workflow automation.",
         "Workload automation and orchestration.",
         "SAP integration and batch processing.",
         "AI-driven intelligent workflows.",
@@ -43,110 +43,131 @@ const ServicesSection = () => {
     },
 
     {
-      title: "Interim Management Services",
+      title: "Digital Transformation Workshop",
       slug: "/workshops-details/ai-strategy-workshop-for-hr",
-      img: "/assets/images/unrecognizable-businesspeople-studying-statistics-holding-papers-with-hands.jpg",
+      img: "/assets/images/man-interacting-with-virtual-interface-modern-workspace.jpg",
       number: "04",
       points: [
-        "Executive advisory and decision-making support.",
-        "Operational leadership and stabilisation.",
-        "Transformation program leadership.",
-        "Stakeholder alignment and performance management.",
+        "Analysis of current HR processes and digital maturity.",
+        "Identification of digital transformation opportunities.",
+        "Evaluation of business impact and efficiency.",
+        "Development of roadmap and implementation strategy.",
       ],
     },
   ];
 
   return (
-    <section className="bg-[#f4f4f4] py-[60px] overflow-hidden">
-{/* TOP */}
-      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] text-center mb-14">
+    <section className="bg-[#f4f4f4] py-[60px]">
+
+      {/* TOP */}
+      <div className="max-w-[1100px] mx-auto px-[20px] md:px-[60px] text-center mb-10">
+
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
           Services
         </span>
 
-        <h2 className="title-font text-3xl md:text-[40px] text-black mt-2 mb-2">
+        <h2 className="title-font text-2xl md:text-[36px] text-black mt-3 mb-3">
           Workshops & Consulting
         </h2>
 
-        <p className="text-[#0a3e40] text-[16px] max-w-xl mx-auto leading-relaxed">
-          From strategic advisory to hands-on implementation — I deliver across the full transformation lifecycle.
+        <p className="text-[#0a3e40] text-[16px] max-w-2xl mx-auto leading-relaxed">
+          From strategic advisory to hands-on implementation —
+          I deliver across the full transformation lifecycle.
         </p>
+
       </div>
-      {/* GRID */}
-      <div className="max-w-[1300px] mx-auto px-[20px] md:px-[60px] grid md:grid-cols-2 gap-12">
 
-        {services.map((service, index) => (
-          
-          /* CARD LINK */
-          <Link
-            to={service.slug}
-            key={index}
-            className="bg-white rounded-[24px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-2 group block"
-          >
+   {/* SERVICES */}
+<div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] space-y-6">
 
-            {/* IMAGE */}
-            <div className="relative overflow-hidden">
+  {services.map((service, index) => (
 
-              <img
-                src={service.img}
-                className="w-full h-[240px] object-cover transition duration-700 group-hover:scale-105"
-                alt={service.title}
-              />
+    <Link
+      key={index}
+      to={service.slug}
+      onClick={() =>
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        })
+      }
+      className="block bg-white rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
+    >
 
-              {/* NUMBER */}
-              <span className="absolute top-4 right-4 bg-black text-white px-3 py-1 text-sm rounded-full">
-                {service.number}
-              </span>
+      <div className={`grid md:grid-cols-2 items-stretch ${index % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""}`}>
 
-            </div>
+        {/* IMAGE */}
+        <div className="relative">
 
-            {/* CONTENT */}
-            <div className="p-7">
+          <img
+            src={service.img}
+            className="w-full h-full min-h-[240px] md:min-h-[260px] object-cover"
+            alt=""
+          />
 
-              {/* TITLE */}
-              <h3 className="title-font text-[24px] md:text-[30px] text-black leading-[1.4] mb-5 transition-all duration-300 group-hover:text-[#b8965a]">
-                {service.title}
-              </h3>
+        </div>
 
-              {/* POINTS */}
-              <div className="space-y-2 text-[15px] text-[#0a3e40]">
+        {/* CONTENT */}
+        <div className="relative p-6 md:p-8 flex flex-col justify-center">
 
-                {service.points.map((p, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-2"
-                  >
+          {/* NUMBER */}
+          <div className="absolute top-5 right-5 w-[42px] h-[42px] rounded-[12px] bg-[#0a3e40] border border-white/20 shadow-lg flex items-center justify-center">
 
-                    <span className="text-[#b8965a] mt-[1px]">
-                      ✔
-                    </span>
+            <span className="text-white text-[13px] font-semibold">
+              {service.number}
+            </span>
 
-                    <p className="leading-[28px]">
-                      {p}
-                    </p>
+          </div>
 
-                  </div>
-                ))}
+          {/* TITLE */}
+          <h3 className="title-font text-[24px] md:text-[30px] leading-tight text-black mb-5 pr-[70px]">
+            {service.title}
+          </h3>
+
+          {/* POINTS */}
+          <div className="space-y-3 text-[16px] text-[#0a3e40] leading-relaxed">
+
+            {service.points.map((p, i) => (
+
+              <div
+                key={i}
+                className="flex items-start gap-3"
+              >
+
+                <span className="text-[#b8965a] mt-[2px] text-[14px]">
+                  ✔
+                </span>
+
+                <p>
+                  {p}
+                </p>
 
               </div>
 
-              {/* BUTTON */}
-              <div className="mt-5">
+            ))}
 
-                <div
-                  className="inline-block px-5 py-2 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] transition-all duration-300 group-hover:bg-transparent group-hover:text-[#b8965a]"
-                >
-                  Learn more →
-                </div>
+          </div>
 
-              </div>
+          {/* BUTTON */}
+          <div className="mt-6">
 
-            </div>
+            <span className="inline-block px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm font-medium border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition">
+              Learn More →
+            </span>
 
-          </Link>
-        ))}
+          </div>
+
+        </div>
 
       </div>
+
+    </Link>
+
+  ))}
+
+</div>
+
+     
 
     </section>
   );

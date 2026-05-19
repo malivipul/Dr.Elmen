@@ -68,7 +68,7 @@ const About = () => {
 
                   <Link
                     to="/contact"
-                    className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
+                    className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
                     Contact Me
                   </Link>
@@ -76,7 +76,7 @@ const About = () => {
                   <Link
                     to="/assets/images/Professional_CV_English.pdf"
                     target="_blank"
-                    className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
                     <i className="fa-solid fa-download"></i>
 
@@ -90,86 +90,67 @@ const About = () => {
               {/* RIGHT CONTENT */}
               <div className="flex-1 w-full">
 
-                <span className="text-[#b8965a] text-[11px] tracking-[3px] uppercase mb-2 block">
+                <span className="text-[#b8965a] text-[11px] tracking-[3px] uppercase mb-5 block">
                   Vita
                 </span>
 
-                <h3 className="title-font text-[24px] md:text-[28px] text-black mb-7 leading-tight">
-                  Impactful Leadership
-                </h3>
-
                 {/* INFO CARDS */}
-                <div className="grid grid-cols-2 md:grid-cols-1 gap-5 mt-8">
+                <div className="grid grid-cols-1 gap-5">
 
                   {/* ITEM */}
-                  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
+                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
 
                     {/* LEFT LINE */}
-                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
+                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
 
                     {/* CONTENT */}
                     <div>
-                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-                        B.Sc.
+                      <h4 className="text-[#b8965a]  text-[18px] md:text-[20px] font-semibold leading-none mb-3">
+                        Entrepreneur
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        Technical University of Munich
+                      <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed">
+                        Building ventures, and turning ideas into sustainable growth
                       </p>
                     </div>
 
                   </div>
 
                   {/* ITEM */}
-                  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
+                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
 
-                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
+                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
 
                     <div>
-                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-                        M.Sc.
+                      <h4 className="text-[#b8965a]  text-[18px] md:text-[20px] font-semibold leading-none mb-3">
+                        HR, AI &amp; Business Process Expert
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        FOM University, Munich
+                      <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed">
+                        Specialised in AI-driven HR transformation and Workload Automation
                       </p>
                     </div>
 
                   </div>
 
                   {/* ITEM */}
-                  <div className="flex items-start gap-3 pb-4 md:pb-6 border-b border-[#ddd5ca]">
+                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
 
-                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
+ <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
 
                     <div>
-                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-                        DBA
+                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-3">
+                        Doctor of Business Administration (DBA)
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        Heriot-Watt University, Edinburgh
+                      <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed">
+                        Heriot Watt University, Edinburgh Business School
                       </p>
                     </div>
 
                   </div>
 
-                  {/* ITEM */}
-                  <div className="flex items-start gap-3 pb-4 md:pb-0 border-b md:border-b-0 border-[#ddd5ca]">
 
-                    <div className="w-[2px] h-[45px] bg-[#b8965a] rounded-full"></div>
-
-                    <div>
-                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-2 md:mb-3">
-                        ASA
-                      </h4>
-
-                      <p className="text-[#0a3e40] text-[14px] md:text-[16px] tracking-[0.3px]">
-                        Innovation Task Force Expert
-                      </p>
-                    </div>
-
-                  </div>
 
                 </div>
 

@@ -40,21 +40,21 @@ const Hero = () => {
           Interim Manager. AI, HR & Business Process Expert
         </p>
 
-        {/* BUTTON + ICONS LEFT ALIGN */}
+        {/* BUTTON + ICONS */}
         <div className="w-full flex justify-center md:justify-start mt-8">
           <div className="flex items-center gap-3 flex-wrap">
 
-          {/* BUTTON */}
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:border-white hover:text-white transition duration-300"
-          >
-            Let’s work together
-          </Link>
+            {/* BUTTON */}
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:border-white hover:text-white transition duration-300 font-bold"
+            >
+              Let’s work together
+            </Link>
 
             {/* EMAIL */}
             <Link
-              to="mailto:your@email.com"
+              to="mailto:contact@edlmann.com"
               className="w-12 h-12 rounded-full flex items-center justify-center bg-white text-black hover:bg-gray-200 transition"
             >
               <i className="fa-solid fa-envelope"></i>
@@ -72,8 +72,52 @@ const Hero = () => {
 
           </div>
         </div>
-
       </div>
+
+    {/* SOCIAL MEDIA */}
+<div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[40px] z-20">
+  <div className="flex gap-4">
+
+    {/* LINKEDIN */}
+    <Link
+      to="https://linkedin.com"
+      target="_blank"
+      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+    >
+      <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
+    </Link>
+
+    {/* X */}
+    <Link
+      to="https://x.com"
+      target="_blank"
+      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+    >
+      <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
+    </Link>
+
+    {/* FACEBOOK */}
+    <Link
+      to="https://facebook.com"
+      target="_blank"
+      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+    >
+      <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
+    </Link>
+
+    {/* INSTAGRAM */}
+    <Link
+      to="https://instagram.com"
+      target="_blank"
+      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+    >
+      <i className="fa-brands fa-instagram text-[14px] text-white"></i>
+    </Link>
+
+  </div>
+</div>
+      
+
     </section>
   );
 };

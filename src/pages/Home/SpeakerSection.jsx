@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const SpeakerSection = () => {
   return (
-    <section id="speaker-section" className="relative w-full py-[40px]">
+    <section id="speaker-section" className="relative w-full py-[40px] overflow-hidden">
 
       {/* BG IMAGE */}
       <div className="absolute inset-0">
         <img
           src="/assets/images/22.jpg"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-top"
           alt="speaker"
         />
       </div>
@@ -57,11 +56,10 @@ const SpeakerSection = () => {
             {/* BUTTON */}
             <Link
               to="/contact"
-              className="inline-block text-[#b8965a] text-sm font-medium hover:underline transition duration-300"
+              className="inline-block text-[#b8965a] text-[18px] font-semibold hover:underline transition duration-300"
             >
-              Work with me →
+              Book me for your next event →
             </Link>
-
           </div>
 
         </div>

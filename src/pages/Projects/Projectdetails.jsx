@@ -2,21 +2,6 @@ import { useState } from "react";
 
 const projects = [
   {
-    title: "HM Business School",
-    role: "Lecturer",
-    logos: ["/assets/images/Picture8.png"],
-    description:
-      "Delivered high-impact seminars and supervised academic theses at the HM Business School, teaching groups of 20–30 students. Enabled students to develop practical, industry-relevant solutions in",
-    points: [
-      "Digital Transformation: Strategies and methodologies",
-      "Topics in Business Informatics with a focus on Artificial Intelligence",
-      "E-Business: Business models and applications",
-      "Guided research projects from concept to completion using structured scientific methodologies and academic research frameworks.",
-      "Strengthened students’ analytical thinking, qualitative and quantitative research capabilities, and application of theory to real-world business challenges.",
-    ],
-  },
-
-  {
     title: "Airbus Defence & Space",
     role: "Interim Manager | IT Build & Operation Management",
     logos: ["/assets/images/Picture2.png"],
@@ -61,6 +46,21 @@ const projects = [
       "Enabled additional cost efficiencies through on-time transition",
       "Reduced annual licensing costs by implementing a vendor-independent automation framework.",
       "Consistently achieved high service performance with SLA/OLA and system availability levels of 96–99%",
+    ],
+  },
+
+  {
+    title: "HM Business School",
+    role: "Lecturer",
+    logos: ["/assets/images/Picture8.png"],
+    description:
+      "Delivered high-impact seminars and supervised academic theses at the HM Business School, teaching groups of 20–30 students. Enabled students to develop practical, industry-relevant solutions in",
+    points: [
+      "Digital Transformation: Strategies and methodologies",
+      "Topics in Business Informatics with a focus on Artificial Intelligence",
+      "E-Business: Business models and applications",
+      "Guided research projects from concept to completion using structured scientific methodologies and academic research frameworks.",
+      "Strengthened students’ analytical thinking, qualitative and quantitative research capabilities, and application of theory to real-world business challenges.",
     ],
   },
 ];

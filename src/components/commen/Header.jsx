@@ -20,7 +20,7 @@ const Header = () => {
         { name: "Vita", path: "/vita" },
         { name: "Projects", path: "/projects" },
         { name: "Workshops", path: "/workshops" },
-        { name: "Let’s Work", path: "/contact" },
+        { name: "Let’s Work Together", path: "/contact" },
       ],
 
       cta: "LET’S WORK →",
@@ -119,7 +119,7 @@ const Header = () => {
         </div>
 
         {/* RIGHT MENU */}
-        <div className="hidden lg:flex items-center gap-9 flex-1 justify-start">
+        <div className="hidden lg:flex items-center gap-6 flex-1 justify-start">
 
           {menuRight.map((item, i) => (
             <Link
@@ -251,7 +251,7 @@ const Header = () => {
       </div>
 
       {/* LANGUAGE TOGGLE */}
-      <div className="absolute top-[30px] right-[80px] md:right-[58px] z-50">
+      <div className="absolute top-[30px] right-[80px] md:right-[25px] z-50">
         <button
           onClick={toggleLang}
           className="text-sm font-semibold tracking-[2px] hover:opacity-70 transition"

@@ -8,14 +8,14 @@ const AboutBanner = () => {
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
 
-        <img
-          src="/assets/images/about.png"
+        <img 
+          src="/assets/images/about.jpg"
           alt="About Banner"
           className="w-full h-full object-cover object-center"
         />
 
         {/* DARK OVERLAY */}
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-black/10"></div>
 
        
       </div>

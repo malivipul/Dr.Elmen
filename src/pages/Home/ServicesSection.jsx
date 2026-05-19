@@ -1,14 +1,26 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ServicesSection = () => {
 
   const services = [
     {
+      title: "Interim Management Services",
+      slug: "/workshops-details/ai-strategy-workshop-for-hr",
+      img: "/assets/images/unrecognizable-businesspeople-studying-statistics-holding-papers-with-hands.jpg",
+      number: "01",
+      points: [
+        "Executive advisory and decision-making support.",
+        "Operational leadership and stabilisation.",
+        "Transformation program leadership.",
+        "Stakeholder alignment and performance management.",
+      ],
+    },
+
+    {
       title: "AI Strategy Workshop for HR",
       slug: "/workshops-details/ai-strategy-workshop-for-hr",
       img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
-      number: "01",
+      number: "02",
       points: [
         "Overview of AI in HR including trends, opportunities, and risks.",
         "Identification and prioritisation of high-impact AI use cases.",
@@ -18,25 +30,12 @@ const ServicesSection = () => {
     },
 
     {
-      title: "Digital Transformation Workshop",
-      slug: "/workshops-details/ai-strategy-workshop-for-hr",
-      img: "/assets/images/man-interacting-with-virtual-interface-modern-workspace.jpg",
-      number: "02",
-      points: [
-        "Analysis of current HR processes and digital maturity.",
-        "Identification of digital transformation opportunities.",
-        "Evaluation of business impact and efficiency.",
-        "Development of roadmap and implementation strategy.",
-      ],
-    },
-
-    {
-      title: "Process Modelling & Automation",
+      title: "Process Modelling & Workload Automation",
       slug: "/workshops-details/ai-strategy-workshop-for-hr",
       img: "/assets/images/close-up-data-center-programmers-using-pc-visualize-ai-neural-networks (1).jpg",
       number: "03",
       points: [
-        "End-to-end modelling of business processes.",
+        "Automic Automation (UC4), BMC Control-M, IWS & SAP ERP workflow automation.",
         "Workload automation and orchestration.",
         "SAP integration and batch processing.",
         "AI-driven intelligent workflows.",
@@ -44,15 +43,15 @@ const ServicesSection = () => {
     },
 
     {
-      title: "Interim Management Services",
+      title: "Digital Transformation Workshop",
       slug: "/workshops-details/ai-strategy-workshop-for-hr",
-      img: "/assets/images/unrecognizable-businesspeople-studying-statistics-holding-papers-with-hands.jpg",
+      img: "/assets/images/man-interacting-with-virtual-interface-modern-workspace.jpg",
       number: "04",
       points: [
-        "Executive advisory and decision-making support.",
-        "Operational leadership and stabilisation.",
-        "Transformation program leadership.",
-        "Stakeholder alignment and performance management.",
+        "Analysis of current HR processes and digital maturity.",
+        "Identification of digital transformation opportunities.",
+        "Evaluation of business impact and efficiency.",
+        "Development of roadmap and implementation strategy.",
       ],
     },
   ];
@@ -61,24 +60,25 @@ const ServicesSection = () => {
     <section className="bg-[#f4f4f4] py-[60px]">
 
       {/* TOP */}
-      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] text-center mb-14">
+      <div className="max-w-[1100px] mx-auto px-[20px] md:px-[60px] text-center mb-10">
 
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
           Services
         </span>
 
-        <h2 className="title-font text-3xl md:text-[40px] text-black mt-2 mb-2">
+        <h2 className="title-font text-2xl md:text-[36px] text-black mt-3 mb-3">
           Workshops & Consulting
         </h2>
 
-        <p className="text-[#0a3e40] text-[16px] max-w-xl mx-auto leading-relaxed">
-          From strategic advisory to hands-on implementation — I deliver across the full transformation lifecycle.
+        <p className="text-[#0a3e40] text-[16px] max-w-2xl mx-auto leading-relaxed">
+          From strategic advisory to hands-on implementation —
+          I deliver across the full transformation lifecycle.
         </p>
 
       </div>
 
-      {/* GRID */}
-      <div className="max-w-[1300px] mx-auto px-[20px] md:px-[60px] grid md:grid-cols-2 gap-12">
+      {/* SERVICES */}
+      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] space-y-6">
 
         {services.map((service, index) => (
 
@@ -91,59 +91,71 @@ const ServicesSection = () => {
                 behavior: "smooth",
               })
             }
-            className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 cursor-pointer"
+            className="block bg-white rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
           >
 
-            {/* IMAGE */}
-            <div className="relative">
+            <div className={`grid md:grid-cols-2 items-stretch ${index % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""}`}>
 
-              <img
-                src={service.img}
-                className="w-full h-[240px] object-cover"
-                alt=""
-              />
+              {/* IMAGE */}
+              <div className="relative">
 
-              <span className="absolute top-4 right-4 bg-black text-white px-3 py-1 text-sm rounded-full">
-                {service.number}
-              </span>
+                <img
+                  src={service.img}
+                  className="w-full h-full min-h-[240px] md:min-h-[260px] object-cover"
+                  alt=""
+                />
 
-            </div>
+              </div>
 
-            {/* CONTENT */}
-            <div className="p-7">
+              {/* CONTENT */}
+              <div className="relative p-6 md:p-8 flex flex-col justify-center">
 
-              <h3 className="title-font text-xl md:text-2xl mb-4">
-                {service.title}
-              </h3>
+                {/* NUMBER */}
+                <div className="absolute top-5 right-5 w-[42px] h-[42px] rounded-[12px] bg-[#0a3e40] border border-white/20 shadow-lg flex items-center justify-center">
 
-              <div className="space-y-3 text-[15px] text-[#0a3e40]">
+                  <span className="text-white text-[13px] font-semibold">
+                    {service.number}
+                  </span>
 
-  {service.points.map((p, i) => (
+                </div>
 
-    <div
-      key={i}
-      className="flex items-start gap-3"
-    >
+                {/* TITLE */}
+                <h3 className="title-font text-[24px] md:text-[30px] leading-tight text-black mb-5 pr-[70px]">
+                  {service.title}
+                </h3>
 
-      <span className="text-[#b8965a] mt-[1px]">
-        ✔
-      </span>
+                {/* POINTS */}
+                <div className="space-y-3 text-[16px] text-[#0a3e40] leading-relaxed">
 
-      <p>
-        {p}
-      </p>
+                  {service.points.map((p, i) => (
 
-    </div>
+                    <div
+                      key={i}
+                      className="flex items-start gap-3"
+                    >
 
-  ))}
+                      <span className="text-[#b8965a] mt-[2px] text-[14px]">
+                        ✔
+                      </span>
 
-</div>
+                      <p>
+                        {p}
+                      </p>
 
-              <div className="mt-5">
+                    </div>
 
-                <span className="inline-block px-5 py-2 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition">
-                  Learn more →
-                </span>
+                  ))}
+
+                </div>
+
+                {/* BUTTON */}
+                <div className="mt-6">
+
+                  <span className="inline-block px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm font-medium border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition">
+                    Learn More →
+                  </span>
+
+                </div>
 
               </div>
 
@@ -152,6 +164,72 @@ const ServicesSection = () => {
           </Link>
 
         ))}
+
+      </div>
+
+      {/* LETS WORK TOGETHER CTA */}
+      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] mt-10">
+
+        <div className="relative overflow-hidden rounded-[24px] min-h-[280px] flex items-center ">
+
+          {/* BG IMAGE */}
+          <div className="absolute inset-0">
+
+            <img src="/assets/images/cta.png"
+              className="w-full h-full object-cover object-[75%_top]"
+              alt="cta"
+            />
+
+            {/* OVERLAY */}
+            <div className="absolute inset-0 bg-gray"></div>
+
+          </div>
+
+          {/* CONTENT */}
+          <div className="relative z-10 w-full px-8 md:px-14 py-10">
+
+            <div className="max-w-[520px]">
+
+              {/* ICON + TITLE */}
+              <div className="flex items-center gap-4 mb-5">
+
+                <div className="w-[44px] h-[44px] rounded-full bg-[#0a3e40] flex items-center justify-center text-white text-[22px] shadow-lg">
+
+                  <i className="fa-regular fa-calendar"></i>
+
+                </div>
+
+                <h3 className="title-font text-2xl md:text-[36px] leading-tight text-black">
+                  Let’s work together
+                </h3>
+
+              </div>
+
+              {/* TEXT */}
+              <p className="text-[#0a3e40] text-[17px] leading-[1.9] max-w-[430px]">
+                Looking to solve a specific challenge or start your AI transformation journey?
+              </p>
+
+              {/* BUTTON */}
+              <div className="mt-7">
+
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#b8965a] text-white text-sm font-medium border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
+                >
+                  Learn More
+
+                  <i className="fa-solid fa-arrow-right text-[12px]"></i>
+
+                </Link>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
 
