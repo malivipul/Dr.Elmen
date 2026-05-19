@@ -234,48 +234,32 @@ const BlogSection = ({ setIsOpen }) => {
           </div>
         )}
 
-        {/* RECENT ARTICLES */}
-        <div className="mb-10">
+       {/* RECENT ARTICLES */}
+<div className="mb-10">
 
-          <h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
-            Recent Articles
-          </h3>
+  <h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
+    Recent Articles
+  </h3>
 
-          {/* MOBILE SLIDER */}
-          <div className="block md:hidden">
+  {/* MOBILE */}
+  <div className="grid grid-cols-1 gap-5 md:hidden">
 
-            <Swiper
-              modules={[Autoplay]}
-              slidesPerView={1.15}
-              spaceBetween={16}
-              loop={recentArticles.length > 1}
-              speed={5000}
-              autoplay={{
-                delay: 0,
-                disableOnInteraction: false,
-              }}
-            >
+    {recentArticles.slice(0, 3).map((item, i) => (
+      <Card key={i} item={item} />
+    ))}
 
-              {recentArticles.map((item, i) => (
-                <SwiperSlide key={i}>
-                  <Card item={item} />
-                </SwiperSlide>
-              ))}
+  </div>
 
-            </Swiper>
+  {/* DESKTOP */}
+  <div className="hidden md:grid md:grid-cols-3 gap-5">
 
-          </div>
+    {recentArticles.slice(0, 3).map((item, i) => (
+      <Card key={i} item={item} />
+    ))}
 
-          {/* DESKTOP GRID */}
-          <div className="hidden md:grid md:grid-cols-4 gap-5">
+  </div>
 
-            {recentArticles.map((item, i) => (
-              <Card key={i} item={item} />
-            ))}
-
-          </div>
-
-        </div>
+</div>
 
         {/* BUTTON */}
         <div className="flex justify-center">

@@ -22,7 +22,7 @@ const Imprint = () => {
             </p>
 
           </div>
-      {/* CENTER BOX */}
+ {/* CENTER BOX */}
 <div className="bg-[#e7dfd7] rounded-[34px] p-6 md:p-12">
 
   {/* CONTENT */}
@@ -36,16 +36,11 @@ const Imprint = () => {
       </h3>
 
       <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-        Raphael Edlmann
+        Dr. Raphael Edlmann
         <br />
-        Interim Manager for AI &
-        Business Process Transformation
+        Wolfratshauser Str. 96 H
         <br />
-        Musterstraße 123
-        <br />
-        80331 Munich
-        <br />
-        Germany
+        81379 Munich, Germany
       </p>
 
     </div>
@@ -54,15 +49,13 @@ const Imprint = () => {
     <div className="text-left">
 
       <h3 className="title-font text-[26px] text-black mb-4">
-        Contact Details
+        Contact
       </h3>
 
       <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-        Phone: +49 123 456789
+        Phone: +49 152 523 50 273
         <br />
-        Email: info@edlmann.com
-        <br />
-        Website: www.edlmann.com
+        E-mail: contact@edlmann.com
       </p>
 
     </div>
@@ -70,16 +63,17 @@ const Imprint = () => {
     {/* EU DISPUTE */}
     <div className="text-left">
 
-     <h3 className="title-font text-[26px] text-black mb-4">
-  Online Dispute Resolution
-</h3>
+      <h3 className="title-font text-[26px] text-black mb-4">
+        EU Dispute Resolution
+      </h3>
 
-<p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-  In the event of any dispute, consumers may use the
-  European Union’s online dispute resolution platform
-  to seek an amicable settlement for online services
-  and digital agreements.
-</p>
+      <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] break-all">
+        The European Commission provides a platform for online dispute resolution (ODR):
+        <br />
+        https://ec.europa.eu/consumers/odr/
+        <br />
+        Our e-mail address can be found above in the site notice.
+      </p>
 
     </div>
 
@@ -87,13 +81,11 @@ const Imprint = () => {
     <div className="text-left">
 
       <h3 className="title-font text-[26px] text-black mb-4">
-        Consumer Arbitration Board
+        Dispute Resolution Proceedings
       </h3>
 
       <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-        We are neither willing nor obligated to participate
-        in dispute resolution proceedings before a
-        consumer arbitration board.
+        We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.
       </p>
 
     </div>
@@ -102,12 +94,11 @@ const Imprint = () => {
     <div className="text-left">
 
       <h3 className="title-font text-[26px] text-black mb-4">
-        Branding & Webdesign
+        Branding and Webdesign
       </h3>
 
       <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-        Concept, branding and website design developed
-        for digital communication and business positioning.
+        ANAXIS Tech
       </p>
 
     </div>
@@ -115,7 +106,6 @@ const Imprint = () => {
   </div>
 
 </div>
-
       </div>
 
     </section>

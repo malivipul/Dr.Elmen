@@ -33,9 +33,9 @@ const ContactForm = () => {
                 Get In Touch
               </span>
 
-              <h3 className="font-['Inter',sans-serif] text-[22px] md:text-[28px] text-black leading-[1.08] mt-3 mb-4 font-semibold">
+              <h3 className="font-['Inter',sans-serif] text-[22px] md:text-[28px] text-black leading-[1.08] mt-3 mb-4 ">
                 Let’s Build
-                <br />
+                
                 Something Great
               </h3>
 
@@ -97,7 +97,7 @@ const ContactForm = () => {
 
               <h2 className="title-font text-[22px] md:text-[30px] leading-[1.05] text-black mt-2 mb-3">
                 Let’s Start a
-                <br />
+              
                 Conversation
               </h2>
 

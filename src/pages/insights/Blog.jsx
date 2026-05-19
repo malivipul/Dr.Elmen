@@ -117,7 +117,7 @@ const BlogSection = ({ setIsOpen }) => {
       : data.filter((item) => item.category === active);
 
   // PAGINATION
-  const blogsPerPage = 9;
+  const blogsPerPage = 7;
 
   const totalPages = Math.ceil(filtered.length / blogsPerPage);
 
@@ -224,10 +224,9 @@ const BlogSection = ({ setIsOpen }) => {
                 font-bold
                 transition-all
                 duration-300
-                ${
-                  active === tab.value
-                    ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
-                    : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
+                ${active === tab.value
+                  ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
+                  : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
                 }
               `}
             >
@@ -300,7 +299,7 @@ const BlogSection = ({ setIsOpen }) => {
         )}
 
         {/* ALL BLOGS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
 
           {recentArticles.map((item, i) => (
             <Card
@@ -318,23 +317,31 @@ const BlogSection = ({ setIsOpen }) => {
 
             <button
               key={i}
-              onClick={() => setCurrentPage(i + 1)}
-              className={`
-                w-[44px]
-                h-[44px]
-                rounded-full
-                text-sm
-                font-bold
-                transition
-                duration-300
-                border
+              onClick={() => {
 
-                ${
-                  currentPage === i + 1
-                    ? "bg-[#b8965a] border-[#b8965a] text-white"
-                    : "bg-white border-[#d6d3cc] text-black hover:border-[#b8965a] hover:text-[#b8965a]"
+                setCurrentPage(i + 1);
+
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+
+              }}
+              className={`
+        w-[44px]
+        h-[44px]
+        rounded-full
+        text-sm
+        font-bold
+        transition
+        duration-300
+        border
+
+        ${currentPage === i + 1
+                  ? "bg-[#b8965a] border-[#b8965a] text-white"
+                  : "bg-white border-[#d6d3cc] text-black hover:border-[#b8965a] hover:text-[#b8965a]"
                 }
-              `}
+      `}
             >
               {i + 1}
             </button>
