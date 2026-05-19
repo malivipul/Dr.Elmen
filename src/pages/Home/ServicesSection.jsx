@@ -151,10 +151,15 @@ const ServicesSection = () => {
                 {/* BUTTON */}
                 <div className="mt-6">
 
-                  <span className="inline-block px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm font-medium border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition">
-                    Learn More →
-                  </span>
+                   <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-7 font-bold py-3 rounded-full bg-[#b8965a] text-white text-sm  border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
+                >
+                  Learn More
 
+                  <i className="fa-solid fa-arrow-right text-[12px]"></i>
+
+                </Link>
                 </div>
 
               </div>
@@ -215,7 +220,7 @@ const ServicesSection = () => {
 
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#b8965a] text-white text-sm font-medium border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
+                  className="inline-flex items-center gap-2 px-7 font-bold py-3 rounded-full bg-[#b8965a] text-white text-sm  border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
                 >
                   Learn More
 

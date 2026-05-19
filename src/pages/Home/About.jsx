@@ -4,10 +4,10 @@ const About = () => {
   return (
     <section className="bg-white py-[60px]">
 
-      <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
+      <div className="max-w-[1350px] mx-auto px-[20px] md:px-[40px]">
 
         {/* MAIN GRID */}
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="grid md:grid-cols-[40%_60%] gap-10 items-center">
 
           {/* LEFT CONTENT */}
           <div>
@@ -52,15 +52,17 @@ const About = () => {
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
 
               {/* LEFT SIDE */}
-              <div className="flex flex-col items-center">
+              <div className="w-full lg:w-[40%] flex flex-col items-center">
 
                 {/* IMAGE */}
                 <div className="w-[250px] h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
+
                   <img
                     src="/assets/images/2026_03_17_Raphael_Edlmann_About Me.jpg"
                     className="w-full h-full object-cover"
                     alt="profile"
                   />
+
                 </div>
 
                 {/* BUTTONS */}
@@ -78,9 +80,11 @@ const About = () => {
                     target="_blank"
                     className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
+
                     <i className="fa-solid fa-download"></i>
 
                     Download CV
+
                   </Link>
 
                 </div>
@@ -88,7 +92,7 @@ const About = () => {
               </div>
 
               {/* RIGHT CONTENT */}
-              <div className="flex-1 w-full">
+              <div className="w-full lg:w-[60%]">
 
                 <span className="text-[#b8965a] text-[11px] tracking-[3px] uppercase mb-5 block">
                   Vita
@@ -105,13 +109,15 @@ const About = () => {
 
                     {/* CONTENT */}
                     <div>
-                      <h4 className="text-[#b8965a]  text-[18px] md:text-[20px] font-semibold leading-none mb-3">
+
+                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
                         Entrepreneur
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed">
+                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
                         Building ventures, and turning ideas into sustainable growth
                       </p>
+
                     </div>
 
                   </div>
@@ -122,13 +128,15 @@ const About = () => {
                     <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
 
                     <div>
-                      <h4 className="text-[#b8965a]  text-[18px] md:text-[20px] font-semibold leading-none mb-3">
+
+                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
                         HR, AI &amp; Business Process Expert
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed">
+                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
                         Specialised in AI-driven HR transformation and Workload Automation
                       </p>
+
                     </div>
 
                   </div>
@@ -136,21 +144,40 @@ const About = () => {
                   {/* ITEM */}
                   <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
 
- <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
+                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
 
                     <div>
-                      <h4 className="text-[#b8965a] text-[18px] md:text-[20px] font-semibold leading-none mb-3">
+
+                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
                         Doctor of Business Administration (DBA)
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed">
+                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
                         Heriot Watt University, Edinburgh Business School
                       </p>
+
                     </div>
 
                   </div>
 
+                  {/* ITEM */}
+                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
 
+                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
+
+                    <div>
+
+                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
+                        Keynote Speaker
+                      </h4>
+
+                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
+                        Speaking internationally on AI, the future of work, and digital transformation.
+                      </p>
+
+                    </div>
+
+                  </div>
 
                 </div>
 
