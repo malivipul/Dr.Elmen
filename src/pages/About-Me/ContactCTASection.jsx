@@ -36,29 +36,73 @@ const ContactCTASection = () => {
               </p>
 
             </div>
-
-          {/* RIGHT SIDE */}
-<div className="w-full lg:w-auto flex flex-col gap-4">
+<div className="flex flex-col items-start sm:items-end gap-3 w-full">
 
   {/* BUTTON */}
   <Link
     to="/contact"
-    className="min-w-[240px] h-[50px] rounded-full bg-[#b8965a] hover:bg-black text-white text-[14px] font-medium tracking-[0.5px] transition-all duration-500 inline-flex items-center justify-center gap-3"
+    className="
+      w-full
+      sm:w-[240px]
+      h-[50px]
+      px-6
+      rounded-full
+      bg-[#b8965a]
+      hover:bg-black
+      text-white
+      text-[14px]
+      font-bold
+      tracking-[0.3px]
+      transition-all
+      duration-500
+      inline-flex
+      items-center
+      justify-center
+      gap-2
+    "
   >
-    Let’s Work Together
 
-    <span className="text-[18px]">
-      →
+    <span className="leading-none">
+      Let’s Work Together
     </span>
+
+    <i className="fa-solid fa-arrow-right text-[14px] mt-[1px]"></i>
 
   </Link>
 
   {/* BUTTON */}
   <Link
     to="/contact"
-    className="min-w-[220px] h-[50px] rounded-full border border-black/10 hover:bg-black hover:text-white text-black text-[14px] font-medium tracking-[0.5px] transition-all duration-500 inline-flex items-center justify-center"
+    className="
+      w-full
+      sm:w-[240px]
+      h-[50px]
+      px-6
+      rounded-full
+      border
+      border-black/10
+      hover:bg-black
+      hover:text-white
+      text-black
+      text-[14px]
+      font-bold
+      tracking-[0.3px]
+      transition-all
+      duration-500
+      inline-flex
+      items-center
+      justify-center
+      gap-2
+      bg-white/40
+    "
   >
-    WhatsApp Me
+
+    <i className="fa-brands fa-whatsapp text-[15px]"></i>
+
+    <span className="leading-none">
+      WhatsApp Me
+    </span>
+
   </Link>
 
 </div>
