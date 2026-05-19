@@ -56,9 +56,15 @@ const SpeakerSection = () => {
             {/* BUTTON */}
             <Link
               to="/contact"
-              className="inline-block text-[#b8965a] text-[18px] font-semibold hover:underline transition duration-300"
+              className="group inline-flex items-center gap-2 text-[#b8965a] text-[18px] font-semibold transition duration-300 hover:scale-[1.03]"
             >
-              Book me for your next event →
+
+              <span>
+                Book me for your next event
+              </span>
+
+              <i className="fa-solid fa-arrow-right transition-all duration-300 group-hover:translate-x-[6px]"></i>
+
             </Link>
           </div>
 
