@@ -210,7 +210,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  to="/workshops"
+                  to="/workshops-details/ai-strategy-workshop-for-hr"
                   className="hover:text-[#b8965a] transition"
                 >
                   AI Strategy Workshop for HR
@@ -219,7 +219,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  to="/workshops"
+                  to="/workshops-details/ai-strategy-workshop-for-hr"
                   className="hover:text-[#b8965a] transition"
                 >
                   Digital Transformation Workshop
@@ -228,7 +228,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  to="/workshops"
+                  to="/workshops-details/ai-strategy-workshop-for-hr"
                   className="hover:text-[#b8965a] transition"
                 >
                   Process Modelling & Automation
@@ -237,7 +237,7 @@ const Footer = () => {
 
               <li>
                 <Link
-                  to="/workshops"
+                  to="/workshops-details/ai-strategy-workshop-for-hr"
                   className="hover:text-[#b8965a] transition"
                 >
                   Interim Management Services

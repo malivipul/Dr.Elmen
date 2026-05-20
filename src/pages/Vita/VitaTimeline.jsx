@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
@@ -8,7 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const VitaTimeline = () => {
-
+const [activeArrow, setActiveArrow] = useState("left");
   const [hoverIndex, setHoverIndex] = useState(null);
 
   const data = [
@@ -163,34 +164,77 @@ Key Achievements:
           ))}
         </Swiper>
 
-   {/* CONTROLS */}
+  {/* CONTROLS */}
 <div className="relative flex items-center justify-between mt-12">
 
-  {/* LEFT SIDE */}
-  <div className="flex items-center gap-4 z-20">
+ 
+{/* LEFT SIDE */}
+<div className="flex items-center gap-4 z-20">
 
-    {/* LEFT BUTTON */}
-    <button className="prev-btn w-11 h-11 rounded-full border border-gray-300 flex items-center justify-center text-[#0a3e40] hover:bg-[#b8965a] hover:text-white transition-all duration-300 cursor-pointer">
+  {/* LEFT BUTTON */}
+  <button
+    onClick={() => setActiveArrow("left")}
+    className={`
+      prev-btn
+      w-11
+      h-11
+      rounded-full
+      border
+      flex
+      items-center
+      justify-center
+      transition-all
+      duration-300
+      cursor-pointer
 
-      <i className="fa-solid fa-arrow-left"></i>
+      ${
+        activeArrow === "left"
+          ? "border-[#b8965a] bg-[#b8965a] text-white"
+          : "border-gray-300 bg-transparent text-[#0a3e40]"
+      }
+    `}
+  >
 
-    </button>
+    <i className="fa-solid fa-arrow-left text-[14px]"></i>
 
-    {/* RIGHT BUTTON */}
-    <button className="next-btn w-11 h-11 rounded-full bg-[#b8965a] text-white flex items-center justify-center hover:opacity-80 transition-all duration-300 cursor-pointer">
+  </button>
 
-      <i className="fa-solid fa-arrow-right"></i>
+  {/* RIGHT BUTTON */}
+  <button
+    onClick={() => setActiveArrow("right")}
+    className={`
+      next-btn
+      w-11
+      h-11
+      rounded-full
+      border
+      flex
+      items-center
+      justify-center
+      transition-all
+      duration-300
+      cursor-pointer
 
-    </button>
+      ${
+        activeArrow === "right"
+          ? "border-[#b8965a] bg-[#b8965a] text-white"
+          : "border-gray-300 bg-transparent text-[#0a3e40]"
+      }
+    `}
+  >
 
-  </div>
+    <i className="fa-solid fa-arrow-right text-[14px]"></i>
 
- {/* CENTER DOTS */}
-<div className="absolute left-1/2 -translate-x-1/2 hidden md:block">
-
-  <div className="custom-dots flex items-center justify-center gap-2"></div>
+  </button>
 
 </div>
+
+  {/* CENTER DOTS */}
+  <div className="absolute left-1/2 -translate-x-1/2 hidden md:block">
+
+    <div className="custom-dots flex items-center justify-center gap-2"></div>
+
+  </div>
 
   {/* RIGHT SIDE */}
   <div className="z-20">
@@ -198,12 +242,33 @@ Key Achievements:
     <Link
       to="/assets/files/cv.pdf"
       download
-      className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 whitespace-nowrap"
+      className="
+        flex
+        items-center
+        justify-center
+        gap-2
+        px-6
+        py-3
+        rounded-full
+        bg-[#b8965a]
+        text-white
+        text-sm
+        font-bold
+        border
+        border-[#b8965a]
+        hover:bg-transparent
+        hover:text-[#b8965a]
+        transition
+        duration-300
+        whitespace-nowrap
+      "
     >
 
-      <i className="fa-solid fa-download"></i>
+      <i className="fa-solid fa-download text-[13px]"></i>
 
-      <span>Download CV</span>
+      <span>
+        Download CV
+      </span>
 
     </Link>
 

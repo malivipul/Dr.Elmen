@@ -70,7 +70,7 @@ const BlogSection = ({ setIsOpen }) => {
   // LATEST ARTICLE
   const latestArticle = filtered[0];
 
-  // NEXT 4 BLOGS
+  // NEXT BLOGS
   const recentArticles = filtered.slice(1, 5);
 
   // TABS
@@ -88,55 +88,55 @@ const BlogSection = ({ setIsOpen }) => {
 
       <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
 
-      {/* TOP */}
-<div className="relative text-center mb-10">
+        {/* TOP */}
+        <div className="relative text-center mb-10">
 
-  {/* SUBSCRIBE DESKTOP */}
-  <div className="hidden md:block absolute right-0 top-0">
+          {/* SUBSCRIBE DESKTOP */}
+          <div className="hidden md:block absolute right-0 top-0">
 
-    <button
-      onClick={() => setIsOpen(true)}
-      className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold border border-black hover:bg-transparent hover:text-black transition duration-300 inline-flex items-center gap-2"
-    >
+            <button
+              onClick={() => setIsOpen(true)}
+              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold border border-black hover:bg-transparent hover:text-black transition duration-300 inline-flex items-center gap-2"
+            >
 
-      <i className="fa-regular fa-envelope"></i>
+              <i className="fa-regular fa-envelope"></i>
 
-      Subscribe
+              Subscribe
 
-    </button>
+            </button>
 
-  </div>
+          </div>
 
-  {/* SUBSCRIBE MOBILE */}
-  <div className="absolute right-0 top-0 md:hidden">
+          {/* SUBSCRIBE MOBILE */}
+          <div className="absolute right-0 top-0 md:hidden">
 
-    <button
-      onClick={() => setIsOpen(true)}
-      className="w-[44px] h-[44px] rounded-full bg-black text-white border border-black hover:bg-transparent hover:text-black transition duration-300 flex items-center justify-center"
-    >
+            <button
+              onClick={() => setIsOpen(true)}
+              className="w-[44px] h-[44px] rounded-full bg-black text-white border border-black hover:bg-transparent hover:text-black transition duration-300 flex items-center justify-center"
+            >
 
-      <i className="fa-regular fa-envelope text-[15px]"></i>
+              <i className="fa-regular fa-envelope text-[15px]"></i>
 
-    </button>
+            </button>
 
-  </div>
+          </div>
 
-  {/* LABEL */}
-  <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-    Insights & Resources
-  </span>
+          {/* LABEL */}
+          <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
+            Insights & Resources
+          </span>
 
-  {/* TITLE */}
-  <h2 className="title-font text-2xl md:text-[36px] text-black leading-tight mb-5 mt-3">
-    Articles & Tools
-  </h2>
+          {/* TITLE */}
+          <h2 className="title-font text-2xl md:text-[36px] text-black leading-tight mb-5 mt-3">
+            Articles & Tools
+          </h2>
 
-  {/* SUBTITLE */}
-  <p className="text-[#0a3e40] text-[16px] leading-relaxed max-w-[760px] mx-auto">
-    Insights, guides, tools, and perspectives on HR, AI and the future of work.
-  </p>
+          {/* SUBTITLE */}
+          <p className="text-[#0a3e40] text-[16px] leading-relaxed max-w-[760px] mx-auto">
+            Insights, guides, tools, and perspectives on HR, AI and the future of work.
+          </p>
 
-</div>
+        </div>
 
         {/* TABS */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
@@ -176,22 +176,18 @@ const BlogSection = ({ setIsOpen }) => {
               {/* LEFT */}
               <div className="p-7 md:p-10 text-left flex flex-col justify-center">
 
-                {/* CATEGORY */}
                 <span className="text-[#b8965a] text-xs tracking-[2px] uppercase font-semibold">
                   {latestArticle.category}
                 </span>
 
-                {/* TITLE */}
                 <h3 className="title-font text-[20px] md:text-[26px] font-medium leading-tight text-black mt-4 max-w-[500px]">
                   {latestArticle.title}
                 </h3>
 
-                {/* CONTENT */}
                 <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
                   {latestArticle.desc}
                 </p>
 
-                {/* DATE + READ */}
                 <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
 
                   <span>{latestArticle.date}</span>
@@ -202,7 +198,6 @@ const BlogSection = ({ setIsOpen }) => {
 
                 </div>
 
-                {/* BUTTON */}
                 <div className="mt-6">
 
                   <Link
@@ -234,32 +229,43 @@ const BlogSection = ({ setIsOpen }) => {
           </div>
         )}
 
-       {/* RECENT ARTICLES */}
-<div className="mb-10">
+        {/* RECENT ARTICLES */}
+        <div className="mb-10">
 
-  <h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
-    Recent Articles
-  </h3>
+          <h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
+            Recent Articles
+          </h3>
 
-  {/* MOBILE */}
-  <div className="grid grid-cols-1 gap-5 md:hidden">
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={20}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+          >
 
-    {recentArticles.slice(0, 3).map((item, i) => (
-      <Card key={i} item={item} />
-    ))}
+            {recentArticles.slice(0, 3).map((item, i) => (
 
-  </div>
+              <SwiperSlide key={i}>
+                <Card item={item} />
+              </SwiperSlide>
 
-  {/* DESKTOP */}
-  <div className="hidden md:grid md:grid-cols-3 gap-5">
+            ))}
 
-    {recentArticles.slice(0, 3).map((item, i) => (
-      <Card key={i} item={item} />
-    ))}
+          </Swiper>
 
-  </div>
-
-</div>
+        </div>
 
         {/* BUTTON */}
         <div className="flex justify-center">
@@ -272,8 +278,6 @@ const BlogSection = ({ setIsOpen }) => {
           </Link>
 
         </div>
-
-       
 
       </div>
 

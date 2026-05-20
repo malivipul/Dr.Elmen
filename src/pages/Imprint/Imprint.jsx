@@ -98,7 +98,7 @@ const Imprint = () => {
       </h3>
 
       <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-        ANAXIS Tech
+        AnaxisTech
       </p>
 
     </div>

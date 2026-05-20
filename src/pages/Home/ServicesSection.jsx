@@ -152,7 +152,7 @@ const ServicesSection = () => {
                 <div className="mt-6">
 
                    <Link
-                  to="/contact"
+                  to="/workshops-details/ai-strategy-workshop-for-hr"
                   className="inline-flex items-center gap-2 px-7 font-bold py-3 rounded-full bg-[#b8965a] text-white text-sm  border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
                 >
                   Learn More

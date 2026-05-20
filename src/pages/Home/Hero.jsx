@@ -74,49 +74,122 @@ const Hero = () => {
         </div>
       </div>
 
-    {/* SOCIAL MEDIA */}
+   {/* SOCIAL MEDIA */}
 <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[40px] z-20">
+
   <div className="flex gap-4">
 
     {/* LINKEDIN */}
-    <Link
-      to="https://linkedin.com"
+    <a
+      href="https://linkedin.com"
       target="_blank"
-      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+      rel="noreferrer"
+      className="
+        w-[45px]
+        h-[45px]
+        flex
+        items-center
+        justify-center
+        border
+        border-white
+        rounded-full
+        bg-white/5
+        hover:bg-[#b8965a]
+        active:bg-[#b8965a]
+        transition-all
+        duration-300
+        backdrop-blur-sm
+        hover:scale-110
+        active:scale-95
+      "
     >
       <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
-    </Link>
+    </a>
 
     {/* X */}
-    <Link
-      to="https://x.com"
+    <a
+      href="https://x.com"
       target="_blank"
-      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+      rel="noreferrer"
+      className="
+        w-[45px]
+        h-[45px]
+        flex
+        items-center
+        justify-center
+        border
+        border-white
+        rounded-full
+        bg-white/5
+        hover:bg-[#b8965a]
+        active:bg-[#b8965a]
+        transition-all
+        duration-300
+        backdrop-blur-sm
+        hover:scale-110
+        active:scale-95
+      "
     >
       <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
-    </Link>
+    </a>
 
     {/* FACEBOOK */}
-    <Link
-      to="https://facebook.com"
+    <a
+      href="https://facebook.com"
       target="_blank"
-      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+      rel="noreferrer"
+      className="
+        w-[45px]
+        h-[45px]
+        flex
+        items-center
+        justify-center
+        border
+        border-white
+        rounded-full
+        bg-white/5
+        hover:bg-[#b8965a]
+        active:bg-[#b8965a]
+        transition-all
+        duration-300
+        backdrop-blur-sm
+        hover:scale-110
+        active:scale-95
+      "
     >
       <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
-    </Link>
+    </a>
 
     {/* INSTAGRAM */}
-    <Link
-      to="https://instagram.com"
+    <a
+      href="https://instagram.com"
       target="_blank"
-      className="w-[45px] h-[45px] flex items-center justify-center border border-white rounded-full hover:bg-[#b8965a] transition-all duration-300 backdrop-blur-sm"
+      rel="noreferrer"
+      className="
+        w-[45px]
+        h-[45px]
+        flex
+        items-center
+        justify-center
+        border
+        border-white
+        rounded-full
+        bg-white/5
+        hover:bg-[#b8965a]
+        active:bg-[#b8965a]
+        transition-all
+        duration-300
+        backdrop-blur-sm
+        hover:scale-110
+        active:scale-95
+      "
     >
       <i className="fa-brands fa-instagram text-[14px] text-white"></i>
-    </Link>
+    </a>
 
   </div>
+
 </div>
-      
 
     </section>
   );
