@@ -74,10 +74,10 @@ const Hero = () => {
         </div>
       </div>
 
-  {/* SOCIAL MEDIA */}
+ {/* SOCIAL MEDIA */}
 <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[40px] z-20">
 
-  <div className="flex gap-4">
+  <div className="flex gap-3 md:gap-4">
 
     {/* LINKEDIN */}
     <a
@@ -85,27 +85,34 @@ const Hero = () => {
       target="_blank"
       rel="noreferrer"
       className="
-        w-[45px]
-        h-[45px]
+        group
+        w-[42px]
+        h-[42px]
+        md:w-[45px]
+        md:h-[45px]
         flex
         items-center
         justify-center
         border
-        border-white
+        border-white/80
         rounded-full
-        bg-white/5
+        bg-white/10
         hover:bg-[#b8965a]
         hover:border-[#b8965a]
         active:bg-[#b8965a]
         active:border-[#b8965a]
         transition-all
-        duration-300
-        backdrop-blur-sm
+        duration-500
+        backdrop-blur-md
         hover:scale-110
-        active:scale-95
+        active:scale-90
+        active:rotate-6
+        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
       "
     >
-      <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
+
+      <i className="fa-brands fa-linkedin-in text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+
     </a>
 
     {/* X */}
@@ -114,27 +121,34 @@ const Hero = () => {
       target="_blank"
       rel="noreferrer"
       className="
-        w-[45px]
-        h-[45px]
+        group
+        w-[42px]
+        h-[42px]
+        md:w-[45px]
+        md:h-[45px]
         flex
         items-center
         justify-center
         border
-        border-white
+        border-white/80
         rounded-full
-        bg-white/5
+        bg-white/10
         hover:bg-[#b8965a]
         hover:border-[#b8965a]
         active:bg-[#b8965a]
         active:border-[#b8965a]
         transition-all
-        duration-300
-        backdrop-blur-sm
+        duration-500
+        backdrop-blur-md
         hover:scale-110
-        active:scale-95
+        active:scale-90
+        active:-rotate-6
+        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
       "
     >
-      <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
+
+      <i className="fa-brands fa-x-twitter text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+
     </a>
 
     {/* FACEBOOK */}
@@ -143,27 +157,34 @@ const Hero = () => {
       target="_blank"
       rel="noreferrer"
       className="
-        w-[45px]
-        h-[45px]
+        group
+        w-[42px]
+        h-[42px]
+        md:w-[45px]
+        md:h-[45px]
         flex
         items-center
         justify-center
         border
-        border-white
+        border-white/80
         rounded-full
-        bg-white/5
+        bg-white/10
         hover:bg-[#b8965a]
         hover:border-[#b8965a]
         active:bg-[#b8965a]
         active:border-[#b8965a]
         transition-all
-        duration-300
-        backdrop-blur-sm
+        duration-500
+        backdrop-blur-md
         hover:scale-110
-        active:scale-95
+        active:scale-90
+        active:rotate-6
+        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
       "
     >
-      <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
+
+      <i className="fa-brands fa-facebook-f text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+
     </a>
 
     {/* INSTAGRAM */}
@@ -172,27 +193,34 @@ const Hero = () => {
       target="_blank"
       rel="noreferrer"
       className="
-        w-[45px]
-        h-[45px]
+        group
+        w-[42px]
+        h-[42px]
+        md:w-[45px]
+        md:h-[45px]
         flex
         items-center
         justify-center
         border
-        border-white
+        border-white/80
         rounded-full
-        bg-white/5
+        bg-white/10
         hover:bg-[#b8965a]
         hover:border-[#b8965a]
         active:bg-[#b8965a]
         active:border-[#b8965a]
         transition-all
-        duration-300
-        backdrop-blur-sm
+        duration-500
+        backdrop-blur-md
         hover:scale-110
-        active:scale-95
+        active:scale-90
+        active:-rotate-6
+        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
       "
     >
-      <i className="fa-brands fa-instagram text-[14px] text-white"></i>
+
+      <i className="fa-brands fa-instagram text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+
     </a>
 
   </div>
