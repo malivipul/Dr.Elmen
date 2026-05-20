@@ -44,7 +44,7 @@ const AuthorSection = () => {
 
   const handleClick = (index) => {
 
-    if (window.innerWidth >= 768) return;
+    if (window.innerWidth >= 1024) return;
 
     setActiveIndex(activeIndex === index ? null : index);
 
@@ -81,8 +81,8 @@ const AuthorSection = () => {
 
         </div>
 
-        {/* MOBILE SLIDER */}
-        <div className="block md:hidden">
+        {/* MOBILE + TABLET SLIDER */}
+        <div className="block lg:hidden">
 
           <Swiper
             modules={[Autoplay]}
@@ -92,6 +92,15 @@ const AuthorSection = () => {
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+              },
+
+              768: {
+                slidesPerView: 3,
+              },
             }}
           >
 
@@ -103,7 +112,7 @@ const AuthorSection = () => {
                   onClick={() => handleClick(i)}
                   className="
                     group relative rounded-[28px] overflow-hidden cursor-pointer
-                    h-[620px] sm:h-[680px]
+                    h-[500px] sm:h-[520px] md:h-[430px]
                   "
                 >
 
@@ -136,8 +145,8 @@ const AuthorSection = () => {
                         border border-white/20
                         rounded-[24px]
                         shadow-[0_10px_35px_rgba(0,0,0,0.18)]
-                        w-[calc(100%-50px)]
-                        h-[calc(100%-50px)]
+                        w-[calc(100%-40px)]
+                        h-[calc(100%-40px)]
                         flex items-center justify-center
                         transition-all duration-500
                         ${
@@ -190,7 +199,7 @@ const AuthorSection = () => {
         </div>
 
         {/* DESKTOP GRID */}
-        <div className="hidden md:grid md:grid-cols-3 gap-10">
+        <div className="hidden lg:grid lg:grid-cols-3 gap-10">
 
           {books.map((book, i) => (
 
