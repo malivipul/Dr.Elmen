@@ -9,57 +9,79 @@ const BlogSection = ({ setIsOpen }) => {
 
   const [active, setActive] = useState("all");
 
-  const data = [
-    {
-      category: "guides",
-      title: "AI Implementation in HR",
-      img: "/assets/images/blog2.png",
-      desc: "AI integration in HR is transforming recruitment, employee engagement, talent management, and workforce productivity through intelligent automation, predictive analytics, and digital innovation across modern organisations.",
-      date: "May 22, 2025",
-      read: "6 min read",
-      link: "/blog-details",
-    },
+const data = [
+  {
+    category: "guides",
+    title: "AI Implementation in HR",
+    img: "/assets/images/blog2.png",
+    desc: "AI integration in HR is transforming recruitment, employee engagement, talent management, and workforce productivity through intelligent automation, predictive analytics, and digital innovation across modern organisations.",
+    date: "May 22, 2025",
+    read: "6 min read",
+    link: "/blog-details",
+  },
 
-    {
-      category: "opinions",
-      title: "AI Leadership",
-      img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
-      desc: "Modern leadership is evolving through AI-driven decision making, strategic innovation, and digital transformation that empower organisations to adapt faster in a competitive business environment.",
-      date: "May 18, 2025",
-      read: "5 min read",
-      link: "/blog-details",
-    },
+  {
+    category: "opinions",
+    title: "AI Leadership",
+    img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
+    desc: "Modern leadership is evolving through AI-driven decision making, strategic innovation, and digital transformation that empower organisations to adapt faster in a competitive business environment.",
+    date: "May 18, 2025",
+    read: "5 min read",
+    link: "/blog-details",
+  },
 
-    {
-      category: "case",
-      title: "HR Case Study",
-      img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
-      desc: "Explore a real-world HR transformation case where AI-powered systems improved recruitment efficiency, employee experience, workflow automation, and operational performance successfully.",
-      date: "May 12, 2025",
-      read: "8 min read",
-      link: "/blog-details",
-    },
+  {
+    category: "case",
+    title: "HR Case Study",
+    img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
+    desc: "Explore a real-world HR transformation case where AI-powered systems improved recruitment efficiency, employee experience, workflow automation, and operational performance successfully.",
+    date: "May 12, 2025",
+    read: "8 min read",
+    link: "/blog-details",
+  },
 
-    {
-      category: "tools",
-      title: "AI Tools for HR Teams",
-      img: "/assets/images/blog3.png",
-      desc: "Discover powerful AI tools designed for HR automation, employee analytics, recruitment optimisation, workflow management, and productivity enhancement in modern workplaces.",
-      date: "May 08, 2025",
-      read: "4 min read",
-      link: "/blog-details",
-    },
+  {
+    category: "tools",
+    title: "AI Tools for HR Teams",
+    img: "/assets/images/blog3.png",
+    desc: "Discover powerful AI tools designed for HR automation, employee analytics, recruitment optimisation, workflow management, and productivity enhancement in modern workplaces.",
+    date: "May 08, 2025",
+    read: "4 min read",
+    link: "/blog-details",
+  },
 
-    {
-      category: "guides",
-      title: "Digital HR Transformation",
-      img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
-      desc: "Digital HR transformation combines AI technologies, automation strategies, and modern workforce solutions to improve operational efficiency and employee engagement across organisations.",
-      date: "May 06, 2025",
-      read: "5 min read",
-      link: "/blog-details",
-    },
-  ];
+  {
+    category: "guides",
+    title: "Digital HR Transformation",
+    img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
+    desc: "Digital HR transformation combines AI technologies, automation strategies, and modern workforce solutions to improve operational efficiency and employee engagement across organisations.",
+    date: "May 06, 2025",
+    read: "5 min read",
+    link: "/blog-details",
+  },
+
+  // ARCHIVE BLOG 1
+  {
+    category: "archive",
+    title: "AI Evolution in Enterprises",
+    img: "/assets/images/2151966708.jpg",
+    desc: "Exploring how enterprise organisations adopted AI technologies to improve operational performance and long-term digital transformation strategies.",
+    date: "March 28, 2025",
+    read: "5 min read",
+    link: "/blog-details",
+  },
+
+  // ARCHIVE BLOG 2
+  {
+    category: "archive",
+    title: "Workforce Automation Trends",
+    img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
+    desc: "A detailed overview of workforce automation trends and how modern businesses are adapting to intelligent systems and AI-driven workflows.",
+    date: "March 15, 2025",
+    read: "6 min read",
+    link: "/blog-details",
+  },
+];
 
   // FILTER
   const filtered =

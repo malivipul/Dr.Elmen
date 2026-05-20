@@ -108,6 +108,28 @@ const BlogSection = ({ setIsOpen }) => {
       read: "5 min read",
       link: "/blog-details",
     },
+
+    // ARCHIVE BLOG 1
+    {
+      category: "archive",
+      title: "AI Evolution in Enterprises",
+      img: "/assets/images/blog2.png",
+      desc: "Exploring how enterprise organisations adopted AI technologies to improve operational performance and long-term digital transformation strategies.",
+      date: "March 28, 2025",
+      read: "5 min read",
+      link: "/blog-details",
+    },
+
+    // ARCHIVE BLOG 2
+    {
+      category: "archive",
+      title: "Workforce Automation Trends",
+      img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
+      desc: "A detailed overview of workforce automation trends and how modern businesses are adapting to intelligent systems and AI-driven workflows.",
+      date: "March 15, 2025",
+      read: "6 min read",
+      link: "/blog-details",
+    },
   ];
 
   // FILTER
@@ -163,7 +185,7 @@ const BlogSection = ({ setIsOpen }) => {
 
             <button
               onClick={() => setIsOpen(true)}
-              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold  hover:bg-[#b8965a] hover:text-white transition duration-300 inline-flex items-center gap-2"
+              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold hover:bg-[#b8965a] hover:text-white transition duration-300 inline-flex items-center gap-2"
             >
 
               <i className="fa-regular fa-envelope"></i>
@@ -224,9 +246,10 @@ const BlogSection = ({ setIsOpen }) => {
                 font-bold
                 transition-all
                 duration-300
-                ${active === tab.value
-                  ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
-                  : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
+                ${
+                  active === tab.value
+                    ? "border-[#b8965a] bg-white text-[#b8965a] shadow-sm"
+                    : "border-[#d6d3cc] text-[#6b6b6b] hover:border-[#b8965a] hover:text-[#b8965a]"
                 }
               `}
             >
@@ -236,7 +259,7 @@ const BlogSection = ({ setIsOpen }) => {
 
         </div>
 
-        {/* FIRST PAGE ONLY SHOW BIG BLOG */}
+        {/* BIG BLOG */}
         {currentPage === 1 && latestArticle && (
           <div className="bg-white border border-[#e6dfd5] rounded-[20px] overflow-hidden mb-8">
 
@@ -328,20 +351,21 @@ const BlogSection = ({ setIsOpen }) => {
 
               }}
               className={`
-        w-[44px]
-        h-[44px]
-        rounded-full
-        text-sm
-        font-bold
-        transition
-        duration-300
-        border
+                w-[44px]
+                h-[44px]
+                rounded-full
+                text-sm
+                font-bold
+                transition
+                duration-300
+                border
 
-        ${currentPage === i + 1
-                  ? "bg-[#b8965a] border-[#b8965a] text-white"
-                  : "bg-white border-[#d6d3cc] text-black hover:border-[#b8965a] hover:text-[#b8965a]"
+                ${
+                  currentPage === i + 1
+                    ? "bg-[#b8965a] border-[#b8965a] text-white"
+                    : "bg-white border-[#d6d3cc] text-black hover:border-[#b8965a] hover:text-[#b8965a]"
                 }
-      `}
+              `}
             >
               {i + 1}
             </button>
