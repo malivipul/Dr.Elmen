@@ -110,11 +110,11 @@ const About = () => {
                     {/* CONTENT */}
                     <div>
 
-                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
+                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
                         Entrepreneur
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
+                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
                         Building ventures, and turning ideas into sustainable growth
                       </p>
 
@@ -129,11 +129,11 @@ const About = () => {
 
                     <div>
 
-                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
+                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
                         HR, AI &amp; Business Process Expert
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
+                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
                         Specialised in AI-driven HR transformation and Workload Automation
                       </p>
 
@@ -148,11 +148,11 @@ const About = () => {
 
                     <div>
 
-                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
+                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
                         Doctor of Business Administration (DBA)
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
+                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
                         Heriot Watt University, Edinburgh Business School
                       </p>
 
@@ -167,11 +167,11 @@ const About = () => {
 
                     <div>
 
-                      <h4 className="text-[#b8965a] text-[14px] md:text-[15px] font-semibold leading-none mb-3">
+                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
                         Keynote Speaker
                       </h4>
 
-                      <p className="text-[#0a3e40] text-[12px] md:text-[15px] leading-relaxed">
+                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
                         Speaking internationally on AI, the future of work, and digital transformation.
                       </p>
 
