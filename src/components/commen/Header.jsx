@@ -192,61 +192,117 @@ const Header = () => {
           onClick={() => setMenuOpen(false)}
         ></div>
 
-        {/* MENU BOX */}
-        <div
-          className={`
-            absolute
-            top-[70px]
-            left-[20px]
-            w-[280px]
-            bg-[#f5f3ef]
-            rounded-[28px]
-            p-8
-            transition-all
-            duration-500
-            ${
-              menuOpen
-                ? "translate-x-0"
-                : "-translate-x-[120%]"
-            }
-          `}
-        >
+    {/* MENU BOX */}
+<div
+  className={`
+    absolute
+    top-[70px]
+    left-[20px]
+    w-[270px]
+    bg-white/90
+    backdrop-blur-[20px]
+    border
+    border-[#ece7de]
+    shadow-[0_15px_45px_rgba(0,0,0,0.08)]
+    rounded-[26px]
+    px-4
+    py-4
+    overflow-hidden
+    transition-all
+    duration-500
+    z-[999]
 
-          {/* CLOSE */}
-          <button
-            onClick={() => setMenuOpen(false)}
-            className="absolute top-5 right-5 text-[28px] text-black"
-          >
-            ×
-          </button>
+    ${
+      menuOpen
+        ? "translate-x-0 opacity-100 visible"
+        : "-translate-x-[120%] opacity-0 invisible"
+    }
+  `}
+>
 
-          {/* MENU ITEMS */}
-          <div className="pt-6">
+  {/* TOP LIGHT */}
+  <div className="absolute top-0 left-0 w-full h-[80px] bg-gradient-to-b from-[#b8965a]/10 to-transparent pointer-events-none"></div>
 
-            {[...menuLeft, ...menuRight].map((item, i) => (
-              <Link
-                key={i}
-                to={item.path}
-                onClick={() => setMenuOpen(false)}
-              >
-                <p className="text-black text-[16px] font-semibold  mb-4 tracking-[1px]">
-                  {item.name}
-                </p>
-              </Link>
-            ))}
+  {/* CLOSE */}
+  <button
+    onClick={() => setMenuOpen(false)}
+    className="
+      absolute
+      top-3
+      right-3
+      w-[32px]
+      h-[32px]
+      rounded-full
+      border
+      border-[#e3ddd3]
+      bg-white
+      text-[18px]
+      text-black
+      flex
+      items-center
+      justify-center
+      transition-all
+      duration-300
+      hover:bg-[#b8965a]
+      hover:border-[#b8965a]
+      hover:text-white
+      active:scale-90
+    "
+  >
+    ×
+  </button>
 
-            {/* CTA */}
-            {/* <Link
-              to="/contact"
-              onClick={() => setMenuOpen(false)}
-              className="block mt-8 bg-[#b8965a] text-white text-center py-4 rounded-full text-sm font-semibold tracking-wide"
-            >
-              {content[lang].cta}
-            </Link> */}
+  {/* MENU ITEMS */}
+<div className="relative z-10 pt-8">
 
-          </div>
+  {[...menuLeft, ...menuRight].map((item, i) => (
 
-        </div>
+    <Link
+      key={i}
+      to={item.path}
+      onClick={() => setMenuOpen(false)}
+      className={`
+        flex
+        items-center
+        px-4
+        h-[46px]
+        rounded-[14px]
+        mb-[8px]
+        transition-all
+        duration-300
+
+        ${
+          location.pathname === item.path
+            ? "bg-[#b8965a] shadow-[0_8px_20px_rgba(184,150,90,0.25)]"
+            : "hover:bg-[#b8965a]/10"
+        }
+      `}
+    >
+
+      <span
+        className={`
+          text-[14px]
+          font-semibold
+          tracking-[0.2px]
+          transition-all
+          duration-300
+
+          ${
+            location.pathname === item.path
+              ? "text-white"
+              : "text-[#111] hover:text-[#b8965a]"
+          }
+        `}
+      >
+        {item.name}
+      </span>
+
+    </Link>
+
+  ))}
+
+</div>
+</div>
 
       </div>
 
