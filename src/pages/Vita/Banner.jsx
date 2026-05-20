@@ -9,7 +9,7 @@ const AboutBanner = () => {
       <div className="absolute inset-0">
 
         <img
-          src="/assets/images/Untitled design (47).png"
+          src="/assets/images/3.png"
           alt="About Banner"
           className="w-full h-full object-cover object-center"
         />
