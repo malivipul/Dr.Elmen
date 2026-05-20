@@ -224,33 +224,51 @@ const Header = () => {
   <div className="absolute top-0 left-0 w-full h-[80px] bg-gradient-to-b from-[#b8965a]/10 to-transparent pointer-events-none"></div>
 
   {/* CLOSE */}
-  <button
-    onClick={() => setMenuOpen(false)}
-    className="
-      absolute
-      top-3
-      right-3
-      w-[32px]
-      h-[32px]
-      rounded-full
-      border
-      border-[#e3ddd3]
-      bg-white
-      text-[18px]
-      text-black
-      flex
-      items-center
-      justify-center
-      transition-all
-      duration-300
-      hover:bg-[#b8965a]
-      hover:border-[#b8965a]
-      hover:text-white
-      active:scale-90
-    "
-  >
-    ×
-  </button>
+<button
+  onClick={() => setMenuOpen(false)}
+  className="
+    absolute
+    top-3
+    right-3
+    md:top-4
+    md:right-4
+
+    w-[34px]
+    h-[34px]
+    md:w-[38px]
+    md:h-[38px]
+
+    rounded-full
+    border
+    border-[#e3ddd3]
+    bg-white/95
+
+    text-[20px]
+    md:text-[22px]
+    text-black
+
+    flex
+    items-center
+    justify-center
+
+    shadow-[0_4px_12px_rgba(0,0,0,0.08)]
+
+    transition-all
+    duration-300
+
+    hover:bg-[#b8965a]
+    hover:border-[#b8965a]
+    hover:text-white
+
+    active:scale-90
+    active:bg-[#b8965a]
+    active:text-white
+
+    z-20
+  "
+>
+  ×
+</button>
 
 {/* MENU ITEMS */}
 <div className="relative z-10 pt-8">
