@@ -74,7 +74,7 @@ const Hero = () => {
         </div>
       </div>
 
-   {/* SOCIAL MEDIA */}
+  {/* SOCIAL MEDIA */}
 <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[40px] z-20">
 
   <div className="flex gap-4">
@@ -95,7 +95,9 @@ const Hero = () => {
         rounded-full
         bg-white/5
         hover:bg-[#b8965a]
+        hover:border-[#b8965a]
         active:bg-[#b8965a]
+        active:border-[#b8965a]
         transition-all
         duration-300
         backdrop-blur-sm
@@ -122,7 +124,9 @@ const Hero = () => {
         rounded-full
         bg-white/5
         hover:bg-[#b8965a]
+        hover:border-[#b8965a]
         active:bg-[#b8965a]
+        active:border-[#b8965a]
         transition-all
         duration-300
         backdrop-blur-sm
@@ -149,7 +153,9 @@ const Hero = () => {
         rounded-full
         bg-white/5
         hover:bg-[#b8965a]
+        hover:border-[#b8965a]
         active:bg-[#b8965a]
+        active:border-[#b8965a]
         transition-all
         duration-300
         backdrop-blur-sm
@@ -176,7 +182,9 @@ const Hero = () => {
         rounded-full
         bg-white/5
         hover:bg-[#b8965a]
+        hover:border-[#b8965a]
         active:bg-[#b8965a]
+        active:border-[#b8965a]
         transition-all
         duration-300
         backdrop-blur-sm
