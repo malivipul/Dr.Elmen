@@ -81,7 +81,7 @@ const ContactCTASection = () => {
       rounded-full
       border
       border-black/10
-      hover:bg-black
+      hover:bg-[#b8965a]
       hover:text-white
       text-black
       text-[14px]

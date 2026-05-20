@@ -300,7 +300,17 @@ const Footer = () => {
             <Link
               to="https://anaxistech.com"
               target="_blank"
-              className="text-[#d4872a] text-[12px] font-semibold"
+              className="
+    text-[#d4872a]
+    text-[12px]
+    font-semibold
+    transition-all
+    duration-300
+    hover:text-white
+    hover:underline
+    decoration-white
+    underline-offset-4
+  "
             >
               AnaxisTech
             </Link>

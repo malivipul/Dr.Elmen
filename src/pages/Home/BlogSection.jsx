@@ -94,9 +94,9 @@ const BlogSection = ({ setIsOpen }) => {
           {/* SUBSCRIBE DESKTOP */}
           <div className="hidden md:block absolute right-0 top-0">
 
-            <button
+           <button
               onClick={() => setIsOpen(true)}
-              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold border border-black hover:bg-transparent hover:text-black transition duration-300 inline-flex items-center gap-2"
+              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold  hover:bg-[#b8965a] hover:text-white transition duration-300 inline-flex items-center gap-2"
             >
 
               <i className="fa-regular fa-envelope"></i>
@@ -104,6 +104,7 @@ const BlogSection = ({ setIsOpen }) => {
               Subscribe
 
             </button>
+
 
           </div>
 

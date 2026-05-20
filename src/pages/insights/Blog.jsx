@@ -163,7 +163,7 @@ const BlogSection = ({ setIsOpen }) => {
 
             <button
               onClick={() => setIsOpen(true)}
-              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold border border-black hover:bg-transparent hover:text-black transition duration-300 inline-flex items-center gap-2"
+              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold  hover:bg-[#b8965a] hover:text-white transition duration-300 inline-flex items-center gap-2"
             >
 
               <i className="fa-regular fa-envelope"></i>

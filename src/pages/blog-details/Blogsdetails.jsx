@@ -142,17 +142,7 @@ const Blogsdetails = () => {
 
   <div className="flex items-center justify-between gap-4 flex-nowrap">
 
-    {/* LIKE */}
-    <button
-      onClick={() => setLikes(likes + 1)}
-      className="shrink-0 flex items-center gap-2 px-4 md:px-6 py-3 rounded-full bg-white border border-[#d7d1c8] text-[#0a3e40] text-sm font-medium hover:border-[#b8965a] transition"
-    >
-
-      <i className="fa-regular fa-heart text-[#b8965a] text-[14px]"></i>
-
-      {likes} Likes
-
-    </button>
+   
 
     {/* SHARE */}
     <div className="flex items-center gap-2 md:gap-4 shrink-0">
@@ -162,7 +152,7 @@ const Blogsdetails = () => {
         href={`https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`}
         target="_blank"
         rel="noreferrer"
-        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-black hover:text-white transition duration-300"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-[#b8965a] hover:text-white transition duration-300"
       >
         <i className="fa-brands fa-linkedin-in"></i>
       </a>
@@ -172,7 +162,7 @@ const Blogsdetails = () => {
         href={`https://twitter.com/intent/tweet?url=${articleUrl}`}
         target="_blank"
         rel="noreferrer"
-        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-black hover:text-white transition duration-300"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-[#b8965a] hover:text-white transition duration-300"
       >
         <i className="fa-brands fa-x-twitter"></i>
       </a>
@@ -182,7 +172,7 @@ const Blogsdetails = () => {
         href={`https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`}
         target="_blank"
         rel="noreferrer"
-        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-black hover:text-white transition duration-300"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-[#b8965a] hover:text-white transition duration-300"
       >
         <i className="fa-brands fa-facebook-f"></i>
       </a>
@@ -192,7 +182,7 @@ const Blogsdetails = () => {
         href="https://www.instagram.com/"
         target="_blank"
         rel="noreferrer"
-        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[13px] hover:bg-black hover:text-white transition duration-300"
+        className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[13px] hover:bg-[#b8965a] hover:text-white transition duration-300"
       >
         <i className="fa-brands fa-instagram"></i>
       </a>
