@@ -252,7 +252,7 @@ const Header = () => {
     ×
   </button>
 
-  {/* MENU ITEMS */}
+{/* MENU ITEMS */}
 <div className="relative z-10 pt-8">
 
   {[...menuLeft, ...menuRight].map((item, i) => (
@@ -265,15 +265,15 @@ const Header = () => {
         flex
         items-center
         px-4
-        h-[46px]
-        rounded-[14px]
-        mb-[8px]
+        h-[40px]
+        rounded-[12px]
+        mb-[4px]
         transition-all
         duration-300
 
         ${
           location.pathname === item.path
-            ? "bg-[#b8965a] shadow-[0_8px_20px_rgba(184,150,90,0.25)]"
+            ? "bg-[#b8965a] shadow-[0_6px_16px_rgba(184,150,90,0.22)]"
             : "hover:bg-[#b8965a]/10"
         }
       `}
@@ -281,9 +281,10 @@ const Header = () => {
 
       <span
         className={`
-          text-[14px]
+          text-[13px]
           font-semibold
           tracking-[0.2px]
+          leading-none
           transition-all
           duration-300
 
