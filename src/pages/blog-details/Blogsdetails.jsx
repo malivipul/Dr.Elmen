@@ -193,34 +193,34 @@ const Blogsdetails = () => {
 
 </div>
 
-            {/* COMMENTS */}
-            <div className="mt-14">
+         {/* COMMENTS */}
+<div className="mt-14">
 
+  {/* COMMENT BOX */}
+  <div className="bg-white rounded-[28px] p-6 md:p-8 border border-[#e6dfd5]">
 
-              {/* COMMENT BOX */}
-              <div className="bg-white rounded-[28px] p-6 md:p-8 border border-[#e6dfd5]">
+    <h3 className="title-font text-[24px] text-black mb-5">
+      Leave a Comment
+    </h3>
 
-                <h3 className="title-font text-[24px] text-black mb-5">
-                  Leave a Comment
-                </h3>
+    <textarea
+      value={commentText}
+      onChange={(e) => setCommentText(e.target.value)}
+      placeholder="Write your comment..."
+      className="w-full h-[160px] rounded-[20px] border border-[#ddd] p-5 outline-none resize-none text-[15px] focus:border-[#b8965a] transition"
+    ></textarea>
 
-                <textarea
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  placeholder="Write your comment..."
-                  className="w-full h-[160px] rounded-[20px] border border-[#ddd] p-5 outline-none resize-none text-[15px] focus:border-[#b8965a] transition"
-                ></textarea>
+   
+    <button
+      onClick={handleComment}
+      className="mt-5 px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
+    >
+      Post Comment
+    </button>
 
-                <button
-                  onClick={handleComment}
-                  className="mt-5 px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
-                >
-                  Post Comment
-                </button>
+  </div>
 
-              </div>
-
-            </div>
+</div>
 
           </div>
 

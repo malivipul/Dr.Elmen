@@ -75,17 +75,24 @@ const About = () => {
                     Contact Me
                   </Link>
 
-                  <Link
-                    to="/assets/images/Professional_CV_English.pdf"
-                    target="_blank"
-                    className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
-                  >
+                 {/* DOWNLOAD CV */}
+<Link
+  to="/assets/images/Professional_CV_English-protected.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
+>
 
-                    <i className="fa-solid fa-download"></i>
+  <i className="fa-solid fa-download"></i>
 
-                    Download CV
+  Download CV
 
-                  </Link>
+</Link>
+
+{/* PASSWORD PROTECTED TEXT */}
+<p className="mt-3 text-[13px] text-[#7b7b7b] text-center">
+  Password-protected application document. Raphael2026
+</p>
 
                 </div>
 

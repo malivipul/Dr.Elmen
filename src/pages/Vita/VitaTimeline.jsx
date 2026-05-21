@@ -239,39 +239,40 @@ Key Achievements:
   {/* RIGHT SIDE */}
   <div className="z-20">
 
-    <Link
-      to="/assets/files/cv.pdf"
-      download
-      className="
-        flex
-        items-center
-        justify-center
-        gap-2
-        px-6
-        py-3
-        rounded-full
-        bg-[#b8965a]
-        text-white
-        text-sm
-        font-bold
-        border
-        border-[#b8965a]
-        hover:bg-transparent
-        hover:text-[#b8965a]
-        transition
-        duration-300
-        whitespace-nowrap
-      "
-    >
+    
+<Link
+  to="/assets/images/Professional_CV_English-protected.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    flex
+    items-center
+    justify-center
+    gap-2
+    px-6
+    py-3
+    rounded-full
+    bg-[#b8965a]
+    text-white
+    text-sm
+    font-bold
+    border
+    border-[#b8965a]
+    hover:bg-transparent
+    hover:text-[#b8965a]
+    transition
+    duration-300
+    whitespace-nowrap
+  "
+>
 
-      <i className="fa-solid fa-download text-[13px]"></i>
+  <i className="fa-solid fa-download text-[13px]"></i>
 
-      <span>
-        Download CV
-      </span>
+  <span>
+    Download CV
+  </span>
 
-    </Link>
-
+</Link>
   </div>
 
 </div>
