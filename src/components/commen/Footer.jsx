@@ -195,7 +195,8 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                  Lets Work Together
+                 
+Let’s Work Together
                 </Link>
               </li>
 
