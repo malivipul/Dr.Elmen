@@ -43,7 +43,7 @@ const BlogSection = ({ setIsOpen }) => {
     },
 
     {
-      category: "case",
+      category: "case studies",
       title: "HR Case Study",
       img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
       desc: "Explore a real-world HR transformation case where AI-powered systems improved recruitment efficiency, employee experience, workflow automation, and operational performance successfully.",
@@ -93,7 +93,7 @@ const BlogSection = ({ setIsOpen }) => {
     },
 
     {
-      category: "case",
+      category: "case studies",
       title: "AI Recruitment Success Story",
       img: "/assets/images/book1.jpeg",
       desc: "How AI recruitment systems improved candidate screening, hiring speed, and workforce planning for enterprise organisations worldwide.",
