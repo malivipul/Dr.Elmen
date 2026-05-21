@@ -111,9 +111,9 @@ const AuthorSection = () => {
                 <div
                   onClick={() => handleClick(i)}
                   className="
-                    group relative rounded-[28px] overflow-hidden cursor-pointer
-                    h-[500px] sm:h-[520px] md:h-[430px]
-                  "
+    group relative rounded-[28px] overflow-hidden cursor-pointer
+    h-[650px] sm:h-[560px] md:h-[430px]
+  "
                 >
 
                   {/* IMAGE */}
@@ -129,10 +129,9 @@ const AuthorSection = () => {
                       absolute inset-0
                       flex items-center justify-center
                       transition-all duration-500
-                      ${
-                        activeIndex === i
-                          ? "opacity-100"
-                          : "opacity-0"
+                      ${activeIndex === i
+                        ? "opacity-100"
+                        : "opacity-0"
                       }
                     `}
                   >
@@ -149,10 +148,9 @@ const AuthorSection = () => {
                         h-[calc(100%-40px)]
                         flex items-center justify-center
                         transition-all duration-500
-                        ${
-                          activeIndex === i
-                            ? "scale-100"
-                            : "scale-95"
+                        ${activeIndex === i
+                          ? "scale-100"
+                          : "scale-95"
                         }
                       `}
                     >

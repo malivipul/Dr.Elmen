@@ -272,7 +272,7 @@ const BlogSection = ({ setIsOpen }) => {
 
         </div>
 {/* LATEST ARTICLE HEADING */}
-<h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
+<h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
   Latest Article
 </h3>
         {/* BIG BLOG */}

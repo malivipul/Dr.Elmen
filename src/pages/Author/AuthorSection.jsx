@@ -112,7 +112,7 @@ const AuthorSection = () => {
                   onClick={() => handleClick(i)}
                   className="
                     group relative rounded-[28px] overflow-hidden cursor-pointer
-                    h-[500px] sm:h-[520px] md:h-[480px]
+                   h-[650px] sm:h-[560px] md:h-[430px]
                   "
                 >
 

@@ -55,7 +55,7 @@ const ContactForm = () => {
 
       window.Calendly.initPopupWidget({
 
-        url: "https://calendly.com/vipulmali7800/30min",
+        url: "https://calendly.com/contact-edlmann/30min?month=2026-05",
 
       });
 
@@ -63,7 +63,7 @@ const ContactForm = () => {
 
       // FALLBACK
       window.open(
-        "https://calendly.com/vipulmali7800/30min",
+        "https://calendly.com/contact-edlmann/30min?month=2026-05",
         "_blank"
       );
 

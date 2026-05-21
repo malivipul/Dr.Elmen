@@ -190,7 +190,7 @@ const data = [
 
         </div>
 {/* LATEST ARTICLE HEADING */}
-<h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
+<h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
   Latest Article
 </h3>
         {/* LATEST ARTICLE */}
@@ -258,7 +258,7 @@ const data = [
         {/* RECENT ARTICLES */}
         <div className="mb-10">
 
-          <h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
+          <h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
             Recent Articles
           </h3>
 
