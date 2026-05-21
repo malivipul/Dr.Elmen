@@ -16,7 +16,7 @@ const [activeArrow, setActiveArrow] = useState("left");
     {
       year: "2014",
       icon: "fa-rocket",
-      text: `2014 marks the first major milestone in my career. In that year, I completed my first long-term project in software automation for a major client in the aerospace and defense industry and graduated from the Technical University of Munich with a degree in Management & Technology (B.Sc.).
+      text: `2014 marks the first major milestone in my career. In that year, I completed my first long-term project in Software automation for a major client in the aerospace and defense industry and graduated from the Technical University of Munich with a degree in Management & Technology (B.Sc.).
 
 Furthermore, it marked the beginning of additional nationwide projects with renowned blue-chip companies in the field of infrastructure and business process automation.`,
     },
@@ -40,7 +40,7 @@ Graduated with distinction with a Master’s degree in IT Management (M.Sc.) fro
     {
       year: "2019",
       icon: "fa-shield-halved",
-      text: `New position as an Interim Manager in the defense sector, responsible for conducting project assessments, leading projects in software automation and deployment, and preparing Statements of Work (SoW) as well as SLA and OLA agreements.
+      text: `New position as an Interim Manager in the defense sector, responsible for conducting project assessments, leading projects in Software automation and deployment, and preparing Statements of Work (SoW) as well as SLA and OLA agreements.
 
 Key Achievements:
 • Successfully completed projects within the proposed timeframes.

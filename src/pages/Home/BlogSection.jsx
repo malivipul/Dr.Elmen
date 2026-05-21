@@ -31,7 +31,7 @@ const data = [
   },
 
   {
-    category: "case",
+    category: "case studies",
     title: "HR Case Study",
     img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
     desc: "Explore a real-world HR transformation case where AI-powered systems improved recruitment efficiency, employee experience, workflow automation, and operational performance successfully.",
@@ -100,7 +100,7 @@ const data = [
     { label: "All", value: "all" },
     { label: "Guides", value: "guides" },
     { label: "Opinions", value: "opinions" },
-    { label: "Case Studies", value: "case" },
+    { label: "Case Studies", value: "case studies" },
     { label: "Tools", value: "tools" },
     { label: "Archive", value: "archive" },
   ];
