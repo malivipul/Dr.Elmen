@@ -24,7 +24,7 @@ const Footer = () => {
 
             {/* TEXT */}
             <p className="text-sm text-white/60 leading-relaxed max-w-[320px] text-center md:text-left">
-              Interim Manager • AI, HR & Business Transformation — Helping organisations transform with practical, high-impact strategies.
+              Interim Manager • AI, HR & Business Transformation - Helping organisations transform with practical, high-impact strategies.
             </p>
 
             {/* SOCIAL */}

@@ -8,11 +8,11 @@ const AboutBanner = () => {
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
 
-        <img
-          src="/assets/images/Untitled design (46).png"
-          alt="About Banner"
-          className="w-full h-full object-cover md:object-cover object-center"
-        />
+       <img
+  src="/assets/images/Untitled design (46).png"
+  alt="About Banner"
+  className="w-full h-full object-cover object-[90%_center] md:object-center"
+/>
 
         {/* OVERLAY */}
         <div className="absolute inset-0 bg-black/30"></div>

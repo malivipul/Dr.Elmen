@@ -11,7 +11,7 @@ const AboutBanner = () => {
         <img
           src="/assets/images/3.png"
           alt="About Banner"
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[90%_center] md:object-center"
         />
 
         {/* DARK OVERLAY */}
