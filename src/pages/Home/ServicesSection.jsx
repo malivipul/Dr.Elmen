@@ -181,7 +181,7 @@ const ServicesSection = () => {
           <div className="absolute inset-0">
 
             <img src="/assets/images/2.png"
-              className="w-full h-full object-cover object-[90%_top]"
+              className="w-full h-full object-cover object-[10%_top]"
               alt="cta"
             />
 
