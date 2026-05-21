@@ -60,8 +60,7 @@ const ExpertiseSection = () => {
 
           {/* TEXT */}
           <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-[30px] md:leading-[34px]">
-            Six core disciplines at the intersection of technology, people and
-organisational change to “Five core disciplines at the intersection of technology, people
+          Five core disciplines at the intersection of technology, people
 and organisational change
           </p>
 

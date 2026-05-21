@@ -189,7 +189,10 @@ const data = [
           ))}
 
         </div>
-
+{/* LATEST ARTICLE HEADING */}
+<h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
+  Latest Article
+</h3>
         {/* LATEST ARTICLE */}
         {latestArticle && (
           <div className="bg-white border border-[#e6dfd5] rounded-[20px] overflow-hidden mb-8">

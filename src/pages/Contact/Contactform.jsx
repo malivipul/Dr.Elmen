@@ -128,7 +128,9 @@ const ContactForm = () => {
 
                 {/* LINKEDIN */}
                 <Link
-                  to="#"
+                  to="https://www.linkedin.com/in/raphael-edlmann-60200059/ "
+                  target="_blank"
+                  rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                 >
                   <FaLinkedinIn className="text-[14px] text-black" />
@@ -136,7 +138,9 @@ const ContactForm = () => {
 
                 {/* X */}
                 <Link
-                  to="#"
+                  to="https://x.com/RaphaelEdlmann "
+                  target="_blank"
+                  rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                 >
                   <FaXTwitter className="text-[14px] text-black" />
@@ -144,7 +148,9 @@ const ContactForm = () => {
 
                 {/* FACEBOOK */}
                 <Link
-                  to="#"
+                  to="https://www.facebook.com/profile.php?id=61587719828544 "
+                  target="_blank"
+                  rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                 >
                   <FaFacebookF className="text-[14px] text-black" />
@@ -152,7 +158,9 @@ const ContactForm = () => {
 
                 {/* INSTAGRAM */}
                 <Link
-                  to="#"
+                  to="https://www.instagram.com/edlmannraphael/ "
+                  target="_blank"
+                  rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                 >
                   <FaInstagram className="text-[14px] text-black" />

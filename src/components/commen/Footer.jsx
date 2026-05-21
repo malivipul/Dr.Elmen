@@ -31,32 +31,36 @@ const Footer = () => {
             <div className="flex gap-4 pt-3 justify-center md:justify-start">
 
               <Link
-                to="https://linkedin.com"
+                to="https://www.linkedin.com/in/raphael-edlmann-60200059/ "
                 target="_blank"
+                rel="noreferrer"
                 className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
               >
                 <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
               </Link>
 
               <Link
-                to="https://x.com"
+                to="https://x.com/raphaeledlmann"
                 target="_blank"
+                rel="noreferrer"
                 className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
               >
                 <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
               </Link>
 
               <Link
-                to="https://facebook.com"
+                to="https://www.facebook.com/profile.php?id=61587719828544 "
                 target="_blank"
+                rel="noreferrer"
                 className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
               >
                 <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
               </Link>
 
               <Link
-                to="https://instagram.com"
+                to="https://www.instagram.com/edlmannraphael/ "
                 target="_blank"
+                rel="noreferrer"
                 className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
               >
                 <i className="fa-brands fa-instagram text-[14px] text-white"></i>

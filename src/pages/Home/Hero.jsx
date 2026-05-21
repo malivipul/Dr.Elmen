@@ -81,7 +81,7 @@ const Hero = () => {
 
     {/* LINKEDIN */}
     <a
-      href="https://linkedin.com"
+      href="https://www.linkedin.com/in/raphael-edlmann-60200059/ "
       target="_blank"
       rel="noreferrer"
       className="
@@ -117,7 +117,7 @@ const Hero = () => {
 
     {/* X */}
     <a
-      href="https://x.com"
+      href="https://x.com/RaphaelEdlmann "
       target="_blank"
       rel="noreferrer"
       className="
@@ -153,7 +153,7 @@ const Hero = () => {
 
     {/* FACEBOOK */}
     <a
-      href="https://facebook.com"
+      href="https://www.facebook.com/profile.php?id=61587719828544 "
       target="_blank"
       rel="noreferrer"
       className="
@@ -189,7 +189,7 @@ const Hero = () => {
 
     {/* INSTAGRAM */}
     <a
-      href="https://instagram.com"
+      href="https://www.instagram.com/edlmannraphael/ "
       target="_blank"
       rel="noreferrer"
       className="

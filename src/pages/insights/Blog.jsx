@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const BlogSection = ({ setIsOpen }) => {
@@ -7,6 +7,19 @@ const BlogSection = ({ setIsOpen }) => {
 
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
+
+  // AUTO POPUP AFTER 5 SECONDS
+  useEffect(() => {
+
+    const timer = setTimeout(() => {
+
+      setIsOpen(true);
+
+    }, 2000);
+
+    return () => clearTimeout(timer);
+
+  }, [setIsOpen]);
 
   const data = [
     {
@@ -258,7 +271,10 @@ const BlogSection = ({ setIsOpen }) => {
           ))}
 
         </div>
-
+{/* LATEST ARTICLE HEADING */}
+<h3 className="text-left text-black text-sm tracking-[2px] font-bold mb-5">
+  Latest Article
+</h3>
         {/* BIG BLOG */}
         {currentPage === 1 && latestArticle && (
           <div className="bg-white border border-[#e6dfd5] rounded-[20px] overflow-hidden mb-8">
