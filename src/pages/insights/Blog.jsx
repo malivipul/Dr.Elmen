@@ -180,7 +180,7 @@ const BlogSection = ({ setIsOpen }) => {
     { label: "All", value: "all" },
     { label: "Guides", value: "guides" },
     { label: "Opinions", value: "opinions" },
-    { label: "Case Studies", value: "case" },
+    { label: "Case Studies", value: "case studies" },
     { label: "Tools", value: "tools" },
     { label: "Archive", value: "archive" },
   ];
