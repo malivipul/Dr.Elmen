@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   FaRobot,
   FaUsers,
@@ -5,40 +6,108 @@ import {
   FaBullseye,
   FaGraduationCap,
 } from "react-icons/fa";
+import { getAboutExpertise, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
+
+const cleanRichText = (value = "") =>
+  String(value)
+    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/?p[^>]*>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;|\u00a0/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .trim();
+
+const findCardItems = (value) => {
+  if (!value) return [];
+
+  if (Array.isArray(value)) {
+    const cardItems = value.filter((item) => {
+      if (!item || typeof item !== "object") return false;
+      return item.title || item.heading || item.name || item.text || item.desc || item.description;
+    });
+
+    if (cardItems.length) return cardItems;
+
+    for (const item of value) {
+      const nestedItems = findCardItems(item);
+      if (nestedItems.length) return nestedItems;
+    }
+
+    return [];
+  }
+
+  if (typeof value !== "object") return [];
+
+  const preferredKeys = [
+    "items",
+    "expertise",
+    "cards",
+    "cardData",
+    "services",
+    "list",
+    "value",
+    "data",
+  ];
+
+  for (const key of preferredKeys) {
+    const nestedItems = findCardItems(value[key]);
+    if (nestedItems.length) return nestedItems;
+  }
+
+  for (const nestedValue of Object.values(value)) {
+    const nestedItems = findCardItems(nestedValue);
+    if (nestedItems.length) return nestedItems;
+  }
+
+  return [];
+};
 
 const ExpertiseSection = () => {
+  const { lang } = useLanguage();
+  const [expertiseData, setExpertiseData] = useState(null);
 
-  const expertise = [
-    {
-      icon: FaBullseye,
-      title: "Interim Management",
-      text: "I take on interim management roles, filling critical leadership positions during periods of transformation, growth, or transition.",
-    },
+  const iconList = [FaBullseye, FaCogs, FaRobot, FaGraduationCap, FaUsers];
 
-    {
-      icon: FaCogs,
-      title: "Business Process & IT-Management",
-      text: "I design and optimise business process models and workload automation solutions using Automic Automation (UC4), BMC Control-M, IBM IWS, and SAP ERP.",
-    },
+  useEffect(() => {
+    let isMounted = true;
 
-    {
-      icon: FaRobot,
-      title: "AI, HR & Digital Transformation",
-      text: "I support organisations in leveraging AI, modernising HR, and accelerating digital transformation to create sustainable competitive advantage.",
-    },
+    getAboutExpertise()
+      .then((res) => {
+        if (!isMounted) return;
+        setExpertiseData(res.data || null);
+      })
+      .catch((err) => {
+        console.error("Failed to load about expertise", err);
+      });
 
-    {
-      icon: FaGraduationCap,
-      title: "Academic Teaching & Research",
-      text: "I combine academic teaching experience with real-world business expertise to train organisations and teams in AI, HR, and digital transformation.",
-    },
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
-    {
-      icon: FaUsers,
-      title: "Keynote Expertise",
-      text: "I provide engaging keynote expertise on AI, HR, and digital transformation, while helping promote your event through my social media reach and professional network.",
-    },
-  ];
+  const sectionData = expertiseData?.data && !Array.isArray(expertiseData.data)
+    ? expertiseData.data
+    : expertiseData;
+  const rawItems = findCardItems(expertiseData);
+
+  const expertise = rawItems.length
+    ? rawItems.map((item, index) => ({
+        icon: iconList[index % iconList.length],
+        title: cleanRichText(getBi(item.title || item.heading || item.name, lang)),
+        text: cleanRichText(getBi(item.text || item.desc || item.description, lang)),
+      }))
+    : [];
+
+  const title = sectionData?.title
+    ? cleanRichText(getBi(sectionData.title, lang))
+    : "";
+  const subtitle = sectionData?.subtitle
+    ? cleanRichText(getBi(sectionData.subtitle, lang))
+    : "";
 
   return (
     <section className="bg-[#f4f4f4] pb-[60px] md:pb-[60px]">
@@ -50,18 +119,17 @@ const ExpertiseSection = () => {
 
           {/* LABEL */}
           <span className="text-[#b8965a] uppercase tracking-[3px] text-[10px] md:text-[11px] font-medium">
-            Areas of Expertise
+            Expertise
           </span>
 
           {/* TITLE */}
           <h2 className="title-font text-[28px] sm:text-[32px] md:text-[36px] leading-[1.05] text-black mt-4 mb-5">
-            Where I Create Value
+            {title}
           </h2>
 
           {/* TEXT */}
           <p className="text-[#0a3e40] text-[15px] md:text-[16px] leading-[30px] md:leading-[34px]">
-          Five core disciplines at the intersection of technology, people
-and organisational change
+            {subtitle}
           </p>
 
         </div>

@@ -3,6 +3,18 @@ import { Link } from "react-router-dom";
 import { getHomeAbout, IMG_URL, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
+const cleanRichText = (value = "") =>
+  value
+    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/?p[^>]*>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;|\u00a0/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .trim();
+
 const About = () => {
   const [about, setAbout] = useState(null);
   const { lang } = useLanguage();
@@ -35,6 +47,8 @@ const About = () => {
 
   const vitaItems = about && about.vita && about.vita.length > 0 ? about.vita : null;
   const vitaTitle = about ? getBi(about.vitaTitle, lang) : "Vita";
+  const readableQuote = cleanRichText(quote);
+  const readableDesc = cleanRichText(desc);
 
   return (
     <section className="bg-white py-[60px]">
@@ -45,7 +59,7 @@ const About = () => {
         <div className="grid md:grid-cols-[40%_60%] gap-10 items-center">
 
           {/* LEFT CONTENT */}
-          <div>
+          <div className="max-w-[620px]">
 
             {/* LABEL */}
             <span className="text-[#b8965a] text-xs tracking-[2px] uppercase mb-4 block">
@@ -58,16 +72,16 @@ const About = () => {
             </h2>
 
             {/* TEXT */}
-            <div className="space-y-5 text-[#0a3e40] text-[16px] leading-relaxed">
+            <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[16px] md:text-[17px] leading-[1.8] break-words">
 
-              {quote && (
+              {readableQuote && (
                 <p className="font-semibold italic">
-                  "{quote}"
+                  "{readableQuote}"
                 </p>
               )}
 
               <p className="whitespace-pre-line">
-                {desc}
+                {readableDesc}
               </p>
 
             </div>

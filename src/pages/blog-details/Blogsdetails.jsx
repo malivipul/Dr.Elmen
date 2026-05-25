@@ -3,6 +3,29 @@ import { useParams, Link } from "react-router-dom";
 import { getBlogById, getBlogs, IMG_URL, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
+const stripHtml = (html) => {
+  if (!html || typeof html !== "string") return "";
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
+const getReadTime = (content, currentLang) => {
+  const words = stripHtml(content).match(/\S+/g)?.length || 0;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+
+  return currentLang === "EN"
+    ? `${minutes} min read`
+    : `${minutes} Min. Lesezeit`;
+};
+
 const Blogsdetails = () => {
   const { id } = useParams();
   const { lang } = useLanguage();
@@ -122,6 +145,7 @@ const Blogsdetails = () => {
 
   // Sanitize HTML: replace &nbsp; with regular spaces so text wraps normally
   const content = rawContent.replace(/&nbsp;/g, " ").replace(/ {2,}/g, " ");
+  const readTime = getReadTime(rawContent, lang);
   const category = currentBlog.Category || currentBlog.category || "Guides";
   const tags = currentBlog.Tags ||
     currentBlog.tags || ["Leadership", "Innovation", "Strategy"];
@@ -135,7 +159,7 @@ const Blogsdetails = () => {
   return (
     <section className="bg-[#f4f4f4] pb-[90px]">
       {/* HERO IMAGE */}
-      <div className="relative w-full overflow-hidden rounded-b-[45px]">
+      <div className="relative w-full overflow-hidden ">
         <img
           src={imgSource}
           alt={title}
@@ -175,6 +199,15 @@ const Blogsdetails = () => {
                   </div>
 
                   <span className="font-medium">{dateStr}</span>
+                </div>
+
+                {/* READ TIME */}
+                <div className="flex items-center gap-3 text-[#6b6b6b] text-[15px]">
+                  <div className="w-10 h-10 rounded-full bg-[#b8965a] text-white flex items-center justify-center shrink-0">
+                    <i className="fa-regular fa-clock"></i>
+                  </div>
+
+                  <span className="font-medium">{readTime}</span>
                 </div>
               </div>
             </div>

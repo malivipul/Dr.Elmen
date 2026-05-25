@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="absolute top-0 left-0 w-full z-50 text-white">
       {/* HEADER */}
-      <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-between relative">
+      <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-center lg:justify-between relative">
         
         {/* LEFT MENU */}
         <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
@@ -185,9 +185,9 @@ const Header = () => {
         </div>
 
         {/* LOGO */}
-        <div className="mx-8 shrink-0">
+        <div className="mx-8 shrink-0 flex justify-center">
           <Link to="/">
-            <h1 className="text-[20px] md:text-[30px] font-bold font-serif leading-tight text-center md:text-left">
+            <h1 className="text-[20px] md:text-[30px] font-bold font-serif leading-tight text-center">
               Dr. Raphael
               <br className="block md:hidden" />
               <span className="md:ml-2">Edlmann</span>
@@ -364,6 +364,13 @@ const Header = () => {
               ></span>
             </span>
           </Link>
+
+          <button
+            onClick={toggleLang}
+            className="h-[30px] text-[14px] font-semibold tracking-[2px] hover:opacity-70 transition cursor-pointer"
+          >
+            {lang === "EN" ? "DE" : "EN"}
+          </button>
         </div>
 
         {/* MOBILE MENU ICON */}
@@ -783,7 +790,7 @@ const Header = () => {
       </div>
 
       {/* LANGUAGE TOGGLE */}
-      <div className="absolute top-[30px] right-[80px] md:right-[25px] z-50">
+      <div className="absolute top-[30px] right-[80px] md:right-[25px] z-50 lg:hidden">
         <button
           onClick={toggleLang}
           className="text-sm font-semibold tracking-[2px] hover:opacity-70 transition cursor-pointer"

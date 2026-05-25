@@ -48,6 +48,16 @@ const stripHtml = (html) => {
     .trim();
 };
 
+const getReadTime = (content, currentLang) => {
+  const text = stripHtml(content);
+  const words = text.match(/\S+/g)?.length || 0;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+
+  return currentLang === "EN"
+    ? `${minutes} min read`
+    : `${minutes} Min. Lesezeit`;
+};
+
 const BlogSection = ({ setIsOpen }) => {
   const [active, setActive] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -202,6 +212,12 @@ const BlogSection = ({ setIsOpen }) => {
   // Format into flat representations matching language choice
   const formattedBlogs = rawBlogs.map((b) => {
     const rawCategory = String(b.Category || b.category || "").toLowerCase();
+    const rawDescription =
+      typeof b.description === "object"
+        ? getBi(b.description, lang)
+        : typeof b.desc === "object"
+        ? getBi(b.desc, lang)
+        : b.description || b.desc || "";
     // Tags can be an array from API or fallback to empty
     const rawTags = Array.isArray(b.Tags || b.tags)
       ? (b.Tags || b.tags).map((t) => t.trim().toLowerCase())
@@ -212,20 +228,14 @@ const BlogSection = ({ setIsOpen }) => {
       tags: rawTags,
       displayCategory: formatCategoryDisplay(rawCategory, lang),
       title: typeof b.title === "object" ? getBi(b.title, lang) : b.title,
-      desc: stripHtml(
-        typeof b.description === "object"
-          ? getBi(b.description, lang)
-          : typeof b.desc === "object"
-          ? getBi(b.desc, lang)
-          : b.description || b.desc || ""
-      ),
+      desc: stripHtml(rawDescription),
       img: (b.img || b.image)
         ? (b.img || b.image).startsWith("http") || (b.img || b.image).startsWith("/assets")
           ? (b.img || b.image)
           : `${IMG_URL}${b.img || b.image}`
         : "/assets/images/blog2.png",
       date: b.date || "May 2025",
-      read: b.read || "5 min read",
+      read: getReadTime(rawDescription, lang),
       link: `/blog-details/${b._id}`,
     };
   });

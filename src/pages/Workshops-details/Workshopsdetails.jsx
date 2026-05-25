@@ -3,6 +3,11 @@ import { useParams, Link } from "react-router-dom";
 import { getServiceBySlug, getServices, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
+const getOrderId = (service, fallback) => {
+  const value = Number(service?.orderId);
+  return Number.isFinite(value) && value > 0 ? value : fallback;
+};
+
 const fallbackWorkshops = {
   "ai-strategy-workshop-for-hr": {
     title: { en: "AI Strategy Workshop for HR", de: "KI-Strategie-Workshop für HR" },
@@ -244,7 +249,9 @@ export default function WorkshopDetailsPage() {
     getServices()
       .then((res) => {
         if (res.data && res.data.length > 0) {
-          setAllServices(res.data);
+          setAllServices(
+            [...res.data].sort((a, b) => getOrderId(a, 9999) - getOrderId(b, 9999))
+          );
         } else {
           setAllServices(
             Object.keys(fallbackWorkshops).map((key) => ({
@@ -257,10 +264,11 @@ export default function WorkshopDetailsPage() {
       .catch((err) => {
         console.error("Error fetching all services:", err);
         setAllServices(
-          Object.keys(fallbackWorkshops).map((key) => ({
-            slug: key,
-            title: fallbackWorkshops[key].title,
-          }))
+          Object.keys(fallbackWorkshops)
+            .map((key) => ({
+              slug: key,
+              title: fallbackWorkshops[key].title,
+            }))
         );
       });
   }, []);

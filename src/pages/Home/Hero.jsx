@@ -23,7 +23,7 @@ const Hero = () => {
   const imgUrl = hero && hero.img ? `${IMG_URL}${hero.img}` : "/assets/images/2026_03_17_Raphael_Edlmann_Start Page.jpg";
 
   return (
-    <section className="relative w-full min-h-[70vh] md:min-h-screen flex items-end items-center overflow-hidden rounded-b-[40px] pt-[140px] pb-[60px]">
+    <section className="relative w-full min-h-[70vh] md:min-h-screen flex items-end items-center overflow-hidden  pt-[140px] pb-[60px]">
 
       {/* IMAGE */}
       <div className="absolute inset-0">

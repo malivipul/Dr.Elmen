@@ -10,61 +10,127 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+const cleanHtml = (html) => {
+  if (!html) return "";
+  return String(html)
+    .replace(/&nbsp;/g, " ")
+    .replace(/\u00a0/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'");
+};
+
+const findTimelineItems = (value) => {
+  if (!value) return [];
+
+  if (Array.isArray(value)) {
+    const timelineItems = value.filter((item) => {
+      if (!item || typeof item !== "object") return false;
+      return item.year || item.years || item.date || item.period || item.title || item.heading || item.text || item.description || item.desc || item.content;
+    });
+
+    if (timelineItems.length) return timelineItems;
+
+    for (const item of value) {
+      const nestedItems = findTimelineItems(item);
+      if (nestedItems.length) return nestedItems;
+    }
+
+    return [];
+  }
+
+  if (typeof value !== "object") return [];
+
+  const preferredKeys = [
+    "items",
+    "timeline",
+    "timelines",
+    "cards",
+    "cardData",
+    "vitaTimeline",
+    "value",
+    "data",
+  ];
+
+  for (const key of preferredKeys) {
+    const nestedItems = findTimelineItems(value[key]);
+    if (nestedItems.length) return nestedItems;
+  }
+
+  for (const nestedValue of Object.values(value)) {
+    const nestedItems = findTimelineItems(nestedValue);
+    if (nestedItems.length) return nestedItems;
+  }
+
+  return [];
+};
+
 const VitaTimeline = () => {
   const [activeArrow, setActiveArrow] = useState("left");
-  const [hoverIndex, setHoverIndex] = useState(null);
   const [timelineData, setTimelineData] = useState(null);
   const { lang } = useLanguage();
 
   useEffect(() => {
+    let isMounted = true;
+
     getVitaTimeline()
       .then((res) => {
-        if (res.data) {
-          setTimelineData(res.data);
-        }
+        if (!isMounted) return;
+        setTimelineData(res.data || null);
       })
       .catch((err) => console.error("Error fetching Vita Timeline:", err));
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  const title = timelineData?.title
-    ? typeof timelineData.title === "object"
-      ? getBi(timelineData.title, lang)
-      : timelineData.title
-    : lang === "EN"
+  const sectionData =
+    timelineData?.data && !Array.isArray(timelineData.data)
+      ? timelineData.data
+      : timelineData?.value && !Array.isArray(timelineData.value)
+      ? timelineData.value
+      : timelineData;
+
+  const title =
+    sectionData?.title || sectionData?.heading
+      ? cleanHtml(getBi(sectionData.title || sectionData.heading, lang))
+      : lang === "EN"
       ? "Together Through the Years"
       : "Gemeinsam durch die Jahre";
 
-  const subtitle = timelineData?.subtitle
-    ? typeof timelineData.subtitle === "object"
-      ? getBi(timelineData.subtitle, lang)
-      : timelineData.subtitle
-    : lang === "EN"
+  const subtitle =
+    sectionData?.subtitle || sectionData?.description || sectionData?.text
+      ? cleanHtml(getBi(sectionData.subtitle || sectionData.description || sectionData.text, lang))
+      : lang === "EN"
       ? "A professional journey shaped by leadership, innovation, and continuous transformation across AI, HR, and business process management."
-      : "Ein beruflicher Werdegang, geprägt von Führung, Innovation und kontinuierlicher Transformation in den Bereichen KI, HR und Geschäftsprozessmanagement.";
+      : "Ein beruflicher Werdegang, gepraegt von Fuehrung, Innovation und kontinuierlicher Transformation in den Bereichen KI, HR und Geschaeftsprozessmanagement.";
 
-  const rawItems = timelineData?.items || [];
+  const items = findTimelineItems(timelineData)
+    .map((item) => {
+      const rawText =
+        item.text ||
+        item.description ||
+        item.desc ||
+        item.content ||
+        item.details ||
+        item.title ||
+        item.heading;
 
-  const cleanHtml = (html) => {
-    if (!html) return "";
-    return html.replace(/&nbsp;/g, " ").replace(/\u00a0/g, " ");
-  };
-
-  const items = rawItems.map((item) => {
-    const rawText =
-      typeof item.text === "object" ? getBi(item.text, lang) : item.text;
-    return {
-      year: item.year,
-      icon: item.icon || "fa-rocket",
-      text: cleanHtml(rawText),
-    };
-  });
+      return {
+        year: cleanHtml(getBi(item.year || item.years || item.date || item.period || item.duration, lang)),
+        icon: item.icon || "fa-rocket",
+        text: cleanHtml(getBi(rawText, lang)),
+      };
+    })
+    .filter((item) => item.year || item.text);
 
   return (
     <section className="bg-[#f4f4f4] py-[60px]">
       {/* TOP */}
       <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] text-center mb-14">
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-          {lang === "EN" ? "Vita" : "Vita"}
+          Vita
         </span>
 
         <h2 className="title-font text-3xl md:text-[40px] text-black mt-2 mb-2">
@@ -78,64 +144,66 @@ const VitaTimeline = () => {
 
       {/* SLIDER */}
       <div className="max-w-[1250px] mx-auto px-[20px]">
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={30}
-          slidesPerView={1}
-          loop={true}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          navigation={{
-            nextEl: ".next-btn",
-            prevEl: ".prev-btn",
-          }}
-          pagination={{
-            el: ".custom-dots",
-            clickable: true,
-          }}
-          breakpoints={{
-            768: { slidesPerView: 2 },
-          }}
-        >
-          {items.map((item, i) => (
-            <SwiperSlide key={i} className="h-full">
-              <div
-                className="bg-white rounded-[20px] p-8 h-[550px] md:h-[450px] flex flex-col justify-between relative border border-[#f9f9f9] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition duration-300"
-                onMouseEnter={() => setHoverIndex(i)}
-                onMouseLeave={() => setHoverIndex(null)}
-              >
-                {/* ICON */}
-                <div className="absolute top-6 right-6 text-[#b8965a] text-[28px]">
-                  <i className={`fa-solid ${item.icon}`}></i>
+        {items.length > 0 ? (
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            loop={items.length > 2}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            navigation={{
+              nextEl: ".next-btn",
+              prevEl: ".prev-btn",
+            }}
+            pagination={{
+              el: ".custom-dots",
+              clickable: true,
+            }}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+            }}
+          >
+            {items.map((item, i) => (
+              <SwiperSlide key={`${item.year}-${i}`} className="h-full">
+                <div className="bg-white rounded-[20px] p-8 h-[550px] md:h-[450px] flex flex-col justify-between relative border border-[#f9f9f9] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition duration-300">
+                  {/* ICON */}
+                  <div className="absolute top-6 right-6 text-[#b8965a] text-[28px]">
+                    <i className={`fa-solid ${item.icon}`}></i>
+                  </div>
+
+                  <div>
+                    {/* YEAR */}
+                    <h3
+                      className="text-[#b8965a] text-[24px] font-semibold mb-1"
+                      style={{
+                        fontFamily: "Caveat, cursive",
+                        letterSpacing: "1px",
+                      }}
+                    >
+                      {item.year}
+                    </h3>
+
+                    {/* LINE */}
+                    <div className="w-[35px] h-[2px] bg-[#b8965a] mb-4"></div>
+
+                    {/* TEXT */}
+                    <div
+                      className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar timeline-text break-words"
+                      dangerouslySetInnerHTML={{ __html: item.text }}
+                    />
+                  </div>
                 </div>
-
-                <div>
-                  {/* YEAR */}
-                  <h3
-                    className="text-[#b8965a] text-[24px] font-semibold mb-1"
-                    style={{
-                      fontFamily: "Caveat, cursive",
-                      letterSpacing: "1px",
-                    }}
-                  >
-                    {item.year}
-                  </h3>
-
-                  {/* LINE */}
-                  <div className="w-[35px] h-[2px] bg-[#b8965a] mb-4"></div>
-
-                  {/* TEXT */}
-                  <div
-                    className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar timeline-text break-words"
-                    dangerouslySetInnerHTML={{ __html: item.text }}
-                  />
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <div className="bg-white rounded-[20px] p-8 border border-[#f9f9f9] text-center text-[#0a3e40]">
+            {lang === "EN" ? "No timeline items available." : "Keine Vita-Eintraege verfuegbar."}
+          </div>
+        )}
 
         {/* CONTROLS */}
         <div className="relative flex items-center justify-between mt-12">

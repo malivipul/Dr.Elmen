@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { getServices, IMG_URL, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
+const getOrderId = (service, fallback) => {
+  const value = Number(service?.orderId);
+  return Number.isFinite(value) && value > 0 ? value : fallback;
+};
+
 const ServicesSection = () => {
   const [servicesList, setServicesList] = useState([]);
   const { lang } = useLanguage();
@@ -66,15 +71,18 @@ const ServicesSection = () => {
   ];
 
   const rawServices = servicesList && servicesList.length > 0 ? servicesList : staticServices;
+  const sortedServices = [...rawServices].sort(
+    (a, b) => getOrderId(a, 9999) - getOrderId(b, 9999)
+  );
 
-  const formattedServices = rawServices.map((service, index) => {
+  const formattedServices = sortedServices.map((service, index) => {
     const title = typeof service.title === "object" ? getBi(service.title, lang) : service.title;
     const slug = service.slug;
     const img = service.img
       ? (service.img.startsWith("http") || service.img.startsWith("/assets") ? service.img : `${IMG_URL}${service.img}`)
       : "/assets/images/unrecognizable-businesspeople-studying-statistics-holding-papers-with-hands.jpg";
 
-    const number = String(index + 1).padStart(2, "0");
+    const number = String(getOrderId(service, index + 1)).padStart(2, "0");
 
     let points = [];
     if (service.sections && service.sections.length > 0) {

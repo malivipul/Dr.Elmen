@@ -1,17 +1,82 @@
-const SectorsSection = () => {
+import { useEffect, useState } from "react";
+import { FaCheck } from "react-icons/fa";
+import { getAboutSectors, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
 
-  const sectors = [
-    "Aerospace & Defence",
-    "Automotive",
-    "Finance & Banking",
-    "Public Sector",
-    "Higher Education",
-    "EU Innovation Policy",
-    "SAP Enterprise",
-    "HR Technology",
-    "IT Infrastructure",
-    "AI & Automation",
-  ];
+const cleanRichText = (value = "") =>
+  String(value)
+    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/?p[^>]*>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;|\u00a0/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .trim();
+
+const fallbackSectors = [
+  "Aerospace & Defence",
+  "Automotive",
+  "Finance & Banking",
+  "Public Sector",
+  "Higher Education",
+];
+
+const getSectorItems = (data, lang) => {
+  const items =
+    data?.sectors ||
+    data?.items ||
+    data?.list ||
+    data?.data?.sectors ||
+    data?.data?.items;
+
+  if (!Array.isArray(items)) return fallbackSectors;
+
+  const sectors = items
+    .map((item) => {
+      if (typeof item === "string") return cleanRichText(item);
+      return cleanRichText(getBi(item.title || item.name || item.label || item.text, lang));
+    })
+    .filter(Boolean);
+
+  return sectors.length ? sectors : fallbackSectors;
+};
+
+const SectorsSection = () => {
+  const { lang } = useLanguage();
+  const [sectorData, setSectorData] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getAboutSectors()
+      .then((res) => {
+        if (!isMounted) return;
+        setSectorData(res.data || null);
+      })
+      .catch((err) => {
+        console.error("Failed to load about sectors", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const sectionData =
+    sectorData?.data && !Array.isArray(sectorData.data)
+      ? sectorData.data
+      : sectorData;
+  const title =
+    sectionData?.title || sectionData?.heading
+      ? cleanRichText(getBi(sectionData.title || sectionData.heading, lang))
+      : "Industries & Domains";
+  const subtitle =
+    sectionData?.subtitle || sectionData?.description || sectionData?.text
+      ? cleanRichText(getBi(sectionData.subtitle || sectionData.description || sectionData.text, lang))
+      : "Cross-industry experience spanning enterprise technology, policy and academia.";
+  const sectors = getSectorItems(sectionData || sectorData, lang);
 
   return (
     <section className="bg-[#050505] py-[60px] md:py-[60px] overflow-hidden relative">
@@ -31,13 +96,12 @@ const SectorsSection = () => {
 
           {/* TITLE */}
           <h2 className="title-font text-[28px] sm:text-[32px] leading-[1.05] text-white mt-4 mb-6">
-            Industries & Domains
+            {title}
           </h2>
 
           {/* TEXT */}
           <p className="text-white/65 text-[15px] md:text-[16px] leading-[30px] md:leading-[35px]">
-            Cross-industry experience spanning enterprise
-            technology, policy and academia.
+            {subtitle}
           </p>
 
         </div>
@@ -53,7 +117,7 @@ const SectorsSection = () => {
 
               {/* ICON */}
               <span className="min-w-[20px] w-[20px] h-[20px] rounded-full bg-[#b8965a] flex items-center justify-center text-white text-[10px]">
-                ✔
+                <FaCheck />
               </span>
 
               {/* TEXT */}

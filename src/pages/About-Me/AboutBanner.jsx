@@ -1,16 +1,40 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAboutBanner, getBi, IMG_URL } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
 
 const AboutBanner = () => {
+  const [banner, setBanner] = useState(null);
+  const { lang } = useLanguage();
+
+  useEffect(() => {
+    getAboutBanner()
+      .then((res) => {
+        if (res.data) {
+          setBanner(res.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching about banner:", err));
+  }, []);
+
+  const title = banner ? getBi(banner.title || banner.heading, lang) : "About Me";
+  const breadcrumbTitle = banner ? getBi(banner.breadcrumb || banner.title || banner.heading, lang) : "About Me";
+  const imagePath = banner?.img || banner?.image;
+  const imageUrl = imagePath
+    ? imagePath.startsWith("http") || imagePath.startsWith("/assets")
+      ? imagePath
+      : `${IMG_URL}${imagePath}`
+    : "/assets/images/about.jpg";
+
   return (
-    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden rounded-b-[40px]">
+    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
 
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
 
         <img 
-          src="/assets/images/about.jpg"
-          alt="About Banner"
+          src={imageUrl}
+          alt={title}
           className="w-full h-full object-cover object-center"
         />
 
@@ -39,14 +63,14 @@ const AboutBanner = () => {
   <span className="text-[16px] leading-none">›</span>
 
   <span className="font-semibold">
-    About Me
+    {breadcrumbTitle}
   </span>
 
 </div>
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-            About Me
+            {title}
           </h1>
 
         </div>

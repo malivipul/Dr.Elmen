@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const AboutBanner = () => {
   return (
-    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden rounded-b-[40px]">
+    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden">
 
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getServiceBySlug, getBi } from "../../api/api";
+import { getServiceBySlug, getBi, IMG_URL } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const staticTitles = {
@@ -26,6 +26,7 @@ const AboutBanner = () => {
   const { slug } = useParams();
   const { lang } = useLanguage();
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     if (slug) {
@@ -33,28 +34,32 @@ const AboutBanner = () => {
         .then((res) => {
           if (res.data) {
             setTitle(getBi(res.data.title, lang));
+            setImage(res.data.img ? `${IMG_URL}${res.data.img}` : "/assets/images/25.png");
           } else {
             setTitle(staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details"));
+            setImage("/assets/images/25.png");
           }
         })
         .catch((err) => {
           console.error("Error fetching service for banner:", err);
           setTitle(staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details"));
+          setImage("/assets/images/25.png");
         });
     } else {
       setTitle(lang === "EN" ? "Workshop Details" : "Workshop-Details");
+      setImage("/assets/images/25.png");
     }
   }, [slug, lang]);
 
   return (
-    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden rounded-b-[40px]">
+    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
 
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
 
         <img
-          src="/assets/images/25.png"
-          alt="About Banner"
+          src={image || "/assets/images/25.png"}
+          alt={title || "Banner"}
           className="w-full h-full object-cover object-center"
         />
 

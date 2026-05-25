@@ -63,7 +63,7 @@ const Footer = () => {
   const displayedServices = services.length > 0 ? services : staticServices;
 
   return (
-    <footer className="bg-black text-white pt-[60px] pb-[30px] rounded-t-[40px]">
+    <footer className="bg-black text-white pt-[60px] pb-[30px] ">
       <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr_0.9fr] gap-[40px] md:gap-[20px] text-center md:text-left">
@@ -78,8 +78,7 @@ const Footer = () => {
 
             {/* TEXT */}
             <p className="text-sm text-white/60 leading-relaxed max-w-[320px] text-center md:text-left">
-              Interim Manager • AI, HR & Business Transformation - Helping
-              organisations transform with practical, high-impact strategies.
+             Interim Manager, AI, HR & Business Process Expert. 
             </p>
 
             {/* SOCIAL */}

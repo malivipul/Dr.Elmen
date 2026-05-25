@@ -7,6 +7,18 @@ import { useLanguage } from "../../context/LanguageContext";
 
 import "swiper/css";
 
+const cleanRichText = (value = "") =>
+  String(value)
+    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/?p[^>]*>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;|\u00a0/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .trim();
+
 const categoryTranslations = {
   guides: { en: "Guides", de: "Leitfäden" },
   opinions: { en: "Opinions", de: "Meinungen" },
@@ -92,17 +104,20 @@ const BlogSection = ({ setIsOpen }) => {
   // Format into flat representations matching language choice
   const formattedBlogs = rawBlogs.map((b) => {
     const rawCategory = String(b.Category || b.category || "").toLowerCase();
+    const rawTitle = typeof b.title === "object" ? getBi(b.title, lang) : b.title;
+    const rawDesc =
+      typeof b.description === "object"
+        ? getBi(b.description, lang)
+        : typeof b.desc === "object"
+          ? getBi(b.desc, lang)
+          : b.description || b.desc || "";
+
     return {
       _id: b._id,
       category: rawCategory,
       displayCategory: formatCategoryDisplay(rawCategory, lang),
-      title: typeof b.title === "object" ? getBi(b.title, lang) : b.title,
-      desc:
-        typeof b.description === "object"
-          ? getBi(b.description, lang)
-          : typeof b.desc === "object"
-            ? getBi(b.desc, lang)
-            : b.description || b.desc || "",
+      title: cleanRichText(rawTitle),
+      desc: cleanRichText(rawDesc),
       img:
         b.img || b.image
           ? (b.img || b.image).startsWith("http") ||

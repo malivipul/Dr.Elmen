@@ -1,6 +1,64 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getAboutCTA, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
+
+const cleanRichText = (value = "") =>
+  String(value)
+    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/?p[^>]*>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;|\u00a0/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .trim();
 
 const ContactCTASection = () => {
+  const { lang } = useLanguage();
+  const [ctaData, setCtaData] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getAboutCTA()
+      .then((res) => {
+        if (!isMounted) return;
+        setCtaData(res.data || null);
+      })
+      .catch((err) => {
+        console.error("Failed to load about CTA", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const sectionData =
+    ctaData?.data && !Array.isArray(ctaData.data)
+      ? ctaData.data
+      : ctaData;
+  const title =
+    sectionData?.title || sectionData?.heading
+      ? cleanRichText(getBi(sectionData.title || sectionData.heading, lang))
+      : "Ready to work together?";
+  const description =
+    sectionData?.description || sectionData?.desc || sectionData?.text || sectionData?.content
+      ? cleanRichText(getBi(sectionData.description || sectionData.desc || sectionData.text || sectionData.content, lang))
+      : "Whether you need an interim manager for a transformation project, a speaker for your next conference, or a research collaborator - let's start a conversation.";
+  const primaryText =
+    sectionData?.primaryButtonText || sectionData?.buttonText || sectionData?.ctaText
+      ? cleanRichText(getBi(sectionData.primaryButtonText || sectionData.buttonText || sectionData.ctaText, lang))
+      : "Let's Work Together";
+  const secondaryText =
+    sectionData?.secondaryButtonText || sectionData?.whatsappText
+      ? cleanRichText(getBi(sectionData.secondaryButtonText || sectionData.whatsappText, lang))
+      : "WhatsApp Me";
+  const primaryLink = sectionData?.primaryButtonLink || sectionData?.buttonLink || sectionData?.link || "/contact";
+  const secondaryLink = sectionData?.secondaryButtonLink || sectionData?.whatsappLink || "/contact";
+
   return (
     <section className="bg-[#f4f4f4] py-[60px] md:py-[60px]">
 
@@ -25,87 +83,86 @@ const ContactCTASection = () => {
 
               {/* TITLE */}
               <h2 className="title-font text-[28px] sm:text-[32px] leading-[1.05] text-black mt-4 mb-5">
-                Ready to work together?
+                {title}
               </h2>
 
               {/* TEXT */}
               <p className="text-[#0a3e40] text-[15px] md:text-[17px] leading-[30px] md:leading-[34px]">
-                Whether you need an interim manager for a transformation
-                project, a speaker for your next conference, or a
-                research collaborator — let’s start a conversation.
+                {description}
               </p>
 
             </div>
-<div className="flex flex-col items-start sm:items-end gap-3 w-full">
 
-  {/* BUTTON */}
-  <Link
-    to="/contact"
-    className="
-      w-full
-      sm:w-[240px]
-      h-[50px]
-      px-6
-      rounded-full
-      bg-[#b8965a]
-      hover:bg-black
-      text-white
-      text-[14px]
-      font-bold
-      tracking-[0.3px]
-      transition-all
-      duration-500
-      inline-flex
-      items-center
-      justify-center
-      gap-2
-    "
-  >
+            <div className="flex flex-col items-start sm:items-end gap-3 w-full">
 
-    <span className="leading-none">
-      Let’s Work Together
-    </span>
+              {/* BUTTON */}
+              <Link
+                to={primaryLink}
+                className="
+                  w-full
+                  sm:w-[240px]
+                  h-[50px]
+                  px-6
+                  rounded-full
+                  bg-[#b8965a]
+                  hover:bg-black
+                  text-white
+                  text-[14px]
+                  font-bold
+                  tracking-[0.3px]
+                  transition-all
+                  duration-500
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                "
+              >
 
-    <i className="fa-solid fa-arrow-right text-[14px] mt-[1px]"></i>
+                <span className="leading-none">
+                  {primaryText}
+                </span>
 
-  </Link>
+                <i className="fa-solid fa-arrow-right text-[14px] mt-[1px]"></i>
 
-  {/* BUTTON */}
-  <Link
-    to="/contact"
-    className="
-      w-full
-      sm:w-[240px]
-      h-[50px]
-      px-6
-      rounded-full
-      border
-      border-black/10
-      hover:bg-[#b8965a]
-      hover:text-white
-      text-black
-      text-[14px]
-      font-bold
-      tracking-[0.3px]
-      transition-all
-      duration-500
-      inline-flex
-      items-center
-      justify-center
-      gap-2
-      bg-white/40
-    "
-  >
+              </Link>
 
-    <i className="fa-brands fa-whatsapp text-[15px]"></i>
+              {/* BUTTON */}
+              <Link
+                to={secondaryLink}
+                className="
+                  w-full
+                  sm:w-[240px]
+                  h-[50px]
+                  px-6
+                  rounded-full
+                  border
+                  border-black/10
+                  hover:bg-[#b8965a]
+                  hover:text-white
+                  text-black
+                  text-[14px]
+                  font-bold
+                  tracking-[0.3px]
+                  transition-all
+                  duration-500
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  bg-white/40
+                "
+              >
 
-    <span className="leading-none">
-      WhatsApp Me
-    </span>
+                <i className="fa-brands fa-whatsapp text-[15px]"></i>
 
-  </Link>
+                <span className="leading-none">
+                  {secondaryText}
+                </span>
 
-</div>
+              </Link>
+
+            </div>
 
           </div>
 
