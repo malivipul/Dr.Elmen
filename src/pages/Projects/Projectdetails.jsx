@@ -1,262 +1,235 @@
-import { useState } from "react";
-
-const projects = [
-  {
-    title: "Airbus Defence & Space",
-    role: "Interim Manager | IT Build & Operation Management",
-    logos: ["/assets/images/Picture2.png"],
-    description:
-      "Starting point: Consolidation of various IT infrastructure service areas, with the option to expand build and operations management activities.",
-    points: [
-      "Led IT build and operations for core backend infrastructure services",
-      "Delivered consistent service quality by managing SLA/OLA performance",
-      "Optimising resource allocation, and developing robust technical architectures and operational standards.",
-      "Drove measurable improvements in team performance and engagement by coaching 20–25 staff and aligning stakeholders through structured service governance and executive-level reporting.",
-    ],
-  },
-
-  {
-    title:
-      "Microsoft Consulting Services | Deutsche Rentenversicherung",
-    role: "IT Workflow Automation Engineer",
-    logos: [
-      "/assets/images/Picture4.png",
-      "/assets/images/Picture2222.png",
-    ],
-    description:
-      "Starting point: Advancing IT infrastructure automation to optimise internal processes and increase operational efficiency in the public sector.",
-    points: [
-      "Designed and implemented automated IT infrastructure workflows",
-      "Eliminated manual deployment errors, and ensured seamless transition into stable service operations through structured testing and documentation.",
-      "Delivered projects on time while significantly improving efficiency, reliability, and scalability of infrastructure processes.",
-    ],
-  },
-
-  {
-    title: "Bechtle Managed Services | Volkswagen AG",
-    role: "Interim Manager & IT-Engineer",
-    logos: [
-      "/assets/images/Picture55.png",
-      "/assets/images/Picture222.png",
-    ],
-    description:
-      "Starting Point: Supporting a service transition, building a decentralized engineering team, and improving existing processes in software automation and deployment.",
-    points: [
-      "Led and coordinated a distributed engineering team (6 FTE), driving collaboration across locations and enabling decentralized service delivery",
-      "Enabled additional cost efficiencies through on-time transition",
-      "Reduced annual licensing costs by implementing a vendor-independent automation framework.",
-      "Consistently achieved high service performance with SLA/OLA and system availability levels of 96–99%",
-    ],
-  },
-
-  {
-    title: "HM Business School",
-    role: "Lecturer",
-    logos: ["/assets/images/Picture8.png"],
-    description:
-      "Delivered high-impact seminars and supervised academic theses at the HM Business School, teaching groups of 20–30 students. Enabled students to develop practical, industry-relevant solutions in",
-    points: [
-      "Digital Transformation: Strategies and methodologies",
-      "Topics in Business Informatics with a focus on Artificial Intelligence",
-      "E-Business: Business models and applications",
-      "Guided research projects from concept to completion using structured scientific methodologies and academic research frameworks.",
-      "Strengthened students’ analytical thinking, qualitative and quantitative research capabilities, and application of theory to real-world business challenges.",
-    ],
-  },
-];
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { getProjects, getProjectHeader, IMG_URL, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
 
 export default function ProjectsSection() {
-
   const [flippedCard, setFlippedCard] = useState(null);
+  const [dbProjects, setDbProjects] = useState([]);
+  const [header, setHeader] = useState(null);
+  const { lang } = useLanguage();
+  const location = useLocation();
+
+  useEffect(() => {
+    getProjects()
+      .then((res) => {
+        if (res.data) {
+          const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
+          setDbProjects(list);
+        }
+      })
+      .catch((err) => console.error("Error fetching projects:", err));
+
+    getProjectHeader()
+      .then((res) => {
+        if (res.data) {
+          setHeader(res.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching project header:", err));
+  }, []);
+
+  useEffect(() => {
+    if (dbProjects.length > 0) {
+      const searchParams = new URLSearchParams(location.search);
+      if (searchParams.get("scrollTo") === "projects") {
+        setTimeout(() => {
+          const element = document.getElementById("projects-section");
+          if (element) {
+            const yOffset = -90; // clear the sticky header elegantly
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({
+              top: y,
+              behavior: "smooth",
+            });
+          }
+        }, 600);
+      }
+    }
+  }, [dbProjects, location.search]);
+
+  const displayedProjects = dbProjects;
+
+  const headerTitle = header ? getBi(header.title, lang) : "Projects";
+  const headerSubtitle = header ? getBi(header.subtitle, lang) : "Transforming Ideas into Impactful Solutions";
+  const headerDesc = header ? getBi(header.description, lang) : "A collection of strategic initiatives, technology-driven implementations, and business transformation projects focused on AI, HR innovation, automation, and operational excellence.";
+
+  const getLogoUrl = (logo) => {
+    if (!logo) return "";
+    if (logo.startsWith("http") || logo.startsWith("/assets")) return logo;
+    if (logo.startsWith("/uploads")) return `${IMG_URL}${logo}`;
+    return `${IMG_URL}/uploads/${logo}`;
+  };
 
   return (
-    <section className="py-[60px] bg-[#f4f4f4] overflow-hidden">
-
+    <section id="projects-section" className="py-[60px] bg-[#f4f4f4] overflow-hidden">
       {/* TOP */}
       <div className="text-center mb-14 px-5 md:px-0">
-
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-          Projects
+          {headerTitle}
         </span>
 
         <h2 className="title-font text-3xl md:text-[40px] text-black mt-2 mb-3 leading-[1.3]">
-          Transforming Ideas into Impactful Solutions
+          {headerSubtitle}
         </h2>
 
-        <p className="text-[#0a3e40] text-[16px] max-w-[760px] mx-auto leading-[30px]">
-          A collection of strategic initiatives, technology-driven
-          implementations, and business transformation projects focused on AI,
-          HR innovation, automation, and operational excellence.
+        <p className="text-[#0a3e40] text-[16px] max-w-[760px] mx-auto leading-[30px] whitespace-pre-line">
+          {headerDesc}
         </p>
-
       </div>
 
       <div className="max-w-7xl mx-auto px-5 md:px-8">
-
         {/* GRID */}
         <div className="grid lg:grid-cols-2 gap-7">
+          {displayedProjects.map((item, index) => {
+            const itemTitle = typeof item.title === "object" ? getBi(item.title, lang) : item.title;
+            const itemRole = typeof item.role === "object" ? getBi(item.role, lang) : item.role;
+            const itemDesc = typeof item.description === "object" ? getBi(item.description, lang) : (typeof item.desc === "object" ? getBi(item.desc, lang) : (item.description || item.desc || ""));
+            const itemLogos = item.logos || [];
 
-          {projects.map((item, index) => (
-
-            <div
-              key={index}
-              className="group perspective-[2000px]"
-              onClick={() =>
-                setFlippedCard(flippedCard === index ? null : index)
-              }
-            >
-
-              {/* FLIP CARD */}
+            return (
               <div
-                className={`
-                  relative w-full
-                  transition-all duration-700
-                  md:h-[430px]
-                  [transform-style:preserve-3d]
-
-                  lg:group-hover:[transform:rotateY(180deg)]
-
-                  ${
-                    flippedCard === index
-                      ? "[transform:rotateY(180deg)]"
-                      : ""
-                  }
-                `}
+                key={index}
+                id={`project-card-${index}`}
+                className="group perspective-[2000px] cursor-pointer"
+                onClick={() =>
+                  setFlippedCard(flippedCard === index ? null : index)
+                }
               >
-
-                {/* FRONT SIDE */}
+                {/* FLIP CARD */}
                 <div
                   className={`
-                    bg-white
-                    rounded-[20px]
-                    p-7 md:p-8
-                    shadow-[0_4px_20px_rgba(0,0,0,0.03)]
-                    overflow-hidden
+                    relative w-full
+                    transition-all duration-700
+                    md:h-[430px]
+                    [transform-style:preserve-3d]
 
-                    md:absolute md:inset-0
-                    [backface-visibility:hidden]
+                    lg:group-hover:[transform:rotateY(180deg)]
 
                     ${
                       flippedCard === index
-                        ? "hidden md:block"
-                        : "block"
+                        ? "[transform:rotateY(180deg)]"
+                        : ""
                     }
                   `}
                 >
+                  {/* FRONT SIDE */}
+                  <div
+                    className={`
+                      bg-white
+                      rounded-[20px]
+                      p-7 md:p-8
+                      shadow-[0_4px_20px_rgba(0,0,0,0.03)]
+                      overflow-hidden
 
-                  {/* LOGOS */}
-                  <div className="flex items-center gap-2 md:gap-3 flex-nowrap mb-7 relative z-10 overflow-x-auto scrollbar-hide">
+                      md:absolute md:inset-0
+                      [backface-visibility:hidden]
 
-                    {item.logos.map((logo, i) => (
-                      <div
-                        key={i}
-                        className="bg-[#f4f4f4] rounded-[16px] md:rounded-[20px] px-3 md:px-5 py-3 md:py-4 border border-[#f4f4f4] shrink-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                      >
-
-                        <img
-                          src={logo}
-                          alt="logo"
-                          className="h-[32px] md:h-[46px] w-auto object-contain"
-                        />
-
-                      </div>
-                    ))}
-
-                  </div>
-
-                  {/* TITLE */}
-                  <h3 className="title-font text-[20px] md:text-[26px] text-black leading-[1.45] mb-4 relative z-10">
-                    {item.title}
-                  </h3>
-
-                  {/* ROLE */}
-                  <p className="text-[13px] uppercase tracking-[2px] text-[#b8965a] mb-5 relative z-10">
-                    {item.role}
-                  </p>
-
-                  {/* LINE */}
-                  <div className="w-full h-[1px] bg-[#ece6dc] mb-5"></div>
-
-                  {/* DESCRIPTION */}
-                  <p className="text-[16px] text-[#0a3e40] leading-[29px] relative z-10">
-                    {item.description}
-                  </p>
-
-                </div>
-
-                {/* BACK SIDE */}
-                <div
-                  className={`
-                    bg-[#111111]
-                    rounded-[30px]
-                    p-7 md:p-8
-                    shadow-[0_15px_40px_rgba(0,0,0,0.18)]
-
-                    /* MOBILE AUTO HEIGHT */
-                    relative h-auto
-
-                    /* DESKTOP FLIP */
-                    md:absolute md:inset-0
-                    md:h-full
-                    [transform:rotateY(180deg)]
-                    [backface-visibility:hidden]
-
-                    ${
-                      flippedCard === index
-                        ? "block"
-                        : "hidden md:block"
-                    }
-                  `}
-                >
-
-                  {/* GLOW */}
-                  <div className="absolute bottom-[-70px] right-[-70px] w-[180px] h-[180px] bg-[#d4b17d]/10 rounded-full blur-[80px]"></div>
-
-                  {/* TITLE */}
-                  <h3 className="title-font text-[21px] md:text-[23px] text-white mb-7 relative z-10">
-                    Key Responsibilities & Achievements
-                  </h3>
-
-                  {/* BULLET POINTS */}
-                  <div className="space-y-5 relative z-10">
-
-                    {item.points.map((p, i) => (
-                      <div
-                        key={i}
-                        className="flex items-start gap-4"
-                      >
-
-                        {/* ICON */}
-                        <div className="min-w-[22px] h-[22px] rounded-full bg-[#d4b17d] flex items-center justify-center mt-1">
-
-                          <span className="text-white text-[10px]">
-                            ✔
-                          </span>
-
+                      ${
+                        flippedCard === index
+                          ? "hidden md:block"
+                          : "block"
+                      }
+                    `}
+                  >
+                    {/* LOGOS */}
+                    <div className="flex items-center gap-2 md:gap-3 flex-nowrap mb-7 relative z-10 overflow-x-auto scrollbar-hide">
+                      {itemLogos.map((logo, i) => (
+                        <div
+                          key={i}
+                          className="bg-[#f4f4f4] rounded-[16px] md:rounded-[20px] px-3 md:px-5 py-3 md:py-4 border border-[#f4f4f4] shrink-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                        >
+                          <img
+                            src={getLogoUrl(logo)}
+                            alt="logo"
+                            className="h-[32px] md:h-[46px] w-auto object-contain"
+                          />
                         </div>
+                      ))}
+                    </div>
 
-                        {/* TEXT */}
-                        <p className="text-[13px] text-[#e5e5e5] leading-[27px]">
-                          {p}
-                        </p>
+                    {/* TITLE */}
+                    <h3 className="title-font text-[20px] md:text-[26px] text-black leading-[1.45] mb-4 relative z-10">
+                      {itemTitle}
+                    </h3>
 
-                      </div>
-                    ))}
+                    {/* ROLE */}
+                    <p className="text-[13px] uppercase tracking-[2px] text-[#b8965a] mb-5 relative z-10">
+                      {itemRole}
+                    </p>
 
+                    {/* LINE */}
+                    <div className="w-full h-[1px] bg-[#ece6dc] mb-5"></div>
+
+                    {/* DESCRIPTION */}
+                    <p className="text-[16px] text-[#0a3e40] leading-[29px] relative z-10">
+                      {itemDesc}
+                    </p>
                   </div>
 
+                  {/* BACK SIDE */}
+                  <div
+                    className={`
+                      bg-[#111111]
+                      rounded-[30px]
+                      p-7 md:p-8
+                      shadow-[0_15px_40px_rgba(0,0,0,0.18)]
+
+                      /* MOBILE AUTO HEIGHT */
+                      relative h-auto
+
+                      /* DESKTOP FLIP */
+                      md:absolute md:inset-0
+                      md:h-full
+                      [transform:rotateY(180deg)]
+                      [backface-visibility:hidden]
+
+                      ${
+                        flippedCard === index
+                          ? "block"
+                          : "hidden md:block"
+                      }
+                    `}
+                  >
+                    {/* GLOW */}
+                    <div className="absolute bottom-[-70px] right-[-70px] w-[180px] h-[180px] bg-[#d4b17d]/10 rounded-full blur-[80px]"></div>
+
+                    {/* TITLE */}
+                    <h3 className="title-font text-[21px] md:text-[23px] text-white mb-7 relative z-10">
+                      {lang === "EN" ? "Key Responsibilities & Achievements" : "Wesentliche Aufgaben & Erfolge"}
+                    </h3>
+
+                    {/* BULLET POINTS */}
+                    <div className="space-y-5 relative z-10">
+                      {(item.points || []).map((p, i) => {
+                        const pointText = typeof p === "object" ? getBi(p, lang) : p;
+                        return (
+                          <div
+                            key={i}
+                            className="flex items-start gap-4"
+                          >
+                            {/* ICON */}
+                            <div className="min-w-[22px] h-[22px] rounded-full bg-[#d4b17d] flex items-center justify-center mt-1">
+                              <span className="text-white text-[10px]">
+                                ✔
+                              </span>
+                            </div>
+
+                            {/* TEXT */}
+                            <p className="text-[13px] text-[#e5e5e5] leading-[27px]">
+                              {pointText}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
-
               </div>
-
-            </div>
-
-          ))}
-
+            );
+          })}
         </div>
-
       </div>
-
     </section>
   );
-}
+}

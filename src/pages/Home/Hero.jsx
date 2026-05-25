@@ -1,8 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getHero, IMG_URL, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Hero = () => {
   const [hover, setHover] = useState(false);
+  const [hero, setHero] = useState(null);
+  const { lang } = useLanguage();
+
+  useEffect(() => {
+    getHero()
+      .then((res) => {
+        if (res.data) {
+          setHero(res.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching hero:", err));
+  }, []);
+
+  const title = hero ? getBi(hero.title, lang) : "Dr. Raphael Edlmann";
+  const subtitle = hero ? getBi(hero.subtitle, lang) : "Interim Manager. AI, HR & Business Process Expert";
+  const imgUrl = hero && hero.img ? `${IMG_URL}${hero.img}` : "/assets/images/2026_03_17_Raphael_Edlmann_Start Page.jpg";
 
   return (
     <section className="relative w-full min-h-[70vh] md:min-h-screen flex items-end items-center overflow-hidden rounded-b-[40px] pt-[140px] pb-[60px]">
@@ -10,7 +28,7 @@ const Hero = () => {
       {/* IMAGE */}
       <div className="absolute inset-0">
         <img
-          src="/assets/images/2026_03_17_Raphael_Edlmann_Start Page.jpg"
+          src={imgUrl}
           className="w-full h-full object-cover object-[70%_20%]"
           alt="hero"
         />
@@ -32,13 +50,14 @@ const Hero = () => {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          Dr. Raphael Edlmann
+          {title}
         </h2>
 
         {/* SUBTEXT */}
         <p className="text-white mt-3 text-base md:text-lg lg:text-xl">
-          Interim Manager. AI, HR & Business Process Expert
+          {subtitle}
         </p>
+
 
         {/* BUTTON + ICONS */}
         <div className="w-full flex justify-center md:justify-start mt-8">

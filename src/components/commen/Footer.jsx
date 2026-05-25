@@ -1,84 +1,140 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getSettings, getServices, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
 
 const Footer = () => {
+  const { lang } = useLanguage();
+  const [socialLinks, setSocialLinks] = useState({
+    linkedin: "https://www.linkedin.com/in/raphael-edlmann-60200059/",
+    twitter: "https://x.com/raphaeledlmann",
+    facebook: "https://www.facebook.com/profile.php?id=61587719828544",
+    instagram: "https://www.instagram.com/edlmannraphael/",
+  });
+  const [services, setServices] = useState([]);
+
+  const staticServices = [
+    {
+      title: { en: "AI Strategy Workshop for HR", de: "KI-Strategie-Workshop für HR" },
+      slug: "ai-strategy-workshop-for-hr",
+    },
+    {
+      title: { en: "Digital Transformation Workshop", de: "Workshop Digitale Transformation" },
+      slug: "digital-transformation-workshop",
+    },
+    {
+      title: { en: "Process Modelling & Automation", de: "Prozessmodellierung & Automatisierung" },
+      slug: "process-modelling-automation",
+    },
+    {
+      title: { en: "Interim Management Services", de: "Interim Management Services" },
+      slug: "interim-management-services",
+    },
+  ];
+
+  useEffect(() => {
+    getSettings()
+      .then((res) => {
+        if (res.data) {
+          setSocialLinks({
+            linkedin: res.data.linkedin || "",
+            twitter: res.data.twitter || "",
+            facebook: res.data.facebook || "",
+            instagram: res.data.instagram || "",
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching settings for footer:", err);
+      });
+
+    getServices()
+      .then((res) => {
+        if (res.data) {
+          const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
+          setServices(list);
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching services for footer:", err);
+      });
+  }, []);
+
+  const displayedServices = services.length > 0 ? services : staticServices;
+
   return (
     <footer className="bg-black text-white pt-[60px] pb-[30px] rounded-t-[40px]">
-
       <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
-
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr_0.9fr] gap-[40px] md:gap-[20px] text-center md:text-left">
-
           {/* LEFT */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
-
             {/* LOGO */}
             <div>
-
               <h1 className="text-[22px] md:text-[36px] leading-tight title-font whitespace-nowrap">
                 Dr. Raphael Edlmann
               </h1>
-
             </div>
 
             {/* TEXT */}
             <p className="text-sm text-white/60 leading-relaxed max-w-[320px] text-center md:text-left">
-              Interim Manager • AI, HR & Business Transformation - Helping organisations transform with practical, high-impact strategies.
+              Interim Manager • AI, HR & Business Transformation - Helping
+              organisations transform with practical, high-impact strategies.
             </p>
 
             {/* SOCIAL */}
             <div className="flex gap-4 pt-3 justify-center md:justify-start">
+              {socialLinks.linkedin && (
+                <Link
+                  to={socialLinks.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
+                >
+                  <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
+                </Link>
+              )}
 
-              <Link
-                to="https://www.linkedin.com/in/raphael-edlmann-60200059/ "
-                target="_blank"
-                rel="noreferrer"
-                className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
-              >
-                <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
-              </Link>
+              {socialLinks.twitter && (
+                <Link
+                  to={socialLinks.twitter}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
+                >
+                  <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
+                </Link>
+              )}
 
-              <Link
-                to="https://x.com/raphaeledlmann"
-                target="_blank"
-                rel="noreferrer"
-                className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
-              >
-                <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
-              </Link>
+              {socialLinks.facebook && (
+                <Link
+                  to={socialLinks.facebook}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
+                >
+                  <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
+                </Link>
+              )}
 
-              <Link
-                to="https://www.facebook.com/profile.php?id=61587719828544 "
-                target="_blank"
-                rel="noreferrer"
-                className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
-              >
-                <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
-              </Link>
-
-              <Link
-                to="https://www.instagram.com/edlmannraphael/ "
-                target="_blank"
-                rel="noreferrer"
-                className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300"
-              >
-                <i className="fa-brands fa-instagram text-[14px] text-white"></i>
-              </Link>
-
+              {socialLinks.instagram && (
+                <Link
+                  to={socialLinks.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
+                >
+                  <i className="fa-brands fa-instagram text-[14px] text-white"></i>
+                </Link>
+              )}
             </div>
-
           </div>
 
           {/* QUICK LINKS */}
           <div className="text-center md:text-left">
-
-            <h4 className="font-semibold mb-5">
-              Quick Links
-            </h4>
+            <h4 className="font-semibold mb-5">Quick Links</h4>
 
             <ul className="space-y-3 text-sm text-white/60">
-
               <li>
                 <Link
                   to="/about"
@@ -195,76 +251,46 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                 
-Let’s Work Together
+                  Let’s Work Together
                 </Link>
               </li>
-
             </ul>
-
           </div>
 
           {/* SERVICES */}
           <div className="text-center md:text-left">
-
-            <h4 className="font-semibold mb-5">
-              Services
-            </h4>
+            <h4 className="font-semibold mb-5">{lang === "EN" ? "Services" : "Leistungen"}</h4>
 
             <ul className="space-y-3 text-sm text-white/60">
-
-              <li>
-                <Link
-                  to="/workshops-details/ai-strategy-workshop-for-hr"
-                  className="hover:text-[#b8965a] transition"
-                >
-                  AI Strategy Workshop for HR
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/workshops-details/ai-strategy-workshop-for-hr"
-                  className="hover:text-[#b8965a] transition"
-                >
-                  Digital Transformation Workshop
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/workshops-details/ai-strategy-workshop-for-hr"
-                  className="hover:text-[#b8965a] transition"
-                >
-                  Process Modelling & Automation
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  to="/workshops-details/ai-strategy-workshop-for-hr"
-                  className="hover:text-[#b8965a] transition"
-                >
-                  Interim Management Services
-                </Link>
-              </li>
-
+              {displayedServices.map((item, index) => {
+                const itemTitle = typeof item.title === "object" ? getBi(item.title, lang) : item.title;
+                return (
+                  <li key={index}>
+                    <Link
+                      to={`/workshops-details/${item.slug}`}
+                      onClick={() =>
+                        window.scrollTo({
+                          top: 0,
+                          behavior: "smooth",
+                        })
+                      }
+                      className="hover:text-[#b8965a] transition cursor-pointer"
+                    >
+                      {itemTitle}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
-
           </div>
 
           {/* CONTACT */}
           <div className="text-center md:text-left">
-
-            <h4 className="font-semibold mb-5">
-              Contact
-            </h4>
+            <h4 className="font-semibold mb-5">Contact</h4>
 
             <div className="space-y-4 text-sm text-white/60">
-
               {/* EMAIL */}
               <div className="flex items-center gap-3 justify-center md:justify-start">
-
                 <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg shrink-0">
                   <i className="fa-regular fa-envelope text-[#b8965a]"></i>
                 </div>
@@ -275,33 +301,23 @@ Let’s Work Together
                 >
                   contact@edlmann.com
                 </a>
-
               </div>
               {/* PHONE */}
               <div className="flex items-center gap-3 justify-center md:justify-start">
-
                 <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg shrink-0">
                   <i className="fa-solid fa-phone text-[#b8965a]"></i>
                 </div>
 
-                <span>
-                  +49 162 523 50 273
-                </span>
-
+                <span>+49 162 523 50 273</span>
               </div>
-
             </div>
-
           </div>
-
         </div>
 
         {/* BOTTOM */}
         <div className="border-t border-white/40 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/50 text-center md:text-left">
-
           <p>
             © 2026 Dr. Raphael Edlmann. All rights reserved. Designed by{" "}
-
             <Link
               to="https://anaxistech.com"
               target="_blank"
@@ -319,31 +335,19 @@ Let’s Work Together
             >
               AnaxisTech
             </Link>
-
           </p>
 
           <div className="flex gap-6 justify-center">
-
-            <Link
-              to="/imprint"
-              className="hover:text-[#b8965a]"
-            >
+            <Link to="/imprint" className="hover:text-[#b8965a]">
               Imprint
             </Link>
 
-            <Link
-              to="/privacy-policy"
-              className="hover:text-[#b8965a]"
-            >
+            <Link to="/privacy-policy" className="hover:text-[#b8965a]">
               Privacy Policy
             </Link>
-
           </div>
-
         </div>
-
       </div>
-
     </footer>
   );
 };

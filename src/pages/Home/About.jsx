@@ -1,6 +1,41 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getHomeAbout, IMG_URL, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
 
 const About = () => {
+  const [about, setAbout] = useState(null);
+  const { lang } = useLanguage();
+
+  useEffect(() => {
+    getHomeAbout()
+      .then((res) => {
+        if (res.data) {
+          setAbout(res.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching about me:", err));
+  }, []);
+
+  const label = about ? getBi(about.label, lang) : "About Me";
+  const title = about ? getBi(about.title, lang) : "Interim Manager for AI, HR and Business Process Transformation";
+  const quote = about ? getBi(about.quote, lang) : "Shaping digital transformation and AI with integrity, clarity and a long-term vision.";
+  const desc = about ? getBi(about.desc, lang) : "Welcome — I’m glad you’re here.\n\nI am an expert in AI, HR and business process transformation, and a recognised speaker at international conferences and public forums. As an interim manager, I help organisations translate complexity into practical, AI-driven solutions with real impact.\n\nOn this website, you will find everything you need to know about my work, upcoming engagements and publications. In my blog “HR & AI Insights,” I share current perspectives and insights on AI and HR. Feel free to subscribe to my newsletter, connect with me on social media, or explore collaboration opportunities. I look forward to hearing from you.";
+  const imgUrl = about && about.img ? `${IMG_URL}${about.img}` : "/assets/images/2026_03_17_Raphael_Edlmann_About Me.jpg";
+  
+  // Use uploaded CV from database if available, else standard fallback
+  const cvUrl = about && about.cv ? `${IMG_URL}${about.cv}` : "/assets/images/Professional_CV_English-protected.pdf";
+
+  const staticVita = [
+    { degree: "Entrepreneur", university: "Building ventures, and turning ideas into sustainable growth" },
+    { degree: "HR, AI & Business Process Expert", university: "Specialised in AI-driven HR transformation and Workload Automation" },
+    { degree: "Doctor of Business Administration (DBA)", university: "Heriot Watt University, Edinburgh Business School" },
+    { degree: "Keynote Speaker", university: "Speaking internationally on AI, the future of work, and digital transformation." }
+  ];
+
+  const vitaItems = about && about.vita && about.vita.length > 0 ? about.vita : null;
+  const vitaTitle = about ? getBi(about.vitaTitle, lang) : "Vita";
+
   return (
     <section className="bg-white py-[60px]">
 
@@ -14,31 +49,25 @@ const About = () => {
 
             {/* LABEL */}
             <span className="text-[#b8965a] text-xs tracking-[2px] uppercase mb-4 block">
-              About Me
+              {label}
             </span>
 
             {/* TITLE */}
             <h2 className="title-font text-2xl md:text-[36px] text-black leading-tight mb-5">
-              Interim Manager for AI, HR and Business Process Transformation
+              {title}
             </h2>
 
             {/* TEXT */}
-            <div className="space-y-5">
+            <div className="space-y-5 text-[#0a3e40] text-[16px] leading-relaxed">
 
-              <p className="text-[#0a3e40] text-[16px] leading-relaxed font-semibold italic">
-                "Shaping digital transformation and AI with integrity, clarity and a long-term vision."
-              </p>
+              {quote && (
+                <p className="font-semibold italic">
+                  "{quote}"
+                </p>
+              )}
 
-              <p className="text-[#0a3e40] text-[16px] leading-relaxed">
-                Welcome — I’m glad you’re here.
-              </p>
-
-              <p className="text-[#0a3e40] text-[16px] leading-relaxed">
-                I am an expert in AI, HR and business process transformation, and a recognised speaker at international conferences and public forums. As an interim manager, I help organisations translate complexity into practical, AI-driven solutions with real impact.
-              </p>
-
-              <p className="text-[#0a3e40] text-[16px] leading-relaxed">
-                On this website, you will find everything you need to know about my work, upcoming engagements and publications. In my blog “HR & AI Insights,” I share current perspectives and insights on AI and HR. Feel free to subscribe to my newsletter, connect with me on social media, or explore collaboration opportunities. I look forward to hearing from you.
+              <p className="whitespace-pre-line">
+                {desc}
               </p>
 
             </div>
@@ -58,7 +87,7 @@ const About = () => {
                 <div className="w-[250px] h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
 
                   <img
-                    src="/assets/images/2026_03_17_Raphael_Edlmann_About Me.jpg"
+                    src={imgUrl}
                     className="w-full h-full object-cover"
                     alt="profile"
                   />
@@ -72,12 +101,12 @@ const About = () => {
                     to="/contact"
                     className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
-                    Contact Me
+                    {lang === "EN" ? "Contact Me" : "Kontaktieren Sie mich"}
                   </Link>
 
                   {/* DOWNLOAD CV */}
-                  <Link
-                    to="/assets/images/Professional_CV_English-protected.pdf"
+                  <a
+                    href={cvUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
@@ -85,11 +114,9 @@ const About = () => {
 
                     <i className="fa-solid fa-download"></i>
 
-                    Download CV
+                    {lang === "EN" ? "Download CV" : "Lebenslauf herunterladen"}
 
-                  </Link>
-
-
+                  </a>
 
                 </div>
 
@@ -99,89 +126,47 @@ const About = () => {
               <div className="w-full lg:w-[60%]">
 
                 <span className="text-[#b8965a] text-[11px] tracking-[3px] uppercase mb-5 block">
-                  Vita
+                  {vitaTitle}
                 </span>
 
                 {/* INFO CARDS */}
                 <div className="grid grid-cols-1 gap-5">
 
-                  {/* ITEM */}
-                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
-
-                    {/* LEFT LINE */}
-                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
-
-                    {/* CONTENT */}
-                    <div>
-
-                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
-                        Entrepreneur
-                      </h4>
-
-                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
-                        Building ventures, and turning ideas into sustainable growth
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                  {/* ITEM */}
-                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
-
-                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
-
-                    <div>
-
-                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
-                        HR, AI &amp; Business Process Expert
-                      </h4>
-
-                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
-                        Specialised in AI-driven HR transformation and Workload Automation
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                  {/* ITEM */}
-                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
-
-                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
-
-                    <div>
-
-                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
-                        Doctor of Business Administration (DBA)
-                      </h4>
-
-                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
-                        Heriot Watt University, Edinburgh Business School
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                  {/* ITEM */}
-                  <div className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca]">
-
-                    <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
-
-                    <div>
-
-                      <h4 className="text-[#b8965a] text-[15px] md:text-[15px] font-semibold leading-none mb-3">
-                        Keynote Speaker
-                      </h4>
-
-                      <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
-                        Speaking internationally on AI, the future of work, and digital transformation.
-                      </p>
-
-                    </div>
-
-                  </div>
+                  {vitaItems ? (
+                    vitaItems.map((item, index) => {
+                      const itemDegree = getBi(item.degree, lang);
+                      const itemUni = getBi(item.university, lang);
+                      return (
+                        <div key={index} className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca] last:border-0">
+                          {/* LEFT LINE */}
+                          <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
+                          {/* CONTENT */}
+                          <div>
+                            <h4 className="text-[#b8965a] text-[15px] font-semibold leading-none mb-3">
+                              {itemDegree}
+                            </h4>
+                            <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
+                              {itemUni}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    staticVita.map((item, index) => (
+                      <div key={index} className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca] last:border-0">
+                        <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
+                        <div>
+                          <h4 className="text-[#b8965a] text-[15px] font-semibold leading-none mb-3">
+                            {item.degree}
+                          </h4>
+                          <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
+                            {item.university}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  )}
 
                 </div>
 

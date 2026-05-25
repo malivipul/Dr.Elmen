@@ -1,7 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import { getServiceBySlug, getBi } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
+
+const staticTitles = {
+  "ai-strategy-workshop-for-hr": {
+    en: "AI Strategy Workshop for HR",
+    de: "KI-Strategie-Workshop für HR"
+  },
+  "interim-management-services": {
+    en: "Interim Management Services",
+    de: "Interim Management Services"
+  },
+  "process-modelling-and-workload-automation": {
+    en: "Process Modelling & Workload Automation",
+    de: "Prozessmodellierung & Workload-Automatisierung"
+  },
+  "digital-transformation-workshop": {
+    en: "Digital Transformation Workshop",
+    de: "Digitale Transformations-Workshop"
+  }
+};
 
 const AboutBanner = () => {
+  const { slug } = useParams();
+  const { lang } = useLanguage();
+  const [title, setTitle] = useState("");
+
+  useEffect(() => {
+    if (slug) {
+      getServiceBySlug(slug)
+        .then((res) => {
+          if (res.data) {
+            setTitle(getBi(res.data.title, lang));
+          } else {
+            setTitle(staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details"));
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching service for banner:", err);
+          setTitle(staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details"));
+        });
+    } else {
+      setTitle(lang === "EN" ? "Workshop Details" : "Workshop-Details");
+    }
+  }, [slug, lang]);
+
   return (
     <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden rounded-b-[40px]">
 
@@ -33,25 +77,25 @@ const AboutBanner = () => {
               to="/"
               className="hover:underline"
             >
-              Home
+              {lang === "EN" ? "Home" : "Startseite"}
             </Link>
 
             <span>›</span>
 
-            <span className="font-semibold">
-             Workshops
+            <span className="opacity-75">
+             {lang === "EN" ? "Workshops" : "Workshops"}
             </span>
              <span>›</span>
 
             <span className="font-semibold">
-            WorkShops-Details
+              {title}
             </span>
 
           </div>
 
           {/* TITLE */}
-          <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-           WorkShops-Details
+          <h1 className="text-white text-[32px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
+            {title}
           </h1>
 
         </div>
