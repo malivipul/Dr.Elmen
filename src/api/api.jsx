@@ -39,6 +39,7 @@ export const getAuthor = () => api.get("/home/author/get");
 export const getBooks = () => api.get("/home/books/all");
 
 // --- SERVICES / WORKSHOPS ---
+export const getServiceHeader = () => api.get("/home/services/header/get");
 export const getServices = () => api.get("/home/services/all");
 export const getServiceBySlug = (slug) => api.get(`/home/services/slug/${slug}`);
 

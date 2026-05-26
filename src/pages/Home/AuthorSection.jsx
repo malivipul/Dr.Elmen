@@ -166,7 +166,7 @@ const AuthorSection = () => {
                               inline-block
                             "
                           >
-                            Order now →
+                            {lang === "EN" ? "Order now →" : "Jetzt bestellen →"}
                           </span>
                         </Link>
                       </div>
@@ -244,7 +244,7 @@ const AuthorSection = () => {
                           inline-block
                         "
                       >
-                        Order now →
+                            {lang === "EN" ? "Order now →" : "Jetzt bestellen →"}
                       </span>
                     </Link>
                   </div>

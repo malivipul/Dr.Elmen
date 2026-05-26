@@ -40,22 +40,25 @@ const ContactCTASection = () => {
     ctaData?.data && !Array.isArray(ctaData.data)
       ? ctaData.data
       : ctaData;
+  const label = lang === "EN" ? "Get In Touch" : "Get In Touch";
   const title =
     sectionData?.title || sectionData?.heading
       ? cleanRichText(getBi(sectionData.title || sectionData.heading, lang))
-      : "Ready to work together?";
+      : (lang === "EN" ? "Ready to work together?" : "Lassen Sie uns zusammenarbeiten ");
   const description =
     sectionData?.description || sectionData?.desc || sectionData?.text || sectionData?.content
       ? cleanRichText(getBi(sectionData.description || sectionData.desc || sectionData.text || sectionData.content, lang))
-      : "Whether you need an interim manager for a transformation project, a speaker for your next conference, or a research collaborator - let's start a conversation.";
+      : (lang === "EN" 
+          ? "Whether you need an interim manager for a transformation project, a speaker for your next conference, or a research collaborator - let's start a conversation."
+          : "Ob Sie einen Interim Manager für ein Transformationsprojekt, einen Redner für Ihre nächste Konferenz oder einen Partner für Forschungsarbeiten suchen - lassen Sie uns ins Gespräch kommen.");
   const primaryText =
     sectionData?.primaryButtonText || sectionData?.buttonText || sectionData?.ctaText
       ? cleanRichText(getBi(sectionData.primaryButtonText || sectionData.buttonText || sectionData.ctaText, lang))
-      : "Let's Work Together";
+      : (lang === "EN" ? "Let's Work Together" : "Let's Work Together");
   const secondaryText =
     sectionData?.secondaryButtonText || sectionData?.whatsappText
       ? cleanRichText(getBi(sectionData.secondaryButtonText || sectionData.whatsappText, lang))
-      : "WhatsApp Me";
+      : (lang === "EN" ? "WhatsApp Me" : "WhatsApp Me");
   const primaryLink = sectionData?.primaryButtonLink || sectionData?.buttonLink || sectionData?.link || "/contact";
   const secondaryLink = sectionData?.secondaryButtonLink || sectionData?.whatsappLink || "/contact";
 
@@ -78,7 +81,7 @@ const ContactCTASection = () => {
 
               {/* LABEL */}
               <span className="text-[#b8965a] uppercase tracking-[3px] text-[10px] md:text-[11px] font-medium">
-                Get In Touch
+                {label}
               </span>
 
               {/* TITLE */}

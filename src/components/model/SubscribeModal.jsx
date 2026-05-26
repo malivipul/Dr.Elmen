@@ -65,17 +65,15 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
         <div className="text-center">
           
           {/* TITLE */}
-          <h2 className="title-font text-[24px] md:text-[30px] leading-tight text-black">
-            {lang === "EN" ? "Subscribe to" : "Abonnieren Sie"}
-            <br />
-            {lang === "EN" ? "AI & HR Insights" : "KI- & HR-Einblicke"}
+          <h2 className="title-font text-[24px] md:text-[28px] leading-tight text-black">
+            {lang === "EN" ? "Subscribe to AI & HR Insights" : "AI & HR Insights kostenlos abonnieren"}
           </h2>
 
           {/* DESC */}
-          <p className="mt-3 text-[#5f5f5f] text-[14px] leading-[1.7] max-w-[340px] mx-auto">
+          <p className="mt-3 text-[#5f5f5f] text-[14px] leading-[1.7] max-w-[360px] mx-auto">
             {lang === "EN"
               ? "Get the latest articles, guides, and tools on HR, AI and the future of work delivered to your inbox"
-              : "Erhalten Sie die neuesten Artikel, Leitfäden und Tools zu HR, KI und der Zukunft der Arbeit direkt in Ihren Posteingang"}
+              : "Erhalten Sie die neuesten Artikel, Leitfäden und Tools zu HR, KI und der Zukunft der Arbeit direkt in Ihr Postfach."}
           </p>
 
           {/* TABLE-BASED FORM LAYOUT */}
@@ -89,7 +87,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder={lang === "EN" ? "Your email address" : "Ihre E-Mail-Adresse"}
+                      placeholder={lang === "EN" ? "Your email address" : "Ihre E-Mail Adresse"}
                       required
                       className="w-full h-[50px] rounded-[12px] border border-[#e5e5e5] px-4 text-[14px] outline-none focus:border-[#b8965a] transition bg-[#faf8f4]"
                     />
@@ -118,13 +116,13 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
               <i className="fa-regular fa-envelope"></i>
               {submitting 
                 ? (lang === "EN" ? "SUBSCRIBING..." : "WIRD ABONNIERT...")
-                : (lang === "EN" ? "SUBSCRIBE" : "ABONNIEREN")}
+                : (lang === "EN" ? "Subscribe" : "Abonnieren")}
             </button>
           </form>
 
           {/* BOTTOM TEXT */}
           <p className="mt-4 text-[12px] text-[#7a7a7a]">
-            {lang === "EN" ? "No spam. Unsubscribe anytime." : "Kein Spam. Jederzeit abbestellbar."}
+            {lang === "EN" ? "No spam. Unsubscribe anytime." : "Keine unerwünschten E-Mails. Eine Abmeldung ist jederzeit möglich."}
           </p>
 
         </div>

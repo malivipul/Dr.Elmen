@@ -17,14 +17,14 @@ const AboutBanner = () => {
       .catch((err) => console.error("Error fetching about banner:", err));
   }, []);
 
-  const title = banner ? getBi(banner.title || banner.heading, lang) : "About Me";
-  const breadcrumbTitle = banner ? getBi(banner.breadcrumb || banner.title || banner.heading, lang) : "About Me";
+  const title = lang === "EN" ? "About Me" : "Über mich";
+  const breadcrumbTitle = lang === "EN" ? "About Me" : "Über mich";
   const imagePath = banner?.img || banner?.image;
   const imageUrl = imagePath
     ? imagePath.startsWith("http") || imagePath.startsWith("/assets")
       ? imagePath
       : `${IMG_URL}${imagePath}`
-    : "/assets/images/about.jpg";
+    : "/assets/images/image (11).png";
 
   return (
     <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
@@ -39,9 +39,9 @@ const AboutBanner = () => {
         />
 
         {/* DARK OVERLAY */}
-        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
 
-       
+
       </div>
 
       {/* CONTENT */}
@@ -51,7 +51,7 @@ const AboutBanner = () => {
         <div className="max-w-fit">
 
          {/* BREADCRUMB */}
-<div className="text-white text-[15px] md:text-sm mb-3 flex items-center gap-2 opacity-90 font-medium">
+  <div className="text-white text-[15px] md:text-sm mb-3 flex items-center gap-2 opacity-90 font-medium">
 
   <Link
     to="/"
@@ -59,6 +59,7 @@ const AboutBanner = () => {
   >
     Home
   </Link>
+
 
   <span className="text-[16px] leading-none">›</span>
 

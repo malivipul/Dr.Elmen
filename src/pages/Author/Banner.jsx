@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const AboutBanner = () => {
+  const { lang } = useLanguage();
+
+  const title = lang === "EN" ? "Author" : "Autor";
+
   return (
     <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
 
@@ -9,13 +14,13 @@ const AboutBanner = () => {
       <div className="absolute inset-0">
 
        <img
-  src="/assets/images/56.png"
-  alt="About Banner"
+  src="/assets/images/image (16).png"
+  alt={title}
   className="w-full h-full object-cover object-[90%_center] md:object-center"
 />
 
         {/* OVERLAY */}
-        <div className="absolute inset-0 bg-black/35"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
 
       </div>
 
@@ -38,14 +43,14 @@ const AboutBanner = () => {
             <span>›</span>
 
             <span className="font-semibold">
-              Author
+              {title}
             </span>
 
           </div>
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-            Author
+            {title}
           </h1>
 
         </div>

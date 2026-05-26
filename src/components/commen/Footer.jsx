@@ -15,16 +15,16 @@ const Footer = () => {
 
   const staticServices = [
     {
-      title: { en: "AI Strategy Workshop for HR", de: "KI-Strategie-Workshop für HR" },
+      title: { en: "AI Strategy Workshop for HR", de: "AI Strategie Workshop für HR" },
       slug: "ai-strategy-workshop-for-hr",
     },
     {
-      title: { en: "Digital Transformation Workshop", de: "Workshop Digitale Transformation" },
-      slug: "digital-transformation-workshop",
+      title: { en: "Digital Transformation for HR Workshop", de: "Digitale Transformation für HR Workshop" },
+      slug: "digital-transformation-workshop-for-hr",
     },
     {
-      title: { en: "Process Modelling & Automation", de: "Prozessmodellierung & Automatisierung" },
-      slug: "process-modelling-automation",
+      title: { en: "Job Scheduling & Workload Automation", de: "Job Scheduling & Workload Automation" },
+      slug: "job-scheduling-workload-automation",
     },
     {
       title: { en: "Interim Management Services", de: "Interim Management Services" },
@@ -60,7 +60,10 @@ const Footer = () => {
       });
   }, []);
 
-  const displayedServices = services.length > 0 ? services : staticServices;
+  const displayedServices = staticServices.map(st => {
+    const dbMatch = services.find(s => s.slug === st.slug);
+    return dbMatch ? { ...dbMatch, title: st.title } : st;
+  });
 
   return (
     <footer className="bg-black text-white pt-[60px] pb-[30px] ">
@@ -78,7 +81,7 @@ const Footer = () => {
 
             {/* TEXT */}
             <p className="text-sm text-white/60 leading-relaxed max-w-[320px] text-center md:text-left">
-             Interim Manager, AI, HR & Business Process Expert. 
+             Interim Manager | AI, HR & Business Process Expert. 
             </p>
 
             {/* SOCIAL */}
@@ -145,7 +148,7 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                  About Me
+                  {lang === "EN" ? "About Me" : "Über mich"}
                 </Link>
               </li>
 
@@ -175,7 +178,7 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                  Author
+                  {lang === "EN" ? "Author" : "Autor"}
                 </Link>
               </li>
 
@@ -220,7 +223,7 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                  Projects
+                  {lang === "EN" ? "Projects" : "Projekte"}
                 </Link>
               </li>
 
@@ -285,7 +288,7 @@ const Footer = () => {
 
           {/* CONTACT */}
           <div className="text-center md:text-left">
-            <h4 className="font-semibold mb-5">Contact</h4>
+            <h4 className="font-semibold mb-5">{lang === "EN" ? "Contact" : "Kontakt"}</h4>
 
             <div className="space-y-4 text-sm text-white/60">
               {/* EMAIL */}

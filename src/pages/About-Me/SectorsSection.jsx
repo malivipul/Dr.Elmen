@@ -15,12 +15,12 @@ const cleanRichText = (value = "") =>
     .replace(/&#39;|&apos;/g, "'")
     .trim();
 
-const fallbackSectors = [
-  "Aerospace & Defence",
+const fallbackSectors = (lang) => [
+  lang === "EN" ? "Aerospace & Defence" : "Luft- & Raumfahrt",
   "Automotive",
-  "Finance & Banking",
-  "Public Sector",
-  "Higher Education",
+  lang === "EN" ? "Finance & Banking" : "Finanzwesen & Banken",
+  lang === "EN" ? "Public Sector" : "Öffentlicher Sektor",
+  lang === "EN" ? "Higher Education" : "Hochschulbildung",
 ];
 
 const getSectorItems = (data, lang) => {
@@ -31,7 +31,7 @@ const getSectorItems = (data, lang) => {
     data?.data?.sectors ||
     data?.data?.items;
 
-  if (!Array.isArray(items)) return fallbackSectors;
+  if (!Array.isArray(items)) return fallbackSectors(lang);
 
   const sectors = items
     .map((item) => {
@@ -40,7 +40,7 @@ const getSectorItems = (data, lang) => {
     })
     .filter(Boolean);
 
-  return sectors.length ? sectors : fallbackSectors;
+  return sectors.length ? sectors : fallbackSectors(lang);
 };
 
 const SectorsSection = () => {
@@ -68,14 +68,21 @@ const SectorsSection = () => {
     sectorData?.data && !Array.isArray(sectorData.data)
       ? sectorData.data
       : sectorData;
+
+  const label = lang === "EN" ? "Sectors Served" : "Bediente Branchen";
+
   const title =
     sectionData?.title || sectionData?.heading
       ? cleanRichText(getBi(sectionData.title || sectionData.heading, lang))
-      : "Industries & Domains";
+      : (lang === "EN" ? "Industries & Domains" : "Branchen & Fachgebiete");
+
   const subtitle =
     sectionData?.subtitle || sectionData?.description || sectionData?.text
       ? cleanRichText(getBi(sectionData.subtitle || sectionData.description || sectionData.text, lang))
-      : "Cross-industry experience spanning enterprise technology, policy and academia.";
+      : (lang === "EN" 
+          ? "Cross-industry experience spanning enterprise technology, policy and academia."
+          : "Branchenübergreifende Erfahrung in den Bereichen Unternehmenstechnologie, Politik und Wissenschaft.");
+
   const sectors = getSectorItems(sectionData || sectorData, lang);
 
   return (
@@ -91,7 +98,7 @@ const SectorsSection = () => {
 
           {/* LABEL */}
           <span className="text-[#b8965a] uppercase tracking-[3px] text-[10px] md:text-[11px] font-medium">
-            Sectors Served
+            {label}
           </span>
 
           {/* TITLE */}

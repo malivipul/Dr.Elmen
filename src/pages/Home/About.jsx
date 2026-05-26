@@ -72,7 +72,7 @@ const About = () => {
             </h2>
 
             {/* TEXT */}
-            <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[16px] md:text-[17px] leading-[1.8] break-words">
+            <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.8] break-words">
 
               {readableQuote && (
                 <p className="font-semibold italic">
@@ -115,7 +115,7 @@ const About = () => {
                     to="/contact"
                     className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
                   >
-                    {lang === "EN" ? "Contact Me" : "Kontaktieren Sie mich"}
+                    {lang === "EN" ? "Contact Me" : "Kontakt  "}
                   </Link>
 
                   {/* DOWNLOAD CV */}
@@ -128,7 +128,7 @@ const About = () => {
 
                     <i className="fa-solid fa-download"></i>
 
-                    {lang === "EN" ? "Download CV" : "Lebenslauf herunterladen"}
+                    {lang === "EN" ? "Download CV" : "Download CV "}
 
                   </a>
 

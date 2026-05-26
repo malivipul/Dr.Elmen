@@ -153,19 +153,19 @@ const ContactForm = () => {
               {/* CONTENT */}
               <div className="relative z-10 max-w-[480px]">
                 <span className="text-[#b8965a] uppercase tracking-[2px] text-[12px] font-bold">
-                  {lang === "EN" ? "Get In Touch" : "Kontakt aufnehmen"}
+                  {lang === "EN" ? "Get In Touch" : "Kontakt"}
                 </span>
 
                 <h3 className="font-['Inter',sans-serif] text-[22px] md:text-[28px] text-black leading-[1.08] mt-3 mb-4 font-bold">
                   {lang === "EN"
                     ? "Let’s Build Something Great"
-                    : "Lassen Sie uns etwas Großartiges aufbauen"}
+                    : "Lassen Sie uns gemeinsam etwas bewegen"}
                 </h3>
 
                 <p className="text-[14px] md:text-[16px] text-black/60 leading-[26px]">
                   {lang === "EN"
                     ? "I collaborate with organizations, leaders, and teams to create impactful workshops, speaking sessions, and transformation initiatives that drive meaningful results."
-                    : "Ich arbeite mit Organisationen, Führungskräften und Teams zusammen, um wirkungsvolle Workshops, Vorträge und Transformationsinitiativen zu entwickeln, die spürbare Ergebnisse liefern."}
+                    : "Ob strategische Workshops, inspirierende Keynotes oder Consulting Projekte – ich unterstütze Organisationen, Führungskräfte und Teams dabei, nachhaltigen Mehrwert zu schaffen."}
                 </p>
               </div>
 
@@ -229,7 +229,7 @@ const ContactForm = () => {
                 <h3 className="font-['Inter',sans-serif] text-[22px] md:text-[28px] text-black leading-[1.1] mt-3 font-bold">
                   {lang === "EN"
                     ? "Schedule Your Consultation"
-                    : "Planen Sie Ihre Beratung"}
+                    : "Vereinbaren Sie Ihr persönliches Beratungsgespräch"}
                 </h3>
 
                 <p className="text-[14px] md:text-[16px] text-[#0a3e40] leading-[28px] mt-4">
@@ -243,7 +243,7 @@ const ContactForm = () => {
                   type="button"
                   className="mt-7 inline-flex items-center justify-center gap-3 px-7 h-[46px] rounded-full bg-[#b8965a] border border-[#b8965a] text-white text-[14px] font-bold hover:bg-transparent hover:text-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
-                  {lang === "EN" ? "Book a Meeting" : "Termin buchen"}
+                  {lang === "EN" ? "Book a Meeting" : "Termin vereinbaren"}
                   <span className="text-[18px] font-bold">→</span>
                 </button>
               </div>
@@ -267,7 +267,7 @@ const ContactForm = () => {
               <p className="text-[15px] text-[#0a3e40] leading-[24px] max-w-[500px]">
                 {lang === "EN"
                   ? "Whether it’s workshops, consulting, speaking engagements, or strategic collaborations — let’s connect and create meaningful impact together."
-                  : "Ob Workshops, Beratung, Vorträge oder strategische Kooperationen – lassen Sie uns in Kontakt treten und gemeinsam etwas bewegen."}
+                  : "Ob strategische Workshops, Beratung, Keynotes oder Kooperationen – lassen Sie uns gemeinsam nachhaltige Wirkung schaffen."}
               </p>
             </div>
 
@@ -284,7 +284,7 @@ const ContactForm = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder={lang === "EN" ? "Your Name" : "Ihr Name"}
+                        placeholder={lang === "EN" ? "Your Name" : "Name"}
                         required
                         className="w-full h-[48px] rounded-[14px] border border-[#ece6dc] bg-[#faf8f4] px-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none focus:border-[#b8965a] transition-all duration-300"
                       />
@@ -370,8 +370,8 @@ const ContactForm = () => {
                       ? "SENDING..."
                       : "WIRD GESENDET..."
                     : lang === "EN"
-                      ? "SEND MESSAGE →"
-                      : "NACHRICHT SENDEN →"}
+                      ? "Send Message →"
+                      : "Anfrage senden →"}
                 </button>
               </div>
             </form>

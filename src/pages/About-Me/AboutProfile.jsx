@@ -21,10 +21,10 @@ const fallbackParagraphs = [
   "My doctoral research at Heriot-Watt University focused on how AI recruitment technology shapes organisational trust - bringing academic rigour into every engagement and strategic decision.",
 ];
 
-const fallbackStats = [
-  { value: "10+", label: "Years Leadership" },
-  { value: "50", label: "FTEs Managed" },
-  { value: "95%", label: "SLA Compliance" },
+const fallbackStats = (lang) => [
+  { value: "10+", label: lang === "EN" ? "Years Leadership" : "Jahre Führungserfahrung" },
+  { value: "50", label: lang === "EN" ? "FTEs Managed" : "Verwaltete FTEs" },
+  { value: "95%", label: lang === "EN" ? "SLA Compliance" : "SLA-Einhaltung" },
   { value: "DBA", label: "Heriot-Watt University" },
 ];
 
@@ -42,8 +42,8 @@ const AboutSection = () => {
       .catch((err) => console.error("Error fetching about profile:", err));
   }, []);
 
-  const label = profile ? getBi(profile.label, lang) : "Who I Am";
-  const title = profile ? getBi(profile.title || profile.heading, lang) : "Building Smarter Organisations";
+  const label = profile ? getBi(profile.label, lang) : (lang === "EN" ? "Who I Am" : "Wer ich bin");
+  const title = profile ? getBi(profile.title || profile.heading, lang) : (lang === "EN" ? "Building Smarter Organisations" : "Intelligentere Organisationen aufbauen");
   const rawDescription = profile
     ? getBi(profile.description || profile.desc || profile.text || profile.content, lang)
     : "";
@@ -61,7 +61,7 @@ const AboutSection = () => {
         value: getBi(item.value || item.number || item.count, lang),
         label: getBi(item.label || item.title || item.text, lang),
       }))
-    : fallbackStats;
+    : fallbackStats(lang);
 
   return (
     <section className="relative overflow-hidden bg-[#f4f4f4] py-[60px] md:py-[60px]">

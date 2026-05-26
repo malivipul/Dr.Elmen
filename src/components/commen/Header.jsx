@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="absolute top-0 left-0 w-full z-50 text-white">
       {/* HEADER */}
-      <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-center lg:justify-between relative">
+      <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-start lg:justify-between relative">
         
         {/* LEFT MENU */}
         <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
@@ -76,13 +76,13 @@ const Header = () => {
                   ${hoverIndex === "insights" ? "font-['Caveat']" : ""}
                 `}
               >
-                {lang === "EN" ? "HR & AI Insights" : "HR & KI Einblicke"}
+                HR & AI Insights
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "HR & AI Insights" : "HR & KI Einblicke"}
+                HR & AI Insights
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "HR & AI Insights" : "HR & KI Einblicke"}
+                HR & AI Insights
               </span>
               <span
                 className={`
@@ -160,13 +160,13 @@ const Header = () => {
                   ${hoverIndex === "speaker" ? "font-['Caveat']" : ""}
                 `}
               >
-                {lang === "EN" ? "Speaker" : "Redner"}
+                Speaker
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Speaker" : "Redner"}
+                Speaker
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Speaker" : "Redner"}
+                Speaker
               </span>
               <span
                 className={`
@@ -185,12 +185,10 @@ const Header = () => {
         </div>
 
         {/* LOGO */}
-        <div className="mx-8 shrink-0 flex justify-center">
+        <div className="mx-0 shrink-0 flex justify-start md:mx-8 md:justify-center">
           <Link to="/">
-            <h1 className="text-[20px] md:text-[30px] font-bold font-serif leading-tight text-center">
-              Dr. Raphael
-              <br className="block md:hidden" />
-              <span className="md:ml-2">Edlmann</span>
+            <h1 className="text-[20px] md:text-[30px] font-bold font-serif leading-tight text-left md:text-center whitespace-nowrap">
+              Dr. Raphael Edlmann
             </h1>
           </Link>
         </div>
@@ -216,13 +214,13 @@ const Header = () => {
                   ${hoverIndex === "vita" ? "font-['Caveat']" : ""}
                 `}
               >
-                {lang === "EN" ? "Vita" : "Vita"}
+                Vita
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Vita" : "Vita"}
+                Vita
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Vita" : "Vita"}
+                Vita
               </span>
               <span
                 className={`
@@ -300,13 +298,13 @@ const Header = () => {
                   ${hoverIndex === "workshops" ? "font-['Caveat']" : ""}
                 `}
               >
-                {lang === "EN" ? "Workshops" : "Workshops"}
+                Workshops
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Workshops" : "Workshops"}
+                Workshops
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Workshops" : "Workshops"}
+                Workshops
               </span>
               <span
                 className={`
@@ -342,13 +340,13 @@ const Header = () => {
                   ${hoverIndex === "contact" ? "font-['Caveat']" : ""}
                 `}
               >
-                {lang === "EN" ? "Let’s Work Together" : "Kontakt"}
+                Let’s Work Together
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Let’s Work Together" : "Kontakt"}
+                Let’s Work Together
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                {lang === "EN" ? "Let’s Work Together" : "Kontakt"}
+                Let’s Work Together
               </span>
               <span
                 className={`
@@ -548,7 +546,7 @@ const Header = () => {
                   }
                 `}
               >
-                {lang === "EN" ? "HR & AI Insights" : "HR & KI Einblicke"}
+                HR & AI Insights
               </span>
             </Link>
 
@@ -626,7 +624,7 @@ const Header = () => {
                   }
                 `}
               >
-                {lang === "EN" ? "Speaker" : "Redner"}
+                Speaker
               </span>
             </Link>
 
@@ -665,7 +663,7 @@ const Header = () => {
                   }
                 `}
               >
-                {lang === "EN" ? "Vita" : "Vita"}
+                Vita
               </span>
             </Link>
 
@@ -743,7 +741,7 @@ const Header = () => {
                   }
                 `}
               >
-                {lang === "EN" ? "Workshops" : "Workshops"}
+                Workshops
               </span>
             </Link>
 
@@ -782,7 +780,7 @@ const Header = () => {
                   }
                 `}
               >
-                {lang === "EN" ? "Let’s Work Together" : "Kontakt"}
+                Let’s Work Together
               </span>
             </Link>
           </div>
@@ -790,7 +788,7 @@ const Header = () => {
       </div>
 
       {/* LANGUAGE TOGGLE */}
-      <div className="absolute top-[30px] right-[80px] md:right-[25px] z-50 lg:hidden">
+      <div className="absolute top-[27px] right-[80px] md:right-[25px] z-50 lg:hidden">
         <button
           onClick={toggleLang}
           className="text-sm font-semibold tracking-[2px] hover:opacity-70 transition cursor-pointer"

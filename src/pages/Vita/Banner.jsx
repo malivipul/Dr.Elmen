@@ -21,7 +21,7 @@ const AboutBanner = () => {
     ? (banner.img.startsWith("http") || banner.img.startsWith("/assets") 
         ? banner.img 
         : `${IMG_URL}${banner.img}`)
-    : "/assets/images/46.png";
+    : "/assets/images/image (16).png";
 
   const bannerTitle = banner?.title 
     ? (typeof banner.title === "object" ? getBi(banner.title, lang) : banner.title)

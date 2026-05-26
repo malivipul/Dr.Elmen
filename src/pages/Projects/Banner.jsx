@@ -32,9 +32,7 @@ const ProjectBanner = () => {
       ? imagePath
       : `${IMG_URL}${imagePath}`
     : "/assets/images/project.jpeg";
-  const bannerTitle = sectionData?.title || sectionData?.heading
-    ? getBi(sectionData.title || sectionData.heading, lang)
-    : "Projects";
+  const bannerTitle = lang === "EN" ? "Projects" : "Projekte";
 
   return (
     <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
@@ -57,7 +55,7 @@ const ProjectBanner = () => {
           {/* BREADCRUMB */}
           <div className="text-white text-[13px] md:text-sm mb-3 flex items-center gap-2 opacity-90 font-medium">
             <Link to="/" className="hover:underline">
-              {lang === "EN" ? "Home" : "Startseite"}
+              Home
             </Link>
 
             <span>{">"}</span>
