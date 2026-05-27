@@ -281,8 +281,8 @@ export default function WorkshopDetailsPage() {
                 <div className="group bg-[#faf8f4] hover:bg-white border border-[#d9bb86] rounded-[26px] p-5 md:p-6 relative transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(0,0,0,0.05)]">
                   <h3 className="title-font text-[20px] md:text-[22px] mb-4 text-black">
                     {lang === "EN"
-                      ? "Additional Support"
-                      : "Zusätzliche Unterstützung"}
+                      ? "Additional Information"
+                      : "Zusätzliche Informationen"}
                   </h3>
                   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[32px]">
                     {wNote}
