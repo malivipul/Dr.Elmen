@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getAboutCTA, getBi } from "../../api/api";
+import { getAboutCTA, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const cleanRichText = (value = "") =>
@@ -17,68 +17,67 @@ const cleanRichText = (value = "") =>
 
 const ContactCTASection = () => {
   const { lang } = useLanguage();
-  const [ctaData, setCtaData] = useState(null);
+  const cached = getCached("aboutCTA");
+  const [ctaData, setCtaData] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
 
   useEffect(() => {
-    let isMounted = true;
-
     getAboutCTA()
       .then((res) => {
-        if (!isMounted) return;
-        setCtaData(res.data || null);
+        if (res.data) {
+          setCtaData(res.data);
+          setCached("aboutCTA", res.data);
+        }
       })
       .catch((err) => {
         console.error("Failed to load about CTA", err);
-      });
-
-    return () => {
-      isMounted = false;
-    };
+      })
+      .finally(() => setLoading(false));
   }, []);
 
-  const sectionData =
-    ctaData?.data && !Array.isArray(ctaData.data)
-      ? ctaData.data
-      : ctaData;
+  if (loading) {
+    return (
+      <div className="bg-[#f4f4f4] py-[30px]">
+        <div className="max-w-[1320px] mx-auto px-4 md:px-7 h-[280px] rounded-[28px] bg-gray-100 animate-pulse" />
+      </div>
+    );
+  }
+
   const label = lang === "EN" ? "Get In Touch" : "Get In Touch";
-  const title =
-    sectionData?.title || sectionData?.heading
-      ? cleanRichText(getBi(sectionData.title || sectionData.heading, lang))
-      : (lang === "EN" ? "Ready to work together?" : "Lassen Sie uns zusammenarbeiten ");
-  const description =
-    sectionData?.description || sectionData?.desc || sectionData?.text || sectionData?.content
-      ? cleanRichText(getBi(sectionData.description || sectionData.desc || sectionData.text || sectionData.content, lang))
-      : (lang === "EN" 
-          ? "Whether you need an interim manager for a transformation project, a speaker for your next conference, or a research collaborator - let's start a conversation."
-          : "Ob Sie einen Interim Manager für ein Transformationsprojekt, einen Redner für Ihre nächste Konferenz oder einen Partner für Forschungsarbeiten suchen - lassen Sie uns ins Gespräch kommen.");
-  const primaryText =
-    sectionData?.primaryButtonText || sectionData?.buttonText || sectionData?.ctaText
-      ? cleanRichText(getBi(sectionData.primaryButtonText || sectionData.buttonText || sectionData.ctaText, lang))
-      : (lang === "EN" ? "Let's Work Together" : "Let's Work Together");
-  const secondaryText =
-    sectionData?.secondaryButtonText || sectionData?.whatsappText
-      ? cleanRichText(getBi(sectionData.secondaryButtonText || sectionData.whatsappText, lang))
-      : (lang === "EN" ? "WhatsApp Me" : "WhatsApp Me");
-  const primaryLink = sectionData?.primaryButtonLink || sectionData?.buttonLink || sectionData?.link || "/contact";
-  const secondaryLink = sectionData?.secondaryButtonLink || sectionData?.whatsappLink || "/contact";
+  const title = ctaData?.title 
+    ? cleanRichText(getBi(ctaData.title, lang)) 
+    : (lang === "EN" ? "Ready to work together?" : "Lassen Sie uns zusammenarbeiten");
+  
+  const description = ctaData?.text 
+    ? cleanRichText(getBi(ctaData.text, lang)) 
+    : (lang === "EN" 
+        ? "Whether you need an interim manager for a transformation project, a speaker for your next conference, or a research collaborator - let's start a conversation."
+        : "Ob Sie einen Interim Manager für ein Transformationsprojekt, einen Redner für Ihre nächste Konferenz oder einen Partner für Forschungsarbeiten suchen - lassen Sie uns ins Gespräch kommen.");
+
+  const btn1Text = ctaData?.btn1Text 
+    ? getBi(ctaData.btn1Text, lang) 
+    : (lang === "EN" ? "Let's Work Together" : "Zusammenarbeiten");
+  
+  const btn1Link = ctaData?.btn1Link || "/contact";
+
+  const btn2Text = ctaData?.btn2Text 
+    ? getBi(ctaData.btn2Text, lang) 
+    : (lang === "EN" ? "WhatsApp Me" : "WhatsApp");
+  
+  const btn2Link = ctaData?.btn2Link || "/contact";
 
   return (
     <section className="bg-[#f4f4f4] py-[60px] md:py-[60px]">
-
       <div className="max-w-[1320px] mx-auto px-4 md:px-7">
-
         {/* CTA BOX */}
         <div className="relative overflow-hidden rounded-[28px] bg-[#e7dfd7] px-5 sm:px-8 md:px-12 py-8 md:py-10 border border-[#ddd5ca]">
-
           {/* BG EFFECT */}
           <div className="absolute top-[-80px] right-[-80px] w-[220px] h-[220px] rounded-full bg-[#b8965a]/10 blur-[90px]"></div>
 
           {/* CONTENT */}
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-
             {/* LEFT SIDE */}
             <div className="max-w-[760px]">
-
               {/* LABEL */}
               <span className="text-[#b8965a] uppercase tracking-[3px] text-[10px] md:text-[11px] font-medium">
                 {label}
@@ -93,14 +92,12 @@ const ContactCTASection = () => {
               <p className="text-[#0a3e40] text-[15px] md:text-[17px] leading-[30px] md:leading-[34px]">
                 {description}
               </p>
-
             </div>
 
             <div className="flex flex-col items-start sm:items-end gap-3 w-full">
-
               {/* BUTTON */}
               <Link
-                to={primaryLink}
+                to={btn1Link}
                 className="
                   w-full
                   sm:w-[240px]
@@ -121,18 +118,14 @@ const ContactCTASection = () => {
                   gap-2
                 "
               >
-
-                <span className="leading-none">
-                  {primaryText}
-                </span>
+                <span className="leading-none">{btn1Text}</span>
 
                 <i className="fa-solid fa-arrow-right text-[14px] mt-[1px]"></i>
-
               </Link>
 
               {/* BUTTON */}
               <Link
-                to={secondaryLink}
+                to={btn2Link}
                 className="
                   w-full
                   sm:w-[240px]
@@ -156,23 +149,14 @@ const ContactCTASection = () => {
                   bg-white/40
                 "
               >
-
                 <i className="fa-brands fa-whatsapp text-[15px]"></i>
 
-                <span className="leading-none">
-                  {secondaryText}
-                </span>
-
+                <span className="leading-none">{btn2Text}</span>
               </Link>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 };

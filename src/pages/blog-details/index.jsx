@@ -1,6 +1,4 @@
-
 import Blogsdetails from "./Blogsdetails";
-
 
 const About = () => {
   return (

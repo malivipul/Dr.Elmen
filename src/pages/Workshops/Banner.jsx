@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getServiceHeader, getBi, getCached, setCached, IMG_URL } from "../../api/api";
+import {
+  getWorkshopsBanner,
+  getBi,
+  getCached,
+  setCached,
+  IMG_URL,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const AboutBanner = () => {
-  const cached = getCached("serviceHeader");
-  const [header, setHeader] = useState(cached || null);
+  const cached = getCached("workshopsBanner");
+  const [banner, setBanner] = useState(cached || null);
   const [loading, setLoading] = useState(!cached);
   const { lang } = useLanguage();
 
   useEffect(() => {
-    getServiceHeader()
+    getWorkshopsBanner()
       .then((res) => {
         if (res.data) {
-          setHeader(res.data);
-          setCached("serviceHeader", res.data);
+          setBanner(res.data);
+          setCached("workshopsBanner", res.data);
         }
       })
-      .catch((err) => console.error("Error fetching service header:", err))
+      .catch((err) => console.error("Error fetching workshops banner:", err))
       .finally(() => setLoading(false));
   }, []);
 
@@ -25,12 +31,11 @@ const AboutBanner = () => {
     return <div className="w-full h-[340px] md:h-[460px] bg-[#111]" />;
   }
 
-  const bannerTitle = header ? getBi(header.subtitle, lang) : (lang === "EN" ? "Workshops" : "Workshops");
-  const bannerImg = header?.img || header?.image || header?.bannerImg;
+  const bannerTitle =
+    getBi(banner?.title, lang) || (lang === "EN" ? "Workshops" : "Workshops");
+  const bannerImg = banner?.img;
   const imageUrl = bannerImg
-    ? bannerImg.startsWith("http") || bannerImg.startsWith("/assets")
-      ? bannerImg
-      : `${IMG_URL}${bannerImg}`
+    ? `${IMG_URL}${bannerImg}`
     : "/assets/images/2151966708.jpg";
 
   return (
@@ -43,7 +48,7 @@ const AboutBanner = () => {
           className="w-full h-full object-cover object-center"
         />
         {/* DARK OVERLAY */}
-        <div className="absolute inset-0 bg-black/35"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
       {/* CONTENT */}

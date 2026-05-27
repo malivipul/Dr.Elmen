@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
 
@@ -7,6 +7,18 @@ const Header = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
   const { lang, toggleLang } = useLanguage();
   const location = useLocation();
+
+  // Disable scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [menuOpen]);
 
   return (
     <header className="absolute top-0 left-0 w-full z-50 text-white">
@@ -186,7 +198,7 @@ const Header = () => {
         {/* LOGO */}
         <div className="mx-0 shrink-0 flex justify-start md:mx-8 md:justify-center">
           <Link to="/">
-            <h1 className="text-[20px] md:text-[30px] font-bold font-serif leading-tight text-left md:text-center whitespace-nowrap">
+            <h1 className="text-[22px] md:text-[30px] font-bold font-serif leading-tight text-left md:text-center whitespace-nowrap">
               Dr. Raphael Edlmann
             </h1>
           </Link>

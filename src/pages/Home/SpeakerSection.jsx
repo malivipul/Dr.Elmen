@@ -1,26 +1,36 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getSpeaker, IMG_URL, getBi } from "../../api/api";
+import { getSpeaker, IMG_URL, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const SpeakerSection = () => {
-  const [speaker, setSpeaker] = useState(null);
+  const cached = getCached("homeSpeaker");
+  const [speaker, setSpeaker] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
   const { lang } = useLanguage();
 
   useEffect(() => {
     getSpeaker()
       .then((res) => {
-        if (res.data) setSpeaker(res.data);
+        if (res.data) {
+          setSpeaker(res.data);
+          setCached("homeSpeaker", res.data);
+        }
       })
-      .catch((err) => console.error("Error fetching speaker details:", err));
+      .catch((err) => console.error("Error fetching speaker details:", err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const label = speaker ? getBi(speaker.label, lang) : "Speaker";
-  const title = speaker ? getBi(speaker.title, lang) : "Inspiring Talks That Drive Action";
-  const subtitle = speaker ? getBi(speaker.subtitle, lang) : "Looking for a speaker who cuts through the noise and delivers real insights? Book me for your next event.";
-  const desc = speaker ? getBi(speaker.desc, lang) : "My talks don’t just fill a slot — they challenge perspectives, spark action, and leave your audience with practical strategies they can apply immediately.\n\nMore attention. More relevance. More impact.\n\nBeyond the stage, I amplify your event through my network and social media channels — extending your reach, increasing visibility, and making sure the impact goes far beyond the room.";
+  if (loading) {
+    return <div className="w-full h-[400px] bg-[#111] animate-pulse" />;
+  }
+
+  const label = getBi(speaker?.label, lang) || (lang === "EN" ? "Speaker" : "Redner");
+  const title = getBi(speaker?.title, lang) || (lang === "EN" ? "Inspiring Talks That Drive Action" : "Inspirierende Vorträge, die zum Handeln anregen");
+  const subtitle = getBi(speaker?.subtitle, lang);
+  const desc = getBi(speaker?.desc, lang);
   
-  const bgImg = speaker && speaker.img 
+  const bgImg = speaker?.img 
     ? (speaker.img.startsWith("http") || speaker.img.startsWith("/assets") ? speaker.img : `${IMG_URL}${speaker.img}`)
     : "/assets/images/22.jpg";
 

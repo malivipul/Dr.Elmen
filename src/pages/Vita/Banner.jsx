@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getVitaBanner, IMG_URL, getBi, getCached, setCached } from "../../api/api";
+import {
+  getVitaBanner,
+  IMG_URL,
+  getBi,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const AboutBanner = () => {
@@ -26,10 +32,10 @@ const AboutBanner = () => {
   }
 
   const bannerTitle = banner?.title ? getBi(banner.title, lang) : "Vita";
-  const bannerImg = banner?.img 
-    ? (banner.img.startsWith("http") || banner.img.startsWith("/assets") 
-        ? banner.img 
-        : `${IMG_URL}${banner.img}`)
+  const bannerImg = banner?.img
+    ? banner.img.startsWith("http") || banner.img.startsWith("/assets")
+      ? banner.img
+      : `${IMG_URL}${banner.img}`
     : null;
 
   return (
@@ -40,7 +46,7 @@ const AboutBanner = () => {
           <img
             src={bannerImg}
             alt="About Banner"
-            className="w-full h-full object-cover object-[90%_center] md:object-center"
+            className="w-full h-full object-cover object-[90%_center] md:object-top"
           />
         )}
         {/* DARK OVERLAY */}
@@ -57,9 +63,7 @@ const AboutBanner = () => {
               {lang === "EN" ? "Home" : "Startseite"}
             </Link>
             <span>›</span>
-            <span className="font-semibold">
-              {bannerTitle}
-            </span>
+            <span className="font-semibold">{bannerTitle}</span>
           </div>
 
           {/* TITLE */}

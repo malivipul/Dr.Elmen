@@ -11,13 +11,18 @@ const api = axios.create({
 export const getBi = (field, lang) => {
   if (!field) return "";
   if (typeof field === "string") return field;
-  if (typeof field === "object") {
+  
+  let result = "";
+  if (typeof field === "object" && !Array.isArray(field)) {
     const key = String(lang).toLowerCase(); // "en" or "de"
-    if (field[key] !== undefined) return field[key];
-    if (field["en"] !== undefined) return field["en"];
-    return "";
+    result = field[key] ?? field["en"] ?? field["de"] ?? "";
+  } else {
+    result = String(field);
   }
-  return String(field);
+
+  // Final safety check: if result is still an object (shouldn't happen with our schema)
+  if (typeof result === "object") return "";
+  return String(result);
 };
 
 // --- CACHE ---
@@ -26,33 +31,41 @@ export const getCached = (key) => cache.get(key);
 export const setCached = (key, data) => cache.set(key, data);
 
 // --- HERO ---
-export const getHero = () => api.get("/home/hero/get");
+export const getHero = () => api.get("/hero/get");
 
 // --- HOME ABOUT ---
-export const getHomeAbout = () => api.get("/home/about/get");
+export const getHomeAbout = () => api.get("/intro/get");
 
 // --- LOGOS ---
-export const getLogos = () => api.get("/home/logos/all");
+export const getLogos = () => api.get("/logos/all");
 
 // --- SPEAKER ---
-export const getSpeaker = () => api.get("/home/speaker/get");
+export const getSpeaker = () => api.get("/speaker/get");
 
 // --- AUTHOR ---
-export const getAuthor = () => api.get("/home/author/get");
+export const getAuthor = () => api.get("/author/get");
 
 // --- BOOKS ---
-export const getBooks = () => api.get("/home/books/all");
+export const getBookHeader = () => api.get("/books/header");
+export const getBooks = () => api.get("/books/all");
 
 // --- SERVICES / WORKSHOPS ---
-export const getServiceHeader = () => api.get("/home/services/header/get");
-export const getServices = () => api.get("/home/services/all");
-export const getServiceBySlug = (slug) => api.get(`/home/services/slug/${slug}`);
+export const getServiceHeader = () => api.get("/services/header/get");
+export const getWorkshopsBanner = () => api.get("/workshops/get");
+export const getServices = () => api.get("/services/all");
+export const getServiceBySlug = (slug) => api.get(`/services/slug/${slug}`);
 
 // --- BLOGS ---
+export const getBlogHeader = () => api.get("/blogs/header/get");
+export const getBlogBanner = () => api.get("/blogs/banner/get");
 export const getBlogs = () => api.get("/blogs/all");
 export const getBlogById = (id) => api.get(`/blogs/${id}`);
+export const likeBlog = (id, data) => api.post(`/blogs/${id}/like`, data);
+export const getBlogComments = (id) => api.get(`/blogs/${id}/comments`);
+export const submitBlogComment = (id, data) => api.post(`/blogs/${id}/comment`, data);
 
 // --- CONTACT ---
+export const getContactBanner = () => api.get("/contact/banner/get");
 export const addContact = (data) => api.post("/contact/add", data);
 
 // --- SUBSCRIBERS ---
@@ -76,6 +89,9 @@ export const getAboutCTA = () => api.get("/about/cta/get");
 // --- VITA BANNER ---
 export const getVitaBanner = () => api.get("/vita/banner/get");
 
+// --- AUTHOR PAGE BANNER ---
+export const getAuthorBanner = () => api.get("/author-page/banner/get");
+
 // --- VITA TIMELINE ---
 export const getVitaTimeline = () => api.get("/vita/timeline/get");
 
@@ -86,5 +102,8 @@ export const getProjectById = (id) => api.get(`/projects/${id}`);
 
 // --- SETTINGS ---
 export const getSettings = () => api.get("/settings/get");
+
+// --- META ---
+export const getMetaByPage = (page) => api.get(`/meta/${page}`);
 
 export default api;

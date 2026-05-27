@@ -1,10 +1,24 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
+import { getBlogBanner, getBi, IMG_URL, getCached, setCached } from "../../api/api";
 
 const AboutBanner = () => {
   const { lang } = useLanguage();
-  const title = lang === "EN" ? "HR & AI Insights" : "HR & KI Einblicke";
+  const cached = getCached("blogBanner");
+  const [banner, setBanner] = useState(cached || null);
+
+  useEffect(() => {
+    getBlogBanner().then(({ data }) => {
+      if (data) {
+        setBanner(data);
+        setCached("blogBanner", data);
+      }
+    });
+  }, []);
+
+  const title = getBi(banner?.title, lang) || (lang === "EN" ? "HR & AI Insights" : "HR & KI Einblicke");
+  const bannerImg = banner?.img ? `${IMG_URL}${banner.img}` : "/assets/images/Untitled design (47).png";
 
   return (
     <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden">
@@ -13,7 +27,7 @@ const AboutBanner = () => {
       <div className="absolute inset-0">
 
         <img
-          src="/assets/images/Untitled design (47).png"
+          src={bannerImg}
           alt={title}
           className="w-full h-full object-cover md:object-cover object-center"
         />

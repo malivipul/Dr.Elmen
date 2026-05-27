@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { getBlogs, IMG_URL, getBi } from "../../api/api";
+import { getBlogs, getBlogHeader, IMG_URL, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 import "swiper/css";
@@ -18,6 +18,31 @@ const cleanRichText = (value = "") =>
     .replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'")
     .trim();
+
+// Strip HTML tags and decode common entities for plain-text preview
+const stripHtml = (html) => {
+  if (!html || typeof html !== "string") return "";
+  return html
+    .replace(/<[^>]*>/g, " ") // remove all HTML tags
+    .replace(/&nbsp;/g, " ") // decode &nbsp;
+    .replace(/&amp;/g, "&") // decode &amp;
+    .replace(/&lt;/g, "<") // decode &lt;
+    .replace(/&gt;/g, ">") // decode &gt;
+    .replace(/&quot;/g, '"') // decode &quot;
+    .replace(/&#39;/g, "'") // decode &#39;
+    .replace(/\s+/g, " ") // collapse multiple spaces
+    .trim();
+};
+
+const getReadTime = (content, currentLang) => {
+  const text = stripHtml(content);
+  const words = text.match(/\S+/g)?.length || 0;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+
+  return currentLang === "EN"
+    ? `${minutes} min read`
+    : `${minutes} Min. Lesezeit`;
+};
 
 const categoryTranslations = {
   guides: { en: "Guides", de: "Leitfäden" },
@@ -52,9 +77,21 @@ const formatCategoryDisplay = (catStr, currentLang) => {
 const BlogSection = ({ setIsOpen }) => {
   const [active, setActive] = useState("all");
   const [blogList, setBlogList] = useState([]);
+  const [header, setHeader] = useState(null);
+  const [readArticles, setReadArticles] = useState([]);
   const { lang } = useLanguage();
 
   useEffect(() => {
+    // Load read articles from local storage
+    const read = JSON.parse(localStorage.getItem("readArticles") || "[]");
+    setReadArticles(read);
+
+    getBlogHeader()
+      .then((res) => {
+        if (res.data) setHeader(res.data);
+      })
+      .catch((err) => console.error("Error fetching blog header:", err));
+
     getBlogs()
       .then((res) => {
         if (res.data) {
@@ -67,43 +104,11 @@ const BlogSection = ({ setIsOpen }) => {
       .catch((err) => console.error("Error fetching blogs:", err));
   }, []);
 
-  const staticBlogs = [
-    {
-      _id: "1",
-      category: "guides",
-      title: {
-        en: "AI Implementation in HR",
-        de: "KI-Implementierung im Personalwesen",
-      },
-      img: "/assets/images/blog2.png",
-      desc: {
-        en: "AI integration in HR is transforming recruitment, employee engagement, talent management, and workforce productivity.",
-        de: "Die Integration von KI im Personalwesen transformiert die Personalbeschaffung, das Mitarbeiterengagement und das Talentmanagement.",
-      },
-      date: "May 22, 2025",
-      read: "6 min read",
-      link: "/blog-details",
-    },
-    {
-      _id: "2",
-      category: "opinions",
-      title: { en: "AI Leadership", de: "KI-Führung" },
-      img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
-      desc: {
-        en: "Modern leadership is evolving through AI-driven decision making, strategic innovation, and digital transformation.",
-        de: "Die moderne Führung entwickelt sich durch KI-gestützte Entscheidungsfindung und strategische Innovation weiter.",
-      },
-      date: "May 18, 2025",
-      read: "5 min read",
-      link: "/blog-details",
-    },
-  ];
-
-  const rawBlogs = blogList && blogList.length > 0 ? blogList : staticBlogs;
+  const rawBlogs = blogList;
 
   // Format into flat representations matching language choice
   const formattedBlogs = rawBlogs.map((b) => {
-    const rawCategory = String(b.Category || b.category || "").toLowerCase();
+    const rawCategory = getBi(b.Category || b.category, lang).toLowerCase();
     const rawTitle =
       typeof b.title === "object" ? getBi(b.title, lang) : b.title;
     const rawDesc =
@@ -119,6 +124,7 @@ const BlogSection = ({ setIsOpen }) => {
       displayCategory: formatCategoryDisplay(rawCategory, lang),
       title: cleanRichText(rawTitle),
       desc: cleanRichText(rawDesc),
+      isRead: readArticles.includes(b._id),
       img:
         b.img || b.image
           ? (b.img || b.image).startsWith("http") ||
@@ -127,7 +133,7 @@ const BlogSection = ({ setIsOpen }) => {
             : `${IMG_URL}${b.img || b.image}`
           : "/assets/images/blog2.png",
       date: b.date || "May 2025",
-      read: b.read || "5 min read",
+      read: getReadTime(rawDesc, lang),
       link: `/blog-details/${b._id}`,
     };
   });
@@ -150,13 +156,13 @@ const BlogSection = ({ setIsOpen }) => {
   // NEXT BLOGS
   const recentArticles = filtered.slice(1, 6);
 
-  // COLLECT DYNAMIC CATEGORIES EXCEPT 'all'
+  // COLLECT DYNAMIC CATEGORIES EXCEPT hardcoded ones
   const dynamicCategoriesSet = new Set();
   formattedBlogs.forEach((b) => {
     if (b.category) {
       b.category.split(",").forEach((cat) => {
         const trimmed = cat.trim().toLowerCase();
-        if (trimmed && trimmed !== "all" && trimmed !== "alle") {
+        if (trimmed && !["all", "alle", "tools", "archive"].includes(trimmed)) {
           dynamicCategoriesSet.add(trimmed);
         }
       });
@@ -165,15 +171,20 @@ const BlogSection = ({ setIsOpen }) => {
 
   const uniqueCategories = Array.from(dynamicCategoriesSet);
 
-  // TABS (Keep "All" as hardcoded first, the rest are dynamic)
+  const dynamicTabs = uniqueCategories.map((cat) => ({
+    label: getCategoryLabel(cat, lang),
+    value: cat,
+  }));
+
+  // TABS: "All" first, then dynamic ones, then "Tools" and "Archive" at the end.
+  // We take enough dynamic tabs to fill up to 7 total.
   const tabs = [
     { label: lang === "EN" ? "All" : "Alle", value: "all" },
-    ...uniqueCategories.map((cat) => ({
-      label: getCategoryLabel(cat, lang),
-      value: cat,
-    })),
-  ].slice(0, 7);
-
+    ...dynamicTabs.slice(0, 4), // Take up to 4 dynamic tabs
+  ];
+  const subscribebtn = {
+    btn: { en: "Subscribe", de: "Abonnieren" },
+  };
   return (
     <section className="bg-[#f5f3ef] py-[60px]">
       <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
@@ -186,7 +197,7 @@ const BlogSection = ({ setIsOpen }) => {
               className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer"
             >
               <i className="fa-regular fa-envelope"></i>
-              Subscribe
+              {subscribebtn.btn[lang === "EN" ? "en" : "de"]}
             </button>
           </div>
 
@@ -202,18 +213,29 @@ const BlogSection = ({ setIsOpen }) => {
 
           {/* LABEL */}
           <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-            Insights & Resources
+            {header?.label
+              ? getBi(header.label, lang)
+              : lang === "EN"
+                ? "Insights & Resources"
+                : "Einblicke & Ressourcen"}
           </span>
 
           {/* TITLE */}
           <h2 className="title-font text-2xl md:text-[36px] text-black leading-tight mb-5 mt-3">
-            Articles & Tools
+            {header?.header
+              ? getBi(header.header, lang)
+              : lang === "EN"
+                ? "Articles & Tools"
+                : "Artikel & Werkzeuge"}
           </h2>
 
           {/* SUBTITLE */}
           <p className="text-[#0a3e40] text-[16px] leading-relaxed max-w-[760px] mx-auto">
-            Insights, guides, tools, and perspectives on HR, AI and the future
-            of work.
+            {header?.text
+              ? getBi(header.text, lang)
+              : lang === "EN"
+                ? "Insights, guides, tools, and perspectives on HR, AI and the future of work."
+                : "Einblicke, Leitfäden, Tools und Perspektiven zu HR, KI und der Zukunft der Arbeit."}
           </p>
         </div>
 
@@ -249,95 +271,131 @@ const BlogSection = ({ setIsOpen }) => {
           Latest Article
         </h3>
         {/* LATEST ARTICLE */}
-        {latestArticle && (
-          <div className="bg-white border border-[#e6dfd5] rounded-[20px] overflow-hidden mb-8">
-            <div className="grid lg:grid-cols-2 items-stretch">
-              {/* LEFT */}
-              <div className="p-7 md:p-10 text-left flex flex-col justify-center">
-                <span className="text-[#b8965a] text-xs tracking-[2px] uppercase font-semibold">
-                  {latestArticle.displayCategory}
-                </span>
+        {latestArticle ? (
+          <>
+            <div className="bg-white border border-[#e6dfd5] rounded-[20px] overflow-hidden mb-8">
+              <div className="grid lg:grid-cols-2 items-stretch">
+                {/* LEFT */}
+                <div className="p-7 md:p-10 text-left flex flex-col justify-center">
+                  <span className="text-[#b8965a] text-xs tracking-[2px] uppercase font-semibold">
+                    {latestArticle.displayCategory}
+                  </span>
 
-                <h3 className="title-font text-[20px] md:text-[26px] font-medium leading-tight text-black mt-4 max-w-[500px]">
-                  {latestArticle.title}
-                </h3>
+                  <h3 className="title-font text-[20px] md:text-[26px] font-medium leading-tight text-black mt-4 max-w-[500px]">
+                    {latestArticle.title}
+                  </h3>
 
-                <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
-                  {latestArticle.desc}
-                </p>
+                  <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
+                    {latestArticle.desc}
+                  </p>
 
-                <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
-                  <span>{latestArticle.date}</span>
+                  <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
+                    <span>{latestArticle.date}</span>
 
-                  <span>•</span>
+                    <span>•</span>
 
-                  <span>{latestArticle.read}</span>
+                    <span>{latestArticle.read}</span>
+                  </div>
+
+                  <div className="mt-6">
+                    <Link
+                      to={latestArticle.link}
+                      className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2 cursor-pointer"
+                    >
+                      Read Article
+                      <i className="fa-solid fa-arrow-right"></i>
+                    </Link>
+                  </div>
                 </div>
 
-                <div className="mt-6">
-                  <Link
-                    to={latestArticle.link}
-                    className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2 cursor-pointer"
-                  >
-                    Read Article
-                    <i className="fa-solid fa-arrow-right"></i>
-                  </Link>
+                {/* IMAGE */}
+                <div className="relative w-full h-[260px] md:h-auto min-h-[260px] overflow-hidden">
+                  <img
+                    src={latestArticle.img}
+                    alt={latestArticle.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
                 </div>
-              </div>
-
-              {/* IMAGE */}
-              <div className="relative w-full h-[260px] md:h-auto min-h-[340px] overflow-hidden">
-                <img
-                  src={latestArticle.img}
-                  alt={latestArticle.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
               </div>
             </div>
+
+            {/* RECENT ARTICLES */}
+            {recentArticles.length > 0 && (
+              <div className="mb-10">
+                <h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
+                  Recent Articles
+                </h3>
+
+                <Swiper
+                  modules={[Autoplay]}
+                  spaceBetween={20}
+                  slidesPerView={1}
+                  loop={true}
+                  autoplay={{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                  }}
+                  breakpoints={{
+                    640: {
+                      slidesPerView: 2,
+                    },
+                    1024: {
+                      slidesPerView: 3,
+                    },
+                  }}
+                >
+                  {recentArticles.slice(0, 3).map((item, i) => (
+                    <SwiperSlide key={i}>
+                      <Card item={item} />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            )}
+
+            {/* BUTTON */}
+            <div className="flex justify-center">
+              <Link
+                to="/insights"
+                className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center justify-center"
+              >
+                View More Articles
+              </Link>
+            </div>
+          </>
+        ) : (
+          <div className="bg-white border border-[#e6dfd5] rounded-[20px] py-20 text-center shadow-sm">
+            <div className="w-16 h-16 bg-[#f5f3ef] rounded-full flex items-center justify-center mx-auto mb-4 text-[#b8965a]">
+              <i className="fa-regular fa-file-lines text-2xl"></i>
+            </div>
+            <h3 className="title-font text-xl text-black mb-2">
+              {blogList.length === 0
+                ? lang === "EN"
+                  ? "No Articles Published"
+                  : "Keine Artikel veröffentlicht"
+                : lang === "EN"
+                  ? "No Articles Found"
+                  : "Keine Artikel gefunden"}
+            </h3>
+            <p className="text-[#0a3e40] text-sm max-w-xs mx-auto">
+              {blogList.length === 0
+                ? lang === "EN"
+                  ? "We haven't published any articles yet. Please check back soon."
+                  : "Wir haben noch keine Artikel veröffentlicht. Bitte schauen Sie bald wieder vorbei."
+                : lang === "EN"
+                  ? "We couldn't find any articles matching your current filter. Try selecting another category."
+                  : "Wir konnten keine Artikel finden, die Ihrem aktuellen Filter entsprechen. Versuchen Sie, eine andere Kategorie auszuwählen."}
+            </p>
+            {blogList.length > 0 && (
+              <button
+                onClick={() => setActive("all")}
+                className="mt-6 text-[#b8965a] font-bold text-sm hover:underline cursor-pointer"
+              >
+                {lang === "EN" ? "Show all articles" : "Alle Artikel anzeigen"}
+              </button>
+            )}
           </div>
         )}
-
-        {/* RECENT ARTICLES */}
-        <div className="mb-10">
-          <h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
-            Recent Articles
-          </h3>
-
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={20}
-            slidesPerView={1}
-            loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-          >
-            {recentArticles.slice(0, 3).map((item, i) => (
-              <SwiperSlide key={i}>
-                <Card item={item} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-
-        {/* BUTTON */}
-        <div className="flex justify-center">
-          <Link
-            to="/insights"
-            className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center justify-center"
-          >
-            View More Articles
-          </Link>
-        </div>
       </div>
     </section>
   );
@@ -355,7 +413,11 @@ const Card = ({ item }) => (
         alt={item.title}
         className="w-full h-[180px] object-cover transition duration-500 group-hover:scale-110"
       />
-
+      {item.isRead && (
+        <div className="absolute top-3 left-3 bg-[#b8965a] text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-10 uppercase tracking-wider">
+          Read
+        </div>
+      )}
       <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition"></div>
     </div>
 

@@ -6,7 +6,7 @@ import {
   FaBullseye,
   FaGraduationCap,
 } from "react-icons/fa";
-import { getAboutExpertise, getBi } from "../../api/api";
+import { getAboutExpertise, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const cleanRichText = (value = "") =>
@@ -68,46 +68,44 @@ const findCardItems = (value) => {
 
 const ExpertiseSection = () => {
   const { lang } = useLanguage();
-  const [expertiseData, setExpertiseData] = useState(null);
+  const cached = getCached("aboutExpertise");
+  const [expertiseData, setExpertiseData] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
 
   const iconList = [FaBullseye, FaCogs, FaRobot, FaGraduationCap, FaUsers];
 
   useEffect(() => {
-    let isMounted = true;
-
     getAboutExpertise()
       .then((res) => {
-        if (!isMounted) return;
-        setExpertiseData(res.data || null);
+        if (res.data) {
+          setExpertiseData(res.data);
+          setCached("aboutExpertise", res.data);
+        }
       })
-      .catch((err) => {
-        console.error("Failed to load about expertise", err);
-      });
-
-    return () => {
-      isMounted = false;
-    };
+      .catch((err) => console.error("Failed to load about expertise", err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const sectionData = expertiseData?.data && !Array.isArray(expertiseData.data)
-    ? expertiseData.data
-    : expertiseData;
+  if (loading) {
+    return (
+      <div className="bg-[#f4f4f4] pb-[60px] pt-[60px]">
+        <div className="max-w-[1320px] mx-auto px-4 md:px-7 h-[400px] rounded-[24px] bg-gray-100 animate-pulse" />
+      </div>
+    );
+  }
+
+  const sectionData = expertiseData;
   const rawItems = findCardItems(expertiseData);
 
-  const expertise = rawItems.length
-    ? rawItems.map((item, index) => ({
-        icon: iconList[index % iconList.length],
-        title: cleanRichText(getBi(item.title || item.heading || item.name, lang)),
-        text: cleanRichText(getBi(item.text || item.desc || item.description, lang)),
-      }))
-    : [];
+  const expertise = rawItems.map((item, index) => ({
+    icon: iconList[index % iconList.length],
+    title: cleanRichText(getBi(item.title || item.heading || item.name, lang)),
+    text: cleanRichText(getBi(item.text || item.desc || item.description, lang)),
+  }));
 
-  const title = sectionData?.title
-    ? cleanRichText(getBi(sectionData.title, lang))
-    : "";
-  const subtitle = sectionData?.subtitle
-    ? cleanRichText(getBi(sectionData.subtitle, lang))
-    : "";
+  const title = getBi(sectionData?.title, lang) || (lang === "EN" ? "Strategic Problem Solving" : "Strategische Problemlösung");
+  const subtitle = getBi(sectionData?.subtitle, lang) || (lang === "EN" ? "Expertise built on research and over a decade of real-world transformation experience." : "Expertise aufgebaut auf Forschung und über einem Jahrzehnt Praxiserfahrung in der Transformation.");
+  const label = getBi(sectionData?.label, lang) || (lang === "EN" ? "Expertise" : "Expertise");
 
   return (
     <section className="bg-[#f4f4f4] pb-[60px] md:pb-[60px]">
@@ -119,7 +117,7 @@ const ExpertiseSection = () => {
 
           {/* LABEL */}
           <span className="text-[#b8965a] uppercase tracking-[3px] text-[10px] md:text-[11px] font-medium">
-            Expertise
+            {label}
           </span>
 
           {/* TITLE */}

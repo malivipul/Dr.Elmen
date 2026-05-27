@@ -1,7 +1,20 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getBlogById, getBlogs, IMG_URL, getBi } from "../../api/api";
+import {
+  getBlogById,
+  getBlogs,
+  getBlogComments,
+  likeBlog,
+  submitBlogComment,
+  getSettings,
+  IMG_URL,
+  getBi,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import SEO from "../../components/commen/SEO";
+import Swal from "sweetalert2";
 
 const stripHtml = (html) => {
   if (!html || typeof html !== "string") return "";
@@ -31,31 +44,46 @@ const Blogsdetails = () => {
   const { lang } = useLanguage();
   const [blog, setBlog] = useState(null);
   const [recentBlogs, setRecentBlogs] = useState([]);
-
-  // LIKES
-  const [likes, setLikes] = useState(128);
-
-  // COMMENTS
-  const [comments, setComments] = useState([
-    {
-      name: "Michael",
-      text: "Great insights about AI and HR transformation.",
-    },
-  ]);
-  const [commentText, setCommentText] = useState("");
-
-  // SHARE URL
-  const articleUrl = window.location.href;
-
+  const [likes, setLikes] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [settings, setSettings] = useState(null);
+  const [commentData, setCommentData] = useState({
+    name: "",
+    email: "",
+    text: "",
+  });
+  const [isLiking, setIsLiking] = useState(false);
+  const [hasLiked, setHasLiked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const articleUrl = window.location.href;
 
   useEffect(() => {
     if (id) {
-      getBlogById(id)
-        .then((res) => {
-          if (res.data) setBlog(res.data);
+      window.scrollTo(0, 0);
+      setLoading(true);
+
+      // Check if already liked locally
+      const liked = JSON.parse(localStorage.getItem("likedArticles") || "[]");
+      setHasLiked(liked.includes(id));
+
+      // Mark as read locally
+      const read = JSON.parse(localStorage.getItem("readArticles") || "[]");
+      if (!read.includes(id)) {
+        localStorage.setItem("readArticles", JSON.stringify([...read, id]));
+      }
+
+      Promise.all([getBlogById(id), getBlogComments(id), getSettings()])
+        .then(([blogRes, commRes, settRes]) => {
+          if (blogRes.data) {
+            setBlog(blogRes.data);
+            setLikes(blogRes.data.likes || 0);
+          }
+          if (commRes.data) setComments(commRes.data);
+          if (settRes.data) setSettings(settRes.data);
         })
-        .catch((err) => console.error("Error fetching blog details:", err))
+        .catch((err) => console.error("Error loading blog details:", err))
         .finally(() => setLoading(false));
     }
   }, [id]);
@@ -64,40 +92,71 @@ const Blogsdetails = () => {
     getBlogs()
       .then((res) => {
         if (res.data) {
-          setRecentBlogs(res.data.slice(0, 5));
+          setRecentBlogs(res.data.filter((b) => b._id !== id).slice(0, 5));
         }
       })
       .catch((err) => console.error("Error fetching recent blogs:", err));
-  }, []);
+  }, [id]);
 
-  // ADD COMMENT
-  const handleComment = () => {
-    if (commentText.trim() === "") return;
-    setComments([
-      ...comments,
-      {
-        name: "Guest",
-        text: commentText,
-      },
-    ]);
-    setCommentText("");
+  const handleLike = async () => {
+    if (isLiking) return;
+    setIsLiking(true);
+    try {
+      // Toggle like based on current local state
+      const { data } = await likeBlog(id, { unlike: hasLiked });
+      if (data.success) {
+        setLikes(data.likes);
+        const liked = JSON.parse(localStorage.getItem("likedArticles") || "[]");
+        if (hasLiked) {
+          // Unlike
+          setHasLiked(false);
+          localStorage.setItem(
+            "likedArticles",
+            JSON.stringify(liked.filter((i) => i !== id)),
+          );
+        } else {
+          // Like
+          setHasLiked(true);
+          localStorage.setItem("likedArticles", JSON.stringify([...liked, id]));
+        }
+      }
+    } catch (err) {
+      console.error("Failed to toggle like", err);
+    } finally {
+      setIsLiking(false);
+    }
   };
 
-  // STATIC FALLBACK while loading or if API fails
-  const staticBlog = {
-    title: {
-      en: "AI Implementation in HR",
-      de: "KI-Implementierung im Personalwesen",
-    },
-    author: "Raphael Edlmann",
-    date: "March 18, 2026",
-    description: {
-      en: "<p>Artificial Intelligence is transforming the future of human resources and workforce management. Organisations worldwide are increasingly integrating AI-driven systems to improve operational efficiency, recruitment strategies, and employee experiences.</p><p>Modern HR leaders are no longer relying solely on traditional methods. Predictive analytics, automation, and intelligent decision-making tools now help organisations reduce repetitive tasks while enabling more strategic leadership.</p><p>AI implementation in HR also creates opportunities for more personalised employee development, better performance insights, and faster recruitment processes.</p><p>However, technology alone is not enough. Companies must ensure ethical AI usage, transparent communication, and strong leadership throughout digital transformation initiatives.</p>",
-      de: "Künstliche Intelligenz verändert die Zukunft der Personalabteilung und der Personalverwaltung.",
-    },
-    Category: "Guides",
-    Tags: ["Leadership", "Innovation", "Strategy", "Future Work"],
-    img: "/assets/images/25.png",
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!commentData.name || !commentData.email || !commentData.text) return;
+    setSubmitting(true);
+    try {
+      await submitBlogComment(id, commentData);
+      Swal.fire({
+        icon: "success",
+        title: lang === "EN" ? "Submitted!" : "Gesendet!",
+        text:
+          lang === "EN"
+            ? "Your comment has been sent for admin approval."
+            : "Ihr Kommentar wurde zur Genehmigung gesendet.",
+        confirmButtonColor: "#b8965a",
+      });
+      setCommentData({ name: "", email: "", text: "" });
+    } catch (err) {
+      console.error("Failed to submit comment", err);
+      Swal.fire({
+        icon: "error",
+        title: lang === "EN" ? "Error" : "Fehler",
+        text:
+          lang === "EN"
+            ? "Failed to submit comment. Please try again."
+            : "Kommentar konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+        confirmButtonColor: "#b8965a",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // SHOW LOADING SKELETON while fetching
@@ -130,7 +189,8 @@ const Blogsdetails = () => {
     );
   }
 
-  const currentBlog = blog || staticBlog;
+  const currentBlog = blog;
+  if (!currentBlog) return null;
 
   const title =
     typeof currentBlog.title === "object"
@@ -143,12 +203,16 @@ const Blogsdetails = () => {
       ? getBi(currentBlog.description, lang)
       : currentBlog.description || currentBlog.desc || "";
 
-  // Sanitize HTML: replace &nbsp; with regular spaces so text wraps normally
+  // Sanitize HTML
   const content = rawContent.replace(/&nbsp;/g, " ").replace(/ {2,}/g, " ");
-  const readTime = getReadTime(rawContent, lang);
-  const category = currentBlog.Category || currentBlog.category || "Guides";
-  const tags = currentBlog.Tags ||
-    currentBlog.tags || ["Leadership", "Innovation", "Strategy"];
+  const readTime = lang === "EN" ? "5 min read" : "5 Min. Lesezeit";
+  const category =
+    getBi(currentBlog.Category || currentBlog.category, lang) ||
+    (lang === "EN" ? "Guides" : "Leitfäden");
+  const tags = (currentBlog.Tags || currentBlog.tags || []).map((t) =>
+    getBi(t, lang),
+  );
+
   const imgSource = currentBlog.img
     ? currentBlog.img.startsWith("http") ||
       currentBlog.img.startsWith("/assets")
@@ -158,6 +222,11 @@ const Blogsdetails = () => {
 
   return (
     <section className="bg-[#f4f4f4] pb-[90px]">
+      <SEO
+        title={title}
+        description={stripHtml(rawContent).slice(0, 160)}
+        keywords={tags.join(", ")}
+      />
       {/* HERO IMAGE */}
       <div className="relative w-full overflow-hidden ">
         <img
@@ -220,45 +289,59 @@ const Blogsdetails = () => {
 
             {/* LIKE + SHARE */}
             <div className="mt-12 border-t border-[#ddd] pt-8">
-              <div className="flex items-center justify-between gap-4 flex-nowrap">
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                {/* LIKE */}
+                <button
+                  onClick={handleLike}
+                  disabled={isLiking}
+                  className={`
+                    flex items-center gap-3 px-6 py-2.5 rounded-full border transition-all duration-300
+                    ${isLiking ? "opacity-50 cursor-not-allowed" : "hover:scale-105 active:scale-95 cursor-pointer"}
+                    ${hasLiked ? "bg-[#b8965a] border-[#b8965a] text-white shadow-md shadow-[#b8965a]/20" : "bg-white border-[#9f9992] text-black hover:bg-[#b8965a]/5"}
+                  `}
+                >
+                  <i
+                    className={`fa-${hasLiked ? "solid" : "regular"} fa-heart text-[16px] ${hasLiked ? "animate-in zoom-in-110" : ""}`}
+                  ></i>
+                  <span className="font-bold text-sm">
+                    {likes} {lang === "EN" ? "Likes" : "Gefällt mir"}
+                  </span>
+                </button>
+
                 {/* SHARE */}
-                <div className="flex items-center gap-2 md:gap-4 shrink-0">
-                  {/* LINKEDIN */}
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-400 mr-1">
+                    {lang === "EN" ? "Share" : "Teilen"}
+                  </span>
                   <a
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-[#b8965a] hover:text-white transition duration-300"
+                    className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
                     <i className="fa-brands fa-linkedin-in"></i>
                   </a>
-
-                  {/* X */}
                   <a
-                    href={`https://twitter.com/intent/tweet?url=${articleUrl}`}
+                    href={`https://twitter.com/intent/tweet?url=${articleUrl}&text=${encodeURIComponent(title)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-[#b8965a] hover:text-white transition duration-300"
+                    className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
                     <i className="fa-brands fa-x-twitter"></i>
                   </a>
-
-                  {/* FACEBOOK */}
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[14px] hover:bg-[#b8965a] hover:text-white transition duration-300"
+                    className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
                     <i className="fa-brands fa-facebook-f"></i>
                   </a>
-
-                  {/* INSTAGRAM */}
                   <a
-                    href="https://www.instagram.com/"
+                    href={settings?.instagram || "https://www.instagram.com/"}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[38px] h-[38px] md:w-[40px] md:h-[40px] rounded-full border border-[#9f9992] flex items-center justify-center text-black text-[13px] hover:bg-[#b8965a] hover:text-white transition duration-300"
+                    className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
                     <i className="fa-brands fa-instagram"></i>
                   </a>
@@ -267,50 +350,115 @@ const Blogsdetails = () => {
             </div>
 
             {/* COMMENTS */}
-            <div className="mt-14">
+            <div className="mt-14" id="comments">
               {/* COMMENT BOX */}
-              <div className="bg-white rounded-[28px] p-6 md:p-8 border border-[#e6dfd5]">
-                <h3 className="title-font text-[24px] text-black mb-5 font-semibold">
+              <div className="bg-white rounded-[28px] p-6 md:p-10 border border-[#e6dfd5] shadow-sm">
+                <h3 className="title-font text-[24px] text-black mb-6 font-semibold">
                   {lang === "EN"
                     ? "Leave a Comment"
                     : "Hinterlasse einen Kommentar"}
                 </h3>
 
-                <textarea
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
-                  placeholder={
-                    lang === "EN"
-                      ? "Write your comment..."
-                      : "Schreiben Sie Ihren Kommentar..."
-                  }
-                  className="w-full h-[160px] rounded-[20px] border border-[#ddd] p-5 outline-none resize-none text-[15px] focus:border-[#b8965a] transition"
-                ></textarea>
+                <form onSubmit={handleCommentSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      required
+                      placeholder={lang === "EN" ? "Your Name *" : "Ihr Name *"}
+                      value={commentData.name}
+                      onChange={(e) =>
+                        setCommentData({ ...commentData, name: e.target.value })
+                      }
+                      className="w-full px-5 py-3 rounded-xl border border-[#ddd] outline-none focus:border-[#b8965a] transition"
+                    />
+                    <input
+                      type="email"
+                      required
+                      placeholder={
+                        lang === "EN" ? "Your Email *" : "Ihre E-Mail *"
+                      }
+                      value={commentData.email}
+                      onChange={(e) =>
+                        setCommentData({
+                          ...commentData,
+                          email: e.target.value,
+                        })
+                      }
+                      className="w-full px-5 py-3 rounded-xl border border-[#ddd] outline-none focus:border-[#b8965a] transition"
+                    />
+                  </div>
+                  <textarea
+                    required
+                    value={commentData.text}
+                    onChange={(e) =>
+                      setCommentData({ ...commentData, text: e.target.value })
+                    }
+                    placeholder={
+                      lang === "EN"
+                        ? "Write your comment..."
+                        : "Schreiben Sie Ihren Kommentar..."
+                    }
+                    className="w-full h-[140px] rounded-xl border border-[#ddd] p-5 outline-none resize-none text-[15px] focus:border-[#b8965a] transition"
+                  ></textarea>
 
-                <button
-                  onClick={handleComment}
-                  className="mt-5 px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 cursor-pointer"
-                >
-                  {lang === "EN" ? "Post Comment" : "Kommentar abschicken"}
-                </button>
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="px-10 py-3.5 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-black hover:border-black transition duration-300 disabled:opacity-50"
+                  >
+                    {submitting
+                      ? lang === "EN"
+                        ? "Submitting..."
+                        : "Wird gesendet..."
+                      : lang === "EN"
+                        ? "Post Comment"
+                        : "Kommentar abschicken"}
+                  </button>
+                  <p className="text-[10px] text-gray-400 mt-2 italic">
+                    *{" "}
+                    {lang === "EN"
+                      ? "Your email address will not be published. Comments require admin approval."
+                      : "Ihre E-Mail-Adresse wird nicht veröffentlicht. Kommentare müssen vom Administrator genehmigt werden."}
+                  </p>
+                </form>
               </div>
 
               {/* LIST OF COMMENTS */}
-              {comments.length > 0 && (
-                <div className="mt-8 space-y-4">
-                  {comments.map((c, i) => (
-                    <div
-                      key={i}
-                      className="bg-white rounded-[20px] p-5 border border-[#e6dfd5]"
-                    >
-                      <h4 className="font-semibold text-black mb-1">
-                        {c.name}
-                      </h4>
-                      <p className="text-[#0a3e40] text-sm">{c.text}</p>
+              <div className="mt-12 space-y-6">
+                <h4 className="font-bold text-black border-b border-[#ddd] pb-4 mb-6">
+                  {comments.length} {lang === "EN" ? "Comments" : "Kommentare"}
+                </h4>
+                {comments.length > 0 ? (
+                  comments.map((c, i) => (
+                    <div key={c._id || i} className="flex gap-4 group">
+                      <div className="w-12 h-12 rounded-full bg-[#f5f3ef] flex items-center justify-center text-[#b8965a] shrink-0 border border-[#e6dfd5]">
+                        <i className="fa-solid fa-user text-lg"></i>
+                      </div>
+                      <div className="flex-1 bg-white rounded-2xl p-5 border border-[#e6dfd5] shadow-sm group-hover:border-[#b8965a]/30 transition-all">
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="font-bold text-black text-sm">
+                            {c.name}
+                          </h4>
+                          <span className="text-[10px] text-gray-400">
+                            {new Date(c.createdAt).toLocaleDateString(
+                              lang === "EN" ? "en-US" : "de-DE",
+                            )}
+                          </span>
+                        </div>
+                        <p className="text-[#0a3e40] text-sm leading-relaxed whitespace-pre-wrap">
+                          {c.text}
+                        </p>
+                      </div>
                     </div>
-                  ))}
-                </div>
-              )}
+                  ))
+                ) : (
+                  <p className="text-center py-10 text-gray-400 text-sm italic">
+                    {lang === "EN"
+                      ? "Be the first to share your thoughts!"
+                      : "Schreiben Sie als Erster einen Kommentar!"}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
@@ -318,7 +466,7 @@ const Blogsdetails = () => {
           <div className="lg:sticky lg:top-[120px] h-fit text-left">
             {/* CATEGORY */}
             <div className="bg-[#e7dfd7] rounded-[28px] p-6 md:p-8 mb-7 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
-              <h3 className="title-font text-[24px] md:text-[28px] text-black mb-6 text-left font-semibold">
+              <h3 className="title-font text-[24px] md:text-[28px] text-black mb-6 text-left ">
                 {lang === "EN" ? "Category" : "Kategorie"}
               </h3>
 
@@ -332,7 +480,7 @@ const Blogsdetails = () => {
             {/* TAGS */}
             {tags && tags.length > 0 && (
               <div className="bg-[#e7dfd7] rounded-[28px] p-6 md:p-8 mb-7 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
-                <h3 className="title-font text-[24px] md:text-[28px] text-black mb-6 text-left font-semibold">
+                <h3 className="title-font text-[24px] md:text-[28px] text-black mb-6 text-left ">
                   Tags
                 </h3>
 
@@ -351,7 +499,7 @@ const Blogsdetails = () => {
 
             {/* RECENT POSTS */}
             <div className="bg-[#e7dfd7] rounded-[28px] p-6 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.04)]">
-              <h3 className="title-font text-[24px] md:text-[28px] text-black mb-7 text-left font-semibold">
+              <h3 className="title-font text-[24px] md:text-[28px] text-black mb-7 text-left ">
                 {lang === "EN" ? "Recent Posts" : "Aktuelle Beiträge"}
               </h3>
 
@@ -363,7 +511,7 @@ const Blogsdetails = () => {
                         ? getBi(item.title, lang)
                         : item.title;
                     const itemCategory =
-                      item.Category || item.category || "AI & HR";
+                      getBi(item.Category || item.category, lang) || "AI & HR";
                     const itemImg = item.img
                       ? item.img.startsWith("http") ||
                         item.img.startsWith("/assets")
@@ -394,38 +542,9 @@ const Blogsdetails = () => {
                     );
                   })
                 ) : (
-                  <>
-                    <div className="flex items-start text-left gap-4 pb-6 border-b border-[#ececec] mb-6 group cursor-pointer">
-                      <img
-                        src="/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg"
-                        alt=""
-                        className="w-[90px] h-[90px] rounded-[18px] object-cover shrink-0"
-                      />
-                      <div>
-                        <p className="text-[#b8965a] text-xs uppercase tracking-[2px] mb-2">
-                          AI & HR
-                        </p>
-                        <h4 className="text-[17px] leading-[1.5] text-black group-hover:text-[#b8965a] transition">
-                          AI Implementation in HR
-                        </h4>
-                      </div>
-                    </div>
-                    <div className="flex items-start text-left gap-4 group cursor-pointer">
-                      <img
-                        src="/assets/images/people-office-analyzing-checking-finance-graphs.jpg"
-                        alt=""
-                        className="w-[90px] h-[90px] rounded-[18px] object-cover shrink-0"
-                      />
-                      <div>
-                        <p className="text-[#b8965a] text-xs uppercase tracking-[2px] mb-2">
-                          Leadership
-                        </p>
-                        <h4 className="text-[17px] leading-[1.5] text-black group-hover:text-[#b8965a] transition">
-                          Future of AI in Business
-                        </h4>
-                      </div>
-                    </div>
-                  </>
+                  <p className="text-gray-400 text-sm italic">
+                    No recent posts found.
+                  </p>
                 )}
               </div>
             </div>

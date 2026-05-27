@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getHero, getSettings, IMG_URL, getBi, getCached, setCached } from "../../api/api";
+import {
+  getHero,
+  getSettings,
+  IMG_URL,
+  getBi,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const Hero = () => {
   const [hover, setHover] = useState(false);
   const cachedHero = getCached("hero");
   const cachedSettings = getCached("settings");
-  
+
   const [hero, setHero] = useState(cachedHero || null);
   const [settings, setSettings] = useState(cachedSettings || null);
   const [loading, setLoading] = useState(!cachedHero || !cachedSettings);
@@ -34,13 +41,42 @@ const Hero = () => {
   }
 
   const title = hero ? getBi(hero.title, lang) : "Dr. Raphael Edlmann";
-  const subtitle = hero ? getBi(hero.subtitle, lang) : "Interim Manager. AI, HR & Business Process Expert";
-  const imgUrl = hero && hero.img ? `${IMG_URL}${hero.img}` : null;
+  const subtitle = hero
+    ? getBi(hero.subtitle, lang)
+    : "Interim Manager. AI, HR & Business Process Expert";
+
+  const imgUrl =
+    hero && hero.img
+      ? `${IMG_URL}${hero.img}`
+      : "/assets/Banners/Home-banner.jpg";
+
   const email = settings?.email || "contact@edlmann.com";
+
+  const socialLinks = [
+    {
+      id: "li",
+      icon: "fa-linkedin-in",
+      url: settings?.linkedin || "https://linkedin.com/",
+    },
+    {
+      id: "tw",
+      icon: "fa-x-twitter",
+      url: settings?.twitter || "https://x.com/",
+    },
+    {
+      id: "fb",
+      icon: "fa-facebook-f",
+      url: settings?.facebook || "https://facebook.com/",
+    },
+    {
+      id: "ig",
+      icon: "fa-instagram",
+      url: settings?.instagram || "https://instagram.com/",
+    },
+  ];
 
   return (
     <section className="relative w-full min-h-[70vh] md:min-h-screen flex items-end items-center overflow-hidden pt-[140px] pb-[60px] bg-[#111]">
-
       {/* IMAGE */}
       <div className="absolute inset-0">
         {imgUrl && (
@@ -55,13 +91,10 @@ const Hero = () => {
 
       {/* CONTENT */}
       <div className="relative max-w-[1420px] mx-auto px-[20px] md:px-[40px] w-full text-center md:text-left mb-[75px] md:mb-0">
-
         <h2
           className="text-white font-medium leading-tight text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-wide"
           style={{
-            fontFamily: hover
-              ? "Caveat, cursive"
-              : "Playfair Display, serif",
+            fontFamily: hover ? "Caveat, cursive" : "Playfair Display, serif",
             letterSpacing: hover ? "1px" : "0px",
             transition: "0.4s ease",
           }}
@@ -76,11 +109,9 @@ const Hero = () => {
           {subtitle}
         </p>
 
-
         {/* BUTTON + ICONS */}
         <div className="w-full flex justify-center md:justify-start mt-8">
           <div className="flex items-center gap-3 flex-wrap">
-
             {/* BUTTON */}
             <Link
               to="/contact"
@@ -106,164 +137,46 @@ const Hero = () => {
             >
               <i className="fa-brands fa-whatsapp"></i>
             </Link>
-
           </div>
         </div>
       </div>
 
- {/* SOCIAL MEDIA */}
-<div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[40px] z-20">
-
-  <div className="flex gap-3 md:gap-4">
-
-    {/* LINKEDIN */}
-    {settings?.linkedin && (
-      <a
-        href={settings.linkedin}
-        target="_blank"
-        rel="noreferrer"
-        className="
-          group
-          w-[42px]
-          h-[42px]
-          md:w-[45px]
-          md:h-[45px]
-          flex
-          items-center
-          justify-center
-          border
-          border-white/80
-          rounded-full
-          bg-white/10
-          hover:bg-[#b8965a]
-          hover:border-[#b8965a]
-          active:bg-[#b8965a]
-          active:border-[#b8965a]
-          transition-all
-          duration-500
-          backdrop-blur-md
-          hover:scale-110
-          active:scale-90
-          active:rotate-6
-          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-        "
-      >
-        <i className="fa-brands fa-linkedin-in text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-      </a>
-    )}
-
-    {/* X */}
-    {settings?.twitter && (
-      <a
-        href={settings.twitter}
-        target="_blank"
-        rel="noreferrer"
-        className="
-          group
-          w-[42px]
-          h-[42px]
-          md:w-[45px]
-          md:h-[45px]
-          flex
-          items-center
-          justify-center
-          border
-          border-white/80
-          rounded-full
-          bg-white/10
-          hover:bg-[#b8965a]
-          hover:border-[#b8965a]
-          active:bg-[#b8965a]
-          active:border-[#b8965a]
-          transition-all
-          duration-500
-          backdrop-blur-md
-          hover:scale-110
-          active:scale-90
-          active:-rotate-6
-          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-        "
-      >
-        <i className="fa-brands fa-x-twitter text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-      </a>
-    )}
-
-    {/* FACEBOOK */}
-    {settings?.facebook && (
-      <a
-        href={settings.facebook}
-        target="_blank"
-        rel="noreferrer"
-        className="
-          group
-          w-[42px]
-          h-[42px]
-          md:w-[45px]
-          md:h-[45px]
-          flex
-          items-center
-          justify-center
-          border
-          border-white/80
-          rounded-full
-          bg-white/10
-          hover:bg-[#b8965a]
-          hover:border-[#b8965a]
-          active:bg-[#b8965a]
-          active:border-[#b8965a]
-          transition-all
-          duration-500
-          backdrop-blur-md
-          hover:scale-110
-          active:scale-90
-          active:rotate-6
-          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-        "
-      >
-        <i className="fa-brands fa-facebook-f text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-      </a>
-    )}
-
-    {/* INSTAGRAM */}
-    {settings?.instagram && (
-      <a
-        href={settings.instagram}
-        target="_blank"
-        rel="noreferrer"
-        className="
-          group
-          w-[42px]
-          h-[42px]
-          md:w-[45px]
-          md:h-[45px]
-          flex
-          items-center
-          justify-center
-          border
-          border-white/80
-          rounded-full
-          bg-white/10
-          hover:bg-[#b8965a]
-          hover:border-[#b8965a]
-          active:bg-[#b8965a]
-          active:border-[#b8965a]
-          transition-all
-          duration-500
-          backdrop-blur-md
-          hover:scale-110
-          active:scale-90
-          active:-rotate-6
-          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-        "
-      >
-        <i className="fa-brands fa-instagram text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-      </a>
-    )}
-
-  </div>
-
-</div>
-
+      {/* SOCIAL MEDIA */}
+      <div className="absolute bottom-[40px] left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-[40px] z-20">
+        <div className="flex gap-4 md:gap-5">
+          {socialLinks.map((s) => (
+            <a
+              key={s.id}
+              href={s.url}
+              target="_blank"
+              rel="noreferrer"
+              className="
+                group
+                w-[45px]
+                h-[45px]
+                flex
+                items-center
+                justify-center
+                border
+                border-white/30
+                rounded-full
+                bg-white/5
+                hover:bg-[#b8965a]
+                hover:border-[#b8965a]
+                transition-all
+                duration-500
+                backdrop-blur-md
+                hover:scale-110
+                shadow-[0_4px_15px_rgba(0,0,0,0.2)]
+              "
+            >
+              <i
+                className={`fa-brands ${s.icon} text-[15px] text-white transition-transform duration-500 group-hover:scale-110`}
+              ></i>
+            </a>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

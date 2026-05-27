@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getHomeAbout, IMG_URL, getBi } from "../../api/api";
+import {
+  getHomeAbout,
+  IMG_URL,
+  getBi,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const cleanRichText = (value = "") =>
@@ -16,7 +22,9 @@ const cleanRichText = (value = "") =>
     .trim();
 
 const About = () => {
-  const [about, setAbout] = useState(null);
+  const cached = getCached("homeIntro");
+  const [about, setAbout] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
   const { lang } = useLanguage();
 
   useEffect(() => {
@@ -24,43 +32,54 @@ const About = () => {
       .then((res) => {
         if (res.data) {
           setAbout(res.data);
+          setCached("homeIntro", res.data);
         }
       })
-      .catch((err) => console.error("Error fetching about me:", err));
+      .catch((err) => console.error("Error fetching home intro:", err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const label = about ? getBi(about.label, lang) : "About Me";
-  const title = about ? getBi(about.title, lang) : "Interim Manager for AI, HR and Business Process Transformation";
-  const quote = about ? getBi(about.quote, lang) : "Shaping digital transformation and AI with integrity, clarity and a long-term vision.";
-  const desc = about ? getBi(about.desc, lang) : "Welcome — I’m glad you’re here.\n\nI am an expert in AI, HR and business process transformation, and a recognised speaker at international conferences and public forums. As an interim manager, I help organisations translate complexity into practical, AI-driven solutions with real impact.\n\nOn this website, you will find everything you need to know about my work, upcoming engagements and publications. In my blog “HR & AI Insights,” I share current perspectives and insights on AI and HR. Feel free to subscribe to my newsletter, connect with me on social media, or explore collaboration opportunities. I look forward to hearing from you.";
-  const imgUrl = about && about.img ? `${IMG_URL}${about.img}` : "/assets/images/2026_03_17_Raphael_Edlmann_About Me.jpg";
-  
+  if (loading) {
+    return (
+      <div className="bg-white py-[60px]">
+        <div className="max-w-[1350px] mx-auto px-4 md:px-7 h-[400px] rounded-[38px] bg-gray-50 animate-pulse" />
+      </div>
+    );
+  }
+
+  const label =
+    getBi(about?.label, lang) || (lang === "EN" ? "About Me" : "Über mich");
+  const title =
+    getBi(about?.title, lang) ||
+    (lang === "EN"
+      ? "Interim Manager for AI, HR and Business Process Transformation"
+      : "Interim Manager für KI, HR und Geschäftsprozess-Transformation");
+  const quote = getBi(about?.quote, lang);
+  const desc = getBi(about?.desc, lang);
+  const imgUrl =
+    about && about.img
+      ? `${IMG_URL}${about.img}`
+      : "/assets/images/2026_03_17_Raphael_Edlmann_About Me.jpg";
+
   // Use uploaded CV from database if available, else standard fallback
-  const cvUrl = about && about.cv ? `${IMG_URL}${about.cv}` : "/assets/images/Professional_CV_English-protected.pdf";
+  const cvUrl =
+    about && about.cv
+      ? `${IMG_URL}${about.cv}`
+      : "/assets/images/Professional_CV_English-protected.pdf";
 
-  const staticVita = [
-    { degree: "Entrepreneur", university: "Building ventures, and turning ideas into sustainable growth" },
-    { degree: "HR, AI & Business Process Expert", university: "Specialised in AI-driven HR transformation and Workload Automation" },
-    { degree: "Doctor of Business Administration (DBA)", university: "Heriot Watt University, Edinburgh Business School" },
-    { degree: "Keynote Speaker", university: "Speaking internationally on AI, the future of work, and digital transformation." }
-  ];
-
-  const vitaItems = about && about.vita && about.vita.length > 0 ? about.vita : null;
-  const vitaTitle = about ? getBi(about.vitaTitle, lang) : "Vita";
-  const readableQuote = cleanRichText(quote);
-  const readableDesc = cleanRichText(desc);
+  const vitaItems =
+    Array.isArray(about?.vita) && about.vita.length > 0 ? about.vita : [];
+  const vitaTitle = getBi(about?.vitaTitle, lang) || "Vita";
+  const readableQuote = quote ? cleanRichText(quote) : "";
+  const readableDesc = desc ? cleanRichText(desc) : "";
 
   return (
     <section className="bg-white py-[60px]">
-
       <div className="max-w-[1350px] mx-auto px-[20px] md:px-[40px]">
-
         {/* MAIN GRID */}
         <div className="grid md:grid-cols-[40%_60%] gap-10 items-center">
-
           {/* LEFT CONTENT */}
           <div className="max-w-[620px]">
-
             {/* LABEL */}
             <span className="text-[#b8965a] text-xs tracking-[2px] uppercase mb-4 block">
               {label}
@@ -73,44 +92,31 @@ const About = () => {
 
             {/* TEXT */}
             <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.8] break-words">
-
               {readableQuote && (
-                <p className="font-semibold italic">
-                  "{readableQuote}"
-                </p>
+                <p className="font-semibold italic">"{readableQuote}"</p>
               )}
 
-              <p className="whitespace-pre-line">
-                {readableDesc}
-              </p>
-
+              <p className="whitespace-pre-line">{readableDesc}</p>
             </div>
-
           </div>
 
           {/* RIGHT SIDE */}
           <div className="bg-[#f5f3ef] rounded-[22px] p-6 md:p-8 border border-[#e6dfd5] shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
-
             {/* TOP */}
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
-
               {/* LEFT SIDE */}
               <div className="w-full lg:w-[40%] flex flex-col items-center">
-
                 {/* IMAGE */}
                 <div className="w-[250px] h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
-
                   <img
                     src={imgUrl}
                     className="w-full h-full object-cover"
                     alt="profile"
                   />
-
                 </div>
 
                 {/* BUTTONS */}
                 <div className="flex flex-col gap-3 mt-6 w-full">
-
                   <Link
                     to="/contact"
                     className="w-full text-center px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition"
@@ -125,33 +131,30 @@ const About = () => {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
                   >
-
                     <i className="fa-solid fa-download"></i>
 
                     {lang === "EN" ? "Download CV" : "Download CV "}
-
                   </a>
-
                 </div>
-
               </div>
 
               {/* RIGHT CONTENT */}
               <div className="w-full lg:w-[60%]">
-
                 <span className="text-[#b8965a] text-[11px] tracking-[3px] uppercase mb-5 block">
                   {vitaTitle}
                 </span>
 
                 {/* INFO CARDS */}
                 <div className="grid grid-cols-1 gap-5">
-
-                  {vitaItems ? (
+                  {vitaItems.length > 0 ? (
                     vitaItems.map((item, index) => {
                       const itemDegree = getBi(item.degree, lang);
                       const itemUni = getBi(item.university, lang);
                       return (
-                        <div key={index} className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca] last:border-0">
+                        <div
+                          key={index}
+                          className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca] last:border-0"
+                        >
                           {/* LEFT LINE */}
                           <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
                           {/* CONTENT */}
@@ -167,33 +170,16 @@ const About = () => {
                       );
                     })
                   ) : (
-                    staticVita.map((item, index) => (
-                      <div key={index} className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca] last:border-0">
-                        <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
-                        <div>
-                          <h4 className="text-[#b8965a] text-[15px] font-semibold leading-none mb-3">
-                            {item.degree}
-                          </h4>
-                          <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
-                            {item.university}
-                          </p>
-                        </div>
-                      </div>
-                    ))
+                    <p className="text-gray-300 text-xs italic">
+                      No highlights listed yet.
+                    </p>
                   )}
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </section>
   );
 };

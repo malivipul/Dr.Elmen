@@ -143,7 +143,7 @@ const VitaTimeline = () => {
       </div>
 
       {/* SLIDER */}
-      <div className="max-w-[1250px] mx-auto px-[20px]">
+      <div className="max-w-[1450px] mx-auto px-[20px]">
         {items.length > 0 ? (
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}

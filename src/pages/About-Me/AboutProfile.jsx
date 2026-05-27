@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { getAboutProfile, getBi, IMG_URL } from "../../api/api";
+import {
+  getAboutProfile,
+  getBi,
+  IMG_URL,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const cleanRichText = (value = "") =>
@@ -14,22 +20,10 @@ const cleanRichText = (value = "") =>
     .replace(/&#39;|&apos;/g, "'")
     .trim();
 
-const fallbackParagraphs = [
-  "Welcome - I am glad you are here.",
-  "I am an expert in AI, HR, and business process transformation based in Munich, Germany, helping organisations turn complexity into practical AI-driven solutions with real impact.",
-  "With over 10 years of management and project experience, I have consistently delivered high-performance results across Aerospace, Defence, Finance, Automotive, and Public Sector organisations.",
-  "My doctoral research at Heriot-Watt University focused on how AI recruitment technology shapes organisational trust - bringing academic rigour into every engagement and strategic decision.",
-];
-
-const fallbackStats = (lang) => [
-  { value: "10+", label: lang === "EN" ? "Years Leadership" : "Jahre Führungserfahrung" },
-  { value: "50", label: lang === "EN" ? "FTEs Managed" : "Verwaltete FTEs" },
-  { value: "95%", label: lang === "EN" ? "SLA Compliance" : "SLA-Einhaltung" },
-  { value: "DBA", label: "Heriot-Watt University" },
-];
-
 const AboutSection = () => {
-  const [profile, setProfile] = useState(null);
+  const cached = getCached("aboutProfile");
+  const [profile, setProfile] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
   const { lang } = useLanguage();
 
   useEffect(() => {
@@ -37,19 +31,27 @@ const AboutSection = () => {
       .then((res) => {
         if (res.data) {
           setProfile(res.data);
+          setCached("aboutProfile", res.data);
         }
       })
-      .catch((err) => console.error("Error fetching about profile:", err));
+      .catch((err) => console.error("Error fetching about profile:", err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const label = profile ? getBi(profile.label, lang) : (lang === "EN" ? "Who I Am" : "Wer ich bin");
-  const title = profile ? getBi(profile.title || profile.heading, lang) : (lang === "EN" ? "Building Smarter Organisations" : "Intelligentere Organisationen aufbauen");
-  const rawDescription = profile
-    ? getBi(profile.description || profile.desc || profile.text || profile.content, lang)
-    : "";
+  if (loading) {
+    return (
+      <div className="bg-[#f4f4f4] py-[60px]">
+        <div className="max-w-[1320px] mx-auto px-4 md:px-7 h-[500px] rounded-[38px] bg-gray-100 animate-pulse" />
+      </div>
+    );
+  }
+
+  const label = getBi(profile?.label, lang) || (lang === "EN" ? "Who I Am" : "Wer ich bin");
+  const title = getBi(profile?.title || profile?.heading, lang) || (lang === "EN" ? "Building Smarter Organisations" : "Intelligentere Organisationen aufbauen");
+  const rawDescription = getBi(profile?.description || profile?.desc || profile?.text || profile?.content, lang);
   const paragraphs = rawDescription
     ? cleanRichText(rawDescription).split(/\n{2,}/).filter(Boolean)
-    : fallbackParagraphs;
+    : [];
   const imagePath = profile?.img || profile?.image;
   const imageUrl = imagePath
     ? imagePath.startsWith("http") || imagePath.startsWith("/assets")
@@ -61,7 +63,7 @@ const AboutSection = () => {
         value: getBi(item.value || item.number || item.count, lang),
         label: getBi(item.label || item.title || item.text, lang),
       }))
-    : fallbackStats(lang);
+    : [];
 
   return (
     <section className="relative overflow-hidden bg-[#f4f4f4] py-[60px] md:py-[60px]">

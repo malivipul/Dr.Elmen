@@ -363,7 +363,7 @@ const ContactForm = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center h-[46px] px-7 rounded-full bg-[#111111] hover:bg-[#b8965a] text-white text-[13px] font-bold tracking-[1.5px] transition-all duration-500 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center justify-center h-[46px] px-7 rounded-full bg-[#b8965a] text-white text-[13px] font-bold tracking-[1.5px] transition-all duration-500 disabled:opacity-50 cursor-pointer"
                 >
                   {submitting
                     ? lang === "EN"

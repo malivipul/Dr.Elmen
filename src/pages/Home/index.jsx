@@ -8,15 +8,17 @@ import SpeakerSection from "./SpeakerSection";
 import LogoSlider from "./LogoSlider";
 import ServicesSection from "./ServicesSection";
 
+import SEO from "../../components/commen/SEO";
+
 // MODAL
 import SubscribeModal from "../../components/model/SubscribeModal";
 const Home = () => {
-
   // MODAL STATE
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
+      <SEO page="home" />
       <Hero />
 
       <About />
@@ -24,9 +26,7 @@ const Home = () => {
       <LogoSlider />
 
       {/* BLOG SECTION */}
-      <BlogSection
-        setIsOpen={setIsOpen}
-      />
+      <BlogSection setIsOpen={setIsOpen} />
 
       <AuthorSection />
 
@@ -35,10 +35,7 @@ const Home = () => {
       <ServicesSection />
 
       {/* SUBSCRIBE MODAL */}
-      <SubscribeModal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
+      <SubscribeModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

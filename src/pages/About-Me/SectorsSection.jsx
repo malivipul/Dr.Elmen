@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
-import { getAboutSectors, getBi } from "../../api/api";
+import { getAboutSectors, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const cleanRichText = (value = "") =>
@@ -15,75 +15,55 @@ const cleanRichText = (value = "") =>
     .replace(/&#39;|&apos;/g, "'")
     .trim();
 
-const fallbackSectors = (lang) => [
-  lang === "EN" ? "Aerospace & Defence" : "Luft- & Raumfahrt",
-  "Automotive",
-  lang === "EN" ? "Finance & Banking" : "Finanzwesen & Banken",
-  lang === "EN" ? "Public Sector" : "Öffentlicher Sektor",
-  lang === "EN" ? "Higher Education" : "Hochschulbildung",
-];
-
 const getSectorItems = (data, lang) => {
   const items =
     data?.sectors ||
     data?.items ||
     data?.list ||
-    data?.data?.sectors ||
-    data?.data?.items;
+    data?.value ||
+    data?.data?.sectors;
 
-  if (!Array.isArray(items)) return fallbackSectors(lang);
+  if (!Array.isArray(items)) return [];
 
-  const sectors = items
+  return items
     .map((item) => {
       if (typeof item === "string") return cleanRichText(item);
       return cleanRichText(getBi(item.title || item.name || item.label || item.text, lang));
     })
     .filter(Boolean);
-
-  return sectors.length ? sectors : fallbackSectors(lang);
 };
 
 const SectorsSection = () => {
   const { lang } = useLanguage();
-  const [sectorData, setSectorData] = useState(null);
+  const cached = getCached("aboutSectors");
+  const [sectorData, setSectorData] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
 
   useEffect(() => {
-    let isMounted = true;
-
     getAboutSectors()
       .then((res) => {
-        if (!isMounted) return;
-        setSectorData(res.data || null);
+        if (res.data) {
+          setSectorData(res.data);
+          setCached("aboutSectors", res.data);
+        }
       })
-      .catch((err) => {
-        console.error("Failed to load about sectors", err);
-      });
-
-    return () => {
-      isMounted = false;
-    };
+      .catch((err) => console.error("Failed to load about sectors", err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const sectionData =
-    sectorData?.data && !Array.isArray(sectorData.data)
-      ? sectorData.data
-      : sectorData;
+  if (loading) {
+    return (
+      <div className="bg-[#050505] py-[60px]">
+        <div className="max-w-[1320px] mx-auto px-4 md:px-7 h-[300px] rounded-[38px] bg-white/5 animate-pulse" />
+      </div>
+    );
+  }
 
-  const label = lang === "EN" ? "Sectors Served" : "Bediente Branchen";
+  const label = getBi(sectorData?.label, lang) || (lang === "EN" ? "Sectors Served" : "Bediente Branchen");
+  const title = getBi(sectorData?.title || sectorData?.heading, lang) || (lang === "EN" ? "Industries & Domains" : "Branchen & Fachgebiete");
+  const subtitle = getBi(sectorData?.subtitle || sectorData?.description || sectorData?.text, lang) || (lang === "EN" ? "Cross-industry experience spanning enterprise technology, policy and academia." : "Branchenübergreifende Erfahrung in den Bereichen Unternehmenstechnologie, Politik und Wissenschaft.");
 
-  const title =
-    sectionData?.title || sectionData?.heading
-      ? cleanRichText(getBi(sectionData.title || sectionData.heading, lang))
-      : (lang === "EN" ? "Industries & Domains" : "Branchen & Fachgebiete");
-
-  const subtitle =
-    sectionData?.subtitle || sectionData?.description || sectionData?.text
-      ? cleanRichText(getBi(sectionData.subtitle || sectionData.description || sectionData.text, lang))
-      : (lang === "EN" 
-          ? "Cross-industry experience spanning enterprise technology, policy and academia."
-          : "Branchenübergreifende Erfahrung in den Bereichen Unternehmenstechnologie, Politik und Wissenschaft.");
-
-  const sectors = getSectorItems(sectionData || sectorData, lang);
+  const sectors = getSectorItems(sectorData, lang);
 
   return (
     <section className="bg-[#050505] py-[60px] md:py-[60px] overflow-hidden relative">
@@ -136,6 +116,10 @@ const SectorsSection = () => {
           ))}
 
         </div>
+
+        {sectors.length === 0 && (
+            <p className="text-center text-white/30 text-xs italic mt-10">No sectors currently listed.</p>
+        )}
 
       </div>
 

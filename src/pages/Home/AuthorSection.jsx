@@ -2,57 +2,75 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { getAuthor, getBooks, IMG_URL, getBi } from "../../api/api";
+import {
+  getBookHeader,
+  getBooks,
+  IMG_URL,
+  getBi,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 import "swiper/css";
 
+const cleanRichText = (value = "") =>
+  value
+    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/?p[^>]*>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;|\u00a0/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
+    .trim();
+
 const AuthorSection = () => {
+  const cachedHeader = getCached("homeBookHeader");
+  const cachedBooks = getCached("homeBooks");
+
   const [activeIndex, setActiveIndex] = useState(null);
-  const [author, setAuthor] = useState(null);
-  const [booksList, setBooksList] = useState([]);
+  const [header, setHeader] = useState(cachedHeader || null);
+  const [booksList, setBooksList] = useState(cachedBooks || []);
+  const [loading, setLoading] = useState(!cachedHeader || !cachedBooks);
   const { lang } = useLanguage();
 
   useEffect(() => {
-    getAuthor()
-      .then((res) => {
-        if (res.data) setAuthor(res.data);
-      })
-      .catch((err) => console.error("Error fetching author details:", err));
-
-    getBooks()
-      .then((res) => {
-        if (res.data) {
-          const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
+    Promise.all([getBookHeader(), getBooks()])
+      .then(([headRes, booksRes]) => {
+        if (headRes.data) {
+          setHeader(headRes.data);
+          setCached("homeBookHeader", headRes.data);
+        }
+        if (booksRes.data) {
+          const list = Array.isArray(booksRes.data)
+            ? booksRes.data
+            : booksRes.data.value || [];
           setBooksList(list);
+          setCached("homeBooks", list);
         }
       })
-      .catch((err) => console.error("Error fetching books:", err));
+      .catch((err) =>
+        console.error("Error fetching book header or books:", err),
+      )
+      .finally(() => setLoading(false));
   }, []);
 
-  const staticBooks = [
-    {
-      img: "/assets/images/book1.jpeg",
-      link: "https://link.springer.com/book/10.1007/978-3-030-56441-4",
-    },
-    {
-      img: "/assets/images/book2.webp",
-      link: "https://link.springer.com/chapter/10.1007/978-3-030-85521-5_3#citeas",
-    },
-    {
-      img: "/assets/images/book3.webp",
-      link: "#",
-    },
-  ];
+  if (loading) {
+    return (
+      <div className="w-full h-[500px] bg-white animate-pulse py-[60px]" />
+    );
+  }
 
-  const rawBooks = booksList && booksList.length > 0 ? booksList : staticBooks;
-  // Slice to the first 3 books
-  const books = rawBooks.slice(0, 3);
+  const books = booksList.slice(0, 3);
 
-  const label = author ? getBi(author.label, lang) : "Publications";
-  const title = author ? getBi(author.title, lang) : "Author";
-  const subtitle = author ? getBi(author.subtitle, lang) : "My research is not just about AI and HR — it’s about opening new perspectives.";
-  const desc = author ? getBi(author.desc, lang) : "Whether it’s rethinking how organisations use AI, reshaping HR, or exploring new ways to work:\nI am most pleased when my publications encourage you to challenge existing models.";
+  const label =
+    getBi(header?.label, lang) ||
+    (lang === "EN" ? "Publications" : "Publikationen");
+  const title =
+    getBi(header?.title, lang) || (lang === "EN" ? "Author" : "Autor");
+  const desc = cleanRichText(getBi(header?.description, lang));
 
   const handleClick = (index) => {
     if (window.innerWidth >= 1024) return;
@@ -61,29 +79,34 @@ const AuthorSection = () => {
 
   return (
     <section className="bg-white py-[60px]">
-      <div className="max-w-[1220px] mx-auto px-[20px] md:px-[40px]">
+      <div className="max-w-[1420px] mx-auto px-[20px] md:px-[40px]">
         {/* TITLE */}
         <div className="text-center mb-14">
           <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-            {label}
+            {lang === "EN" ? "Publications" : "Publikationen"}
           </span>
 
           <h2 className="title-font text-3xl md:text-4xl text-black py-4">
-            {title}
+            {lang === "EN" ? "Author" : "Autor"}
           </h2>
 
-          <p className="text-[#0a3e40] max-w-4xl mx-auto text-[16px] leading-relaxed whitespace-pre-line">
+          <p className="text-[#0a3e40] max-w-4xl mx-auto text-[16px] leading-relaxed">
             <span className="font-semibold italic">
-              {subtitle}
+              {lang === "EN"
+                ? "My research is not just about AI and HR — it’s about opening new perspectives."
+                : "Bei meiner Forschung geht es nicht nur um KI und HR – es geht darum, neue Perspektiven zu eröffnen."}
             </span>
+
             <br />
-            {desc}
+
+            {lang === "EN"
+              ? "Whether it’s rethinking how organisations use AI, reshaping HR, or exploring new ways to work: I am most pleased when my publications encourage you to challenge existing models."
+              : "Ob es darum geht, die Nutzung von KI in Unternehmen neu zu überdenken, HR neu zu gestalten oder neue Wege der Zusammenarbeit zu erkunden: Am meisten freut es mich, wenn meine Publikationen Sie dazu anregen, bestehende Modelle zu hinterfragen."}
           </p>
         </div>
 
         {/* MOBILE + TABLET SLIDER */}
         <div className="block lg:hidden">
-
           <Swiper
             modules={[Autoplay]}
             slidesPerView={1}
@@ -103,7 +126,6 @@ const AuthorSection = () => {
               },
             }}
           >
-
             {books.map((book, i) => {
               const bookPath = book.img || book.image;
               const imgSrc = bookPath
@@ -116,7 +138,7 @@ const AuthorSection = () => {
                 <SwiperSlide key={i}>
                   <div
                     onClick={() => handleClick(i)}
-                    className="group relative rounded-[28px] overflow-hidden cursor-pointer h-[650px] sm:h-[560px] md:h-[430px]"
+                    className="group relative rounded-[28px] overflow-hidden cursor-pointer h-[500px] md:h-[580px] lg:h-[580px]"
                   >
                     {/* IMAGE */}
                     <img
@@ -150,7 +172,11 @@ const AuthorSection = () => {
                         `}
                       >
                         {/* BUTTON */}
-                        <Link to={book.link || "#"} target="_blank" rel="noreferrer">
+                        <Link
+                          to={book.link || "#"}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           <span
                             className="
                               px-8 py-3
@@ -166,7 +192,9 @@ const AuthorSection = () => {
                               inline-block
                             "
                           >
-                            {lang === "EN" ? "Order now →" : "Jetzt bestellen →"}
+                            {lang === "EN"
+                              ? "Order now →"
+                              : "Jetzt bestellen →"}
                           </span>
                         </Link>
                       </div>
@@ -175,14 +203,11 @@ const AuthorSection = () => {
                 </SwiperSlide>
               );
             })}
-
           </Swiper>
-
         </div>
 
         {/* DESKTOP GRID */}
         <div className="hidden lg:grid lg:grid-cols-3 gap-10">
-
           {books.map((book, i) => {
             const bookPath = book.img || book.image;
             const imgSrc = bookPath
@@ -194,7 +219,7 @@ const AuthorSection = () => {
             return (
               <div
                 key={i}
-                className="group relative rounded-[28px] overflow-hidden cursor-pointer h-[520px]"
+                className="group relative rounded-[28px] overflow-hidden cursor-pointer h-[590px]"
               >
                 {/* IMAGE */}
                 <img
@@ -228,7 +253,11 @@ const AuthorSection = () => {
                     "
                   >
                     {/* BUTTON */}
-                    <Link to={book.link || "#"} target="_blank" rel="noreferrer">
+                    <Link
+                      to={book.link || "#"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <span
                         className="
                           px-8 py-3
@@ -244,7 +273,7 @@ const AuthorSection = () => {
                           inline-block
                         "
                       >
-                            {lang === "EN" ? "Order now →" : "Jetzt bestellen →"}
+                        {lang === "EN" ? "Order now →" : "Jetzt bestellen →"}
                       </span>
                     </Link>
                   </div>
@@ -252,11 +281,8 @@ const AuthorSection = () => {
               </div>
             );
           })}
-
         </div>
-
       </div>
-
     </section>
   );
 };

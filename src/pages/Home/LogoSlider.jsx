@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { getLogos, IMG_URL } from "../../api/api";
+import { getLogos, IMG_URL, getCached, setCached } from "../../api/api";
 
 import "swiper/css";
 
 const LogoSlider = () => {
-  const [logoList, setLogoList] = useState([]);
+  const cached = getCached("homeLogos");
+  const [logoList, setLogoList] = useState(cached || []);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,23 +17,15 @@ const LogoSlider = () => {
         if (res.data) {
           const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
           setLogoList(list);
+          setCached("homeLogos", list);
         }
       })
       .catch((err) => console.error("Error fetching logos:", err));
   }, []);
 
-  const staticLogos = [
-    { _id: "1", img: "/assets/images/Picture1.png" },
-    { _id: "2", img: "/assets/images/Picture2.png" },
-    { _id: "3", img: "/assets/images/Picture3.png" },
-    { _id: "4", img: "/assets/images/Picture4.png" },
-    { _id: "5", img: "/assets/images/Picture5.png" },
-    { _id: "6", img: "/assets/images/Picture6.png" },
-    { _id: "7", img: "/assets/images/Picture7.png" },
-    { _id: "8", img: "/assets/images/Picture8.png" }
-  ];
+  const logos = logoList;
 
-  const logos = logoList && logoList.length > 0 ? logoList : staticLogos;
+  if (logos.length === 0) return null;
 
 
   // CLICK FUNCTION
