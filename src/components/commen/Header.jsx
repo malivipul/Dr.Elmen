@@ -12,7 +12,6 @@ const Header = () => {
     <header className="absolute top-0 left-0 w-full z-50 text-white">
       {/* HEADER */}
       <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-start lg:justify-between relative">
-        
         {/* LEFT MENU */}
         <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
           {/* About Me */}
@@ -143,7 +142,7 @@ const Header = () => {
 
           {/* Speaker */}
           <Link
-            to={lang === "EN" ? "/#speaker-section" : "/speaker"}
+            to={lang === "EN" ? "/#speaker-section" : "/#speaker-section"}
             onMouseEnter={() => setHoverIndex("speaker")}
             onMouseLeave={() => setHoverIndex(null)}
             className="relative flex items-center justify-center h-[30px]"
@@ -603,7 +602,8 @@ const Header = () => {
                 transition-all
                 duration-300
                 ${
-                  location.pathname === (lang === "EN" ? "/#speaker-section" : "/speaker")
+                  location.pathname ===
+                  (lang === "EN" ? "/#speaker-section" : "/speaker")
                     ? "bg-[#b8965a] shadow-[0_6px_16px_rgba(184,150,90,0.22)]"
                     : "hover:bg-[#b8965a]/10"
                 }
@@ -618,7 +618,8 @@ const Header = () => {
                   transition-all
                   duration-300
                   ${
-                    location.pathname === (lang === "EN" ? "/#speaker-section" : "/speaker")
+                    location.pathname ===
+                    (lang === "EN" ? "/#speaker-section" : "/speaker")
                       ? "text-white"
                       : "text-[#111] hover:text-[#b8965a]"
                   }

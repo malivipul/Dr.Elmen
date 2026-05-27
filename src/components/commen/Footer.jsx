@@ -5,38 +5,23 @@ import { useLanguage } from "../../context/LanguageContext";
 
 const Footer = () => {
   const { lang } = useLanguage();
-  const [socialLinks, setSocialLinks] = useState({
-    linkedin: "https://www.linkedin.com/in/raphael-edlmann-60200059/",
-    twitter: "https://x.com/raphaeledlmann",
-    facebook: "https://www.facebook.com/profile.php?id=61587719828544",
-    instagram: "https://www.instagram.com/edlmannraphael/",
+  const [settings, setSettings] = useState({
+    email: "",
+    phone: "",
+    linkedin: "",
+    twitter: "",
+    facebook: "",
+    instagram: "",
   });
   const [services, setServices] = useState([]);
-
-  const staticServices = [
-    {
-      title: { en: "AI Strategy Workshop for HR", de: "AI Strategie Workshop für HR" },
-      slug: "ai-strategy-workshop-for-hr",
-    },
-    {
-      title: { en: "Digital Transformation for HR Workshop", de: "Digitale Transformation für HR Workshop" },
-      slug: "digital-transformation-workshop-for-hr",
-    },
-    {
-      title: { en: "Job Scheduling & Workload Automation", de: "Job Scheduling & Workload Automation" },
-      slug: "job-scheduling-workload-automation",
-    },
-    {
-      title: { en: "Interim Management Services", de: "Interim Management Services" },
-      slug: "interim-management-services",
-    },
-  ];
 
   useEffect(() => {
     getSettings()
       .then((res) => {
         if (res.data) {
-          setSocialLinks({
+          setSettings({
+            email: res.data.email || "contact@edlmann.com",
+            phone: res.data.phone || "+49 162 523 50 273",
             linkedin: res.data.linkedin || "",
             twitter: res.data.twitter || "",
             facebook: res.data.facebook || "",
@@ -51,7 +36,9 @@ const Footer = () => {
     getServices()
       .then((res) => {
         if (res.data) {
-          const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
+          const list = Array.isArray(res.data)
+            ? res.data
+            : res.data.value || [];
           setServices(list);
         }
       })
@@ -59,11 +46,6 @@ const Footer = () => {
         console.error("Error fetching services for footer:", err);
       });
   }, []);
-
-  const displayedServices = staticServices.map(st => {
-    const dbMatch = services.find(s => s.slug === st.slug);
-    return dbMatch ? { ...dbMatch, title: st.title } : st;
-  });
 
   return (
     <footer className="bg-black text-white pt-[60px] pb-[30px] ">
@@ -81,14 +63,14 @@ const Footer = () => {
 
             {/* TEXT */}
             <p className="text-sm text-white/60 leading-relaxed max-w-[320px] text-center md:text-left">
-             Interim Manager | AI, HR & Business Process Expert. 
+              Interim Manager | AI, HR & Business Process Expert
             </p>
 
             {/* SOCIAL */}
             <div className="flex gap-4 pt-3 justify-center md:justify-start">
-              {socialLinks.linkedin && (
+              {settings.linkedin && (
                 <Link
-                  to={socialLinks.linkedin}
+                  to={settings.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
@@ -97,9 +79,9 @@ const Footer = () => {
                 </Link>
               )}
 
-              {socialLinks.twitter && (
+              {settings.twitter && (
                 <Link
-                  to={socialLinks.twitter}
+                  to={settings.twitter}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
@@ -108,9 +90,9 @@ const Footer = () => {
                 </Link>
               )}
 
-              {socialLinks.facebook && (
+              {settings.facebook && (
                 <Link
-                  to={socialLinks.facebook}
+                  to={settings.facebook}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
@@ -119,9 +101,9 @@ const Footer = () => {
                 </Link>
               )}
 
-              {socialLinks.instagram && (
+              {settings.instagram && (
                 <Link
-                  to={socialLinks.instagram}
+                  to={settings.instagram}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
@@ -261,11 +243,13 @@ const Footer = () => {
 
           {/* SERVICES */}
           <div className="text-center md:text-left">
-            <h4 className="font-semibold mb-5">{lang === "EN" ? "Services" : "Leistungen"}</h4>
+            <h4 className="font-semibold mb-5">
+              {lang === "EN" ? "Services" : "Leistungen"}
+            </h4>
 
             <ul className="space-y-3 text-sm text-white/60">
-              {displayedServices.map((item, index) => {
-                const itemTitle = typeof item.title === "object" ? getBi(item.title, lang) : item.title;
+              {services.map((item, index) => {
+                const itemTitle = getBi(item.title, lang);
                 return (
                   <li key={index}>
                     <Link
@@ -288,7 +272,9 @@ const Footer = () => {
 
           {/* CONTACT */}
           <div className="text-center md:text-left">
-            <h4 className="font-semibold mb-5">{lang === "EN" ? "Contact" : "Kontakt"}</h4>
+            <h4 className="font-semibold mb-5">
+              {lang === "EN" ? "Contact" : "Kontakt"}
+            </h4>
 
             <div className="space-y-4 text-sm text-white/60">
               {/* EMAIL */}
@@ -298,10 +284,10 @@ const Footer = () => {
                 </div>
 
                 <a
-                  href="mailto:contact@edlmann.com"
+                  href={`mailto:${settings.email}`}
                   className="hover:text-[#b8965a] transition duration-300"
                 >
-                  contact@edlmann.com
+                  {settings.email}
                 </a>
               </div>
               {/* PHONE */}
@@ -310,7 +296,7 @@ const Footer = () => {
                   <i className="fa-solid fa-phone text-[#b8965a]"></i>
                 </div>
 
-                <span>+49 162 523 50 273</span>
+                <span>{settings.phone}</span>
               </div>
             </div>
           </div>

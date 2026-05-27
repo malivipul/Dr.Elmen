@@ -104,7 +104,8 @@ const BlogSection = ({ setIsOpen }) => {
   // Format into flat representations matching language choice
   const formattedBlogs = rawBlogs.map((b) => {
     const rawCategory = String(b.Category || b.category || "").toLowerCase();
-    const rawTitle = typeof b.title === "object" ? getBi(b.title, lang) : b.title;
+    const rawTitle =
+      typeof b.title === "object" ? getBi(b.title, lang) : b.title;
     const rawDesc =
       typeof b.description === "object"
         ? getBi(b.description, lang)
@@ -182,7 +183,7 @@ const BlogSection = ({ setIsOpen }) => {
           <div className="hidden md:block absolute right-0 top-0">
             <button
               onClick={() => setIsOpen(true)}
-              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold hover:bg-[#b8965a] hover:text-white transition duration-300 inline-flex items-center gap-2 cursor-pointer"
+              className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer"
             >
               <i className="fa-regular fa-envelope"></i>
               Subscribe
@@ -193,7 +194,7 @@ const BlogSection = ({ setIsOpen }) => {
           <div className="absolute right-0 top-0 md:hidden">
             <button
               onClick={() => setIsOpen(true)}
-              className="w-[44px] h-[44px] rounded-full bg-black text-white border border-black hover:bg-transparent hover:text-black transition duration-300 flex items-center justify-center cursor-pointer"
+              className="w-[44px] h-[44px] rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 flex items-center justify-center cursor-pointer"
             >
               <i className="fa-regular fa-envelope text-[15px]"></i>
             </button>

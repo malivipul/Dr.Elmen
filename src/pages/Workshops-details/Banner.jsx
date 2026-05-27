@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getServiceBySlug, getBi, IMG_URL } from "../../api/api";
+import { getServiceBySlug, getBi, IMG_URL, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const staticTitles = {
@@ -25,31 +25,42 @@ const staticTitles = {
 const AboutBanner = () => {
   const { slug } = useParams();
   const { lang } = useLanguage();
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
+  
+  const cacheKey = `workshop_${slug}_${lang}`;
+  const cached = getCached(cacheKey);
+
+  const [title, setTitle] = useState(cached?.title || "");
+  const [image, setImage] = useState(cached?.image || "");
+  const [loading, setLoading] = useState(!cached);
 
   useEffect(() => {
     if (slug) {
       getServiceBySlug(slug)
         .then((res) => {
-          if (res.data) {
-            setTitle(getBi(res.data.title, lang));
-            setImage(res.data.img ? `${IMG_URL}${res.data.img}` : "/assets/images/25.png");
-          } else {
-            setTitle(staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details"));
-            setImage("/assets/images/25.png");
-          }
+          const newTitle = res.data ? getBi(res.data.title, lang) : (staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details"));
+          const newImage = res.data && res.data.img ? `${IMG_URL}${res.data.img}` : "/assets/images/25.png";
+          
+          setTitle(newTitle);
+          setImage(newImage);
+          setCached(cacheKey, { title: newTitle, image: newImage });
         })
         .catch((err) => {
           console.error("Error fetching service for banner:", err);
-          setTitle(staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details"));
+          const fallbackTitle = staticTitles[slug]?.[lang.toLowerCase()] || (lang === "EN" ? "Workshop Details" : "Workshop-Details");
+          setTitle(fallbackTitle);
           setImage("/assets/images/25.png");
-        });
+        })
+        .finally(() => setLoading(false));
     } else {
       setTitle(lang === "EN" ? "Workshop Details" : "Workshop-Details");
       setImage("/assets/images/25.png");
+      setLoading(false);
     }
   }, [slug, lang]);
+
+  if (loading) {
+    return <div className="w-full h-[340px] md:h-[460px] bg-[#111]" />;
+  }
 
   return (
     <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">

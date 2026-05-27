@@ -4,14 +4,14 @@ import { getBlogs, IMG_URL, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const categoryTranslations = {
-  "guides": { en: "Guides", de: "Leitfäden" },
-  "opinions": { en: "Opinions", de: "Meinungen" },
+  guides: { en: "Guides", de: "Leitfäden" },
+  opinions: { en: "Opinions", de: "Meinungen" },
   "case studies": { en: "Case Studies", de: "Fallstudien" },
-  "tools": { en: "Tools", de: "Werkzeuge" },
-  "archive": { en: "Archive", de: "Archiv" },
-  "hr": { en: "HR", de: "HR" },
-  "ai": { en: "AI", de: "KI" },
-  "leadership": { en: "Leadership", de: "Führung" }
+  tools: { en: "Tools", de: "Werkzeuge" },
+  archive: { en: "Archive", de: "Archiv" },
+  hr: { en: "HR", de: "HR" },
+  ai: { en: "AI", de: "KI" },
+  leadership: { en: "Leadership", de: "Führung" },
 };
 
 const getCategoryLabel = (cat, currentLang) => {
@@ -37,14 +37,14 @@ const formatCategoryDisplay = (catStr, currentLang) => {
 const stripHtml = (html) => {
   if (!html || typeof html !== "string") return "";
   return html
-    .replace(/<[^>]*>/g, " ")       // remove all HTML tags
-    .replace(/&nbsp;/g, " ")        // decode &nbsp;
-    .replace(/&amp;/g, "&")         // decode &amp;
-    .replace(/&lt;/g, "<")          // decode &lt;
-    .replace(/&gt;/g, ">")          // decode &gt;
-    .replace(/&quot;/g, '"')        // decode &quot;
-    .replace(/&#39;/g, "'")         // decode &#39;
-    .replace(/\s+/g, " ")           // collapse multiple spaces
+    .replace(/<[^>]*>/g, " ") // remove all HTML tags
+    .replace(/&nbsp;/g, " ") // decode &nbsp;
+    .replace(/&amp;/g, "&") // decode &amp;
+    .replace(/&lt;/g, "<") // decode &lt;
+    .replace(/&gt;/g, ">") // decode &gt;
+    .replace(/&quot;/g, '"') // decode &quot;
+    .replace(/&#39;/g, "'") // decode &#39;
+    .replace(/\s+/g, " ") // collapse multiple spaces
     .trim();
 };
 
@@ -66,7 +66,7 @@ const BlogSection = ({ setIsOpen }) => {
 
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum);
-    
+
     // Delayed scroll ensures DOM renders before scrolling to guarantee success on all browsers
     setTimeout(() => {
       const sectionElement = document.getElementById("articles-section");
@@ -89,7 +89,9 @@ const BlogSection = ({ setIsOpen }) => {
     getBlogs()
       .then((res) => {
         if (res.data) {
-          const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
+          const list = Array.isArray(res.data)
+            ? res.data
+            : res.data.value || [];
           setBlogList(list);
         }
       })
@@ -100,9 +102,15 @@ const BlogSection = ({ setIsOpen }) => {
     {
       _id: "1",
       category: "guides",
-      title: { en: "AI Implementation in HR", de: "KI-Implementierung im Personalwesen" },
+      title: {
+        en: "AI Implementation in HR",
+        de: "KI-Implementierung im Personalwesen",
+      },
       img: "/assets/images/blog2.png",
-      desc: { en: "AI integration in HR is transforming recruitment, employee engagement, talent management, and workforce productivity through intelligent automation, predictive analytics, and digital innovation across modern organisations.", de: "Die Integration von KI im Personalwesen transformiert die Personalbeschaffung, das Mitarbeiterengagement und das Talentmanagement durch intelligente Automatisierung, prädiktive Analysen und digitale Innovation." },
+      desc: {
+        en: "AI integration in HR is transforming recruitment, employee engagement, talent management, and workforce productivity through intelligent automation, predictive analytics, and digital innovation across modern organisations.",
+        de: "Die Integration von KI im Personalwesen transformiert die Personalbeschaffung, das Mitarbeiterengagement und das Talentmanagement durch intelligente Automatisierung, prädiktive Analysen und digitale Innovation.",
+      },
       date: "May 22, 2025",
       read: "6 min read",
     },
@@ -111,7 +119,10 @@ const BlogSection = ({ setIsOpen }) => {
       category: "opinions",
       title: { en: "AI Leadership", de: "KI-Führung" },
       img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
-      desc: { en: "Modern leadership is evolving through AI-driven decision making, strategic innovation, and digital transformation that empower organisations to adapt faster in a competitive business environment.", de: "Die moderne Führung entwickelt sich durch KI-gestützte Entscheidungsfindung, strategische Innovation und digitale Transformation weiter." },
+      desc: {
+        en: "Modern leadership is evolving through AI-driven decision making, strategic innovation, and digital transformation that empower organisations to adapt faster in a competitive business environment.",
+        de: "Die moderne Führung entwickelt sich durch KI-gestützte Entscheidungsfindung, strategische Innovation und digitale Transformation weiter.",
+      },
       date: "May 18, 2025",
       read: "5 min read",
     },
@@ -120,7 +131,10 @@ const BlogSection = ({ setIsOpen }) => {
       category: "case studies",
       title: { en: "HR Case Study", de: "HR-Fallstudie" },
       img: "/assets/images/240_F_1942873505_xvkW6maBqx4FrGYE4x6fFX3HXnvBSwoQ (1).jpg",
-      desc: { en: "Explore a real-world HR transformation case where AI-powered systems improved recruitment efficiency, employee experience, workflow automation, and operational performance successfully.", de: "Erkunden Sie ein reales Fallbeispiel für eine HR-Transformation, bei der KI-gestützte Systeme die Rekrutierungseffizienz, die Mitarbeitererfahrung und die Arbeitsablaufautomatisierung erfolgreich verbessert haben." },
+      desc: {
+        en: "Explore a real-world HR transformation case where AI-powered systems improved recruitment efficiency, employee experience, workflow automation, and operational performance successfully.",
+        de: "Erkunden Sie ein reales Fallbeispiel für eine HR-Transformation, bei der KI-gestützte Systeme die Rekrutierungseffizienz, die Mitarbeitererfahrung und die Arbeitsablaufautomatisierung erfolgreich verbessert haben.",
+      },
       date: "May 12, 2025",
       read: "8 min read",
     },
@@ -129,52 +143,85 @@ const BlogSection = ({ setIsOpen }) => {
       category: "tools",
       title: { en: "AI Tools for HR Teams", de: "KI-Werkzeuge für HR-Teams" },
       img: "/assets/images/blog3.png",
-      desc: { en: "Discover powerful AI tools designed for HR automation, employee analytics, recruitment optimisation, workflow management, and productivity enhancement in modern workplaces.", de: "Entdecken Sie leistungsstarke KI-Tools, die für die HR-Automatisierung, Mitarbeiteranalyse, Rekrutierungsoptimierung und Produktivitätssteigerung an modernen Arbeitsplätzen entwickelt wurden." },
+      desc: {
+        en: "Discover powerful AI tools designed for HR automation, employee analytics, recruitment optimisation, workflow management, and productivity enhancement in modern workplaces.",
+        de: "Entdecken Sie leistungsstarke KI-Tools, die für die HR-Automatisierung, Mitarbeiteranalyse, Rekrutierungsoptimierung und Produktivitätssteigerung an modernen Arbeitsplätzen entwickelt wurden.",
+      },
       date: "May 08, 2025",
       read: "4 min read",
     },
     {
       _id: "5",
       category: "guides",
-      title: { en: "Digital HR Transformation", de: "Digitale HR-Transformation" },
+      title: {
+        en: "Digital HR Transformation",
+        de: "Digitale HR-Transformation",
+      },
       img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
-      desc: { en: "Digital HR transformation combines AI technologies, automation strategies, and modern workforce solutions to improve operational efficiency and employee engagement across organisations.", de: "Die digitale HR-Transformation kombiniert KI-Technologien, Automatisierungsstrategien und moderne Belegschaftslösungen, um die betriebliche Effizienz und das Engagement der Mitarbeiter zu verbessern." },
+      desc: {
+        en: "Digital HR transformation combines AI technologies, automation strategies, and modern workforce solutions to improve operational efficiency and employee engagement across organisations.",
+        de: "Die digitale HR-Transformation kombiniert KI-Technologien, Automatisierungsstrategien und moderne Belegschaftslösungen, um die betriebliche Effizienz und das Engagement der Mitarbeiter zu verbessern.",
+      },
       date: "May 06, 2025",
       read: "5 min read",
     },
     {
       _id: "6",
       category: "opinions",
-      title: { en: "Future of AI in Business", de: "Zukunft der KI in Unternehmen" },
+      title: {
+        en: "Future of AI in Business",
+        de: "Zukunft der KI in Unternehmen",
+      },
       img: "/assets/images/2151966708.jpg",
-      desc: { en: "Exploring how AI is reshaping business strategy, leadership, and operational efficiency across global industries through innovation and digital transformation.", de: "Untersuchung, wie KI die Geschäftsstrategie, Führung und betriebliche Effizienz in globalen Branchen durch Innovation und digitale Transformation neu gestaltet." },
+      desc: {
+        en: "Exploring how AI is reshaping business strategy, leadership, and operational efficiency across global industries through innovation and digital transformation.",
+        de: "Untersuchung, wie KI die Geschäftsstrategie, Führung und betriebliche Effizienz in globalen Branchen durch Innovation und digitale Transformation neu gestaltet.",
+      },
       date: "May 03, 2025",
       read: "7 min read",
     },
     {
       _id: "7",
       category: "tools",
-      title: { en: "Top HR Automation Platforms", de: "Top HR Automatisierungsplattformen" },
+      title: {
+        en: "Top HR Automation Platforms",
+        de: "Top HR Automatisierungsplattformen",
+      },
       img: "/assets/images/close-up-data-center-programmers-using-pc-visualize-ai-neural-networks (1).jpg",
-      desc: { en: "A curated overview of modern HR automation platforms helping organisations streamline workflows and employee management successfully.", de: "Ein kuratierter Überblick über moderne HR-Automatisierungsplattformen, die Unternehmen dabei helfen, Arbeitsabläufe und Mitarbeiterverwaltung erfolgreich zu optimieren." },
+      desc: {
+        en: "A curated overview of modern HR automation platforms helping organisations streamline workflows and employee management successfully.",
+        de: "Ein kuratierter Überblick über moderne HR-Automatisierungsplattformen, die Unternehmen dabei helfen, Arbeitsabläufe und Mitarbeiterverwaltung erfolgreich zu optimieren.",
+      },
       date: "April 29, 2025",
       read: "4 min read",
     },
     {
       _id: "8",
       category: "case studies",
-      title: { en: "AI Recruitment Success Story", de: "Erfolgsgeschichte der KI-Rekrutierung" },
+      title: {
+        en: "AI Recruitment Success Story",
+        de: "Erfolgsgeschichte der KI-Rekrutierung",
+      },
       img: "/assets/images/book1.jpeg",
-      desc: { en: "How AI recruitment systems improved candidate screening, hiring speed, and workforce planning for enterprise organisations worldwide.", de: "Wie KI-gestützte Rekrutierungssysteme das Kandidatenscreening, die Einstellungsgeschwindigkeit und die Personalplanung für globale Unternehmen verbessert haben." },
+      desc: {
+        en: "How AI recruitment systems improved candidate screening, hiring speed, and workforce planning for enterprise organisations worldwide.",
+        de: "Wie KI-gestützte Rekrutierungssysteme das Kandidatenscreening, die Einstellungsgeschwindigkeit und die Personalplanung für globale Unternehmen verbessert haben.",
+      },
       date: "April 22, 2025",
       read: "6 min read",
     },
     {
       _id: "9",
       category: "guides",
-      title: { en: "AI & Workforce Innovation", de: "KI & Innovation der Belegschaft" },
+      title: {
+        en: "AI & Workforce Innovation",
+        de: "KI & Innovation der Belegschaft",
+      },
       img: "/assets/images/people-taking-part-high-protocol-event (3) (1).jpg",
-      desc: { en: "AI and workforce innovation are transforming organisations through automation, strategic decision-making, and intelligent employee engagement solutions.", de: "KI und Belegschaftsinnovation verändern Unternehmen durch Automatisierung, strategische Entscheidungsfindung und intelligente Lösungen zur Mitarbeiterbindung." },
+      desc: {
+        en: "AI and workforce innovation are transforming organisations through automation, strategic decision-making, and intelligent employee engagement solutions.",
+        de: "KI und Belegschaftsinnovation verändern Unternehmen durch Automatisierung, strategische Entscheidungsfindung und intelligente Lösungen zur Mitarbeiterbindung.",
+      },
       date: "April 18, 2025",
       read: "5 min read",
     },
@@ -183,25 +230,40 @@ const BlogSection = ({ setIsOpen }) => {
       category: "opinions",
       title: { en: "AI & Leadership Strategy", de: "KI & Führungsstrategie" },
       img: "/assets/images/people-office-analyzing-checking-finance-graphs.jpg",
-      desc: { en: "Understanding how AI leadership strategy can improve organisational agility, workforce planning, and operational excellence.", de: "Verstehen, wie KI-Führungsstrategien die Agilität von Organisationen, die Personalplanung und die operative Exzellenz verbessern können." },
+      desc: {
+        en: "Understanding how AI leadership strategy can improve organisational agility, workforce planning, and operational excellence.",
+        de: "Verstehen, wie KI-Führungsstrategien die Agilität von Organisationen, die Personalplanung und die operative Exzellenz verbessern können.",
+      },
       date: "April 12, 2025",
       read: "5 min read",
     },
     {
       _id: "11",
       category: "archive",
-      title: { en: "AI Evolution in Enterprises", de: "KI-Entwicklung in Unternehmen" },
+      title: {
+        en: "AI Evolution in Enterprises",
+        de: "KI-Entwicklung in Unternehmen",
+      },
       img: "/assets/images/blog2.png",
-      desc: { en: "Exploring how enterprise organisations adopted AI technologies to improve operational performance and long-term digital transformation strategies.", de: "Untersuchung, wie Unternehmen KI-Technologien eingeführt haben, um die betriebliche Leistung und langfristige digitale Transformationsstrategien zu verbessern." },
+      desc: {
+        en: "Exploring how enterprise organisations adopted AI technologies to improve operational performance and long-term digital transformation strategies.",
+        de: "Untersuchung, wie Unternehmen KI-Technologien eingeführt haben, um die betriebliche Leistung und langfristige digitale Transformationsstrategien zu verbessern.",
+      },
       date: "March 28, 2025",
       read: "5 min read",
     },
     {
       _id: "12",
       category: "archive",
-      title: { en: "Workforce Automation Trends", de: "Trends in der Automatisierung der Belegschaft" },
+      title: {
+        en: "Workforce Automation Trends",
+        de: "Trends in der Automatisierung der Belegschaft",
+      },
       img: "/assets/images/businessman-using-futuristic-technology-with-digital-interface.jpg",
-      desc: { en: "A detailed overview of workforce automation trends and how modern businesses are adapting to intelligent systems and AI-driven workflows.", de: "Ein detaillierter Überblick über Trends in der Automatisierung der Belegschaft und wie sich moderne Unternehmen an intelligente Systeme und KI-gestützte Arbeitsabläufe anpassen." },
+      desc: {
+        en: "A detailed overview of workforce automation trends and how modern businesses are adapting to intelligent systems and AI-driven workflows.",
+        de: "Ein detaillierter Überblick über Trends in der Automatisierung der Belegschaft und wie sich moderne Unternehmen an intelligente Systeme und KI-gestützte Arbeitsabläufe anpassen.",
+      },
       date: "March 15, 2025",
       read: "6 min read",
     },
@@ -216,8 +278,8 @@ const BlogSection = ({ setIsOpen }) => {
       typeof b.description === "object"
         ? getBi(b.description, lang)
         : typeof b.desc === "object"
-        ? getBi(b.desc, lang)
-        : b.description || b.desc || "";
+          ? getBi(b.desc, lang)
+          : b.description || b.desc || "";
     // Tags can be an array from API or fallback to empty
     const rawTags = Array.isArray(b.Tags || b.tags)
       ? (b.Tags || b.tags).map((t) => t.trim().toLowerCase())
@@ -229,11 +291,13 @@ const BlogSection = ({ setIsOpen }) => {
       displayCategory: formatCategoryDisplay(rawCategory, lang),
       title: typeof b.title === "object" ? getBi(b.title, lang) : b.title,
       desc: stripHtml(rawDescription),
-      img: (b.img || b.image)
-        ? (b.img || b.image).startsWith("http") || (b.img || b.image).startsWith("/assets")
-          ? (b.img || b.image)
-          : `${IMG_URL}${b.img || b.image}`
-        : "/assets/images/blog2.png",
+      img:
+        b.img || b.image
+          ? (b.img || b.image).startsWith("http") ||
+            (b.img || b.image).startsWith("/assets")
+            ? b.img || b.image
+            : `${IMG_URL}${b.img || b.image}`
+          : "/assets/images/blog2.png",
       date: b.date || "May 2025",
       read: getReadTime(rawDescription, lang),
       link: `/blog-details/${b._id}`,
@@ -260,22 +324,14 @@ const BlogSection = ({ setIsOpen }) => {
   const totalPages = Math.ceil(filtered.length / blogsPerPage);
   const startIndex = (currentPage - 1) * blogsPerPage;
 
-  const paginatedBlogs = filtered.slice(
-    startIndex,
-    startIndex + blogsPerPage
-  );
+  const paginatedBlogs = filtered.slice(startIndex, startIndex + blogsPerPage);
 
   // FIRST PAGE ONLY
-  const latestArticle =
-    currentPage === 1
-      ? paginatedBlogs[0]
-      : null;
+  const latestArticle = currentPage === 1 ? paginatedBlogs[0] : null;
 
   // REMAINING BLOGS
   const recentArticles =
-    currentPage === 1
-      ? paginatedBlogs.slice(1)
-      : paginatedBlogs;
+    currentPage === 1 ? paginatedBlogs.slice(1) : paginatedBlogs;
 
   // COLLECT DYNAMIC CATEGORIES AND TAGS
   const dynamicCategoriesSet = new Set();
@@ -313,40 +369,28 @@ const BlogSection = ({ setIsOpen }) => {
 
   return (
     <section id="articles-section" className="bg-[#f4f4f4] py-[60px]">
-
       <div className="max-w-[1300px] mx-auto px-[20px] md:px-[40px]">
-
         {/* TOP */}
         <div className="relative text-center mb-10">
-
           {/* SUBSCRIBE DESKTOP */}
           <div className="hidden md:block absolute right-0 top-0">
-
             <button
               onClick={() => setIsOpen(true)}
-              className="px-8 py-3 rounded-full bg-black text-white text-sm font-bold hover:bg-[#b8965a] hover:text-white transition duration-300 inline-flex items-center gap-2 cursor-pointer"
+              className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer"
             >
-
               <i className="fa-regular fa-envelope"></i>
-
               Subscribe
-
             </button>
-
           </div>
 
           {/* SUBSCRIBE MOBILE */}
           <div className="absolute right-0 top-0 md:hidden">
-
             <button
               onClick={() => setIsOpen(true)}
-              className="w-[44px] h-[44px] rounded-full bg-black text-white border border-black hover:bg-transparent hover:text-black transition duration-300 flex items-center justify-center cursor-pointer"
+              className="w-[44px] h-[44px] rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 flex items-center justify-center cursor-pointer"
             >
-
               <i className="fa-regular fa-envelope text-[15px]"></i>
-
             </button>
-
           </div>
 
           {/* LABEL */}
@@ -361,14 +405,13 @@ const BlogSection = ({ setIsOpen }) => {
 
           {/* SUBTITLE */}
           <p className="text-[#0a3e40] text-[16px] leading-relaxed max-w-[760px] mx-auto">
-            Insights, guides, tools, and perspectives on HR, AI and the future of work.
+            Insights, guides, tools, and perspectives on HR, AI and the future
+            of work.
           </p>
-
         </div>
 
         {/* TABS */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
-
           {tabs.map((tab, i) => (
             <button
               key={i}
@@ -396,21 +439,17 @@ const BlogSection = ({ setIsOpen }) => {
               {tab.label}
             </button>
           ))}
-
         </div>
-{/* LATEST ARTICLE HEADING */}
-<h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
-  Latest Article
-</h3>
+        {/* LATEST ARTICLE HEADING */}
+        <h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
+          Latest Article
+        </h3>
         {/* BIG BLOG */}
         {currentPage === 1 && latestArticle && (
           <div className="bg-white border border-[#e6dfd5] rounded-[20px] overflow-hidden mb-8">
-
             <div className="grid lg:grid-cols-2 items-stretch">
-
               {/* LEFT */}
               <div className="p-7 md:p-10 text-left flex flex-col justify-center">
-
                 <span className="text-[#b8965a] text-xs tracking-[2px] uppercase font-semibold">
                   {latestArticle.displayCategory}
                 </span>
@@ -424,56 +463,41 @@ const BlogSection = ({ setIsOpen }) => {
                 </p>
 
                 <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
-
                   <span>{latestArticle.date}</span>
 
                   <span>•</span>
 
                   <span>{latestArticle.read}</span>
-
                 </div>
 
                 <div className="mt-6">
-
                   <Link
                     to={latestArticle.link}
                     className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2"
                   >
                     Read Article
-
                     <i className="fa-solid fa-arrow-right"></i>
                   </Link>
-
                 </div>
-
               </div>
 
               {/* IMAGE */}
               <div className="relative w-full h-[260px] md:h-auto min-h-[340px] overflow-hidden">
-
                 <img
                   src={latestArticle.img}
                   alt={latestArticle.title}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-
               </div>
-
             </div>
-
           </div>
         )}
 
         {/* ALL BLOGS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-
           {recentArticles.map((item, i) => (
-            <Card
-              key={i}
-              item={item}
-            />
+            <Card key={i} item={item} />
           ))}
-
         </div>
 
         {/* PAGINATION */}
@@ -550,9 +574,7 @@ const BlogSection = ({ setIsOpen }) => {
             </button>
           </div>
         )}
-
       </div>
-
     </section>
   );
 };
@@ -562,21 +584,17 @@ const Card = ({ item }) => (
     to={item.link}
     className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 block"
   >
-
     {/* IMAGE */}
     <div className="overflow-hidden relative">
-
       <img
         src={item.img}
         alt={item.title}
         className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
       />
-
     </div>
 
     {/* CONTENT */}
     <div className="p-4">
-
       {/* CATEGORY */}
       <span className="text-[11px] text-[#b8965a] uppercase tracking-[2px] font-semibold">
         {item.displayCategory}
@@ -594,17 +612,13 @@ const Card = ({ item }) => (
 
       {/* DATE + READ */}
       <div className="flex items-center gap-3 mt-5 text-[#7b7b7b] text-[13px]">
-
         <span>{item.date}</span>
 
         <span>•</span>
 
         <span>{item.read}</span>
-
       </div>
-
     </div>
-
   </Link>
 );
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getVitaBanner, IMG_URL, getBi } from "../../api/api";
+import { getVitaBanner, IMG_URL, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const AboutBanner = () => {
-  const [banner, setBanner] = useState(null);
+  const cached = getCached("vitaBanner");
+  const [banner, setBanner] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
   const { lang } = useLanguage();
 
   useEffect(() => {
@@ -12,30 +14,35 @@ const AboutBanner = () => {
       .then((res) => {
         if (res.data) {
           setBanner(res.data);
+          setCached("vitaBanner", res.data);
         }
       })
-      .catch((err) => console.error("Error fetching Vita Banner:", err));
+      .catch((err) => console.error("Error fetching Vita Banner:", err))
+      .finally(() => setLoading(false));
   }, []);
 
+  if (loading) {
+    return <div className="w-full h-[340px] md:h-[460px] bg-[#111]" />;
+  }
+
+  const bannerTitle = banner?.title ? getBi(banner.title, lang) : "Vita";
   const bannerImg = banner?.img 
     ? (banner.img.startsWith("http") || banner.img.startsWith("/assets") 
         ? banner.img 
         : `${IMG_URL}${banner.img}`)
-    : "/assets/images/image (16).png";
-
-  const bannerTitle = banner?.title 
-    ? (typeof banner.title === "object" ? getBi(banner.title, lang) : banner.title)
-    : "Vita";
+    : null;
 
   return (
-    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
+    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden bg-[#111]">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
-        <img
-          src={bannerImg}
-          alt="About Banner"
-          className="w-full h-full object-cover object-[90%_center] md:object-center"
-        />
+        {bannerImg && (
+          <img
+            src={bannerImg}
+            alt="About Banner"
+            className="w-full h-full object-cover object-[90%_center] md:object-center"
+          />
+        )}
         {/* DARK OVERLAY */}
         <div className="absolute inset-0 bg-black/20"></div>
       </div>

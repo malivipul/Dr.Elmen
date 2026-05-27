@@ -4,7 +4,6 @@ import ExpertiseSection from "./ExpertiseSection";
 import SectorsSection from "./SectorsSection";
 import ContactCTASection from "./ContactCTASection";
 
-
 const About = () => {
   return (
     <>
@@ -13,7 +12,6 @@ const About = () => {
       <ExpertiseSection />
       <SectorsSection />
       <ContactCTASection />
-      
     </>
   );
 };

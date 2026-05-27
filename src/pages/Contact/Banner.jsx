@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 const AboutBanner = () => {
+  const { lang } = useLanguage();
+  const title = lang === "EN" ? "Let’s work together" : "Lassen Sie uns zusammenarbeiten";
+
   return (
     <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
 
@@ -10,7 +14,7 @@ const AboutBanner = () => {
 
         <img
           src="/assets/images/image (14).png"
-          alt="About Banner"
+          alt={title}
           className="w-full h-full object-cover object-[100%_center] md:object-center"
         />
 
@@ -39,14 +43,14 @@ const AboutBanner = () => {
             <span>›</span>
 
             <span className="font-semibold">
-            Let’s work together
+              {title}
             </span>
 
           </div>
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-          Let’s work together
+            {title}
           </h1>
 
         </div>

@@ -19,7 +19,6 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Imprint = lazy(() => import("./pages/Imprint"));
 const PrivacyPolicy = lazy(() => import("./pages/Privacy-policy"));
 
-
 /* HASH SCROLL */
 function ScrollToHash() {
   const { hash } = useLocation();
@@ -52,7 +51,13 @@ function App() {
       <Header />
 
       {/* Routes */}
-      <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center min-h-screen">
+            Loading...
+          </div>
+        }
+      >
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -63,7 +68,7 @@ function App() {
           <Route path="/projects" element={<Projects />} />
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/imprint" element={<Imprint/>} />
+          <Route path="/imprint" element={<Imprint />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
           <Route

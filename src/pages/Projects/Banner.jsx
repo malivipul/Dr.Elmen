@@ -1,48 +1,52 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProjectHeader, getBi, IMG_URL } from "../../api/api";
+import { getProjectHeader, getBi, IMG_URL, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const ProjectBanner = () => {
-  const [banner, setBanner] = useState(null);
+  const cached = getCached("projectHeader");
+  const [banner, setBanner] = useState(cached || null);
+  const [loading, setLoading] = useState(!cached);
   const { lang } = useLanguage();
 
   useEffect(() => {
-    let isMounted = true;
-
     getProjectHeader()
       .then((res) => {
-        if (!isMounted) return;
         setBanner(res.data || null);
+        setCached("projectHeader", res.data);
       })
-      .catch((err) => console.error("Error fetching project header:", err));
-
-    return () => {
-      isMounted = false;
-    };
+      .catch((err) => console.error("Error fetching project header:", err))
+      .finally(() => setLoading(false));
   }, []);
 
-  const sectionData =
-    banner?.data && !Array.isArray(banner.data)
-      ? banner.data
-      : banner;
-  const imagePath = sectionData?.img || sectionData?.image || sectionData?.bannerImg;
+  if (loading) {
+    return <div className="w-full h-[340px] md:h-[460px] bg-[#111]" />;
+  }
+
+  const sectionData = banner;
+  const imagePath =
+    sectionData?.bannerImg || sectionData?.img || sectionData?.image;
   const bannerImg = imagePath
     ? imagePath.startsWith("http") || imagePath.startsWith("/assets")
       ? imagePath
       : `${IMG_URL}${imagePath}`
-    : "/assets/images/project.jpeg";
-  const bannerTitle = lang === "EN" ? "Projects" : "Projekte";
+    : null;
+
+  const bannerTitle =
+    getBi(sectionData?.title, lang) ||
+    (lang === "EN" ? "Projects" : "Projekte");
 
   return (
-    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden ">
+    <section className="relative w-full h-[340px] md:h-[460px] overflow-hidden bg-[#111]">
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0">
-        <img
-          src={bannerImg}
-          alt={bannerTitle}
-          className="w-full h-full object-cover md:object-cover object-center"
-        />
+        {bannerImg && (
+          <img
+            src={bannerImg}
+            alt={bannerTitle}
+            className="w-full h-full object-cover md:object-cover object-center"
+          />
+        )}
 
         {/* OVERLAY */}
         <div className="absolute inset-0 bg-black/20"></div>

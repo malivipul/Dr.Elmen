@@ -20,6 +20,11 @@ export const getBi = (field, lang) => {
   return String(field);
 };
 
+// --- CACHE ---
+const cache = new Map();
+export const getCached = (key) => cache.get(key);
+export const setCached = (key, data) => cache.set(key, data);
+
 // --- HERO ---
 export const getHero = () => api.get("/home/hero/get");
 

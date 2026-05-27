@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getServices, getServiceHeader, IMG_URL, getBi } from "../../api/api";
+import { getServices, getServiceHeader, IMG_URL, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const getOrderId = (service, fallback) => {
@@ -9,14 +9,20 @@ const getOrderId = (service, fallback) => {
 };
 
 const ServicesSection = () => {
-  const [servicesList, setServicesList] = useState([]);
-  const [header, setHeader] = useState(null);
+  const cachedServices = getCached("servicesList");
+  const cachedHeader = getCached("serviceHeader");
+
+  const [servicesList, setServicesList] = useState(cachedServices || []);
+  const [header, setHeader] = useState(cachedHeader || null);
   const { lang } = useLanguage();
 
   useEffect(() => {
     getServiceHeader()
       .then((res) => {
-        if (res.data) setHeader(res.data);
+        if (res.data) {
+          setHeader(res.data);
+          setCached("serviceHeader", res.data);
+        }
       })
       .catch((err) => console.error("Error fetching service header:", err));
 
@@ -25,6 +31,7 @@ const ServicesSection = () => {
         if (res.data) {
           const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
           setServicesList(list);
+          setCached("servicesList", list);
         }
       })
       .catch((err) => console.error("Error fetching services:", err));

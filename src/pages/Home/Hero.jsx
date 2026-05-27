@@ -1,37 +1,55 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getHero, IMG_URL, getBi } from "../../api/api";
+import { getHero, getSettings, IMG_URL, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const Hero = () => {
   const [hover, setHover] = useState(false);
-  const [hero, setHero] = useState(null);
+  const cachedHero = getCached("hero");
+  const cachedSettings = getCached("settings");
+  
+  const [hero, setHero] = useState(cachedHero || null);
+  const [settings, setSettings] = useState(cachedSettings || null);
+  const [loading, setLoading] = useState(!cachedHero || !cachedSettings);
   const { lang } = useLanguage();
 
   useEffect(() => {
-    getHero()
-      .then((res) => {
-        if (res.data) {
-          setHero(res.data);
+    Promise.all([getHero(), getSettings()])
+      .then(([heroRes, settingsRes]) => {
+        if (heroRes.data) {
+          setHero(heroRes.data);
+          setCached("hero", heroRes.data);
+        }
+        if (settingsRes.data) {
+          setSettings(settingsRes.data);
+          setCached("settings", settingsRes.data);
         }
       })
-      .catch((err) => console.error("Error fetching hero:", err));
+      .catch((err) => console.error("Error fetching hero or settings:", err))
+      .finally(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return <div className="w-full min-h-[70vh] md:min-h-screen bg-[#111]" />;
+  }
 
   const title = hero ? getBi(hero.title, lang) : "Dr. Raphael Edlmann";
   const subtitle = hero ? getBi(hero.subtitle, lang) : "Interim Manager. AI, HR & Business Process Expert";
-  const imgUrl = hero && hero.img ? `${IMG_URL}${hero.img}` : "/assets/images/2026_03_17_Raphael_Edlmann_Start Page.jpg";
+  const imgUrl = hero && hero.img ? `${IMG_URL}${hero.img}` : null;
+  const email = settings?.email || "contact@edlmann.com";
 
   return (
-    <section className="relative w-full min-h-[70vh] md:min-h-screen flex items-end items-center overflow-hidden  pt-[140px] pb-[60px]">
+    <section className="relative w-full min-h-[70vh] md:min-h-screen flex items-end items-center overflow-hidden pt-[140px] pb-[60px] bg-[#111]">
 
       {/* IMAGE */}
       <div className="absolute inset-0">
-        <img
-          src={imgUrl}
-          className="w-full h-full object-cover object-[70%_20%]"
-          alt="hero"
-        />
+        {imgUrl && (
+          <img
+            src={imgUrl}
+            className="w-full h-full object-cover object-[70%_20%]"
+            alt="hero"
+          />
+        )}
         <div className="absolute inset-0 bg-[#b8965a]/20"></div>
       </div>
 
@@ -73,7 +91,7 @@ const Hero = () => {
 
             {/* EMAIL */}
             <Link
-              to="mailto:contact@edlmann.com"
+              to={`mailto:${email}`}
               className="w-12 h-12 rounded-full flex items-center justify-center bg-white text-black hover:bg-gray-200 transition"
             >
               <i className="fa-solid fa-envelope"></i>
@@ -99,148 +117,148 @@ const Hero = () => {
   <div className="flex gap-3 md:gap-4">
 
     {/* LINKEDIN */}
-    <a
-      href="https://www.linkedin.com/in/raphael-edlmann-60200059/ "
-      target="_blank"
-      rel="noreferrer"
-      className="
-        group
-        w-[42px]
-        h-[42px]
-        md:w-[45px]
-        md:h-[45px]
-        flex
-        items-center
-        justify-center
-        border
-        border-white/80
-        rounded-full
-        bg-white/10
-        hover:bg-[#b8965a]
-        hover:border-[#b8965a]
-        active:bg-[#b8965a]
-        active:border-[#b8965a]
-        transition-all
-        duration-500
-        backdrop-blur-md
-        hover:scale-110
-        active:scale-90
-        active:rotate-6
-        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-      "
-    >
-
-      <i className="fa-brands fa-linkedin-in text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-
-    </a>
+    {settings?.linkedin && (
+      <a
+        href={settings.linkedin}
+        target="_blank"
+        rel="noreferrer"
+        className="
+          group
+          w-[42px]
+          h-[42px]
+          md:w-[45px]
+          md:h-[45px]
+          flex
+          items-center
+          justify-center
+          border
+          border-white/80
+          rounded-full
+          bg-white/10
+          hover:bg-[#b8965a]
+          hover:border-[#b8965a]
+          active:bg-[#b8965a]
+          active:border-[#b8965a]
+          transition-all
+          duration-500
+          backdrop-blur-md
+          hover:scale-110
+          active:scale-90
+          active:rotate-6
+          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
+        "
+      >
+        <i className="fa-brands fa-linkedin-in text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+      </a>
+    )}
 
     {/* X */}
-    <a
-      href="https://x.com/RaphaelEdlmann "
-      target="_blank"
-      rel="noreferrer"
-      className="
-        group
-        w-[42px]
-        h-[42px]
-        md:w-[45px]
-        md:h-[45px]
-        flex
-        items-center
-        justify-center
-        border
-        border-white/80
-        rounded-full
-        bg-white/10
-        hover:bg-[#b8965a]
-        hover:border-[#b8965a]
-        active:bg-[#b8965a]
-        active:border-[#b8965a]
-        transition-all
-        duration-500
-        backdrop-blur-md
-        hover:scale-110
-        active:scale-90
-        active:-rotate-6
-        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-      "
-    >
-
-      <i className="fa-brands fa-x-twitter text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-
-    </a>
+    {settings?.twitter && (
+      <a
+        href={settings.twitter}
+        target="_blank"
+        rel="noreferrer"
+        className="
+          group
+          w-[42px]
+          h-[42px]
+          md:w-[45px]
+          md:h-[45px]
+          flex
+          items-center
+          justify-center
+          border
+          border-white/80
+          rounded-full
+          bg-white/10
+          hover:bg-[#b8965a]
+          hover:border-[#b8965a]
+          active:bg-[#b8965a]
+          active:border-[#b8965a]
+          transition-all
+          duration-500
+          backdrop-blur-md
+          hover:scale-110
+          active:scale-90
+          active:-rotate-6
+          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
+        "
+      >
+        <i className="fa-brands fa-x-twitter text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+      </a>
+    )}
 
     {/* FACEBOOK */}
-    <a
-      href="https://www.facebook.com/profile.php?id=61587719828544 "
-      target="_blank"
-      rel="noreferrer"
-      className="
-        group
-        w-[42px]
-        h-[42px]
-        md:w-[45px]
-        md:h-[45px]
-        flex
-        items-center
-        justify-center
-        border
-        border-white/80
-        rounded-full
-        bg-white/10
-        hover:bg-[#b8965a]
-        hover:border-[#b8965a]
-        active:bg-[#b8965a]
-        active:border-[#b8965a]
-        transition-all
-        duration-500
-        backdrop-blur-md
-        hover:scale-110
-        active:scale-90
-        active:rotate-6
-        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-      "
-    >
-
-      <i className="fa-brands fa-facebook-f text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-
-    </a>
+    {settings?.facebook && (
+      <a
+        href={settings.facebook}
+        target="_blank"
+        rel="noreferrer"
+        className="
+          group
+          w-[42px]
+          h-[42px]
+          md:w-[45px]
+          md:h-[45px]
+          flex
+          items-center
+          justify-center
+          border
+          border-white/80
+          rounded-full
+          bg-white/10
+          hover:bg-[#b8965a]
+          hover:border-[#b8965a]
+          active:bg-[#b8965a]
+          active:border-[#b8965a]
+          transition-all
+          duration-500
+          backdrop-blur-md
+          hover:scale-110
+          active:scale-90
+          active:rotate-6
+          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
+        "
+      >
+        <i className="fa-brands fa-facebook-f text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+      </a>
+    )}
 
     {/* INSTAGRAM */}
-    <a
-      href="https://www.instagram.com/edlmannraphael/ "
-      target="_blank"
-      rel="noreferrer"
-      className="
-        group
-        w-[42px]
-        h-[42px]
-        md:w-[45px]
-        md:h-[45px]
-        flex
-        items-center
-        justify-center
-        border
-        border-white/80
-        rounded-full
-        bg-white/10
-        hover:bg-[#b8965a]
-        hover:border-[#b8965a]
-        active:bg-[#b8965a]
-        active:border-[#b8965a]
-        transition-all
-        duration-500
-        backdrop-blur-md
-        hover:scale-110
-        active:scale-90
-        active:-rotate-6
-        shadow-[0_4px_15px_rgba(255,255,255,0.08)]
-      "
-    >
-
-      <i className="fa-brands fa-instagram text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
-
-    </a>
+    {settings?.instagram && (
+      <a
+        href={settings.instagram}
+        target="_blank"
+        rel="noreferrer"
+        className="
+          group
+          w-[42px]
+          h-[42px]
+          md:w-[45px]
+          md:h-[45px]
+          flex
+          items-center
+          justify-center
+          border
+          border-white/80
+          rounded-full
+          bg-white/10
+          hover:bg-[#b8965a]
+          hover:border-[#b8965a]
+          active:bg-[#b8965a]
+          active:border-[#b8965a]
+          transition-all
+          duration-500
+          backdrop-blur-md
+          hover:scale-110
+          active:scale-90
+          active:-rotate-6
+          shadow-[0_4px_15px_rgba(255,255,255,0.08)]
+        "
+      >
+        <i className="fa-brands fa-instagram text-[13px] md:text-[14px] text-white transition-transform duration-500 group-hover:scale-125"></i>
+      </a>
+    )}
 
   </div>
 
