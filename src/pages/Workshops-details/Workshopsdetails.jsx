@@ -96,6 +96,14 @@ export default function WorkshopDetailsPage() {
       ? getBi(workshop.note, lang)
       : workshop.note;
 
+  const objectiveTitle =
+    workshop.objectiveTitle &&
+    (workshop.objectiveTitle.en || workshop.objectiveTitle.de)
+      ? getBi(workshop.objectiveTitle, lang)
+      : lang === "EN"
+        ? "Objective"
+        : "Ziel";
+
   const sectionsTitle =
     workshop.sectionsTitle &&
     (workshop.sectionsTitle.en || workshop.sectionsTitle.de)
@@ -263,7 +271,7 @@ export default function WorkshopDetailsPage() {
               {/* OBJECTIVE */}
               <div className="mb-0 relative z-10">
                 <h2 className="title-font text-[20px] md:text-[24px] mb-4 text-black">
-                  {lang === "EN" ? "Objective" : "Ziel"}
+                  {objectiveTitle}
                 </h2>
                 <div
                   className="rich-text text-[15px] md:text-[16px] text-[#0a3e40] leading-[30px]"
