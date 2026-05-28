@@ -174,6 +174,7 @@ export default function ProjectsSection() {
                       rounded-[30px]
                       p-7 md:p-8
                       shadow-[0_15px_40px_rgba(0,0,0,0.18)]
+                      overflow-hidden
 
                       /* MOBILE AUTO HEIGHT */
                       relative h-auto
@@ -181,7 +182,7 @@ export default function ProjectsSection() {
                       /* DESKTOP FLIP */
                       md:absolute md:inset-0
                       md:h-full
-                      md:overflow-y-auto md:pr-4 custom-scrollbar
+                      md:overflow-y-auto md:overflow-x-hidden scrollbar-hide
                       [transform:rotateY(180deg)]
                       [backface-visibility:hidden]
 
