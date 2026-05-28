@@ -335,14 +335,3 @@ const Footer = () => {
 };
 
 export default Footer;
-olicy" className="hover:text-[#b8965a]">
-              Privacy Policy
-            </Link>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
-export default Footer;
