@@ -106,6 +106,7 @@ body {
   overflow-wrap: break-word;
   word-break: normal;
   hyphens: none;
+  max-width: 100%;
 }
 .rich-text p {
   margin-bottom: 1.25rem;
@@ -143,6 +144,21 @@ body {
 .rich-text a {
   color: #b8965a;
   text-decoration: underline;
+}
+.rich-text img,
+.rich-text video,
+.rich-text iframe,
+.rich-text table {
+  max-width: 100%;
+}
+.rich-text img,
+.rich-text video,
+.rich-text iframe {
+  height: auto;
+}
+.rich-text table {
+  display: block;
+  overflow-x: auto;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

@@ -63,21 +63,21 @@ const About = () => {
     <section className="bg-white py-[60px]">
       <div className="max-w-[1350px] mx-auto px-[20px] md:px-[40px]">
         {/* MAIN GRID */}
-        <div className="grid md:grid-cols-[40%_60%] gap-10 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center overflow-hidden">
           {/* LEFT CONTENT */}
-          <div className="max-w-[620px]">
+          <div className="w-full lg:max-w-[620px]">
             {/* LABEL */}
             <span className="text-[#b8965a] text-xs tracking-[2px] uppercase mb-4 block">
               {label}
             </span>
 
             {/* TITLE */}
-            <h2 className="title-font text-2xl md:text-[36px] text-black leading-tight mb-5">
+            <h2 className="title-font text-2xl md:text-[36px] text-black leading-tight mb-5 break-words">
               {title}
             </h2>
 
             {/* TEXT */}
-            <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.8]">
+            <div className="max-w-full lg:max-w-[58ch] space-y-5 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.8] break-words">
               {quote && (
                 <div
                   className="rich-text font-semibold italic"
@@ -93,13 +93,13 @@ const About = () => {
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="bg-[#f5f3ef] rounded-[22px] p-6 md:p-8 border border-[#e6dfd5] shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+          <div className="bg-[#f5f3ef] rounded-[22px] p-5 md:p-8 border border-[#e6dfd5] shadow-[0_10px_30px_rgba(0,0,0,0.06)] overflow-hidden">
             {/* TOP */}
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
               {/* LEFT SIDE */}
               <div className="w-full lg:w-[40%] flex flex-col items-center">
                 {/* IMAGE */}
-                <div className="w-[250px] h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
+                <div className="w-full max-w-[250px] h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
                   <img
                     src={imgUrl}
                     className="w-full h-full object-cover"
@@ -148,13 +148,13 @@ const About = () => {
                           className="flex items-start gap-4 pb-5 border-b border-[#ddd5ca] last:border-0"
                         >
                           {/* LEFT LINE */}
-                          <div className="w-[2px] h-[70px] bg-[#b8965a] rounded-full"></div>
+                          <div className="min-w-[2px] w-[2px] self-stretch bg-[#b8965a] rounded-full"></div>
                           {/* CONTENT */}
-                          <div>
-                            <h4 className="text-[#b8965a] text-[15px] font-semibold leading-none mb-3">
+                          <div className="min-w-0 flex-1">
+                            <h4 className="text-[#b8965a] text-[15px] font-semibold leading-tight mb-3 break-words">
                               {itemDegree}
                             </h4>
-                            <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed">
+                            <p className="text-[#0a3e40] text-[13px] md:text-[15px] leading-relaxed break-words">
                               {itemUni}
                             </p>
                           </div>

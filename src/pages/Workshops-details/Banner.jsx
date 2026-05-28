@@ -95,7 +95,7 @@ const AboutBanner = () => {
           </div>
 
           {/* TITLE */}
-          <h1 className="text-white text-[32px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
+          <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
             {title}
           </h1>
         </div>
