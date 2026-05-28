@@ -116,6 +116,11 @@ const ContactForm = () => {
                 : "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."),
           });
         }
+
+        // Auto-clear status after 5 seconds
+        setTimeout(() => {
+          setStatus({ success: null, message: "" });
+        }, 5000);
       })
       .catch((err) => {
         console.error("Error submitting contact form:", err);
@@ -128,6 +133,11 @@ const ContactForm = () => {
               ? "Something went wrong. Please try again."
               : "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut."),
         });
+
+        // Auto-clear status after 5 seconds
+        setTimeout(() => {
+          setStatus({ success: null, message: "" });
+        }, 5000);
       });
   };
 

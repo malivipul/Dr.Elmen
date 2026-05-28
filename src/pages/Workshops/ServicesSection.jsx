@@ -213,7 +213,7 @@ const ServicesSection = () => {
                 <h3 className="title-font text-2xl md:text-[36px] leading-tight text-black font-semibold">
                   {lang === "EN"
                     ? "Let’s work together"
-                    : "Lassen Sie uns zusammenarbeiten"}
+                    : "Let’s work together"}
                 </h3>
               </div>
 

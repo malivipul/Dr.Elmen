@@ -89,7 +89,7 @@ const SpeakerSection = () => {
             >
 
               <span>
-                {lang === "EN" ? "Book me for your next event" : "Buchen Sie mich für Ihre nächste Veranstaltung"}
+                {lang === "EN" ? "Book me for your next event" : "Buchen Sie mich für Ihr nächstes Event."}
               </span>
 
               <i className="fa-solid fa-arrow-right transition-all duration-300 group-hover:translate-x-[6px]"></i>

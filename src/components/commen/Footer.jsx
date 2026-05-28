@@ -238,7 +238,7 @@ const Footer = () => {
           {/* SERVICES */}
           <div className="text-center md:text-left">
             <h4 className="font-semibold mb-5">
-              {lang === "EN" ? "Services" : "Leistungen"}
+              {lang === "EN" ? "Services" : "Services"}
             </h4>
 
             <ul className="space-y-3 text-sm text-white/60">
