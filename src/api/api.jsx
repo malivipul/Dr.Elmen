@@ -10,10 +10,11 @@ const api = axios.create({
 // Helper to safely extract bilingual content
 export const getBi = (field, lang) => {
   if (!field) return "";
-  if (typeof field === "string") return field;
   
   let result = "";
-  if (typeof field === "object" && !Array.isArray(field)) {
+  if (typeof field === "string") {
+    result = field;
+  } else if (typeof field === "object" && !Array.isArray(field)) {
     const key = String(lang).toLowerCase(); // "en" or "de"
     result = field[key] ?? field["en"] ?? field["de"] ?? "";
   } else {
@@ -22,7 +23,11 @@ export const getBi = (field, lang) => {
 
   // Final safety check: if result is still an object (shouldn't happen with our schema)
   if (typeof result === "object") return "";
-  return String(result);
+
+  // Replace non-breaking spaces (&nbsp; or Unicode \u00A0) with regular spaces.
+  // This is crucial because some text editors insert &nbsp; between every word,
+  // which prevents natural word-wrapping and breaks the UI layout.
+  return String(result).replace(/&nbsp;|\u00A0/g, " ");
 };
 
 // Date formatter for German compliance (DD.MM.YYYY)

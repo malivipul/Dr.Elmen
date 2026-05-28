@@ -63,7 +63,7 @@ const About = () => {
     <section className="bg-white py-[60px]">
       <div className="max-w-[1350px] mx-auto px-[20px] md:px-[40px]">
         {/* MAIN GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-[40%_60%] gap-10 items-center ">
           {/* LEFT CONTENT */}
           <div className="w-full lg:max-w-[620px]">
             {/* LABEL */}
@@ -93,13 +93,13 @@ const About = () => {
           </div>
 
           {/* RIGHT SIDE */}
-          <div className="bg-[#f5f3ef] rounded-[22px] p-5 md:p-8 border border-[#e6dfd5] shadow-[0_10px_30px_rgba(0,0,0,0.06)] overflow-hidden">
+          <div className="bg-[#f5f3ef] rounded-[22px] p-5 md:p-8 border border-[#e6dfd5] shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
             {/* TOP */}
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
               {/* LEFT SIDE */}
               <div className="w-full lg:w-[40%] flex flex-col items-center">
                 {/* IMAGE */}
-                <div className="w-full max-w-[250px] h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
+                <div className="w-full max-w-[250px] h-[330px] rounded-[20px]  shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
                   <img
                     src={imgUrl}
                     className="w-full h-full object-cover"

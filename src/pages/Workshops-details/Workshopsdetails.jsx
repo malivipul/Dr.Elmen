@@ -83,18 +83,17 @@ export default function WorkshopDetailsPage() {
   }
  
   // Safe extraction helpers
-  const wTitle =
-    typeof workshop.title === "object"
-      ? getBi(workshop.title, lang)
-      : workshop.title;
-  const wObjective =
-    typeof workshop.objective === "object"
-      ? getBi(workshop.objective, lang)
-      : workshop.objective;
-  const wNote =
-    typeof workshop.note === "object"
-      ? getBi(workshop.note, lang)
-      : workshop.note;
+  const wTitle = typeof workshop.title === "object"
+    ? getBi(workshop.title, lang)
+    : workshop.title;
+
+  const wObjective = typeof workshop.objective === "object"
+    ? getBi(workshop.objective, lang)
+    : workshop.objective;
+
+  const wNote = typeof workshop.note === "object"
+    ? getBi(workshop.note, lang)
+    : workshop.note;
  
   const objectiveTitle =
     workshop.objectiveTitle &&
@@ -306,7 +305,7 @@ export default function WorkshopDetailsPage() {
               {wNote && (
                 <div className="group bg-[#faf8f4] hover:bg-white border border-[#d9bb86] rounded-[26px] p-5 md:p-6 relative transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(0,0,0,0.05)]">
                   <div
-                    className="rich-text text-[15px] md:text-[16px] text-[#0a3e40] leading-[32px]"
+                    className="rich-text text-[15px] md:text-[16px] text-[#0a3e40] max-w-full leading-[32px]"
                     dangerouslySetInnerHTML={{ __html: wNote }}
                   />
                 </div>

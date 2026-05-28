@@ -1,21 +1,37 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getBookHeader, getBooks, IMG_URL, getBi, getCached, setCached } from "../../api/api";
+import {
+  getAuthor,
+  getBookHeader,
+  getBooks,
+  IMG_URL,
+  getBi,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const AuthorSection = () => {
+  const cachedAuthor = getCached("authorPageProfileData");
   const cachedHeader = getCached("authorPageBookHeader");
   const cachedBooks = getCached("authorPageBooks");
 
   const [activeIndex, setActiveIndex] = useState(null);
+  const [authorPageData, setAuthorPageData] = useState(cachedAuthor || null);
   const [header, setHeader] = useState(cachedHeader || null);
   const [bookList, setBookList] = useState(cachedBooks || []);
-  const [loading, setLoading] = useState(!cachedHeader || !cachedBooks);
+  const [loading, setLoading] = useState(
+    !cachedAuthor || !cachedHeader || !cachedBooks,
+  );
   const { lang } = useLanguage();
 
   useEffect(() => {
-    Promise.all([getBookHeader(), getBooks()])
-      .then(([headRes, booksRes]) => {
+    Promise.all([getAuthor(), getBookHeader(), getBooks()])
+      .then(([authRes, headRes, booksRes]) => {
+        if (authRes.data) {
+          setAuthorPageData(authRes.data);
+          setCached("authorPageProfileData", authRes.data);
+        }
         if (headRes.data) {
           setHeader(headRes.data);
           setCached("authorPageBookHeader", headRes.data);
@@ -28,7 +44,7 @@ const AuthorSection = () => {
           setCached("authorPageBooks", list);
         }
       })
-      .catch((err) => console.error("Error fetching data:", err))
+      .catch((err) => console.error("Error fetching author data:", err))
       .finally(() => setLoading(false));
   }, []);
 
@@ -54,8 +70,11 @@ const AuthorSection = () => {
     return <div className="w-full h-[400px] bg-white animate-pulse" />;
   }
 
-  const label = getBi(header?.label, lang) || (lang === "EN" ? "Publications" : "Publikationen");
-  const title = getBi(header?.title, lang) || (lang === "EN" ? "Author" : "Autor");
+  const label =
+    getBi(header?.label, lang) ||
+    (lang === "EN" ? "Publications" : "Publikationen");
+  const title =
+    getBi(header?.title, lang) || (lang === "EN" ? "Author" : "Autor");
   const desc = getBi(header?.description, lang);
 
   return (

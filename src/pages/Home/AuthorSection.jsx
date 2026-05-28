@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import {
+  getAuthor,
   getBookHeader,
   getBooks,
   IMG_URL,
@@ -15,18 +16,24 @@ import { useLanguage } from "../../context/LanguageContext";
 import "swiper/css";
 
 const AuthorSection = () => {
+  const cachedAuthor = getCached("homeAuthorProfile");
   const cachedHeader = getCached("homeBookHeader");
   const cachedBooks = getCached("homeBooks");
 
   const [activeIndex, setActiveIndex] = useState(null);
+  const [authorData, setAuthorData] = useState(cachedAuthor || null);
   const [header, setHeader] = useState(cachedHeader || null);
   const [booksList, setBooksList] = useState(cachedBooks || []);
-  const [loading, setLoading] = useState(!cachedHeader || !cachedBooks);
+  const [loading, setLoading] = useState(!cachedAuthor || !cachedHeader || !cachedBooks);
   const { lang } = useLanguage();
 
   useEffect(() => {
-    Promise.all([getBookHeader(), getBooks()])
-      .then(([headRes, booksRes]) => {
+    Promise.all([getAuthor(), getBookHeader(), getBooks()])
+      .then(([authRes, headRes, booksRes]) => {
+        if (authRes.data) {
+          setAuthorData(authRes.data);
+          setCached("homeAuthorProfile", authRes.data);
+        }
         if (headRes.data) {
           setHeader(headRes.data);
           setCached("homeBookHeader", headRes.data);
@@ -40,7 +47,7 @@ const AuthorSection = () => {
         }
       })
       .catch((err) =>
-        console.error("Error fetching book header or books:", err),
+        console.error("Error fetching author data or books:", err),
       )
       .finally(() => setLoading(false));
   }, []);
@@ -54,11 +61,11 @@ const AuthorSection = () => {
   const books = booksList.slice(0, 3);
 
   const label =
-    getBi(header?.label, lang) ||
+    getBi(authorData?.label, lang) ||
     (lang === "EN" ? "Publications" : "Publikationen");
   const title =
-    getBi(header?.title, lang) || (lang === "EN" ? "Author" : "Autor");
-  const desc = getBi(header?.description, lang);
+    getBi(authorData?.title, lang) || (lang === "EN" ? "Author" : "Autor");
+  const desc = getBi(authorData?.desc, lang);
 
   const handleClick = (index) => {
     if (window.innerWidth >= 1024) return;

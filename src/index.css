@@ -100,13 +100,11 @@ body {
   border-radius: 12px;
   margin: 1.5rem 0;
 }
-
 /* Global rich-text content styling */
 .rich-text {
   overflow-wrap: break-word;
   word-break: normal;
   hyphens: none;
-  max-width: 100%;
 }
 .rich-text p {
   margin-bottom: 1.25rem;
