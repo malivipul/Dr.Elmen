@@ -98,7 +98,7 @@ export default function WorkshopDetailsPage() {
 
   const objectiveTitle =
     workshop.objectiveTitle &&
-    (workshop.objectiveTitle.en || workshop.objectiveTitle.de)
+      (workshop.objectiveTitle.en || workshop.objectiveTitle.de)
       ? getBi(workshop.objectiveTitle, lang)
       : lang === "EN"
         ? "Objective"
@@ -106,7 +106,7 @@ export default function WorkshopDetailsPage() {
 
   const sectionsTitle =
     workshop.sectionsTitle &&
-    (workshop.sectionsTitle.en || workshop.sectionsTitle.de)
+      (workshop.sectionsTitle.en || workshop.sectionsTitle.de)
       ? getBi(workshop.sectionsTitle, lang)
       : lang === "EN"
         ? "Key Service Areas"
@@ -114,7 +114,7 @@ export default function WorkshopDetailsPage() {
 
   const outcomesTitle =
     workshop.outcomesTitle &&
-    (workshop.outcomesTitle.en || workshop.outcomesTitle.de)
+      (workshop.outcomesTitle.en || workshop.outcomesTitle.de)
       ? getBi(workshop.outcomesTitle, lang)
       : lang === "EN"
         ? "Key technologies and platforms"
@@ -252,7 +252,7 @@ export default function WorkshopDetailsPage() {
                 to="/workshops"
                 className="inline-flex items-center gap-2 text-[#b8965a] hover:text-black transition-colors mb-6 font-medium group relative z-10"
               >
-                <span className="group-hover:-translate-x-1 transition-transform">
+                <span className="group-hover:-translate-x-1 transition-transform text-[22px] md:text-[16px]">
                   ←
                 </span>
                 {lang === "EN"
@@ -346,31 +346,28 @@ export default function WorkshopDetailsPage() {
                           behavior: "smooth",
                         })
                       }
-                      className={`group block rounded-[16px] px-4 py-3 transition-all duration-500 border ${
-                        isActive
+                      className={`group block rounded-[16px] px-4 py-3 transition-all duration-500 border ${isActive
                           ? "bg-[#b8965a] border-[#b8965a]"
                           : "bg-white hover:bg-[#b8965a] border-[#ece6dc] hover:border-[#b8965a]"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between gap-3">
                         {/* TEXT */}
                         <p
-                          className={`text-[14px] md:text-[15px] leading-[26px] transition-all duration-500 ${
-                            isActive
+                          className={`text-[14px] md:text-[15px] leading-[26px] transition-all duration-500 ${isActive
                               ? "text-white"
                               : "text-[#111111] group-hover:text-white"
-                          }`}
+                            }`}
                         >
                           {title}
                         </p>
 
                         {/* ARROW */}
                         <span
-                          className={`text-[18px] transition-all duration-500 ${
-                            isActive
+                          className={`text-[18px] transition-all duration-500 ${isActive
                               ? "text-white"
                               : "text-[#b8965a] group-hover:text-white group-hover:translate-x-1"
-                          }`}
+                            }`}
                         >
                           →
                         </span>

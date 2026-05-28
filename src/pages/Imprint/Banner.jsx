@@ -11,7 +11,7 @@ const AboutBanner = () => {
         <img
           src="/assets/Banners/Privacy-Policy-Banner.jpg"
           alt="About Banner"
-          className="w-full h-full object-cover md:object-cover object-center"
+          className="w-full h-full object-cover object-right md:object-center"
         />
 
         {/* OVERLAY */}
@@ -38,14 +38,14 @@ const AboutBanner = () => {
             <span>›</span>
 
             <span className="font-semibold">
-Imprint
+              Imprint
             </span>
 
           </div>
 
           {/* TITLE */}
           <h1 className="text-white text-[38px] md:text-5xl font-serif leading-none md:leading-tight drop-shadow-lg">
-          Imprint
+            Imprint
           </h1>
 
         </div>

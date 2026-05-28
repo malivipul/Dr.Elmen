@@ -69,47 +69,47 @@ const Footer = () => {
             {/* SOCIAL */}
             <div className="flex gap-4 pt-3 justify-center md:justify-start">
               {settings.linkedin && (
-                <Link
-                  to={settings.linkedin}
+                <a
+                  href={settings.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
                   <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
-                </Link>
+                </a>
               )}
 
               {settings.twitter && (
-                <Link
-                  to={settings.twitter}
+                <a
+                  href={settings.twitter}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
                   <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
-                </Link>
+                </a>
               )}
 
               {settings.facebook && (
-                <Link
-                  to={settings.facebook}
+                <a
+                  href={settings.facebook}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
                   <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
-                </Link>
+                </a>
               )}
 
               {settings.instagram && (
-                <Link
-                  to={settings.instagram}
+                <a
+                  href={settings.instagram}
                   target="_blank"
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
                   <i className="fa-brands fa-instagram text-[14px] text-white"></i>
-                </Link>
+                </a>
               )}
             </div>
           </div>
@@ -325,6 +325,17 @@ const Footer = () => {
             </Link>
 
             <Link to="/privacy-policy" className="hover:text-[#b8965a]">
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+olicy" className="hover:text-[#b8965a]">
               Privacy Policy
             </Link>
           </div>

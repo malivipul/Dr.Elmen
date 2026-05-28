@@ -57,9 +57,9 @@ const Imprint = () => {
               </h3>
 
               <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-                Phone: {contactPhone}
+                Phone: <a href={`tel:${contactPhone}`} className="hover:text-[#b8965a] transition-colors">{contactPhone}</a>
                 <br />
-                E-mail: {contactEmail}
+                E-mail: <a href={`mailto:${contactEmail}`} className="hover:text-[#b8965a] transition-colors">{contactEmail}</a>
               </p>
             </div>
 
@@ -73,7 +73,7 @@ const Imprint = () => {
                 The European Commission provides a platform for online dispute
                 resolution (ODR):
                 <br />
-                https://ec.europa.eu/consumers/odr/
+                <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://ec.europa.eu/consumers/odr/</a>
                 <br />
                 Our e-mail address can be found above in the site notice.
               </p>
@@ -98,7 +98,14 @@ const Imprint = () => {
               </h3>
 
               <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px]">
-                AnaxisTech LLP
+                <a
+                  href="https://anaxistech.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#b8965a] transition duration-300"
+                >
+                  AnaxisTech LLP
+                </a>
               </p>
             </div>
           </div>

@@ -84,8 +84,7 @@ const AuthorSection = () => {
               <div
                 key={i}
                 onClick={() => handleClick(i)}
-                className="group relative rounded-[28px] overflow-hidden cursor-pointer w-full h-[500px] md:h-[580px] lg:h-[580px] shadow-sm hover:shadow-xl transition-all duration-500"
-              >
+                className="group relative rounded-[28px] overflow-hidden cursor-pointer w-full h-[620px] md:h-[580px] lg:h-[580px] shadow-sm hover:shadow-xl transition-all duration-500"               >
                 {/* IMAGE */}
                 <img
                   src={book.img}
@@ -95,19 +94,17 @@ const AuthorSection = () => {
 
                 {/* OVERLAY */}
                 <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                    activeIndex === i
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${activeIndex === i
                       ? "opacity-100"
                       : "opacity-0 group-hover:opacity-100"
-                  } bg-black/20`}
+                    } bg-black/20`}
                 >
                   {/* BLUR BOX */}
                   <div
-                    className={`bg-white/30 backdrop-blur-md border border-white/20 rounded-[24px] shadow-[0_10px_35px_rgba(0,0,0,0.18)] w-[calc(100%-40px)] h-[calc(100%-40px)] flex flex-col items-center justify-center p-6 text-center transition-all duration-500 ${
-                      activeIndex === i
+                    className={`bg-white/30 backdrop-blur-md border border-white/20 rounded-[24px] shadow-[0_10px_35px_rgba(0,0,0,0.18)] w-[calc(100%-40px)] h-[calc(100%-40px)] flex flex-col items-center justify-center p-6 text-center transition-all duration-500 ${activeIndex === i
                         ? "scale-100"
                         : "scale-95 group-hover:scale-100"
-                    }`}
+                      }`}
                   >
                     {/* BUTTON */}
                     <Link to={book.link} target="_blank" rel="noreferrer">

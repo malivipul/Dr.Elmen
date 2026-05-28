@@ -180,9 +180,9 @@ const PrivacyPolicy = () => {
     <br />
     {contactAddress}
     <br />
-    Phone: {contactPhone}
+    Phone: <a href={`tel:${contactPhone}`} className="hover:text-[#b8965a] transition-colors">{contactPhone}</a>
     <br />
-    E-Mail: {contactEmail}
+    E-Mail: <a href={`mailto:${contactEmail}`} className="hover:text-[#b8965a] transition-colors">{contactEmail}</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10">
@@ -434,7 +434,7 @@ const PrivacyPolicy = () => {
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     An overview of the Facebook social media elements is available under the following link:
     <br />
-    https://developers.facebook.com/docs/plugins/
+    <a href="https://developers.facebook.com/docs/plugins/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://developers.facebook.com/docs/plugins/</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
@@ -452,7 +452,7 @@ const PrivacyPolicy = () => {
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     For more information, please consult the Data Privacy Policy of Facebook at:
     <br />
-    https://de-de.facebook.com/privacy/explanation
+    <a href="https://de-de.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://de-de.facebook.com/privacy/explanation</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
@@ -466,23 +466,23 @@ const PrivacyPolicy = () => {
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     The wording of the agreement can be found under:
     <br />
-    https://www.facebook.com/legal/controller_addendum
+    <a href="https://www.facebook.com/legal/controller_addendum" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/legal/controller_addendum</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     Details can be found here:
     <br />
-    https://www.facebook.com/legal/EU_data_transfer_addendum
+    <a href="https://www.facebook.com/legal/EU_data_transfer_addendum" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/legal/EU_data_transfer_addendum</a>
     <br />
-    https://de-de.facebook.com/help/566994660333381
+    <a href="https://de-de.facebook.com/help/566994660333381" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://de-de.facebook.com/help/566994660333381</a>
     <br />
-    https://www.facebook.com/policy.php
+    <a href="https://www.facebook.com/policy.php" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/policy.php</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-all">
     More information:
     <br />
-    https://www.dataprivacyframework.gov/s/participant-search/participantdetail?contact=true&id=a2zt0000000GnywAAC&status=Active
+    <a href="https://www.dataprivacyframework.gov/s/participant-search/participantdetail?contact=true&id=a2zt0000000GnywAAC&status=Active" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.dataprivacyframework.gov/s/participant-search/participantdetail?contact=true&id=a2zt0000000GnywAAC&status=Active</a>
   </p>
 
   {/* WHATSAPP */}
@@ -509,7 +509,7 @@ const PrivacyPolicy = () => {
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     Further information:
     <br />
-    https://www.whatsapp.com/legal/privacy-policy
+    <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.whatsapp.com/legal/privacy-policy</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10">
@@ -532,19 +532,19 @@ const PrivacyPolicy = () => {
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     More details:
     <br />
-    https://twitter.com/en/privacy
+    <a href="https://twitter.com/en/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://twitter.com/en/privacy</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     Data transfer details:
     <br />
-    https://gdpr.twitter.com/en/controller-to-controller-transfers.html
+    <a href="https://gdpr.twitter.com/en/controller-to-controller-transfers.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://gdpr.twitter.com/en/controller-to-controller-transfers.html</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-all">
     Privacy settings:
     <br />
-    https://twitter.com/account/settings
+    <a href="https://twitter.com/account/settings" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://twitter.com/account/settings</a>
   </p>
 
   {/* INSTAGRAM */}
@@ -563,15 +563,15 @@ const PrivacyPolicy = () => {
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
     Instagram Privacy Policy:
     <br />
-    https://privacycenter.instagram.com/policy/
+    <a href="https://privacycenter.instagram.com/policy/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://privacycenter.instagram.com/policy/</a>
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-all">
     Data transfer information:
     <br />
-    https://www.facebook.com/legal/EU_data_transfer_addendum
+    <a href="https://www.facebook.com/legal/EU_data_transfer_addendum" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/legal/EU_data_transfer_addendum</a>
     <br />
-    https://de-de.facebook.com/help/566994660333381
+    <a href="https://de-de.facebook.com/help/566994660333381" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://de-de.facebook.com/help/566994660333381</a>
   </p>
 
   {/* LINKEDIN */}
@@ -594,7 +594,7 @@ const PrivacyPolicy = () => {
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] break-all">
     For further information:
     <br />
-    https://www.linkedin.com/legal/privacy-policy
+    <a href="https://www.linkedin.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.linkedin.com/legal/privacy-policy</a>
   </p>
 
 </div>

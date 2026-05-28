@@ -117,7 +117,7 @@ const AuthorSection = () => {
                 <SwiperSlide key={i}>
                   <div
                     onClick={() => handleClick(i)}
-                    className="group relative rounded-[28px] overflow-hidden cursor-pointer h-[500px] md:h-[580px] lg:h-[580px]"
+                    className="group relative rounded-[28px] overflow-hidden cursor-pointer h-[620px] md:h-[580px] lg:h-[580px]"
                   >
                     {/* IMAGE */}
                     <img
