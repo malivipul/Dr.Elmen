@@ -245,7 +245,7 @@ const ContactForm = () => {
                 <p className="text-[14px] md:text-[16px] text-[#0a3e40] leading-[28px] mt-4">
                   {lang === "EN"
                     ? "Easily book a professional consultation session directly through the integrated Calendly scheduling system for workshops, strategy discussions, and collaboration meetings."
-                    : "Buchen Sie ganz einfach einen professionellen Beratungstermin direkt über das integrierte Calendly-Terminsystem für Workshops, Strategiegespräche und Kooperationstreffen."}
+                    : "Buchen Sie Ihr persönliches Beratungsgespräch ganz einfach über das integrierte Calendly-Buchungssystem – für Workshops, Strategiegespräche und gemeinsame Projektgespräche."}
                 </p>
 
                 <button

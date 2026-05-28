@@ -121,13 +121,17 @@ const VitaTimeline = () => {
         item.title ||
         item.heading;
 
+      const year = getBi(
+        item.year || item.years || item.date || item.period || item.duration,
+        lang,
+      );
+      const text = getBi(rawText, lang);
+
       return {
-        year: getBi(
-          item.year || item.years || item.date || item.period || item.duration,
-          lang,
-        ),
+        year: year.replace(/-/g, "\u2011"), // Non-breaking hyphen
         icon: item.icon || "fa-rocket",
-        text: getBi(rawText, lang),
+        // Replace hyphens with non-breaking hyphens, but avoid replacing them inside HTML tags
+        text: text.replace(/(<[^>]*>)|(-)/g, (match, group1) => group1 || "&#8209;"),
       };
     })
     .filter((item) => item.year || item.text);
@@ -199,7 +203,7 @@ const VitaTimeline = () => {
 
                     {/* TEXT */}
                     <div
-                      className="rich-text text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed max-h-[400px] md:max-h-[360px] overflow-y-auto pr-2 custom-scrollbar timeline-text break-words"
+                      className="rich-text text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed max-h-[400px] md:max-h-[360px] overflow-y-auto pr-2 custom-scrollbar timeline-text"
                       dangerouslySetInnerHTML={{ __html: item.text }}
                     />
                   </div>

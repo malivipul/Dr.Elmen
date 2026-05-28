@@ -17,7 +17,7 @@ const AboutBanner = () => {
     });
   }, []);
 
-  const title = getBi(banner?.title, lang) || (lang === "EN" ? "Let’s work together" : "Lassen Sie uns zusammenarbeiten");
+  const title = getBi(banner?.title, lang) || (lang === "EN" ? "Let’s work together" : "Let’s work together");
   const bannerImg = banner?.img ? `${IMG_URL}${banner.img}` : "/assets/images/image (14).png";
 
   return (

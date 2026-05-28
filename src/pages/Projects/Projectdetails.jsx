@@ -181,6 +181,7 @@ export default function ProjectsSection() {
                       /* DESKTOP FLIP */
                       md:absolute md:inset-0
                       md:h-full
+                      md:overflow-y-auto md:pr-4 custom-scrollbar
                       [transform:rotateY(180deg)]
                       [backface-visibility:hidden]
 

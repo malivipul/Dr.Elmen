@@ -104,8 +104,8 @@ body {
 /* Global rich-text content styling */
 .rich-text {
   overflow-wrap: break-word;
-  word-break: break-word;
-  /* word-break: normal; */
+  word-break: normal;
+  hyphens: none;
 }
 .rich-text p {
   margin-bottom: 1.25rem;

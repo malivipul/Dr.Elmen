@@ -77,7 +77,7 @@ const About = () => {
             </h2>
 
             {/* TEXT */}
-            <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.8] break-words">
+            <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.8]">
               {quote && (
                 <div
                   className="rich-text font-semibold italic"

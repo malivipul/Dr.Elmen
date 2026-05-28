@@ -60,7 +60,7 @@ const AboutBanner = () => {
           {/* BREADCRUMB */}
           <div className="text-white text-[13px] md:text-sm mb-3 flex items-center gap-2 opacity-90 font-medium">
             <Link to="/" className="hover:underline">
-              {lang === "EN" ? "Home" : "Startseite"}
+              {lang === "EN" ? "Home" : "Home"}
             </Link>
             <span>›</span>
             <span className="font-semibold">{bannerTitle}</span>

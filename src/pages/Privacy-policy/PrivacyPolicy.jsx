@@ -431,7 +431,7 @@ const PrivacyPolicy = () => {
     We have integrated elements of the social network Facebook on this website. The provider of this service is Meta Platforms Ireland Limited, 4 Grand Canal Square, Dublin 2, Ireland. According to Facebook’s statement the collected data will be transferred to the USA and other third-party countries too.
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     An overview of the Facebook social media elements is available under the following link:
     <br />
     <a href="https://developers.facebook.com/docs/plugins/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://developers.facebook.com/docs/plugins/</a>
@@ -449,7 +449,7 @@ const PrivacyPolicy = () => {
     We have to emphasize that we as the provider of the website do not receive any information on the content of the transferred data and its use by Facebook.
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     For more information, please consult the Data Privacy Policy of Facebook at:
     <br />
     <a href="https://de-de.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://de-de.facebook.com/privacy/explanation</a>
@@ -463,13 +463,13 @@ const PrivacyPolicy = () => {
     Insofar as personal data is collected on our website with the help of the tool described here and forwarded to Facebook, we and Meta Platforms Ireland Limited are jointly responsible for this data processing (Art. 26 DSGVO).
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     The wording of the agreement can be found under:
     <br />
     <a href="https://www.facebook.com/legal/controller_addendum" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/legal/controller_addendum</a>
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     Details can be found here:
     <br />
     <a href="https://www.facebook.com/legal/EU_data_transfer_addendum" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/legal/EU_data_transfer_addendum</a>
@@ -479,7 +479,7 @@ const PrivacyPolicy = () => {
     <a href="https://www.facebook.com/policy.php" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/policy.php</a>
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-words">
     More information:
     <br />
     <a href="https://www.dataprivacyframework.gov/s/participant-search/participantdetail?contact=true&id=a2zt0000000GnywAAC&status=Active" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.dataprivacyframework.gov/s/participant-search/participantdetail?contact=true&id=a2zt0000000GnywAAC&status=Active</a>
@@ -506,7 +506,7 @@ const PrivacyPolicy = () => {
     The use of WhatsApp is based on your consent in accordance with Art. 6 (1)(a) GDPR and § 25 (1) TTDSG. Consent can be revoked at any time.
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     Further information:
     <br />
     <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.whatsapp.com/legal/privacy-policy</a>
@@ -529,19 +529,19 @@ const PrivacyPolicy = () => {
     If the social media element has been activated, a direct connection between your device and X’s server will be established. As a result, X will receive information on your visit to this website.
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     More details:
     <br />
     <a href="https://twitter.com/en/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://twitter.com/en/privacy</a>
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     Data transfer details:
     <br />
     <a href="https://gdpr.twitter.com/en/controller-to-controller-transfers.html" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://gdpr.twitter.com/en/controller-to-controller-transfers.html</a>
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-words">
     Privacy settings:
     <br />
     <a href="https://twitter.com/account/settings" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://twitter.com/account/settings</a>
@@ -560,13 +560,13 @@ const PrivacyPolicy = () => {
     If the social media element has been activated, a direct connection between your device and Instagram’s server will be established.
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8 break-words">
     Instagram Privacy Policy:
     <br />
     <a href="https://privacycenter.instagram.com/policy/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://privacycenter.instagram.com/policy/</a>
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10 break-words">
     Data transfer information:
     <br />
     <a href="https://www.facebook.com/legal/EU_data_transfer_addendum" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.facebook.com/legal/EU_data_transfer_addendum</a>
@@ -591,7 +591,7 @@ const PrivacyPolicy = () => {
     The use of this service is based on your consent in accordance with Art. 6 (1)(a) GDPR and § 25 (1) TTDSG. Consent can be revoked at any time.
   </p>
 
-  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] break-all">
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] break-words">
     For further information:
     <br />
     <a href="https://www.linkedin.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors">https://www.linkedin.com/legal/privacy-policy</a>

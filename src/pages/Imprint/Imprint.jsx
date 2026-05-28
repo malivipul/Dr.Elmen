@@ -69,7 +69,7 @@ const Imprint = () => {
                 EU Dispute Resolution
               </h3>
 
-              <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] break-all">
+              <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] break-words">
                 The European Commission provides a platform for online dispute
                 resolution (ODR):
                 <br />

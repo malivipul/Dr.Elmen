@@ -99,7 +99,7 @@ const SectorsSection = () => {
           {sectors.map((item, index) => (
             <div
               key={index}
-              className="group min-h-[56px] md:h-[58px] px-4 md:px-7 rounded-full border border-white/10 bg-white/[0.04] hover:bg-[#b8965a] transition-all duration-500 flex items-center justify-center md:justify-start gap-2.5 md:gap-3"
+              className="group min-h-[56px] md:h-[58px] px-4 md:px-7 rounded-full border border-white/50 bg-white/[0.04] hover:bg-[#b8965a] transition-all duration-500 flex items-center justify-center md:justify-start gap-2.5 md:gap-3"
             >
 
               {/* ICON */}
