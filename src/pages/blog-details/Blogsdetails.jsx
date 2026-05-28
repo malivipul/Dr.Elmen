@@ -11,6 +11,7 @@ import {
   getBi,
   getCached,
   setCached,
+  formatDate,
 } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 import SEO from "../../components/commen/SEO";
@@ -56,6 +57,7 @@ const Blogsdetails = () => {
   const [hasLiked, setHasLiked] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isRead, setIsRead] = useState(false);
 
   const articleUrl = window.location.href;
 
@@ -70,8 +72,11 @@ const Blogsdetails = () => {
 
       // Mark as read locally
       const read = JSON.parse(localStorage.getItem("readArticles") || "[]");
+      setIsRead(read.includes(id));
       if (!read.includes(id)) {
-        localStorage.setItem("readArticles", JSON.stringify([...read, id]));
+        const newRead = [...read, id];
+        localStorage.setItem("readArticles", JSON.stringify(newRead));
+        setIsRead(true);
       }
 
       Promise.all([getBlogById(id), getBlogComments(id), getSettings()])
@@ -138,8 +143,8 @@ const Blogsdetails = () => {
         title: lang === "EN" ? "Submitted!" : "Gesendet!",
         text:
           lang === "EN"
-            ? "Your comment has been sent for admin approval."
-            : "Ihr Kommentar wurde zur Genehmigung gesendet.",
+            ? "You have added comment successfully."
+            : "Ihr Kommentar wurde erfolgreich hinzugefügt.",
         confirmButtonColor: "#b8965a",
       });
       setCommentData({ name: "", email: "", text: "" });
@@ -197,7 +202,7 @@ const Blogsdetails = () => {
       ? getBi(currentBlog.title, lang)
       : currentBlog.title || "";
   const authorName = currentBlog.author || "Raphael Edlmann";
-  const dateStr = currentBlog.date || "March 18, 2026";
+  const dateStr = formatDate(currentBlog.date) || "18.03.2026";
   const rawContent =
     typeof currentBlog.description === "object"
       ? getBi(currentBlog.description, lang)
@@ -205,7 +210,7 @@ const Blogsdetails = () => {
 
   // Sanitize HTML
   const content = rawContent.replace(/&nbsp;/g, " ").replace(/ {2,}/g, " ");
-  const readTime = lang === "EN" ? "5 min read" : "5 Min. Lesezeit";
+  const readTime = getReadTime(rawContent, lang);
   const category =
     getBi(currentBlog.Category || currentBlog.category, lang) ||
     (lang === "EN" ? "Guides" : "Leitfäden");
@@ -271,13 +276,15 @@ const Blogsdetails = () => {
                 </div>
 
                 {/* READ TIME */}
-                <div className="flex items-center gap-3 text-[#6b6b6b] text-[15px]">
-                  <div className="w-10 h-10 rounded-full bg-[#b8965a] text-white flex items-center justify-center shrink-0">
-                    <i className="fa-regular fa-clock"></i>
-                  </div>
+                {isRead && (
+                  <div className="flex items-center gap-3 text-[#6b6b6b] text-[15px]">
+                    <div className="w-10 h-10 rounded-full bg-[#b8965a] text-white flex items-center justify-center shrink-0">
+                      <i className="fa-regular fa-clock"></i>
+                    </div>
 
-                  <span className="font-medium">{readTime}</span>
-                </div>
+                    <span className="font-medium">{readTime}</span>
+                  </div>
+                )}
               </div>
             </div>
 

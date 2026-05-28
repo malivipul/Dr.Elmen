@@ -21,22 +21,46 @@ const PrivacyPolicy = lazy(() => import("./pages/Privacy-policy"));
 
 /* HASH SCROLL */
 function ScrollToHash() {
-  const { hash } = useLocation();
+  const { hash, pathname } = useLocation();
 
   useEffect(() => {
-    if (hash) {
-      const element = document.querySelector(hash);
+    if (!hash) return;
 
+    let scrollAttempts = 0;
+    const maxAttempts = 50; // Try for up to 5 seconds
+    const headerOffset = 100;
+
+    const performScroll = () => {
+      const element = document.querySelector(hash);
       if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 100);
+        const rect = element.getBoundingClientRect();
+        const absoluteTop = rect.top + window.pageYOffset;
+        const targetPosition = absoluteTop - headerOffset;
+
+        // If we are already within 5px of the target, stop attempting
+        if (Math.abs(window.pageYOffset - targetPosition) < 5) {
+          return true;
+        }
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
       }
-    }
-  }, [hash]);
+      return false;
+    };
+
+    const interval = setInterval(() => {
+      scrollAttempts++;
+      const finished = performScroll();
+      
+      if (finished || scrollAttempts >= maxAttempts) {
+        clearInterval(interval);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [hash, pathname]);
 
   return null;
 }

@@ -602,7 +602,7 @@ const Header = () => {
 
             {/* Speaker */}
             <Link
-              to={lang === "EN" ? "/#speaker-section" : "/speaker"}
+              to="/#speaker-section"
               onClick={() => setMenuOpen(false)}
               className={`
                 flex
@@ -614,8 +614,7 @@ const Header = () => {
                 transition-all
                 duration-300
                 ${
-                  location.pathname ===
-                  (lang === "EN" ? "/#speaker-section" : "/speaker")
+                  location.hash === "#speaker-section"
                     ? "bg-[#b8965a] shadow-[0_6px_16px_rgba(184,150,90,0.22)]"
                     : "hover:bg-[#b8965a]/10"
                 }
@@ -630,8 +629,7 @@ const Header = () => {
                   transition-all
                   duration-300
                   ${
-                    location.pathname ===
-                    (lang === "EN" ? "/#speaker-section" : "/speaker")
+                    location.hash === "#speaker-section"
                       ? "text-white"
                       : "text-[#111] hover:text-[#b8965a]"
                   }

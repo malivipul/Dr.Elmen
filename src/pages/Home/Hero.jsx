@@ -105,9 +105,10 @@ const Hero = () => {
         </h2>
 
         {/* SUBTEXT */}
-        <p className="text-white mt-3 text-base md:text-lg lg:text-xl">
-          {subtitle}
-        </p>
+        <div
+          className="rich-text text-white mt-3 text-base md:text-lg lg:text-xl"
+          dangerouslySetInnerHTML={{ __html: subtitle }}
+        />
 
         {/* BUTTON + ICONS */}
         <div className="w-full flex justify-center md:justify-start mt-8">

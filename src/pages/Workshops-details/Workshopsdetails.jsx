@@ -134,6 +134,102 @@ export default function WorkshopDetailsPage() {
     .map((o) => (typeof o === "object" ? getBi(o, lang) : o))
     .filter((o) => o && typeof o === "string" && o.trim() !== "");
 
+  const isService = workshop.type === "service";
+
+  const renderSections = (isInsideBox = false) =>
+    sections.length > 0 && (
+      <div className={isInsideBox ? "mt-10 relative z-10" : ""}>
+        <h2 className="title-font text-[22px] md:text-[24px] mb-5 text-black">
+          {sectionsTitle}
+        </h2>
+
+        {/* CARDS */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          {sections.map((section, index) => {
+            const heading =
+              typeof section.heading === "object"
+                ? getBi(section.heading, lang)
+                : section.heading;
+            const points = section.points || [];
+
+            return (
+              <div
+                key={index}
+                className="group bg-[#faf8f4] hover:bg-white rounded-[20px] p-4 border border-[#ece6dc] hover:border-[#d4b17d] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.05)]"
+              >
+                {/* HEADING */}
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="min-w-[32px] w-[32px] h-[32px] rounded-full bg-[#b8965a] text-white flex items-center justify-center text-[11px] font-semibold">
+                    {index + 1}
+                  </div>
+                  <h3 className="title-font !font-['Inter',sans-serif] text-[16px] md:text-[18px] leading-[1.3] text-black">
+                    {heading}
+                  </h3>
+                </div>
+
+                {/* POINTS */}
+                <div className="space-y-2.5">
+                  {points.map((point, i) => {
+                    const pointText =
+                      typeof point === "object" ? getBi(point, lang) : point;
+                    return (
+                      <div key={i} className="flex items-start gap-2.5">
+                        {/* ICON */}
+                        <span className="text-[#b8965a] text-[13px] mt-[4px]">
+                          ✔
+                        </span>
+                        {/* TEXT */}
+                        <p className="text-[14px] md:text-[15px] text-[#0a3e40] leading-[27px]">
+                          {pointText}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+
+  const renderOutcomes = () =>
+    outcomes.length > 0 && (
+      <div className="bg-[#050505] rounded-[26px] p-4 md:p-6 relative overflow-hidden mb-6">
+        {/* EFFECT */}
+        <div className="absolute bottom-[-80px] right-[-80px] w-[180px] h-[180px] bg-[#d4b17d]/10 rounded-full blur-[70px]"></div>
+
+        <h2 className="title-font text-[20px] md:text-[22px] mb-5 text-white relative z-10">
+          {outcomesTitle}
+        </h2>
+
+        {/* OUTCOMES GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 relative z-10">
+          {outcomes.map((item, index) => {
+            const outcomeText =
+              typeof item === "object" ? getBi(item, lang) : item;
+            return (
+              <div
+                key={index}
+                className="group bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-[#d4b17d]/40 rounded-[18px] px-4 py-4 transition-all duration-500 hover:-translate-y-1"
+              >
+                <div className="flex items-start gap-3">
+                  {/* ICON */}
+                  <span className="min-w-[22px] w-[22px] h-[22px] rounded-full bg-[#b8965a] flex items-center justify-center text-white text-[11px] mt-[2px]">
+                    ✔
+                  </span>
+                  {/* TEXT */}
+                  <p className="text-[14px] md:text-[15px] text-[#f5f5f5] leading-[28px]">
+                    {outcomeText}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+
   return (
     <section className="bg-[#f4f4f4] min-h-screen py-10 md:py-14">
       <div className="max-w-[1320px] mx-auto px-4 md:px-7">
@@ -165,128 +261,46 @@ export default function WorkshopDetailsPage() {
               </h1>
 
               {/* OBJECTIVE */}
-              <div className="mb-8 relative z-10">
+              <div className="mb-0 relative z-10">
                 <h2 className="title-font text-[20px] md:text-[24px] mb-4 text-black">
                   {lang === "EN" ? "Objective" : "Ziel"}
                 </h2>
-                <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[30px]">
-                  {wObjective}
-                </p>
+                <div
+                  className="rich-text text-[15px] md:text-[16px] text-[#0a3e40] leading-[30px]"
+                  dangerouslySetInnerHTML={{ __html: wObjective }}
+                />
               </div>
 
-              {/* WORKSHOP STRUCTURE */}
-              {sections.length > 0 && (
-                <div className="relative z-10">
-                  <h2 className="title-font text-[22px] md:text-[24px] mb-5 text-black">
-                    {sectionsTitle}
-                  </h2>
-
-                  {/* CARDS */}
-                  <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                    {sections.map((section, index) => {
-                      const heading =
-                        typeof section.heading === "object"
-                          ? getBi(section.heading, lang)
-                          : section.heading;
-                      const points = section.points || [];
-
-                      return (
-                        <div
-                          key={index}
-                          className="group bg-[#faf8f4] hover:bg-white rounded-[20px] p-4 border border-[#ece6dc] hover:border-[#d4b17d] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(0,0,0,0.05)]"
-                        >
-                          {/* HEADING */}
-                          <div className="flex items-center gap-3 mb-4">
-                            <div className="min-w-[32px] w-[32px] h-[32px] rounded-full bg-[#b8965a] text-white flex items-center justify-center text-[11px] font-semibold">
-                              {index + 1}
-                            </div>
-                            <h3 className="title-font !font-['Inter',sans-serif] text-[16px] md:text-[18px] leading-[1.3] text-black whitespace-nowrap overflow-hidden text-ellipsis">
-                              {heading}
-                            </h3>
-                          </div>
-
-                          {/* POINTS */}
-                          <div className="space-y-2.5">
-                            {points.map((point, i) => {
-                              const pointText =
-                                typeof point === "object"
-                                  ? getBi(point, lang)
-                                  : point;
-                              return (
-                                <div
-                                  key={i}
-                                  className="flex items-start gap-2.5"
-                                >
-                                  {/* ICON */}
-                                  <span className="text-[#b8965a] text-[13px] mt-[4px]">
-                                    ✔
-                                  </span>
-                                  {/* TEXT */}
-                                  <p className="text-[14px] md:text-[15px] text-[#0a3e40] leading-[27px]">
-                                    {pointText}
-                                  </p>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
+              {/* WORKSHOP STRUCTURE (Condition: show here ONLY for workshops) */}
+              {!isService && renderSections(true)}
             </div>
 
-            {/* OUTCOMES + SUPPORT */}
+            {/* OUTCOMES + STRUCTURE + SUPPORT (Dynamic Order) */}
             <div className="mt-6">
-              {/* OUTCOMES */}
-              {outcomes.length > 0 && (
-                <div className="bg-[#050505] rounded-[26px] p-4 md:p-6 relative overflow-hidden mb-6">
-                  {/* EFFECT */}
-                  <div className="absolute bottom-[-80px] right-[-80px] w-[180px] h-[180px] bg-[#d4b17d]/10 rounded-full blur-[70px]"></div>
-
-                  <h2 className="title-font text-[20px] md:text-[22px] mb-5 text-white relative z-10">
-                    {outcomesTitle}
-                  </h2>
-
-                  {/* OUTCOMES GRID */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 relative z-10">
-                    {outcomes.map((item, index) => {
-                      const outcomeText =
-                        typeof item === "object" ? getBi(item, lang) : item;
-                      return (
-                        <div
-                          key={index}
-                          className="group bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 hover:border-[#d4b17d]/40 rounded-[18px] px-4 py-4 transition-all duration-500 hover:-translate-y-1"
-                        >
-                          <div className="flex items-start gap-3">
-                            {/* ICON */}
-                            <span className="min-w-[22px] w-[22px] h-[22px] rounded-full bg-[#b8965a] flex items-center justify-center text-white text-[11px] mt-[2px]">
-                              ✔
-                            </span>
-                            {/* TEXT */}
-                            <p className="text-[14px] md:text-[15px] text-[#f5f5f5] leading-[28px]">
-                              {outcomeText}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+              {isService ? (
+                <>
+                  {/* For Service: Outcomes first, then Structure (in box), then Note */}
+                  {renderOutcomes()}
+                  {sections.length > 0 && (
+                    <div className="bg-white rounded-[26px] p-4 md:p-7 border border-[#ece6dc] shadow-[0_10px_30px_rgba(0,0,0,0.03)] relative overflow-hidden mb-6">
+                      {renderSections()}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* For Workshop: Structure is already in main box, show outcomes below */}
+                  {renderOutcomes()}
+                </>
               )}
 
               {/* ADDITIONAL SUPPORT */}
               {wNote && (
                 <div className="group bg-[#faf8f4] hover:bg-white border border-[#d9bb86] rounded-[26px] p-5 md:p-6 relative transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_15px_35px_rgba(0,0,0,0.05)]">
-                  <h3 className="title-font text-[20px] md:text-[22px] mb-4 text-black">
-                    {lang === "EN"
-                      ? "Additional Information"
-                      : "Zusätzliche Informationen"}
-                  </h3>
-                  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[32px]">
-                    {wNote}
-                  </p>
+                  <div
+                    className="rich-text text-[15px] md:text-[16px] text-[#0a3e40] leading-[32px]"
+                    dangerouslySetInnerHTML={{ __html: wNote }}
+                  />
                 </div>
               )}
             </div>

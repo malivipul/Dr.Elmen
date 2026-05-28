@@ -176,9 +176,9 @@ const ContactForm = () => {
                     to={socialLinks.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
+                    className="w-[45px] h-[45px] flex text-black hover:text-white items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                   >
-                    <FaLinkedinIn className="text-[14px] text-black hover:text-white" />
+                    <FaLinkedinIn className="text-[18px] " />
                   </Link>
                 )}
 
@@ -187,9 +187,9 @@ const ContactForm = () => {
                     to={socialLinks.twitter}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
+                    className="w-[45px] h-[45px] flex text-black hover:text-white items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                   >
-                    <FaXTwitter className="text-[14px] text-black hover:text-white" />
+                    <FaXTwitter className="text-[18px] " />
                   </Link>
                 )}
 
@@ -198,9 +198,9 @@ const ContactForm = () => {
                     to={socialLinks.facebook}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
+                    className="w-[45px] h-[45px] flex text-black hover:text-white items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                   >
-                    <FaFacebookF className="text-[14px] text-black hover:text-white" />
+                    <FaFacebookF className="text-[18px] " />
                   </Link>
                 )}
 
@@ -209,9 +209,9 @@ const ContactForm = () => {
                     to={socialLinks.instagram}
                     target="_blank"
                     rel="noreferrer"
-                    className="w-[45px] h-[45px] flex items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
+                    className="w-[45px] h-[45px] flex text-black hover:text-white items-center justify-center border border-black/40 rounded-full hover:bg-[#b8965a] hover:border-[#b8965a] transition-all duration-300"
                   >
-                    <FaInstagram className="text-[14px] text-black hover:text-white" />
+                    <FaInstagram className="text-[18px] " />
                   </Link>
                 )}
               </div>
@@ -277,7 +277,6 @@ const ContactForm = () => {
                 <tbody>
                   {/* NAME */}
                   <tr>
-                    
                     <td className="py-2">
                       <input
                         type="text"
@@ -293,7 +292,6 @@ const ContactForm = () => {
 
                   {/* EMAIL */}
                   <tr>
-                    
                     <td className="py-2">
                       <input
                         type="email"
@@ -311,7 +309,6 @@ const ContactForm = () => {
 
                   {/* SUBJECT */}
                   <tr>
-                    
                     <td className="py-2">
                       <input
                         type="text"
@@ -327,7 +324,6 @@ const ContactForm = () => {
 
                   {/* MESSAGE */}
                   <tr>
-                    
                     <td className="py-2">
                       <textarea
                         rows="4"
@@ -363,15 +359,16 @@ const ContactForm = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center h-[46px] px-7 rounded-full bg-[#b8965a] text-white text-[13px] font-bold tracking-[1.5px] transition-all duration-500 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center justify-center h-[46px] px-7 gap-3 rounded-full bg-[#b8965a] border border-[#b8965a] text-white text-[13px] font-bold tracking-[1.5px] hover:bg-transparent hover:text-[#b8965a] transition-all duration-300 disabled:opacity-50 cursor-pointer"
                 >
                   {submitting
                     ? lang === "EN"
                       ? "SENDING..."
                       : "WIRD GESENDET..."
                     : lang === "EN"
-                      ? "Send Message →"
-                      : "Anfrage senden →"}
+                      ? "Send Message"
+                      : "Anfrage senden"}
+                  <span className="text-[18px] font-bold">→</span>
                 </button>
               </div>
             </form>

@@ -1,6 +1,22 @@
-// PrivacyPolicy.jsx
+import { useEffect, useState } from "react";
+import { getSettings } from "../../api/api";
+import { useLanguage } from "../../context/LanguageContext";
 
 const PrivacyPolicy = () => {
+  const { lang } = useLanguage();
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    getSettings().then((res) => {
+      if (res.data) setSettings(res.data);
+    });
+  }, []);
+
+  const contactName = "Dr. Raphael Edlmann";
+  const contactAddress = "Wolfratshauser Str. 96 H, 81379 Munich, Germany";
+  const contactPhone = settings?.phone || "+49 152 523 50 273";
+  const contactEmail = settings?.email || "contact@edlmann.com";
+
   return (
     <section className="bg-[#f4f4f4] py-[60px] md:py-[60px]">
 
@@ -160,15 +176,13 @@ const PrivacyPolicy = () => {
     Angaben nach TMG § 5:
     <br /><br />
 
-    Dr. Raphael Edlmann
+    {contactName}
     <br />
-    Wolfratshauser Str. 96 H
+    {contactAddress}
     <br />
-    81379 Munich, Germany
+    Phone: {contactPhone}
     <br />
-    Phone: +49 152 523 50 273
-    <br />
-    E-Mail: contact@edlmann.com
+    E-Mail: {contactEmail}
   </p>
 
   <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-10">

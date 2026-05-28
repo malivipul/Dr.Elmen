@@ -10,23 +10,24 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const cleanHtml = (html) => {
-  if (!html) return "";
-  return String(html)
-    .replace(/&nbsp;/g, " ")
-    .replace(/\u00a0/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'");
-};
-
 const findTimelineItems = (value) => {
   if (!value) return [];
 
   if (Array.isArray(value)) {
     const timelineItems = value.filter((item) => {
       if (!item || typeof item !== "object") return false;
-      return item.year || item.years || item.date || item.period || item.title || item.heading || item.text || item.description || item.desc || item.content;
+      return (
+        item.year ||
+        item.years ||
+        item.date ||
+        item.period ||
+        item.title ||
+        item.heading ||
+        item.text ||
+        item.description ||
+        item.desc ||
+        item.content
+      );
     });
 
     if (timelineItems.length) return timelineItems;
@@ -89,22 +90,25 @@ const VitaTimeline = () => {
     timelineData?.data && !Array.isArray(timelineData.data)
       ? timelineData.data
       : timelineData?.value && !Array.isArray(timelineData.value)
-      ? timelineData.value
-      : timelineData;
+        ? timelineData.value
+        : timelineData;
 
   const title =
     sectionData?.title || sectionData?.heading
-      ? cleanHtml(getBi(sectionData.title || sectionData.heading, lang))
+      ? getBi(sectionData.title || sectionData.heading, lang)
       : lang === "EN"
-      ? "Together Through the Years"
-      : "Gemeinsam durch die Jahre";
+        ? "Together Through the Years"
+        : "Gemeinsam durch die Jahre";
 
   const subtitle =
     sectionData?.subtitle || sectionData?.description || sectionData?.text
-      ? cleanHtml(getBi(sectionData.subtitle || sectionData.description || sectionData.text, lang))
+      ? getBi(
+          sectionData.subtitle || sectionData.description || sectionData.text,
+          lang,
+        )
       : lang === "EN"
-      ? "A professional journey shaped by leadership, innovation, and continuous transformation across AI, HR, and business process management."
-      : "Ein beruflicher Werdegang, gepraegt von Fuehrung, Innovation und kontinuierlicher Transformation in den Bereichen KI, HR und Geschaeftsprozessmanagement.";
+        ? "A professional journey shaped by leadership, innovation, and continuous transformation across AI, HR, and business process management."
+        : "Ein beruflicher Werdegang, gepraegt von Fuehrung, Innovation und kontinuierlicher Transformation in den Bereichen KI, HR und Geschaeftsprozessmanagement.";
 
   const items = findTimelineItems(timelineData)
     .map((item) => {
@@ -118,9 +122,12 @@ const VitaTimeline = () => {
         item.heading;
 
       return {
-        year: cleanHtml(getBi(item.year || item.years || item.date || item.period || item.duration, lang)),
+        year: getBi(
+          item.year || item.years || item.date || item.period || item.duration,
+          lang,
+        ),
         icon: item.icon || "fa-rocket",
-        text: cleanHtml(getBi(rawText, lang)),
+        text: getBi(rawText, lang),
       };
     })
     .filter((item) => item.year || item.text);
@@ -137,9 +144,10 @@ const VitaTimeline = () => {
           {title}
         </h2>
 
-        <p className="text-[#0a3e40] text-[16px] max-w-xl mx-auto leading-relaxed">
-          {subtitle}
-        </p>
+        <div
+          className="rich-text text-[#0a3e40] text-[16px] max-w-xl mx-auto leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: subtitle }}
+        />
       </div>
 
       {/* SLIDER */}
@@ -168,7 +176,7 @@ const VitaTimeline = () => {
           >
             {items.map((item, i) => (
               <SwiperSlide key={`${item.year}-${i}`} className="h-full">
-                <div className="bg-white rounded-[20px] p-8 h-[550px] md:h-[450px] flex flex-col justify-between relative border border-[#f9f9f9] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition duration-300">
+                <div className="bg-white rounded-[20px] p-8 h-[550px] md:h-[470px] flex flex-col justify-between relative border border-[#f9f9f9] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition duration-300">
                   {/* ICON */}
                   <div className="absolute top-6 right-6 text-[#b8965a] text-[28px]">
                     <i className={`fa-solid ${item.icon}`}></i>
@@ -191,7 +199,7 @@ const VitaTimeline = () => {
 
                     {/* TEXT */}
                     <div
-                      className="text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar timeline-text break-words"
+                      className="rich-text text-[#0a3e40] text-[15px] md:text-[16px] leading-relaxed max-h-[400px] md:max-h-[360px] overflow-y-auto pr-2 custom-scrollbar timeline-text break-words"
                       dangerouslySetInnerHTML={{ __html: item.text }}
                     />
                   </div>
@@ -201,7 +209,9 @@ const VitaTimeline = () => {
           </Swiper>
         ) : (
           <div className="bg-white rounded-[20px] p-8 border border-[#f9f9f9] text-center text-[#0a3e40]">
-            {lang === "EN" ? "No timeline items available." : "Keine Vita-Eintraege verfuegbar."}
+            {lang === "EN"
+              ? "No timeline items available."
+              : "Keine Vita-Eintraege verfuegbar."}
           </div>
         )}
 

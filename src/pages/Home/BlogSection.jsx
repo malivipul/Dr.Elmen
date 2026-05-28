@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { getBlogs, getBlogHeader, IMG_URL, getBi } from "../../api/api";
+import { getBlogs, getBlogHeader, IMG_URL, getBi, formatDate } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 import "swiper/css";
@@ -132,7 +132,7 @@ const BlogSection = ({ setIsOpen }) => {
             ? b.img || b.image
             : `${IMG_URL}${b.img || b.image}`
           : "/assets/images/blog2.png",
-      date: b.date || "May 2025",
+      date: formatDate(b.date) || "24.05.2026",
       read: getReadTime(rawDesc, lang),
       link: `/blog-details/${b._id}`,
     };
@@ -292,9 +292,12 @@ const BlogSection = ({ setIsOpen }) => {
                   <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
                     <span>{latestArticle.date}</span>
 
-                    <span>•</span>
-
-                    <span>{latestArticle.read}</span>
+                    {latestArticle.isRead && (
+                      <>
+                        <span>•</span>
+                        <span>{latestArticle.read}</span>
+                      </>
+                    )}
                   </div>
 
                   <div className="mt-6">
@@ -442,9 +445,12 @@ const Card = ({ item }) => (
       <div className="flex items-center gap-3 mt-5 text-[#7b7b7b] text-[13px]">
         <span>{item.date}</span>
 
-        <span>•</span>
-
-        <span>{item.read}</span>
+        {item.isRead && (
+          <>
+            <span>•</span>
+            <span>{item.read}</span>
+          </>
+        )}
       </div>
     </div>
   </Link>

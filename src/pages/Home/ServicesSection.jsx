@@ -108,9 +108,10 @@ const ServicesSection = () => {
           {hTitle}
         </h2>
 
-        <p className="text-[#0a3e40] text-[16px] max-w-2xl mx-auto leading-relaxed">
-          {hDesc}
-        </p>
+        <div
+          className="rich-text text-[#0a3e40] text-[16px] max-w-2xl mx-auto leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: hDesc }}
+        />
       </div>
 
       {/* SERVICES */}
@@ -182,7 +183,7 @@ const ServicesSection = () => {
 
       {/* LETS WORK TOGETHER CTA */}
       <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] mt-10">
-        <div className="relative overflow-hidden rounded-[24px] min-h-[280px] flex items-center ">
+        <div className="relative overflow-hidden rounded-[24px] min-h-[320px] flex items-center ">
           {/* BG IMAGE */}
           <div className="absolute inset-0">
             <img
@@ -195,8 +196,8 @@ const ServicesSection = () => {
           </div>
 
           {/* CONTENT */}
-          <div className="relative z-10 w-full px-8 md:px-14 py-10">
-            <div className="max-w-[520px]">
+          <div className="relative z-10 w-full px-8 md:px-8 py-10">
+            <div className="max-w-[620px]">
               {/* ICON + TITLE */}
               <div className="flex items-center gap-4 mb-5">
                 <div className="w-[44px] h-[44px] rounded-full bg-[#0a3e40] flex items-center justify-center text-white text-[22px] shadow-lg">
@@ -211,7 +212,7 @@ const ServicesSection = () => {
               </div>
 
               {/* TEXT */}
-              <p className="text-[#0a3e40] text-[17px] leading-[1.9] max-w-[430px]">
+              <p className="text-[#0a3e40] text-[17px] leading-[1.9] max-w-[530px]">
                 {lang === "EN"
                   ? "Looking to solve a specific challenge or start your AI transformation journey?"
                   : "Stehen Sie vor einer konkreten Herausforderung oder möchten Sie Ihre KI-Transformation gezielt auf den Weg bringen?"}

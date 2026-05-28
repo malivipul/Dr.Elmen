@@ -63,7 +63,7 @@ const Footer = () => {
 
             {/* TEXT */}
             <p className="text-sm text-white/60 leading-relaxed max-w-[320px] text-center md:text-left">
-              Interim Manager | AI, HR & Business Process Expert
+              Interim Manager, AI, HR & Business Process Expert
             </p>
 
             {/* SOCIAL */}
@@ -167,12 +167,6 @@ const Footer = () => {
               <li>
                 <Link
                   to="/#speaker-section"
-                  onClick={() =>
-                    window.scrollTo({
-                      top: 0,
-                      behavior: "smooth",
-                    })
-                  }
                   className="hover:text-[#b8965a] transition"
                 >
                   Speaker
@@ -321,7 +315,7 @@ const Footer = () => {
     underline-offset-4
   "
             >
-              AnaxisTech
+              AnaxisTech LLP
             </Link>
           </p>
 

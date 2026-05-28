@@ -72,7 +72,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
   return (
     <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 px-4">
       {/* MODAL */}
-      <div className="relative w-full max-w-[460px] md:h-[380px] max-h-[500px] rounded-[24px] bg-white p-6 md:p-8 shadow-2xl animate-fadeIn border border-[#ece6dc]">
+      <div className="relative w-full max-w-[460px] h-auto max-h-[90vh] overflow-y-auto rounded-[24px] bg-white p-6 md:p-8 shadow-2xl animate-fadeIn border border-[#ece6dc]">
         {/* CLOSE BUTTON */}
         <button
           onClick={() => setIsOpen(false)}
@@ -86,8 +86,8 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
           {/* TITLE */}
           <h2 className="title-font text-[24px] md:text-[28px] leading-tight text-black">
             {lang === "EN"
-              ? "Subscribe to AI & HR Insights"
-              : "AI & HR Insights kostenlos abonnieren"}
+              ? "Subscribe to HR & AI Insights"
+              : "HR & AI Insights kostenlos abonnieren"}
           </h2>
 
           {/* DESC */}
@@ -137,7 +137,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-4 w-full h-[50px] rounded-[12px] bg-black text-white text-[14px] font-bold border border-black hover:bg-[#b8965a] hover:border-[#b8965a] transition duration-300 inline-flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+              className="mt-4 w-full h-[50px]  rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2   text-[14px]    hover:border-[#b8965a]    justify-center  disabled:opacity-50 cursor-pointer"
             >
               <i className="fa-regular fa-envelope"></i>
               {submitting

@@ -9,18 +9,6 @@ import {
 } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
-const cleanRichText = (value = "") =>
-  value
-    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/?p[^>]*>/gi, "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;|\u00a0/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'")
-    .trim();
-
 const About = () => {
   const cached = getCached("homeIntro");
   const [about, setAbout] = useState(cached || null);
@@ -70,8 +58,6 @@ const About = () => {
   const vitaItems =
     Array.isArray(about?.vita) && about.vita.length > 0 ? about.vita : [];
   const vitaTitle = getBi(about?.vitaTitle, lang) || "Vita";
-  const readableQuote = quote ? cleanRichText(quote) : "";
-  const readableDesc = desc ? cleanRichText(desc) : "";
 
   return (
     <section className="bg-white py-[60px]">
@@ -92,11 +78,17 @@ const About = () => {
 
             {/* TEXT */}
             <div className="max-w-[58ch] space-y-5 text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.8] break-words">
-              {readableQuote && (
-                <p className="font-semibold italic">"{readableQuote}"</p>
+              {quote && (
+                <div
+                  className="rich-text font-semibold italic"
+                  dangerouslySetInnerHTML={{ __html: quote }}
+                />
               )}
 
-              <p className="whitespace-pre-line">{readableDesc}</p>
+              <div
+                className="rich-text"
+                dangerouslySetInnerHTML={{ __html: desc }}
+              />
             </div>
           </div>
 

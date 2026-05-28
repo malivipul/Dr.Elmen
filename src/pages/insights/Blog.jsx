@@ -6,6 +6,7 @@ import {
   likeBlog,
   IMG_URL,
   getBi,
+  formatDate,
 } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
@@ -183,7 +184,7 @@ const BlogSection = ({ setIsOpen }) => {
             ? b.img || b.image
             : `${IMG_URL}${b.img || b.image}`
           : "/assets/images/blog2.png",
-      date: b.date || "May 2025",
+      date: formatDate(b.date) || "24.05.2026",
       read: getReadTime(rawDescription, lang),
       link: `/blog-details/${b._id}`,
       likes: b.likes || 0,
@@ -272,7 +273,7 @@ const BlogSection = ({ setIsOpen }) => {
           <div className="hidden md:block absolute right-0 top-0">
             <button
               onClick={() => setIsOpen(true)}
-              className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer"
+              className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2"
             >
               <i className="fa-regular fa-envelope"></i>
               {subscribebtn.btn[lang === "EN" ? "en" : "de"]}
@@ -366,10 +367,10 @@ const BlogSection = ({ setIsOpen }) => {
                     onClick={(e) => handleLike(e, latestArticle._id)}
                     className={`flex items-center gap-1.5 text-xs font-bold transition-all ${likedArticles.includes(latestArticle._id) ? "text-[#b8965a]" : "text-gray-300 hover:text-[#b8965a]"}`}
                   >
+                    {latestArticle.likes}
                     <i
                       className={`fa-${likedArticles.includes(latestArticle._id) ? "solid" : "regular"} fa-heart`}
                     ></i>
-                    {latestArticle.likes}
                   </button>
                 </div>
 
@@ -384,9 +385,12 @@ const BlogSection = ({ setIsOpen }) => {
                 <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
                   <span>{latestArticle.date}</span>
 
-                  <span>•</span>
-
-                  <span>{latestArticle.read}</span>
+                  {latestArticle.isRead && (
+                    <>
+                      <span>•</span>
+                      <span>{latestArticle.read}</span>
+                    </>
+                  )}
                 </div>
 
                 <div className="mt-6">
@@ -576,8 +580,8 @@ const Card = ({ item, isLiked, onLike }) => (
           onClick={onLike}
           className={`flex items-center gap-1.5 text-xs font-bold transition-all ${isLiked ? "text-[#b8965a]" : "text-gray-300 hover:text-[#b8965a]"}`}
         >
-          <i className={`fa-${isLiked ? "solid" : "regular"} fa-heart`}></i>
           {item.likes}
+          <i className={`fa-${isLiked ? "solid" : "regular"} fa-heart`}></i>
         </button>
       </div>
 
@@ -595,9 +599,12 @@ const Card = ({ item, isLiked, onLike }) => (
       <div className="flex items-center gap-3 mt-5 text-[#7b7b7b] text-[13px]">
         <span>{item.date}</span>
 
-        <span>•</span>
-
-        <span>{item.read}</span>
+        {item.isRead && (
+          <>
+            <span>•</span>
+            <span>{item.read}</span>
+          </>
+        )}
       </div>
     </div>
   </Link>

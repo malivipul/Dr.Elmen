@@ -14,18 +14,6 @@ import { useLanguage } from "../../context/LanguageContext";
 
 import "swiper/css";
 
-const cleanRichText = (value = "") =>
-  value
-    .replace(/<\/p>\s*<p[^>]*>/gi, "\n\n")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/?p[^>]*>/gi, "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;|\u00a0/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'")
-    .trim();
-
 const AuthorSection = () => {
   const cachedHeader = getCached("homeBookHeader");
   const cachedBooks = getCached("homeBooks");
@@ -70,7 +58,7 @@ const AuthorSection = () => {
     (lang === "EN" ? "Publications" : "Publikationen");
   const title =
     getBi(header?.title, lang) || (lang === "EN" ? "Author" : "Autor");
-  const desc = cleanRichText(getBi(header?.description, lang));
+  const desc = getBi(header?.description, lang);
 
   const handleClick = (index) => {
     if (window.innerWidth >= 1024) return;
@@ -83,26 +71,17 @@ const AuthorSection = () => {
         {/* TITLE */}
         <div className="text-center mb-14">
           <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-            {lang === "EN" ? "Publications" : "Publikationen"}
+            {label}
           </span>
 
           <h2 className="title-font text-3xl md:text-4xl text-black py-4">
-            {lang === "EN" ? "Author" : "Autor"}
+            {title}
           </h2>
 
-          <p className="text-[#0a3e40] max-w-4xl mx-auto text-[16px] leading-relaxed">
-            <span className="font-semibold italic">
-              {lang === "EN"
-                ? "My research is not just about AI and HR — it’s about opening new perspectives."
-                : "Bei meiner Forschung geht es nicht nur um KI und HR – es geht darum, neue Perspektiven zu eröffnen."}
-            </span>
-
-            <br />
-
-            {lang === "EN"
-              ? "Whether it’s rethinking how organisations use AI, reshaping HR, or exploring new ways to work: I am most pleased when my publications encourage you to challenge existing models."
-              : "Ob es darum geht, die Nutzung von KI in Unternehmen neu zu überdenken, HR neu zu gestalten oder neue Wege der Zusammenarbeit zu erkunden: Am meisten freut es mich, wenn meine Publikationen Sie dazu anregen, bestehende Modelle zu hinterfragen."}
-          </p>
+          <div
+            className="rich-text text-[#0a3e40] max-w-[850px] w-full mx-auto text-[16px] leading-relaxed transition-all duration-300"
+            dangerouslySetInnerHTML={{ __html: desc }}
+          />
         </div>
 
         {/* MOBILE + TABLET SLIDER */}

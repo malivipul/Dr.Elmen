@@ -35,7 +35,7 @@ const SpeakerSection = () => {
     : "/assets/images/22.jpg";
 
   return (
-    <section id="speaker-section" className="relative w-full py-[40px] overflow-hidden">
+    <section id="speaker-section" className="relative w-full py-[40px] overflow-hidden scroll-mt-[120px]">
 
       {/* BG IMAGE */}
       <div className="absolute inset-0">
@@ -71,14 +71,16 @@ const SpeakerSection = () => {
           <div className="text-[#0a3e40]">
 
             {subtitle && (
-              <p className="text-sm md:text-[16px] leading-relaxed mb-4 italic font-semibold">
-                {subtitle}
-              </p>
+              <div
+                className="rich-text text-sm md:text-[16px] leading-relaxed mb-4 italic font-semibold"
+                dangerouslySetInnerHTML={{ __html: subtitle }}
+              />
             )}
 
-            <p className="text-sm md:text-[16px] leading-relaxed mb-6 whitespace-pre-line">
-              {desc}
-            </p>
+            <div
+              className="rich-text text-sm md:text-[16px] leading-relaxed mb-6"
+              dangerouslySetInnerHTML={{ __html: desc }}
+            />
 
             {/* BUTTON */}
             <Link

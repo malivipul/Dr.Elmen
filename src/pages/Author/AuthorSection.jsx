@@ -1,24 +1,35 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getBooks, IMG_URL, getBi } from "../../api/api";
+import { getBookHeader, getBooks, IMG_URL, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 
 const AuthorSection = () => {
+  const cachedHeader = getCached("authorPageBookHeader");
+  const cachedBooks = getCached("authorPageBooks");
+
   const [activeIndex, setActiveIndex] = useState(null);
-  const [bookList, setBookList] = useState([]);
+  const [header, setHeader] = useState(cachedHeader || null);
+  const [bookList, setBookList] = useState(cachedBooks || []);
+  const [loading, setLoading] = useState(!cachedHeader || !cachedBooks);
   const { lang } = useLanguage();
 
   useEffect(() => {
-    getBooks()
-      .then((res) => {
-        if (res.data) {
-          const list = Array.isArray(res.data)
-            ? res.data
-            : res.data.value || [];
+    Promise.all([getBookHeader(), getBooks()])
+      .then(([headRes, booksRes]) => {
+        if (headRes.data) {
+          setHeader(headRes.data);
+          setCached("authorPageBookHeader", headRes.data);
+        }
+        if (booksRes.data) {
+          const list = Array.isArray(booksRes.data)
+            ? booksRes.data
+            : booksRes.data.value || [];
           setBookList(list);
+          setCached("authorPageBooks", list);
         }
       })
-      .catch((err) => console.error("Error fetching books:", err));
+      .catch((err) => console.error("Error fetching data:", err))
+      .finally(() => setLoading(false));
   }, []);
 
   const formattedBooks = bookList.map((b) => ({
@@ -39,32 +50,31 @@ const AuthorSection = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  if (loading) {
+    return <div className="w-full h-[400px] bg-white animate-pulse" />;
+  }
+
+  const label = getBi(header?.label, lang) || (lang === "EN" ? "Publications" : "Publikationen");
+  const title = getBi(header?.title, lang) || (lang === "EN" ? "Author" : "Autor");
+  const desc = getBi(header?.description, lang);
+
   return (
     <section id="publications-section" className="bg-white py-[60px]">
       <div className="max-w-[1420px] mx-auto px-[20px] md:px-[40px]">
         {/* TITLE */}
         <div className="text-center mb-14">
           <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-            {lang === "EN" ? "Publications" : "Publikationen"}
+            {label}
           </span>
 
           <h2 className="title-font text-3xl md:text-4xl text-black py-4">
-            {lang === "EN" ? "Author" : "Autor"}
+            {title}
           </h2>
 
-          <p className="text-[#0a3e40] max-w-4xl mx-auto text-[16px] leading-relaxed">
-            <span className="font-semibold italic">
-              {lang === "EN"
-                ? "My research is not just about AI and HR — it’s about opening new perspectives."
-                : "Bei meiner Forschung geht es nicht nur um KI und HR – es geht darum, neue Perspektiven zu eröffnen."}
-            </span>
-
-            <br />
-
-            {lang === "EN"
-              ? "Whether it’s rethinking how organisations use AI, reshaping HR, or exploring new ways to work: I am most pleased when my publications encourage you to challenge existing models."
-              : "Ob es darum geht, die Nutzung von KI in Unternehmen neu zu überdenken, HR neu zu gestalten oder neue Wege der Zusammenarbeit zu erkunden: Am meisten freut es mich, wenn meine Publikationen Sie dazu anregen, bestehende Modelle zu hinterfragen."}
-          </p>
+          <div
+            className="rich-text text-[#0a3e40] max-w-[850px] w-full mx-auto text-[16px] leading-relaxed transition-all duration-300"
+            dangerouslySetInnerHTML={{ __html: desc }}
+          />
         </div>
 
         {/* BOOKS GRID */}
