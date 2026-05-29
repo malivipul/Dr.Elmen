@@ -130,7 +130,7 @@ const VitaTimeline = () => {
 
       return {
         year: year.replace(/-/g, "\u2011"), // Non-breaking hyphen
-        icon: item.icon || "fa-rocket",
+        icon: getBi(item.icon, lang) || "fa-rocket",
         // Replace hyphens with non-breaking hyphens, but avoid replacing them inside HTML tags
         text: text,
       };

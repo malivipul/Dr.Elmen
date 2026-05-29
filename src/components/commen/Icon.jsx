@@ -23,6 +23,7 @@ import {
   FaXTwitter,
   FaXmark,
 } from "react-icons/fa6";
+import * as Fa6Icons from "react-icons/fa6";
 
 const icons = {
   "arrow-left": FaArrowLeft,
@@ -65,8 +66,34 @@ const icons = {
   "fa-xmark": FaXmark,
 };
 
+const toPascalCase = (value) =>
+  value
+    .split(/[-_\s]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join("");
+
+const getIconComponent = (name) => {
+  if (!name) return FaArrowRight;
+
+  const normalizedName = String(name).trim();
+  if (icons[normalizedName]) return icons[normalizedName];
+  if (Fa6Icons[normalizedName]) return Fa6Icons[normalizedName];
+
+  const iconClass = normalizedName
+    .split(/\s+/)
+    .reverse()
+    .find((part) => part.startsWith("fa-"));
+
+  const iconKey = iconClass || normalizedName;
+  if (icons[iconKey]) return icons[iconKey];
+
+  const componentName = `Fa${toPascalCase(iconKey.replace(/^fa-/, ""))}`;
+  return Fa6Icons[componentName] || FaArrowRight;
+};
+
 const Icon = ({ name, className = "", ...props }) => {
-  const Component = icons[name] || FaArrowRight;
+  const Component = getIconComponent(name);
   return <Component aria-hidden="true" focusable="false" className={className} {...props} />;
 };
 
