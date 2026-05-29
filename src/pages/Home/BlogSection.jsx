@@ -143,7 +143,13 @@ const BlogSection = ({ setIsOpen }) => {
   // FILTER
   const filtered =
     active === "all"
-      ? formattedBlogs
+      ? formattedBlogs.filter(
+          (item) =>
+            !item.category
+              ?.split(",")
+              .map((c) => c.trim().toLowerCase())
+              .includes("archive"),
+        )
       : formattedBlogs.filter((item) => {
           if (!item.category) return false;
           const cats = item.category
@@ -158,13 +164,13 @@ const BlogSection = ({ setIsOpen }) => {
   // NEXT BLOGS
   const recentArticles = filtered.slice(1, 6);
 
-  // COLLECT DYNAMIC CATEGORIES EXCEPT hardcoded ones
+  // COLLECT DYNAMIC CATEGORIES FROM BACKEND
   const dynamicCategoriesSet = new Set();
   formattedBlogs.forEach((b) => {
     if (b.category) {
       b.category.split(",").forEach((cat) => {
         const trimmed = cat.trim().toLowerCase();
-        if (trimmed && !["all", "alle", "tools", "archive"].includes(trimmed)) {
+        if (trimmed && !["all", "alle"].includes(trimmed)) {
           dynamicCategoriesSet.add(trimmed);
         }
       });
@@ -172,17 +178,20 @@ const BlogSection = ({ setIsOpen }) => {
   });
 
   const uniqueCategories = Array.from(dynamicCategoriesSet);
+  const archiveCategory = uniqueCategories.includes("archive")
+    ? ["archive"]
+    : [];
+  const otherCategories = uniqueCategories.filter((cat) => cat !== "archive");
 
-  const dynamicTabs = uniqueCategories.map((cat) => ({
+  const dynamicTabs = [...archiveCategory, ...otherCategories].map((cat) => ({
     label: getCategoryLabel(cat, lang),
     value: cat,
   }));
 
-  // TABS: "All" first, then dynamic ones, then "Tools" and "Archive" at the end.
-  // We take enough dynamic tabs to fill up to 7 total.
+  // TABS: "All" first, then up to 4 category tabs, with Archive prioritized if present.
   const tabs = [
     { label: lang === "EN" ? "All" : "Alle", value: "all" },
-    ...dynamicTabs.slice(0, 4), // Take up to 4 dynamic tabs
+    ...dynamicTabs.slice(0, 4),
   ];
   const subscribebtn = {
     btn: { en: "Subscribe", de: "Abonnieren" },

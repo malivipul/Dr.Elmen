@@ -4,6 +4,7 @@ import { useEffect, lazy, Suspense } from "react";
 import Header from "./components/commen/Header";
 import Footer from "./components/commen/Footer";
 import ScrollToTop from "./components/commen/ScrollToTop";
+import ImageDownloadManager from "./components/commen/ImageDownloadManager";
 
 // Pages
 const Home = lazy(() => import("./pages/Home"));
@@ -70,6 +71,7 @@ function App() {
     <>
       <ScrollToTop />
       <ScrollToHash />
+      <ImageDownloadManager />
 
       {/* Header */}
       <Header />

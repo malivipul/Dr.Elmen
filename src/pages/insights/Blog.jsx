@@ -199,7 +199,13 @@ const BlogSection = ({ setIsOpen }) => {
   // FILTER — match against both Category and Tags
   const filtered =
     active === "all"
-      ? formattedBlogs
+      ? formattedBlogs.filter(
+          (item) =>
+            !item.category
+              ?.split(",")
+              .map((c) => c.trim().toLowerCase())
+              .includes("archive"),
+        )
       : formattedBlogs.filter((item) => {
           // Check category
           const cats = (item.category || "")
