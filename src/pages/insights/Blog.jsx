@@ -225,29 +225,13 @@ const BlogSection = ({ setIsOpen }) => {
   const recentArticles =
     currentPage === 1 ? paginatedBlogs.slice(1) : paginatedBlogs;
 
-  // COLLECT DYNAMIC CATEGORIES EXCEPT hardcoded ones
+  // COLLECT ALL BLOG CATEGORIES FROM BACKEND
   const dynamicCategoriesSet = new Set();
   formattedBlogs.forEach((b) => {
-    // Add each category (already localized string)
     if (b.category) {
       b.category.split(",").forEach((cat) => {
         const trimmed = cat.trim().toLowerCase();
-        if (
-          trimmed &&
-          !["all", "alle", "tools", "archive", "Archiv"].includes(trimmed)
-        ) {
-          dynamicCategoriesSet.add(trimmed);
-        }
-      });
-    }
-    // Add each tag (already localized strings)
-    if (b.tags && b.tags.length > 0) {
-      b.tags.forEach((tag) => {
-        const trimmed = tag.trim().toLowerCase();
-        if (
-          trimmed &&
-          !["all", "alle", "tools", "archive", "Archiv"].includes(trimmed)
-        ) {
+        if (trimmed && !["all", "alle"].includes(trimmed)) {
           dynamicCategoriesSet.add(trimmed);
         }
       });
@@ -261,11 +245,10 @@ const BlogSection = ({ setIsOpen }) => {
     value: cat,
   }));
 
-  // TABS: "All" first, then dynamic ones, then "Tools" and "Archive" at the end.
-  // We take enough dynamic tabs to fill up to 7 total.
+  // TABS: "All" first, then all dynamic category tabs from the backend.
   const tabs = [
     { label: lang === "EN" ? "All" : "Alle", value: "all" },
-    ...dynamicTabs.slice(0, 4),
+    ...dynamicTabs,
   ];
 
   return (
