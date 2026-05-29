@@ -224,6 +224,7 @@ const Blogsdetails = () => {
       ? currentBlog.img
       : `${IMG_URL}${currentBlog.img}`
     : "/assets/images/25.png";
+  const imgAlt = getBi(currentBlog.imgAlt, lang) || title;
 
   return (
     <section className="bg-[#f4f4f4] pb-[90px]">
@@ -236,7 +237,8 @@ const Blogsdetails = () => {
       <div className="relative w-full overflow-hidden ">
         <img
           src={imgSource}
-          alt={title}
+          alt={imgAlt}
+          title={imgAlt}
           className="w-full h-[260px] md:h-[460px] object-cover object-center"
         />
 
@@ -525,6 +527,7 @@ const Blogsdetails = () => {
                         ? item.img
                         : `${IMG_URL}${item.img}`
                       : "/assets/images/blog2.png";
+                    const itemImgAlt = getBi(item.imgAlt, lang) || itemTitle;
 
                     return (
                       <Link
@@ -534,7 +537,8 @@ const Blogsdetails = () => {
                       >
                         <img
                           src={itemImg}
-                          alt={itemTitle}
+                          alt={itemImgAlt}
+                          title={itemImgAlt}
                           className="w-[90px] h-[90px] rounded-[18px] object-cover shrink-0"
                         />
                         <div>

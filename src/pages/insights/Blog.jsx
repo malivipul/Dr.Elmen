@@ -184,6 +184,9 @@ const BlogSection = ({ setIsOpen }) => {
             ? b.img || b.image
             : `${IMG_URL}${b.img || b.image}`
           : "/assets/images/blog2.png",
+      imgAlt:
+        getBi(b.imgAlt, lang) ||
+        (typeof b.title === "object" ? getBi(b.title, lang) : b.title),
       date: formatDate(b.date) || "24.05.2026",
       read: getReadTime(rawDescription, lang),
       link: `/blog-details/${b._id}`,
@@ -408,7 +411,8 @@ const BlogSection = ({ setIsOpen }) => {
               <div className="relative w-full h-[260px] md:h-auto min-h-[260px] overflow-hidden">
                 <img
                   src={latestArticle.img}
-                  alt={latestArticle.title}
+                  alt={latestArticle.imgAlt}
+                  title={latestArticle.imgAlt}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
@@ -559,7 +563,8 @@ const Card = ({ item, isLiked, onLike }) => (
     <div className="overflow-hidden relative">
       <img
         src={item.img}
-        alt={item.title}
+        alt={item.imgAlt}
+        title={item.imgAlt}
         className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
       />
       {item.isRead && (
