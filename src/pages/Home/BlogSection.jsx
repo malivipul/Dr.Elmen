@@ -46,13 +46,13 @@ const getReadTime = (content, currentLang) => {
 };
 
 const categoryTranslations = {
-  guides: { en: "Guides", de: "Leitfäden" },
+  guides: { en: "Guides", de: "Guides" },
   opinions: { en: "Opinions", de: "Meinungen" },
-  "case studies": { en: "Case Studies", de: "Fallstudien" },
-  tools: { en: "Tools", de: "Werkzeuge" },
+  "case studies": { en: "Case Studies", de: "Case Studies" },
+  tools: { en: "Tools", de: "Tools" },
   archive: { en: "Archive", de: "Archiv" },
   hr: { en: "HR", de: "HR" },
-  ai: { en: "AI", de: "KI" },
+  ai: { en: "AI", de: "AI" },
   leadership: { en: "Leadership", de: "Führung" },
 };
 
