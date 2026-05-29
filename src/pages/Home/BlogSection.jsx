@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { getBlogs, getBlogHeader, IMG_URL, getBi, formatDate } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 import "swiper/css";
 
@@ -197,7 +198,7 @@ const BlogSection = ({ setIsOpen }) => {
               onClick={() => setIsOpen(true)}
               className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer"
             >
-              <i className="fa-regular fa-envelope"></i>
+              <Icon name="reg-envelope" />
               {subscribebtn.btn[lang === "EN" ? "en" : "de"]}
             </button>
           </div>
@@ -208,7 +209,7 @@ const BlogSection = ({ setIsOpen }) => {
               onClick={() => setIsOpen(true)}
               className="w-[44px] h-[44px] rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 flex items-center justify-center cursor-pointer"
             >
-              <i className="fa-regular fa-envelope text-[15px]"></i>
+              <Icon name="reg-envelope" className="text-[15px]" />
             </button>
           </div>
 
@@ -307,7 +308,7 @@ const BlogSection = ({ setIsOpen }) => {
                       className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2 cursor-pointer"
                     >
                       Read Article
-                      <i className="fa-solid fa-arrow-right"></i>
+                      <Icon name="arrow-right" />
                     </Link>
                   </div>
                 </div>
@@ -371,7 +372,7 @@ const BlogSection = ({ setIsOpen }) => {
         ) : (
           <div className="bg-white border border-[#e6dfd5] rounded-[20px] py-20 text-center shadow-sm">
             <div className="w-16 h-16 bg-[#f5f3ef] rounded-full flex items-center justify-center mx-auto mb-4 text-[#b8965a]">
-              <i className="fa-regular fa-file-lines text-2xl"></i>
+              <Icon name="reg-file-lines" className="text-2xl" />
             </div>
             <h3 className="title-font text-xl text-black mb-2">
               {blogList.length === 0

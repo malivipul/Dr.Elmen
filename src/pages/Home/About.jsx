@@ -8,6 +8,7 @@ import {
   setCached,
 } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 const About = () => {
   const cached = getCached("homeIntro");
@@ -123,7 +124,7 @@ const About = () => {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
                   >
-                    <i className="fa-solid fa-download"></i>
+                    <Icon name="download" />
 
                     {lang === "EN" ? "Download CV" : "Download CV "}
                   </a>

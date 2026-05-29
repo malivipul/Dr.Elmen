@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getVitaTimeline, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -183,7 +184,7 @@ const VitaTimeline = () => {
                 <div className="bg-white rounded-[20px] p-8 h-[550px] md:h-[470px] flex flex-col justify-between relative border border-[#f9f9f9] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition duration-300">
                   {/* ICON */}
                   <div className="absolute top-6 right-6 text-[#b8965a] text-[28px]">
-                    <i className={`fa-solid ${item.icon}`}></i>
+                    <Icon name={item.icon || "rocket"} />
                   </div>
 
                   <div>
@@ -232,7 +233,7 @@ const VitaTimeline = () => {
                   : "border-gray-300 bg-transparent text-[#0a3e40]"
               }`}
             >
-              <i className="fa-solid fa-arrow-left text-[14px]"></i>
+              <Icon name="arrow-left" className="text-[14px]" />
             </button>
 
             {/* RIGHT BUTTON */}
@@ -244,7 +245,7 @@ const VitaTimeline = () => {
                   : "border-gray-300 bg-transparent text-[#0a3e40]"
               }`}
             >
-              <i className="fa-solid fa-arrow-right text-[14px]"></i>
+              <Icon name="arrow-right" className="text-[14px]" />
             </button>
           </div>
 
@@ -261,7 +262,7 @@ const VitaTimeline = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 whitespace-nowrap cursor-pointer"
             >
-              <i className="fa-solid fa-download text-[13px]"></i>
+              <Icon name="download" className="text-[13px]" />
               <span>
                 {lang === "EN" ? "Download CV" : "Lebenslauf herunterladen"}
               </span>

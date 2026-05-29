@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getSpeaker, IMG_URL, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 const SpeakerSection = () => {
   const cached = getCached("homeSpeaker");
@@ -92,7 +93,10 @@ const SpeakerSection = () => {
                 {lang === "EN" ? "Book me for your next event" : "Buchen Sie mich für Ihr nächstes Event."}
               </span>
 
-              <i className="fa-solid fa-arrow-right transition-all duration-300 group-hover:translate-x-[6px]"></i>
+              <Icon
+                name="arrow-right"
+                className="transition-all duration-300 group-hover:translate-x-[6px]"
+              />
 
             </Link>
           </div>

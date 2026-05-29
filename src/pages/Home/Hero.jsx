@@ -9,6 +9,7 @@ import {
   setCached,
 } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 const Hero = () => {
   const [hover, setHover] = useState(false);
@@ -55,22 +56,22 @@ const Hero = () => {
   const socialLinks = [
     {
       id: "li",
-      icon: "fa-linkedin-in",
+      icon: "linkedin",
       url: settings?.linkedin || "https://linkedin.com/",
     },
     {
       id: "tw",
-      icon: "fa-x-twitter",
+      icon: "x",
       url: settings?.twitter || "https://x.com/",
     },
     {
       id: "fb",
-      icon: "fa-facebook-f",
+      icon: "facebook",
       url: settings?.facebook || "https://facebook.com/",
     },
     {
       id: "ig",
-      icon: "fa-instagram",
+      icon: "instagram",
       url: settings?.instagram || "https://instagram.com/",
     },
   ];
@@ -84,6 +85,7 @@ const Hero = () => {
             src={imgUrl}
             className="w-full h-full object-cover object-[70%_20%]"
             alt="Dr. Raphael Edlmann - Interim Manager, AI, HR & Business Process Expert"
+            fetchPriority="high"
           />
         )}
         <div className="absolute inset-0 bg-[#b8965a]/20"></div>
@@ -126,7 +128,7 @@ const Hero = () => {
               to={`mailto:${email}`}
               className="w-12 h-12 rounded-full flex items-center justify-center bg-white text-black hover:bg-gray-200 transition"
             >
-              <i className="fa-solid fa-envelope"></i>
+              <Icon name="envelope" />
             </Link>
 
             {/* WHATSAPP */}
@@ -136,7 +138,7 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full flex items-center justify-center text-white bg-[#25D366] hover:opacity-80 transition"
             >
-              <i className="fa-brands fa-whatsapp"></i>
+              <Icon name="whatsapp" />
             </Link>
           </div>
         </div>
@@ -171,9 +173,10 @@ const Hero = () => {
                 shadow-[0_4px_15px_rgba(0,0,0,0.2)]
               "
             >
-              <i
-                className={`fa-brands ${s.icon} text-[15px] text-white transition-transform duration-500 group-hover:scale-110`}
-              ></i>
+              <Icon
+                name={s.icon}
+                className="text-[15px] text-white transition-transform duration-500 group-hover:scale-110"
+              />
             </a>
           ))}
         </div>

@@ -42,6 +42,7 @@ const AboutBanner = () => {
           <img
             src={imageUrl}
             alt={title}
+            fetchPriority="high"
             className="w-full h-full object-cover object-center"
           />
         )}

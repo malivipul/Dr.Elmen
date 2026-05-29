@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { addSubscriber } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../commen/Icon";
 
 const SubscribeModal = ({ isOpen, setIsOpen }) => {
   const { lang } = useLanguage();
@@ -78,7 +79,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
           onClick={() => setIsOpen(false)}
           className="absolute  right-3 md:right-5 md:top-5 top-3 text-[20px] text-black hover:rotate-90 transition duration-300 cursor-pointer"
         >
-          <i className="fa-solid fa-xmark"></i>
+          <Icon name="xmark" />
         </button>
 
         {/* CONTENT */}
@@ -139,7 +140,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
               disabled={submitting}
               className="mt-4 w-full h-[50px]  rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2   text-[14px]    hover:border-[#b8965a]    justify-center  disabled:opacity-50 cursor-pointer"
             >
-              <i className="fa-regular fa-envelope"></i>
+              <Icon name="reg-envelope" />
               {submitting
                 ? lang === "EN"
                   ? "SUBSCRIBING..."

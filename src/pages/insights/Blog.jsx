@@ -9,6 +9,7 @@ import {
   formatDate,
 } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 const categoryTranslations = {
   guides: { en: "Guides", de: "Leitfäden" },
@@ -278,7 +279,7 @@ const BlogSection = ({ setIsOpen }) => {
               onClick={() => setIsOpen(true)}
               className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2"
             >
-              <i className="fa-regular fa-envelope"></i>
+              <Icon name="reg-envelope" />
               {subscribebtn.btn[lang === "EN" ? "en" : "de"]}
             </button>
           </div>
@@ -289,7 +290,7 @@ const BlogSection = ({ setIsOpen }) => {
               onClick={() => setIsOpen(true)}
               className="w-[44px] h-[44px] rounded-full bg-[#b8965a] text-white border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 flex items-center justify-center cursor-pointer"
             >
-              <i className="fa-regular fa-envelope text-[15px]"></i>
+              <Icon name="reg-envelope" className="text-[15px]" />
             </button>
           </div>
 
@@ -371,9 +372,9 @@ const BlogSection = ({ setIsOpen }) => {
                     className={`flex items-center gap-1.5 text-xs font-bold transition-all ${likedArticles.includes(latestArticle._id) ? "text-[#b8965a]" : "text-gray-300 hover:text-[#b8965a]"}`}
                   >
                     {latestArticle.likes}
-                    <i
-                      className={`fa-${likedArticles.includes(latestArticle._id) ? "solid" : "regular"} fa-heart`}
-                    ></i>
+                    <Icon
+                      name={likedArticles.includes(latestArticle._id) ? "heart" : "reg-heart"}
+                    />
                   </button>
                 </div>
 
@@ -402,7 +403,7 @@ const BlogSection = ({ setIsOpen }) => {
                     className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2"
                   >
                     Read Article
-                    <i className="fa-solid fa-arrow-right"></i>
+                    <Icon name="arrow-right" />
                   </Link>
                 </div>
               </div>
@@ -435,7 +436,7 @@ const BlogSection = ({ setIsOpen }) => {
         ) : (
           <div className="py-20 text-center ">
             <div className="w-16 h-16 bg-[#f5f3ef] rounded-full flex items-center justify-center mx-auto mb-4 text-[#b8965a]">
-              <i className="fa-regular fa-file-lines text-2xl"></i>
+              <Icon name="reg-file-lines" className="text-2xl" />
             </div>
             <h3 className="title-font text-xl text-black mb-2">
               {blogList.length === 0
@@ -486,7 +487,7 @@ const BlogSection = ({ setIsOpen }) => {
                   : "border-[#b8965a] bg-white text-[#b8965a] hover:bg-[#b8965a] hover:text-white cursor-pointer shadow-sm active:scale-95"
               }`}
             >
-              <i className="fa-solid fa-chevron-left text-[10px]"></i>
+              <Icon name="chevron-left" className="text-[10px]" />
               <span className="mt-[-1px]">
                 {lang === "EN" ? "Prev" : "Zurück"}
               </span>
@@ -545,7 +546,7 @@ const BlogSection = ({ setIsOpen }) => {
               <span className="mt-[-1px]">
                 {lang === "EN" ? "Next" : "Weiter"}
               </span>
-              <i className="fa-solid fa-chevron-right text-[10px]"></i>
+              <Icon name="chevron-right" className="text-[10px]" />
             </button>
           </div>
         )}
@@ -586,7 +587,7 @@ const Card = ({ item, isLiked, onLike }) => (
           className={`flex items-center gap-1.5 text-xs font-bold transition-all ${isLiked ? "text-[#b8965a]" : "text-gray-300 hover:text-[#b8965a]"}`}
         >
           {item.likes}
-          <i className={`fa-${isLiked ? "solid" : "regular"} fa-heart`}></i>
+          <Icon name={isLiked ? "heart" : "reg-heart"} />
         </button>
       </div>
 

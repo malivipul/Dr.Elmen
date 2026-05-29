@@ -9,6 +9,7 @@ const AboutBanner = () => {
         <img
           src="/assets/Banners/Privacy-Policy-Banner.jpg"
           alt="About Banner"
+          fetchPriority="high"
           className="w-full h-full object-cover object-right md:object-center"
         />
 

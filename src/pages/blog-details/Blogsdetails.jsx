@@ -16,6 +16,7 @@ import {
 import { useLanguage } from "../../context/LanguageContext";
 import SEO from "../../components/commen/SEO";
 import Swal from "sweetalert2";
+import Icon from "../../components/commen/Icon";
 
 const stripHtml = (html) => {
   if (!html || typeof html !== "string") return "";
@@ -262,7 +263,7 @@ const Blogsdetails = () => {
                 {/* AUTHOR */}
                 <div className="flex items-center gap-3 text-[#6b6b6b] text-[15px]">
                   <div className="w-10 h-10 rounded-full bg-[#b8965a] text-white flex items-center justify-center shrink-0">
-                    <i className="fa-regular fa-user"></i>
+                    <Icon name="reg-user" />
                   </div>
 
                   <span className="font-medium">{authorName}</span>
@@ -271,7 +272,7 @@ const Blogsdetails = () => {
                 {/* DATE */}
                 <div className="flex items-center gap-3 text-[#6b6b6b] text-[15px]">
                   <div className="w-10 h-10 rounded-full bg-[#b8965a] text-white flex items-center justify-center shrink-0">
-                    <i className="fa-regular fa-calendar"></i>
+                    <Icon name="reg-calendar" />
                   </div>
 
                   <span className="font-medium">{dateStr}</span>
@@ -281,7 +282,7 @@ const Blogsdetails = () => {
                 {isRead && (
                   <div className="flex items-center gap-3 text-[#6b6b6b] text-[15px]">
                     <div className="w-10 h-10 rounded-full bg-[#b8965a] text-white flex items-center justify-center shrink-0">
-                      <i className="fa-regular fa-clock"></i>
+                      <Icon name="reg-clock" />
                     </div>
 
                     <span className="font-medium">{readTime}</span>
@@ -309,9 +310,10 @@ const Blogsdetails = () => {
                     ${hasLiked ? "bg-[#b8965a] border-[#b8965a] text-white shadow-md shadow-[#b8965a]/20" : "bg-white border-[#9f9992] text-black hover:bg-[#b8965a]/5"}
                   `}
                 >
-                  <i
-                    className={`fa-${hasLiked ? "solid" : "regular"} fa-heart text-[16px] ${hasLiked ? "animate-in zoom-in-110" : ""}`}
-                  ></i>
+                  <Icon
+                    name={hasLiked ? "heart" : "reg-heart"}
+                    className={`text-[16px] ${hasLiked ? "animate-in zoom-in-110" : ""}`}
+                  />
                   <span className="font-bold text-sm">
                     {likes} {lang === "EN" ? "Likes" : "Gefällt mir"}
                   </span>
@@ -328,7 +330,7 @@ const Blogsdetails = () => {
                     rel="noreferrer"
                     className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
-                    <i className="fa-brands fa-linkedin-in"></i>
+                    <Icon name="linkedin" />
                   </a>
                   <a
                     href={`https://twitter.com/intent/tweet?url=${articleUrl}&text=${encodeURIComponent(title)}`}
@@ -336,7 +338,7 @@ const Blogsdetails = () => {
                     rel="noreferrer"
                     className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
-                    <i className="fa-brands fa-x-twitter"></i>
+                    <Icon name="x" />
                   </a>
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`}
@@ -344,7 +346,7 @@ const Blogsdetails = () => {
                     rel="noreferrer"
                     className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
-                    <i className="fa-brands fa-facebook-f"></i>
+                    <Icon name="facebook" />
                   </a>
                   <a
                     href={settings?.instagram || "https://www.instagram.com/"}
@@ -352,7 +354,7 @@ const Blogsdetails = () => {
                     rel="noreferrer"
                     className="w-10 h-10 rounded-full border border-[#9f9992] flex items-center justify-center text-black hover:bg-[#b8965a] hover:border-[#b8965a] hover:text-white transition-all duration-300"
                   >
-                    <i className="fa-brands fa-instagram"></i>
+                    <Icon name="instagram" />
                   </a>
                 </div>
               </div>
@@ -441,7 +443,7 @@ const Blogsdetails = () => {
                   comments.map((c, i) => (
                     <div key={c._id || i} className="flex gap-4 group">
                       <div className="w-12 h-12 rounded-full bg-[#f5f3ef] flex items-center justify-center text-[#b8965a] shrink-0 border border-[#e6dfd5]">
-                        <i className="fa-solid fa-user text-lg"></i>
+                        <Icon name="user" className="text-lg" />
                       </div>
                       <div className="flex-1 bg-white rounded-2xl p-5 border border-[#e6dfd5] shadow-sm group-hover:border-[#b8965a]/30 transition-all">
                         <div className="flex justify-between items-center mb-2">

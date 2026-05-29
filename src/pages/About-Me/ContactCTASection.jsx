@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getAboutCTA, getBi, getCached, setCached } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 const cleanRichText = (value = "") =>
   String(value)
@@ -120,7 +121,7 @@ const ContactCTASection = () => {
               >
                 <span className="leading-none">{btn1Text}</span>
 
-                <i className="fa-solid fa-arrow-right text-[14px] mt-[1px]"></i>
+                <Icon name="arrow-right" className="text-[14px] mt-[1px]" />
               </Link>
 
               {/* BUTTON */}
@@ -149,7 +150,7 @@ const ContactCTASection = () => {
                   bg-white/40
                 "
               >
-                <i className="fa-brands fa-whatsapp text-[15px]"></i>
+                <Icon name="whatsapp" className="text-[15px]" />
 
                 <span className="leading-none">{btn2Text}</span>
               </Link>

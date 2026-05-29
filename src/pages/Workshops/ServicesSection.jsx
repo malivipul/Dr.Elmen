@@ -9,6 +9,7 @@ import {
   setCached,
 } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "../../components/commen/Icon";
 
 const getOrderId = (service, fallback) => {
   const value = Number(service?.orderId);
@@ -60,6 +61,7 @@ const ServicesSection = () => {
       service.img && !service.img.startsWith("/assets")
         ? `${IMG_URL}${service.img}`
         : service.img || "/assets/images/blog2.png";
+    const imgAlt = getBi(service.imgAlt, lang) || title;
     const number = String(index + 1).padStart(2, "0");
 
     let points = [];
@@ -77,7 +79,7 @@ const ServicesSection = () => {
       );
     }
 
-    return { title, slug, img, number, points };
+    return { title, slug, img, imgAlt, number, points };
   });
 
   const hSubtitle = header
@@ -135,7 +137,8 @@ const ServicesSection = () => {
                 <img
                   src={service.img}
                   className="w-full h-full min-h-[240px] md:min-h-[260px] object-cover"
-                  alt={service.title}
+                  alt={service.imgAlt}
+                  title={service.imgAlt}
                 />
               </div>
 
@@ -171,7 +174,7 @@ const ServicesSection = () => {
                   <span className="inline-flex items-center gap-2 px-7 font-bold py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300">
                     {lang === "EN" ? "Learn More" : "Mehr erfahren"}
 
-                    <i className="fa-solid fa-arrow-right text-[12px]"></i>
+                    <Icon name="arrow-right" className="text-[12px]" />
                   </span>
                 </div>
               </div>
@@ -207,7 +210,7 @@ const ServicesSection = () => {
               {/* ICON + TITLE */}
               <div className="flex items-center gap-4 mb-5">
                 <div className="w-[44px] h-[44px] rounded-full bg-[#0a3e40] flex items-center justify-center text-white text-[22px] shadow-lg">
-                  <i className="fa-regular fa-calendar"></i>
+                  <Icon name="reg-calendar" />
                 </div>
 
                 <h3 className="title-font text-2xl md:text-[36px] leading-tight text-black font-semibold">
@@ -232,7 +235,7 @@ const ServicesSection = () => {
                 >
                   {lang === "EN" ? "Learn More" : "Mehr erfahren"}
 
-                  <i className="fa-solid fa-arrow-right text-[12px]"></i>
+                  <Icon name="arrow-right" className="text-[12px]" />
                 </Link>
               </div>
             </div>

@@ -29,6 +29,7 @@ const AboutBanner = () => {
         <img
           src={bannerImg}
           alt={title}
+          fetchPriority="high"
           className="w-full h-full object-cover md:object-cover object-center"
         />
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getSettings, getServices, getBi } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
+import Icon from "./Icon";
 
 const Footer = () => {
   const { lang } = useLanguage();
@@ -75,7 +76,7 @@ const Footer = () => {
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
-                  <i className="fa-brands fa-linkedin-in text-[14px] text-white"></i>
+                  <Icon name="linkedin" className="text-[14px] text-white" />
                 </a>
               )}
 
@@ -86,7 +87,7 @@ const Footer = () => {
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
-                  <i className="fa-brands fa-x-twitter text-[14px] text-white"></i>
+                  <Icon name="x" className="text-[14px] text-white" />
                 </a>
               )}
 
@@ -97,7 +98,7 @@ const Footer = () => {
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
-                  <i className="fa-brands fa-facebook-f text-[14px] text-white"></i>
+                  <Icon name="facebook" className="text-[14px] text-white" />
                 </a>
               )}
 
@@ -108,7 +109,7 @@ const Footer = () => {
                   rel="noreferrer"
                   className="w-[45px] h-[45px] flex items-center justify-center border border-white/40 rounded-full hover:bg-[#b8965a] transition-all duration-300 cursor-pointer"
                 >
-                  <i className="fa-brands fa-instagram text-[14px] text-white"></i>
+                  <Icon name="instagram" className="text-[14px] text-white" />
                 </a>
               )}
             </div>
@@ -274,7 +275,7 @@ const Footer = () => {
               {/* EMAIL */}
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg shrink-0">
-                  <i className="fa-regular fa-envelope text-[#b8965a]"></i>
+                  <Icon name="reg-envelope" className="text-[#b8965a]" />
                 </div>
 
                 <a
@@ -287,7 +288,7 @@ const Footer = () => {
               {/* PHONE */}
               <div className="flex items-center gap-3 justify-center md:justify-start">
                 <div className="w-[36px] h-[36px] flex items-center justify-center bg-white/10 rounded-lg shrink-0">
-                  <i className="fa-solid fa-phone text-[#b8965a]"></i>
+                  <Icon name="phone" className="text-[#b8965a]" />
                 </div>
 
                 <span>{settings.phone}</span>
