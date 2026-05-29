@@ -103,7 +103,7 @@ const About = () => {
                   <img
                     src={imgUrl}
                     className="w-full h-full object-cover"
-                    alt="profile"
+                     alt="Dr. Raphael Edlmann Profile Photo"
                   />
                 </div>
 

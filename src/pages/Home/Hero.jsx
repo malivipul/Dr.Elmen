@@ -83,7 +83,7 @@ const Hero = () => {
           <img
             src={imgUrl}
             className="w-full h-full object-cover object-[70%_20%]"
-            alt="hero"
+            alt="Dr. Raphael Edlmann - Interim Manager, AI, HR & Business Process Expert"
           />
         )}
         <div className="absolute inset-0 bg-[#b8965a]/20"></div>

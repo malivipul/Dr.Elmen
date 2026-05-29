@@ -42,7 +42,7 @@ const SpeakerSection = () => {
         <img
           src={bgImg}
           className="w-full h-full object-cover object-top"
-          alt="speaker"
+          alt="Dr. Raphael Edlmann speaking at leadership, AI and business transformation events"
         />
       </div>
 
