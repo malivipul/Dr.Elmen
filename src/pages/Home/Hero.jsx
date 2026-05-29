@@ -136,9 +136,12 @@ const Hero = () => {
               to="https://wa.me/your-number"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full flex items-center justify-center text-white bg-[#25D366] hover:opacity-80 transition"
+              className="group w-12 h-12 rounded-full flex items-center justify-center text-white bg-[#25D366] border border-[#25D366] shadow-[0_8px_22px_rgba(37,211,102,0.28)] transition-all duration-300  hover:bg-white hover:text-[#25D366] "
             >
-              <Icon name="whatsapp" />
+              <Icon
+                name="whatsapp"
+                className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+              />
             </Link>
           </div>
         </div>

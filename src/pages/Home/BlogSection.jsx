@@ -196,7 +196,7 @@ const BlogSection = ({ setIsOpen }) => {
           <div className="hidden md:block absolute right-0 top-0">
             <button
               onClick={() => setIsOpen(true)}
-              className="px-8 py-3 rounded-full text-white text-sm font-bold bg-[#b8965a]  transition duration-300 inline-flex items-center gap-2 cursor-pointer"
+              className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2 cursor-pointer"
             >
               <Icon name="reg-envelope" />
               {subscribebtn.btn[lang === "EN" ? "en" : "de"]}
