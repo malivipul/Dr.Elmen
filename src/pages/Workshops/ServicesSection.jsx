@@ -192,7 +192,7 @@ const ServicesSection = () => {
 
       {/* LETS WORK TOGETHER CTA */}
       <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] mt-10">
-        <div className="relative overflow-hidden rounded-[24px] min-h-[280px] flex items-center ">
+        <div className="relative overflow-hidden rounded-[24px] min-h-[320px] flex items-center ">
           {/* BG IMAGE */}
           <div className="absolute inset-0">
             <img

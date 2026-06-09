@@ -282,8 +282,11 @@ const VitaTimeline = () => {
           <div className="z-20">
             <a
               href={cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              download={
+                lang === "EN"
+                  ? "Dr_Raphael_Edlmann_CV_EN.pdf"
+                  : "Dr_Raphael_Edlmann_CV_DE.pdf"
+              }
               className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 whitespace-nowrap cursor-pointer"
             >
               <Icon name="download" className="text-[13px]" />

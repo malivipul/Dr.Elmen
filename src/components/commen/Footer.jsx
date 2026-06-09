@@ -291,7 +291,12 @@ const Footer = () => {
                   <Icon name="phone" className="text-[#b8965a]" />
                 </div>
 
-                <span>{settings.phone}</span>
+                <a
+                  href={`tel:${settings.phone}`}
+                  className="hover:text-[#b8965a] transition duration-300"
+                >
+                  {settings.phone}
+                </a>
               </div>
             </div>
           </div>
