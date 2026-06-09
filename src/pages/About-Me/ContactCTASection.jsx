@@ -65,7 +65,7 @@ const ContactCTASection = () => {
     ? getBi(ctaData.btn2Text, lang) 
     : (lang === "EN" ? "WhatsApp Me" : "WhatsApp");
   
-  const btn2Link = ctaData?.btn2Link || "/contact";
+  const btn2Link = ctaData?.btn2Link || "https://wa.me/4916092678837";
 
   return (
     <section className="bg-[#f4f4f4] py-[60px] md:py-[60px]">

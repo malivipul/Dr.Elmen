@@ -52,8 +52,8 @@ const About = () => {
 
   // Use uploaded CV from database if available, else standard fallback
   const cvUrl =
-    about && about.cv
-      ? `${IMG_URL}${about.cv}`
+    about && about.cv && about.cv[lang.toLowerCase()]
+      ? `${IMG_URL}${about.cv[lang.toLowerCase()]}`
       : "/assets/images/Professional_CV_English-protected.pdf";
 
   const vitaItems =

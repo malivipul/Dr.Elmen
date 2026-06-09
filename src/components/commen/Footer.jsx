@@ -22,7 +22,7 @@ const Footer = () => {
         if (res.data) {
           setSettings({
             email: res.data.email || "contact@edlmann.com",
-            phone: res.data.phone || "+49 162 523 50 273",
+            phone: res.data.phone || "+49 160 92 67 88 37",
             linkedin: res.data.linkedin || "",
             twitter: res.data.twitter || "",
             facebook: res.data.facebook || "",

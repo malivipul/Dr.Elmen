@@ -427,7 +427,7 @@ const Card = ({ item }) => (
         src={item.img}
         alt={item.imgAlt}
         title={item.imgAlt}
-        className="w-full h-[180px] object-cover transition duration-500 group-hover:scale-110"
+        className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
       />
       {item.isRead && (
         <div className="absolute top-3 left-3 bg-[#b8965a] text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-10 uppercase tracking-wider">

@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getVitaTimeline, getBi } from "../../api/api";
+import {
+  getVitaTimeline,
+  getBi,
+  getHomeAbout,
+  IMG_URL,
+  getCached,
+  setCached,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 import Icon from "../../components/commen/Icon";
 
@@ -70,6 +77,8 @@ const findTimelineItems = (value) => {
 const VitaTimeline = () => {
   const [activeArrow, setActiveArrow] = useState("left");
   const [timelineData, setTimelineData] = useState(null);
+  const cachedAbout = getCached("homeIntro");
+  const [about, setAbout] = useState(cachedAbout || null);
   const { lang } = useLanguage();
 
   useEffect(() => {
@@ -81,6 +90,16 @@ const VitaTimeline = () => {
         setTimelineData(res.data || null);
       })
       .catch((err) => console.error("Error fetching Vita Timeline:", err));
+
+    getHomeAbout()
+      .then((res) => {
+        if (!isMounted) return;
+        if (res.data) {
+          setAbout(res.data);
+          setCached("homeIntro", res.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching home intro for CV:", err));
 
     return () => {
       isMounted = false;
@@ -136,6 +155,11 @@ const VitaTimeline = () => {
       };
     })
     .filter((item) => item.year || item.text);
+
+  const cvUrl =
+    about && about.cv && about.cv[lang.toLowerCase()]
+      ? `${IMG_URL}${about.cv[lang.toLowerCase()]}`
+      : "/assets/images/Professional_CV_English-protected.pdf";
 
   return (
     <section className="bg-[#f4f4f4] py-[60px]">
@@ -256,8 +280,8 @@ const VitaTimeline = () => {
 
           {/* RIGHT SIDE */}
           <div className="z-20">
-            <Link
-              to="/assets/images/Professional_CV_English-protected.pdf"
+            <a
+              href={cvUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 whitespace-nowrap cursor-pointer"
@@ -266,7 +290,7 @@ const VitaTimeline = () => {
               <span>
                 {lang === "EN" ? "Download CV" : "Lebenslauf herunterladen"}
               </span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
