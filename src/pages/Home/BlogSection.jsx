@@ -45,33 +45,18 @@ const getReadTime = (content, currentLang) => {
     : `${minutes} Min. Lesezeit`;
 };
 
-const categoryTranslations = {
-  guides: { en: "Guides", de: "Guides" },
-  opinions: { en: "Opinions", de: "Meinungen" },
-  "case studies": { en: "Case Studies", de: "Case Studies" },
-  tools: { en: "Tools", de: "Tools" },
-  archive: { en: "Archive", de: "Archiv" },
-  hr: { en: "HR", de: "HR" },
-  ai: { en: "AI", de: "AI" },
-  leadership: { en: "Leadership", de: "Führung" },
-};
-
-const getCategoryLabel = (cat, currentLang) => {
-  const translation = categoryTranslations[cat.toLowerCase()];
-  if (translation) {
-    return currentLang === "EN" ? translation.en : translation.de;
-  }
+const getCategoryLabel = (cat) => {
   return cat
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
 
-const formatCategoryDisplay = (catStr, currentLang) => {
+const formatCategoryDisplay = (catStr) => {
   if (!catStr) return "";
   return catStr
     .split(",")
-    .map((c) => getCategoryLabel(c.trim(), currentLang))
+    .map((c) => getCategoryLabel(c.trim()))
     .join(", ");
 };
 
@@ -122,7 +107,7 @@ const BlogSection = ({ setIsOpen }) => {
     return {
       _id: b._id,
       category: rawCategory,
-      displayCategory: formatCategoryDisplay(rawCategory, lang),
+      displayCategory: formatCategoryDisplay(rawCategory),
       title: cleanRichText(rawTitle),
       desc: cleanRichText(rawDesc),
       isRead: readArticles.includes(b._id),
@@ -184,7 +169,7 @@ const BlogSection = ({ setIsOpen }) => {
   const otherCategories = uniqueCategories.filter((cat) => cat !== "archive");
 
   const dynamicTabs = [...archiveCategory, ...otherCategories].map((cat) => ({
-    label: getCategoryLabel(cat, lang),
+    label: getCategoryLabel(cat),
     value: cat,
   }));
 
