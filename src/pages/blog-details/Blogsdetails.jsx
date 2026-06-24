@@ -105,7 +105,15 @@ const Blogsdetails = () => {
     getBlogs()
       .then((res) => {
         if (res.data) {
-          setRecentBlogs(res.data.filter((b) => b._id !== id).slice(0, 5));
+          const filteredRecent = res.data.filter((b) => {
+            if (b._id === id) return false;
+            const categoryStrEn = getBi(b.Category || b.category, "en").toLowerCase();
+            const categoryStrDe = getBi(b.Category || b.category, "de").toLowerCase();
+            const hasArchiveEn = categoryStrEn.split(",").map((c) => c.trim()).includes("archive");
+            const hasArchiveDe = categoryStrDe.split(",").map((c) => c.trim()).some((c) => c === "archive" || c === "archiv");
+            return !hasArchiveEn && !hasArchiveDe;
+          });
+          setRecentBlogs(filteredRecent.slice(0, 5));
         }
       })
       .catch((err) => console.error("Error fetching recent blogs:", err));
@@ -312,7 +320,7 @@ const Blogsdetails = () => {
 
             {/* CONTENT */}
             <div
-              className="blog-content text-justify text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.95]"
+              className="blog-content  text-[#0a3e40] text-[14px] md:text-[16px] leading-[1.95]"
               dangerouslySetInnerHTML={{ __html: content }}
             />
 

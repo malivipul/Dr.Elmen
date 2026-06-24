@@ -360,7 +360,11 @@ const BlogSection = ({ setIsOpen }) => {
                   >
                     {latestArticle.likes}
                     <Icon
-                      name={likedArticles.includes(latestArticle._id) ? "heart" : "reg-heart"}
+                      name={
+                        likedArticles.includes(latestArticle._id)
+                          ? "heart"
+                          : "reg-heart"
+                      }
                     />
                   </button>
                 </div>
@@ -396,7 +400,7 @@ const BlogSection = ({ setIsOpen }) => {
               </div>
 
               {/* IMAGE */}
-              <div className="relative w-full h-[260px] md:h-auto min-h-[260px] overflow-hidden">
+              <div className="relative w-full h-[260px] md:h-[350px] min-h-[260px] overflow-hidden">
                 <img
                   src={latestArticle.img}
                   alt={latestArticle.imgAlt}
