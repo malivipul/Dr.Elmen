@@ -369,9 +369,9 @@ const BlogSection = ({ setIsOpen }) => {
                   {latestArticle.title}
                 </h3>
 
-                <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
+                {/* <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
                   {latestArticle.desc}
-                </p>
+                </p> */}
 
                 <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
                   <span>{latestArticle.date}</span>
@@ -584,9 +584,9 @@ const Card = ({ item, isLiked, onLike }) => (
       </h3>
 
       {/* DESC */}
-      <p className="text-[#0a3e40] text-[15px] mt-3 leading-[1.7] line-clamp-2">
+      {/* <p className="text-[#0a3e40] text-[15px] mt-3 leading-[1.7] line-clamp-2">
         {item.desc}
-      </p>
+      </p> */}
 
       {/* DATE + READ */}
       <div className="flex items-center gap-3 mt-5 text-[#7b7b7b] text-[13px]">
