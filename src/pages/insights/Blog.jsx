@@ -186,17 +186,19 @@ const BlogSection = ({ setIsOpen }) => {
   const filtered =
     active === "all"
       ? formattedBlogs.filter(
-          (item) =>
-            !item.category
-              ?.split(",")
-              .map((c) => c.trim().toLowerCase())
-              .includes("archive"),
+          (item) => {
+            const cats = (item.category || "")
+              .split(",")
+              .map((c) => c.trim().toLowerCase());
+            return !cats.includes("archive") && !cats.includes("archiv");
+          }
         )
       : formattedBlogs.filter((item) => {
           // Check category
           const cats = (item.category || "")
             .split(",")
-            .map((c) => c.trim().toLowerCase());
+            .map((c) => c.trim().toLowerCase())
+            .map((c) => (c === "archiv" ? "archive" : c));
           if (cats.includes(active)) return true;
           // Check tags array
           if (item.tags && item.tags.includes(active)) return true;
@@ -224,7 +226,11 @@ const BlogSection = ({ setIsOpen }) => {
       b.category.split(",").forEach((cat) => {
         const trimmed = cat.trim().toLowerCase();
         if (trimmed && !["all", "alle"].includes(trimmed)) {
-          dynamicCategoriesSet.add(trimmed);
+          if (trimmed === "archive" || trimmed === "archiv") {
+            dynamicCategoriesSet.add("archive");
+          } else {
+            dynamicCategoriesSet.add(trimmed);
+          }
         }
       });
     }
