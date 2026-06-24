@@ -7,6 +7,7 @@ import {
   likeBlog,
   submitBlogComment,
   getSettings,
+  getBlogBanner,
   IMG_URL,
   getBi,
   getCached,
@@ -49,6 +50,8 @@ const Blogsdetails = () => {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
   const [settings, setSettings] = useState(null);
+  const cachedBanner = getCached("blogBanner");
+  const [banner, setBanner] = useState(cachedBanner || null);
   const [commentData, setCommentData] = useState({
     name: "",
     email: "",
@@ -80,14 +83,18 @@ const Blogsdetails = () => {
         setIsRead(true);
       }
 
-      Promise.all([getBlogById(id), getBlogComments(id), getSettings()])
-        .then(([blogRes, commRes, settRes]) => {
+      Promise.all([getBlogById(id), getBlogComments(id), getSettings(), getBlogBanner()])
+        .then(([blogRes, commRes, settRes, bannerRes]) => {
           if (blogRes.data) {
             setBlog(blogRes.data);
             setLikes(blogRes.data.likes || 0);
           }
           if (commRes.data) setComments(commRes.data);
           if (settRes.data) setSettings(settRes.data);
+          if (bannerRes.data) {
+            setBanner(bannerRes.data);
+            setCached("blogBanner", bannerRes.data);
+          }
         })
         .catch((err) => console.error("Error loading blog details:", err))
         .finally(() => setLoading(false));
@@ -227,6 +234,9 @@ const Blogsdetails = () => {
     : "/assets/images/25.png";
   const imgAlt = getBi(currentBlog.imgAlt, lang) || title;
 
+  const bannerImg = banner?.img ? `${IMG_URL}${banner.img}` : "/assets/images/Untitled design (47).png";
+  const bannerTitle = getBi(banner?.title, lang) || (lang === "EN" ? "Future of Work Insights" : "HR & KI Einblicke");
+
   return (
     <section className="bg-[#f4f4f4] pb-[90px]">
       <SEO
@@ -237,9 +247,9 @@ const Blogsdetails = () => {
       {/* HERO IMAGE */}
       <div className="relative w-full overflow-hidden ">
         <img
-          src={imgSource}
-          alt={imgAlt}
-          title={imgAlt}
+          src={bannerImg}
+          alt={bannerTitle}
+          title={bannerTitle}
           className="w-full h-[260px] md:h-[460px] object-cover object-center"
         />
 
@@ -289,6 +299,15 @@ const Blogsdetails = () => {
                   </div>
                 )}
               </div>
+            </div>
+
+            {/* FEATURED IMAGE */}
+            <div className="mb-10 overflow-hidden rounded-[20px] shadow-sm">
+              <img
+                src={imgSource}
+                alt={imgAlt}
+                className="w-full h-auto max-h-[500px] object-cover"
+              />
             </div>
 
             {/* CONTENT */}

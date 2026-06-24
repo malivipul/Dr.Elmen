@@ -30,8 +30,8 @@ const SubscribeConfirm = () => {
           setStatus("success");
           setMessage(
             lang === "EN"
-              ? "Your subscription has been confirmed. Thank you for subscribing to HR & AI Insights!"
-              : "Ihr Abonnement wurde erfolgreich bestätigt. Vielen Dank für Ihre Anmeldung zu HR & AI Insights!"
+              ? "Your subscription has been confirmed. Thank you for subscribing to Future of Work Insights!"
+              : "Ihr Abonnement wurde erfolgreich bestätigt. Vielen Dank für Ihre Anmeldung zu Future of Work Insights!"
           );
         } else {
           setStatus("error");

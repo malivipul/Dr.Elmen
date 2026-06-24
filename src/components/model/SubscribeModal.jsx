@@ -40,7 +40,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
     setSubmitting(true);
     setStatus({ success: null, message: "" });
 
-    addSubscriber({ email })
+    addSubscriber({ email, lang })
       .then((res) => {
         setSubmitting(false);
         if (res.data && res.data.success) {
@@ -100,8 +100,8 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
           {/* TITLE */}
           <h2 className="title-font text-[24px] md:text-[28px] leading-tight text-black">
             {lang === "EN"
-              ? "Subscribe to HR & AI Insights"
-              : "HR & AI Insights abonnieren"}
+              ? "Subscribe to Future of Work Insights"
+              : "Future of Work Insights abonnieren"}
           </h2>
 
           {/* DESC */}

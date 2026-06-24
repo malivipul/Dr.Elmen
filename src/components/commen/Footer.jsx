@@ -146,7 +146,7 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                  HR & AI Insights
+                  Future of Work Insights
                 </Link>
               </li>
 
