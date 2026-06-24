@@ -68,7 +68,7 @@ const Header = () => {
             </span>
           </Link>
 
-          {/* HR & AI Insights */}
+          {/* Future of Work Insights */}
           <Link
             to="/insights"
             onMouseEnter={() => setHoverIndex("insights")}
@@ -87,13 +87,13 @@ const Header = () => {
                   ${hoverIndex === "insights" ? "font-['Caveat']" : ""}
                 `}
               >
-                HR & AI Insights
+                Future of Work Insights
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                HR & AI Insights
+                Future of Work Insights
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                HR & AI Insights
+                Future of Work Insights
               </span>
               <span
                 className={`
@@ -557,7 +557,7 @@ const Header = () => {
                   }
                 `}
               >
-                HR & AI Insights
+                Future of Work Insights
               </span>
             </Link>
 

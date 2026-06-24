@@ -14,7 +14,9 @@ export default function ProjectsSection() {
     getProjects()
       .then((res) => {
         if (res.data) {
-          const list = Array.isArray(res.data) ? res.data : (res.data.value || []);
+          const list = Array.isArray(res.data)
+            ? res.data
+            : res.data.value || [];
           setDbProjects(list);
         }
       })
@@ -37,7 +39,10 @@ export default function ProjectsSection() {
           const element = document.getElementById("projects-section");
           if (element) {
             const yOffset = -90; // clear the sticky header elegantly
-            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            const y =
+              element.getBoundingClientRect().top +
+              window.pageYOffset +
+              yOffset;
             window.scrollTo({
               top: y,
               behavior: "smooth",
@@ -51,8 +56,12 @@ export default function ProjectsSection() {
   const displayedProjects = dbProjects;
 
   const headerTitle = header ? getBi(header.title, lang) : "Projects";
-  const headerSubtitle = header ? getBi(header.subtitle, lang) : "Transforming Ideas into Impactful Solutions";
-  const headerDesc = header ? getBi(header.description, lang) : "A collection of strategic initiatives, technology-driven implementations, and business transformation projects focused on AI, HR innovation, automation, and operational excellence.";
+  const headerSubtitle = header
+    ? getBi(header.subtitle, lang)
+    : "Transforming Ideas into Impactful Solutions";
+  const headerDesc = header
+    ? getBi(header.description, lang)
+    : "A collection of strategic initiatives, technology-driven implementations, and business transformation projects focused on AI, HR innovation, automation, and operational excellence.";
 
   const getLogoUrl = (logo) => {
     if (!logo) return "";
@@ -62,7 +71,10 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects-section" className="py-[60px] bg-[#f4f4f4] overflow-hidden">
+    <section
+      id="projects-section"
+      className="py-[60px] bg-[#f4f4f4] overflow-hidden"
+    >
       {/* TOP */}
       <div className="text-center mb-14 px-5 md:px-0">
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
@@ -82,9 +94,20 @@ export default function ProjectsSection() {
         {/* GRID */}
         <div className="grid lg:grid-cols-2 gap-7">
           {displayedProjects.map((item, index) => {
-            const itemTitle = typeof item.title === "object" ? getBi(item.title, lang) : item.title;
-            const itemRole = typeof item.role === "object" ? getBi(item.role, lang) : item.role;
-            const itemDesc = typeof item.description === "object" ? getBi(item.description, lang) : (typeof item.desc === "object" ? getBi(item.desc, lang) : (item.description || item.desc || ""));
+            const itemTitle =
+              typeof item.title === "object"
+                ? getBi(item.title, lang)
+                : item.title;
+            const itemRole =
+              typeof item.role === "object"
+                ? getBi(item.role, lang)
+                : item.role;
+            const itemDesc =
+              typeof item.description === "object"
+                ? getBi(item.description, lang)
+                : typeof item.desc === "object"
+                  ? getBi(item.desc, lang)
+                  : item.description || item.desc || "";
             const itemLogos = item.logos || [];
 
             return (
@@ -101,15 +124,12 @@ export default function ProjectsSection() {
                   className={`
                     relative w-full
                     transition-all duration-700
-                    md:h-[430px]
+                    h-auto min-h-[300px md:min-h-[350px]
                     [transform-style:preserve-3d]
-
                     lg:group-hover:[transform:rotateY(180deg)]
 
                     ${
-                      flippedCard === index
-                        ? "[transform:rotateY(180deg)]"
-                        : ""
+                      flippedCard === index ? "[transform:rotateY(180deg)]" : ""
                     }
                   `}
                 >
@@ -125,11 +145,7 @@ export default function ProjectsSection() {
                       md:absolute md:inset-0
                       [backface-visibility:hidden]
 
-                      ${
-                        flippedCard === index
-                          ? "hidden md:block"
-                          : "block"
-                      }
+                      ${flippedCard === index ? "hidden md:block" : "block"}
                     `}
                   >
                     {/* LOGOS */}
@@ -159,12 +175,12 @@ export default function ProjectsSection() {
                     </p>
 
                     {/* LINE */}
-                    <div className="w-full h-[1px] bg-[#ece6dc] mb-5"></div>
+                    {/* <div className="w-full h-[1px] bg-[#ece6dc] mb-5"></div> */}
 
                     {/* DESCRIPTION */}
-                    <p className="text-[16px] text-[#0a3e40] leading-[29px] relative z-10">
+                    {/* <p className="text-[16px] text-[#0a3e40] leading-[29px] relative z-10">
                       {itemDesc}
-                    </p>
+                    </p> */}
                   </div>
 
                   {/* BACK SIDE */}
@@ -186,11 +202,7 @@ export default function ProjectsSection() {
                       [transform:rotateY(180deg)]
                       [backface-visibility:hidden]
 
-                      ${
-                        flippedCard === index
-                          ? "block"
-                          : "hidden md:block"
-                      }
+                      ${flippedCard === index ? "block" : "hidden md:block"}
                     `}
                   >
                     {/* GLOW */}
@@ -198,23 +210,21 @@ export default function ProjectsSection() {
 
                     {/* TITLE */}
                     <h3 className="title-font text-[21px] md:text-[23px] text-white mb-7 relative z-10">
-                      {lang === "EN" ? "Key Responsibilities & Achievements" : "Wesentliche Aufgaben & Erfolge"}
+                      {lang === "EN"
+                        ? "Key Responsibilities & Achievements"
+                        : "Wesentliche Aufgaben & Erfolge"}
                     </h3>
 
                     {/* BULLET POINTS */}
                     <div className="space-y-5 relative z-10">
                       {(item.points || []).map((p, i) => {
-                        const pointText = typeof p === "object" ? getBi(p, lang) : p;
+                        const pointText =
+                          typeof p === "object" ? getBi(p, lang) : p;
                         return (
-                          <div
-                            key={i}
-                            className="flex items-start gap-4"
-                          >
+                          <div key={i} className="flex items-start gap-4">
                             {/* ICON */}
                             <div className="min-w-[22px] h-[22px] rounded-full bg-[#d4b17d] flex items-center justify-center mt-1">
-                              <span className="text-white text-[10px]">
-                                ✔
-                              </span>
+                              <span className="text-white text-[10px]">✔</span>
                             </div>
 
                             {/* TEXT */}
@@ -234,4 +244,4 @@ export default function ProjectsSection() {
       </div>
     </section>
   );
-}
+}

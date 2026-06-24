@@ -231,16 +231,28 @@ const BlogSection = ({ setIsOpen }) => {
   });
 
   const uniqueCategories = Array.from(dynamicCategoriesSet);
+  const hasArchive = uniqueCategories.includes("archive");
+  const otherCategories = uniqueCategories.filter((cat) => cat !== "archive");
 
-  const dynamicTabs = uniqueCategories.map((cat) => ({
+  const otherTabs = otherCategories.map((cat) => ({
     label: getCategoryLabel(cat),
     value: cat,
   }));
 
-  // TABS: "All" first, then all dynamic category tabs from the backend.
+  const archiveTab = hasArchive
+    ? [
+        {
+          label: lang === "EN" ? "Archive" : "Archiv",
+          value: "archive",
+        },
+      ]
+    : [];
+
+  // TABS: "All" first, then all other dynamic category tabs, and Archive at the very end.
   const tabs = [
     { label: lang === "EN" ? "All" : "Alle", value: "all" },
-    ...dynamicTabs,
+    ...otherTabs,
+    ...archiveTab,
   ];
 
   return (

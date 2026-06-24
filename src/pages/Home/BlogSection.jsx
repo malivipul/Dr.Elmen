@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { getBlogs, getBlogHeader, IMG_URL, getBi, formatDate } from "../../api/api";
+import {
+  getBlogs,
+  getBlogHeader,
+  IMG_URL,
+  getBi,
+  formatDate,
+} from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 import Icon from "../../components/commen/Icon";
 
@@ -163,20 +169,28 @@ const BlogSection = ({ setIsOpen }) => {
   });
 
   const uniqueCategories = Array.from(dynamicCategoriesSet);
-  const archiveCategory = uniqueCategories.includes("archive")
-    ? ["archive"]
-    : [];
+  const hasArchive = uniqueCategories.includes("archive");
   const otherCategories = uniqueCategories.filter((cat) => cat !== "archive");
 
-  const dynamicTabs = [...archiveCategory, ...otherCategories].map((cat) => ({
+  const otherTabs = otherCategories.map((cat) => ({
     label: getCategoryLabel(cat),
     value: cat,
   }));
 
-  // TABS: "All" first, then up to 4 category tabs, with Archive prioritized if present.
+  const archiveTab = hasArchive
+    ? [
+        {
+          label: lang === "EN" ? "Archive" : "Archiv",
+          value: "archive",
+        },
+      ]
+    : [];
+
+  // TABS: "All" first, then other categories, and Archive at the very end.
   const tabs = [
     { label: lang === "EN" ? "All" : "Alle", value: "all" },
-    ...dynamicTabs.slice(0, 4),
+    ...otherTabs.slice(0, 4),
+    ...archiveTab,
   ];
   const subscribebtn = {
     btn: { en: "Subscribe", de: "Abonnieren" },
@@ -281,9 +295,9 @@ const BlogSection = ({ setIsOpen }) => {
                     {latestArticle.title}
                   </h3>
 
-                  <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
+                  {/* <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
                     {latestArticle.desc}
-                  </p>
+                  </p> */}
 
                   <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
                     <span>{latestArticle.date}</span>
@@ -435,9 +449,9 @@ const Card = ({ item }) => (
       </h3>
 
       {/* DESC */}
-      <p className="text-[#0a3e40] text-[15px] mt-3 leading-[1.7] line-clamp-2">
+      {/* <p className="text-[#0a3e40] text-[15px] mt-3 leading-[1.7] line-clamp-2">
         {item.desc}
-      </p>
+      </p> */}
 
       {/* DATE + READ */}
       <div className="flex items-center gap-3 mt-5 text-[#7b7b7b] text-[13px]">

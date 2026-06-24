@@ -157,7 +157,7 @@ const ServicesSection = () => {
                 </h3>
 
                 {/* POINTS */}
-                <div className="space-y-3 text-[16px] text-[#0a3e40] leading-relaxed">
+                {/* <div className="space-y-3 text-[16px] text-[#0a3e40] leading-relaxed">
                   {service.points.map((p, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <span className="text-[#b8965a] mt-[2px] text-[14px]">
@@ -167,7 +167,7 @@ const ServicesSection = () => {
                       <p>{p}</p>
                     </div>
                   ))}
-                </div>
+                </div> */}
 
                 {/* BUTTON */}
                 <div className="mt-6">

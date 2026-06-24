@@ -86,6 +86,7 @@ export const addContact = (data) => api.post("/contact/add", data);
 
 // --- SUBSCRIBERS ---
 export const addSubscriber = (data) => api.post("/subscribers/add", data);
+export const confirmSubscriber = (data) => api.put("/subscribers/confirm", data);
 
 // --- ABOUT BANNER ---
 export const getAboutBanner = () => api.get("/about/banner/get");

@@ -18,6 +18,7 @@ const BlogDetails = lazy(() => import("./pages/blog-details"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Imprint = lazy(() => import("./pages/Imprint"));
 const PrivacyPolicy = lazy(() => import("./pages/Privacy-policy"));
+const SubscribeConfirm = lazy(() => import("./pages/SubscribeConfirm"));
 
 /* HASH SCROLL */
 function ScrollToHash() {
@@ -101,6 +102,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/imprint" element={<Imprint />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/subscribe-confirm" element={<SubscribeConfirm />} />
 
           <Route
             path="/workshops-details/:slug"

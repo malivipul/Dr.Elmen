@@ -6,6 +6,7 @@ import Icon from "../commen/Icon";
 const SubscribeModal = ({ isOpen, setIsOpen }) => {
   const { lang } = useLanguage();
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState({ success: null, message: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -25,6 +26,17 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!consent) {
+      setStatus({
+        success: false,
+        message:
+          lang === "EN"
+            ? "You must agree to the Privacy Policy to subscribe."
+            : "Sie müssen der Datenschutzerklärung zustimmen, um das Abonnement abzuschließen.",
+      });
+      return;
+    }
+
     setSubmitting(true);
     setStatus({ success: null, message: "" });
 
@@ -36,15 +48,16 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
             success: true,
             message:
               lang === "EN"
-                ? "Thank you! You have successfully subscribed."
-                : "Vielen Dank! Sie haben sich erfolgreich angemeldet.",
+                ? "A confirmation email has been sent. Please check your inbox."
+                : "Eine Bestätigungs-E-Mail wurde gesendet. Bitte überprüfen Sie Ihr Postfach.",
           });
           setEmail("");
-          // Close modal after 2 seconds on success
+          setConsent(false);
+          // Close modal after 3 seconds on success
           setTimeout(() => {
             setIsOpen(false);
             setStatus({ success: null, message: "" });
-          }, 2000);
+          }, 3000);
         } else {
           setStatus({
             success: false,
@@ -77,7 +90,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
         {/* CLOSE BUTTON */}
         <button
           onClick={() => setIsOpen(false)}
-          className="absolute  right-3 md:right-5 md:top-5 top-3 text-[20px] text-black hover:rotate-90 transition duration-300 cursor-pointer"
+          className="absolute right-3 md:right-5 md:top-5 top-3 text-[20px] text-black hover:rotate-90 transition duration-300 cursor-pointer"
         >
           <Icon name="xmark" />
         </button>
@@ -88,13 +101,13 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
           <h2 className="title-font text-[24px] md:text-[28px] leading-tight text-black">
             {lang === "EN"
               ? "Subscribe to HR & AI Insights"
-              : "HR & AI Insights kostenlos abonnieren"}
+              : "HR & AI Insights abonnieren"}
           </h2>
 
           {/* DESC */}
           <p className="mt-3 text-[#5f5f5f] text-[14px] leading-[1.7] max-w-[360px] mx-auto">
             {lang === "EN"
-              ? "Get the latest articles, guides, and tools on HR, AI and the future of work delivered to your inbox"
+              ? "Get the latest articles, guides, and tools on HR, AI and the future of work delivered to your inbox."
               : "Erhalten Sie die neuesten Artikel, Leitfäden und Tools zu HR, KI und der Zukunft der Arbeit direkt in Ihr Postfach."}
           </p>
 
@@ -118,6 +131,48 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
                     />
                   </td>
                 </tr>
+                <tr>
+                  <td className="py-2 text-left">
+                    <label className="flex items-start gap-2.5 text-xs text-[#5f5f5f] cursor-pointer selection:bg-transparent">
+                      <input
+                        type="checkbox"
+                        checked={consent}
+                        onChange={(e) => setConsent(e.target.checked)}
+                        required
+                        className="mt-0.5 accent-[#b8965a] cursor-pointer"
+                      />
+                      <span>
+                        {lang === "EN" ? (
+                          <>
+                            I agree to receive the newsletter and have read the{" "}
+                            <a
+                              href="/privacy-policy"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#b8965a] hover:underline font-semibold"
+                            >
+                              Privacy Policy
+                            </a>
+                            .
+                          </>
+                        ) : (
+                          <>
+                            Ich stimme dem Erhalt des Newsletters zu und habe die{" "}
+                            <a
+                              href="/privacy-policy"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-[#b8965a] hover:underline font-semibold"
+                            >
+                              Datenschutzerklärung
+                            </a>{" "}
+                            gelesen.
+                          </>
+                        )}
+                      </span>
+                    </label>
+                  </td>
+                </tr>
               </tbody>
             </table>
 
@@ -138,7 +193,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-4 w-full h-[50px]  rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2   text-[14px]    hover:border-[#b8965a]    justify-center  disabled:opacity-50 cursor-pointer"
+              className="mt-4 w-full h-[50px] rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2 text-[14px] hover:border-[#b8965a] justify-center disabled:opacity-50 cursor-pointer"
             >
               <Icon name="reg-envelope" />
               {submitting

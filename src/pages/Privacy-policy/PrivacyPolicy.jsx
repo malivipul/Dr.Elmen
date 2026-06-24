@@ -389,6 +389,64 @@ const PrivacyPolicy = () => {
     The data sent by you to us via contact requests remain with us until you request us to delete, revoke your consent to the storage or the purpose for the data storage lapses (e.g. after completion of your request). Mandatory statutory provisions - in particular statutory retention periods - remain unaffected.
   </p>
 
+  {/* NEWSLETTER */}
+  <h4 className="text-[18px] font-semibold text-black mb-3 mt-8">
+    Newsletter Subscription
+  </h4>
+
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
+    If you subscribe to our newsletter, we will process your email address for the purpose of sending you regular updates, articles, and information related to Human Resources Management and Artificial Intelligence.
+  </p>
+
+  <h5 className="text-[16px] font-semibold text-black mb-3">
+    Legal Basis
+  </h5>
+
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
+    The processing of your personal data is based on your consent in accordance with Article 6(1)(a) GDPR.
+  </p>
+
+  <h5 className="text-[16px] font-semibold text-black mb-3">
+    Double Opt-In
+  </h5>
+
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
+    We use a double opt-in procedure for newsletter subscriptions. After submitting your email address, you will receive a confirmation email containing a verification link. Your subscription will only be activated once you click this link. This procedure helps us verify that the subscription request was made by the owner of the email address.
+  </p>
+
+  <h5 className="text-[16px] font-semibold text-black mb-3">
+    Newsletter Service Provider
+  </h5>
+
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
+    We use Brevo as our newsletter service provider. Your email address is stored and processed by Brevo solely for the purpose of managing subscriptions and delivering newsletters on our behalf.
+    For further information about how Brevo processes personal data, please refer to Brevo's privacy policy: <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b8965a] transition-colors break-all">https://www.brevo.com/legal/privacypolicy/</a>
+  </p>
+
+  <h5 className="text-[16px] font-semibold text-black mb-3">
+    Data Retention
+  </h5>
+
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
+    Your email address will be retained for as long as you remain subscribed to the newsletter. If you unsubscribe, your data will be deleted or restricted in accordance with applicable legal requirements.
+  </p>
+
+  <h5 className="text-[16px] font-semibold text-black mb-3">
+    Withdrawal of Consent
+  </h5>
+
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
+    You may withdraw your consent and unsubscribe from the newsletter at any time by clicking the unsubscribe link included in every newsletter email or by contacting us directly.
+  </p>
+
+  <h5 className="text-[16px] font-semibold text-black mb-3">
+    Your Rights
+  </h5>
+
+  <p className="text-[15px] md:text-[16px] text-[#0a3e40] leading-[33px] mb-8">
+    You have the right to request access to, rectification of, erasure of, restriction of processing of, or portability of your personal data, as well as the right to lodge a complaint with a competent supervisory authority.
+  </p>
+
 </div>
 {/* SOCIAL MEDIA */}
 <div className="text-left">

@@ -154,13 +154,11 @@ const ContactForm = () => {
           {/* LEFT SIDE */}
           <div className="space-y-5">
             {/* GET IN TOUCH BOX */}
-            <div className="relative overflow-hidden rounded-[28px] bg-[#e7dfd7] border border-black/5 p-5 md:p-7 h-fit shadow-[0_15px_50px_rgba(0,0,0,0.05)]">
-              {/* BLACK GRADIENT */}
+            {/* <div className="relative overflow-hidden rounded-[28px] bg-[#e7dfd7] border border-black/5 p-5 md:p-7 h-fit shadow-[0_15px_50px_rgba(0,0,0,0.05)]">
               <div className="absolute bottom-0 right-0 w-[220px] h-[220px] bg-black/5 blur-3xl rounded-full pointer-events-none"></div>
-              {/* GOLD BLUR */}
+
               <div className="absolute top-[-70px] left-[-70px] w-[180px] h-[180px] rounded-full bg-[#b8965a]/10 blur-3xl pointer-events-none"></div>
 
-              {/* CONTENT */}
               <div className="relative z-10 max-w-[480px]">
                 <span className="text-[#b8965a] uppercase tracking-[2px] text-[12px] font-bold">
                   {lang === "EN" ? "Get In Touch" : "Kontakt"}
@@ -179,7 +177,6 @@ const ContactForm = () => {
                 </p>
               </div>
 
-              {/* SOCIAL ICONS */}
               <div className="relative z-10 flex items-center gap-4 mt-7 flex-wrap">
                 {socialLinks.linkedin && (
                   <Link
@@ -225,7 +222,7 @@ const ContactForm = () => {
                   </Link>
                 )}
               </div>
-            </div>
+            </div> */}
 
             {/* BOOKING BOX */}
             <div className="relative overflow-hidden rounded-[28px] bg-white border border-[#ece6dc] p-5 md:p-7 shadow-[0_15px_50px_rgba(0,0,0,0.04)]">

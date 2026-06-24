@@ -187,10 +187,7 @@ const VitaTimeline = () => {
             spaceBetween={30}
             slidesPerView={1}
             loop={items.length > 2}
-            autoplay={{
-              delay: 4000,
-              disableOnInteraction: false,
-            }}
+            autoplay={false}
             navigation={{
               nextEl: ".next-btn",
               prevEl: ".prev-btn",
@@ -205,7 +202,7 @@ const VitaTimeline = () => {
           >
             {items.map((item, i) => (
               <SwiperSlide key={`${item.year}-${i}`} className="h-full">
-                <div className="bg-white rounded-[20px] p-8 h-[550px] md:h-[470px] flex flex-col justify-between relative border border-[#f9f9f9] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition duration-300">
+                <div className="bg-white rounded-[20px] p-8 h-[550px] md:h-[400px] flex flex-col justify-between relative border border-[#f9f9f9] shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition duration-300">
                   {/* ICON */}
                   <div className="absolute top-6 right-6 text-[#b8965a] text-[28px]">
                     <Icon name={item.icon || "rocket"} />
