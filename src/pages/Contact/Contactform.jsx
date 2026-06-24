@@ -22,6 +22,20 @@ const ContactForm = () => {
     message: "",
   });
 
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    subject: false,
+    message: false,
+  });
+
   const [status, setStatus] = useState({ success: null, message: "" });
   const [submitting, setSubmitting] = useState(false);
 
@@ -84,13 +98,80 @@ const ContactForm = () => {
     return false;
   };
 
+  const validateField = (name, value) => {
+    let error = "";
+    if (name === "name") {
+      if (!value.trim()) {
+        error = lang === "EN" ? "Name is required." : "Name ist erforderlich.";
+      } else if (value.trim().length < 2) {
+        error = lang === "EN" ? "Name must be at least 2 characters." : "Name muss mindestens 2 Zeichen lang sein.";
+      }
+    } else if (name === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!value.trim()) {
+        error = lang === "EN" ? "Email is required." : "E-Mail ist erforderlich.";
+      } else if (!emailRegex.test(value.trim())) {
+        error = lang === "EN" ? "Invalid email address." : "Ungültige E-Mail-Adresse.";
+      }
+    } else if (name === "subject") {
+      if (!value.trim()) {
+        error = lang === "EN" ? "Subject is required." : "Betreff ist erforderlich.";
+      } else if (value.trim().length < 3) {
+        error = lang === "EN" ? "Subject must be at least 3 characters." : "Betreff muss mindestens 3 Zeichen lang sein.";
+      }
+    } else if (name === "message") {
+      if (!value.trim()) {
+        error = lang === "EN" ? "Message is required." : "Nachricht ist erforderlich.";
+      } else if (value.trim().length < 10) {
+        error = lang === "EN" ? "Message must be at least 10 characters." : "Nachricht muss mindestens 10 Zeichen lang sein.";
+      }
+    }
+    return error;
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // If the field has been touched, validate on change
+    if (touched[name]) {
+      const error = validateField(name, value);
+      setErrors((prev) => ({ ...prev, [name]: error }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    const error = validateField(name, value);
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Mark all fields as touched and validate
+    const allTouched = {
+      name: true,
+      email: true,
+      subject: true,
+      message: true,
+    };
+    setTouched(allTouched);
+
+    const newErrors = {
+      name: validateField("name", formData.name),
+      email: validateField("email", formData.email),
+      subject: validateField("subject", formData.subject),
+      message: validateField("message", formData.message),
+    };
+    setErrors(newErrors);
+
+    const hasErrors = Object.values(newErrors).some((err) => err !== "");
+    if (hasErrors) {
+      return;
+    }
+
     setSubmitting(true);
     setStatus({ success: null, message: "" });
 
@@ -106,6 +187,8 @@ const ContactForm = () => {
                 : "Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.",
           });
           setFormData({ name: "", email: "", subject: "", message: "" });
+          setTouched({ name: false, email: false, subject: false, message: false });
+          setErrors({ name: "", email: "", subject: "", message: "" });
         } else {
           setStatus({
             success: false,
@@ -279,7 +362,7 @@ const ContactForm = () => {
             </div>
 
             {/* FORM IN A TABLE-BASED LAYOUT */}
-            <form onSubmit={handleSubmit} className="w-full">
+            <form onSubmit={handleSubmit} className="w-full" noValidate>
               <table className="w-full border-collapse">
                 <tbody>
                   {/* NAME */}
@@ -290,10 +373,19 @@ const ContactForm = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
+                        onBlur={handleBlur}
                         placeholder={lang === "EN" ? "Your Name" : "Name"}
-                        required
-                        className="w-full h-[48px] rounded-[14px] border border-[#ece6dc] bg-[#faf8f4] px-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none focus:border-[#b8965a] transition-all duration-300"
+                        className={`w-full h-[48px] rounded-[14px] border ${
+                          touched.name && errors.name
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-[#ece6dc] focus:border-[#b8965a]"
+                        } bg-[#faf8f4] px-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none transition-all duration-300`}
                       />
+                      {touched.name && errors.name && (
+                        <p className="text-red-500 text-[11px] mt-1 ml-2 font-medium">
+                          {errors.name}
+                        </p>
+                      )}
                     </td>
                   </tr>
 
@@ -305,12 +397,21 @@ const ContactForm = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
+                        onBlur={handleBlur}
                         placeholder={
                           lang === "EN" ? "Email Address" : "E-Mail-Adresse"
                         }
-                        required
-                        className="w-full h-[48px] rounded-[14px] border border-[#ece6dc] bg-[#faf8f4] px-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none focus:border-[#b8965a] transition-all duration-300"
+                        className={`w-full h-[48px] rounded-[14px] border ${
+                          touched.email && errors.email
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-[#ece6dc] focus:border-[#b8965a]"
+                        } bg-[#faf8f4] px-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none transition-all duration-300`}
                       />
+                      {touched.email && errors.email && (
+                        <p className="text-red-500 text-[11px] mt-1 ml-2 font-medium">
+                          {errors.email}
+                        </p>
+                      )}
                     </td>
                   </tr>
 
@@ -322,10 +423,19 @@ const ContactForm = () => {
                         name="subject"
                         value={formData.subject}
                         onChange={handleInputChange}
+                        onBlur={handleBlur}
                         placeholder={lang === "EN" ? "Subject" : "Betreff"}
-                        required
-                        className="w-full h-[48px] rounded-[14px] border border-[#ece6dc] bg-[#faf8f4] px-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none focus:border-[#b8965a] transition-all duration-300"
+                        className={`w-full h-[48px] rounded-[14px] border ${
+                          touched.subject && errors.subject
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-[#ece6dc] focus:border-[#b8965a]"
+                        } bg-[#faf8f4] px-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none transition-all duration-300`}
                       />
+                      {touched.subject && errors.subject && (
+                        <p className="text-red-500 text-[11px] mt-1 ml-2 font-medium">
+                          {errors.subject}
+                        </p>
+                      )}
                     </td>
                   </tr>
 
@@ -337,12 +447,21 @@ const ContactForm = () => {
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
+                        onBlur={handleBlur}
                         placeholder={
                           lang === "EN" ? "Your Message" : "Ihre Nachricht"
                         }
-                        required
-                        className="w-full rounded-[18px] border border-[#ece6dc] bg-[#faf8f4] px-4 py-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none resize-none focus:border-[#b8965a] transition-all duration-300"
+                        className={`w-full rounded-[18px] border ${
+                          touched.message && errors.message
+                            ? "border-red-500 focus:border-red-500"
+                            : "border-[#ece6dc] focus:border-[#b8965a]"
+                        } bg-[#faf8f4] px-4 py-4 text-[13px] text-black placeholder:text-[#6e6e6e] outline-none resize-none transition-all duration-300`}
                       ></textarea>
+                      {touched.message && errors.message && (
+                        <p className="text-red-500 text-[11px] mt-1 ml-2 font-medium">
+                          {errors.message}
+                        </p>
+                      )}
                     </td>
                   </tr>
                 </tbody>
