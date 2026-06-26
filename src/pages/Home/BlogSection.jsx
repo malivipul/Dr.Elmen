@@ -70,14 +70,12 @@ const BlogSection = ({ setIsOpen }) => {
   const [active, setActive] = useState("all");
   const [blogList, setBlogList] = useState([]);
   const [header, setHeader] = useState(null);
-  const [readArticles, setReadArticles] = useState([]);
+  const [readArticles] = useState(() =>
+    JSON.parse(localStorage.getItem("readArticles") || "[]")
+  );
   const { lang } = useLanguage();
 
   useEffect(() => {
-    // Load read articles from local storage
-    const read = JSON.parse(localStorage.getItem("readArticles") || "[]");
-    setReadArticles(read);
-
     getBlogHeader()
       .then((res) => {
         if (res.data) setHeader(res.data);

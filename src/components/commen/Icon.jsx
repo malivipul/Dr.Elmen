@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import {
   FaArrowLeft,
   FaArrowRight,
@@ -93,8 +94,12 @@ const getIconComponent = (name) => {
 };
 
 const Icon = ({ name, className = "", ...props }) => {
-  const Component = getIconComponent(name);
-  return <Component aria-hidden="true" focusable="false" className={className} {...props} />;
+  return createElement(getIconComponent(name), {
+    "aria-hidden": "true",
+    focusable: "false",
+    className,
+    ...props,
+  });
 };
 
 export default Icon;

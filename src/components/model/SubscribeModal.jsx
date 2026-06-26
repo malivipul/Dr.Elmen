@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { addSubscriber } from "../../api/api";
 import { useLanguage } from "../../context/LanguageContext";
 import Icon from "../commen/Icon";

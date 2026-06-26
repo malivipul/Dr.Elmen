@@ -62,8 +62,12 @@ const BlogSection = ({ setIsOpen }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [blogList, setBlogList] = useState([]);
   const [header, setHeader] = useState(null);
-  const [likedArticles, setLikedArticles] = useState([]);
-  const [readArticles, setReadArticles] = useState([]);
+  const [likedArticles, setLikedArticles] = useState(() =>
+    JSON.parse(localStorage.getItem("likedArticles") || "[]")
+  );
+  const [readArticles, setReadArticles] = useState(() =>
+    JSON.parse(localStorage.getItem("readArticles") || "[]")
+  );
 
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum);
@@ -87,12 +91,6 @@ const BlogSection = ({ setIsOpen }) => {
   }, [setIsOpen]);
 
   useEffect(() => {
-    // Load liked and read articles from local storage
-    const liked = JSON.parse(localStorage.getItem("likedArticles") || "[]");
-    const read = JSON.parse(localStorage.getItem("readArticles") || "[]");
-    setLikedArticles(liked);
-    setReadArticles(read);
-
     getBlogHeader()
       .then((res) => {
         if (res.data) setHeader(res.data);
@@ -102,7 +100,7 @@ const BlogSection = ({ setIsOpen }) => {
     fetchBlogs();
   }, []);
 
-  const fetchBlogs = () => {
+  function fetchBlogs() {
     getBlogs()
       .then((res) => {
         if (res.data) {
@@ -113,7 +111,7 @@ const BlogSection = ({ setIsOpen }) => {
         }
       })
       .catch((err) => console.error("Error fetching blogs:", err));
-  };
+  }
 
   const handleLike = async (e, id) => {
     e.preventDefault(); // Prevent link navigation
