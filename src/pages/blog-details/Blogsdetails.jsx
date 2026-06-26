@@ -240,6 +240,12 @@ const Blogsdetails = () => {
       ? currentBlog.img
       : `${IMG_URL}${currentBlog.img}`
     : "/assets/images/25.png";
+  const innerImgSource = currentBlog.innerImg
+    ? currentBlog.innerImg.startsWith("http") ||
+      currentBlog.innerImg.startsWith("/assets")
+      ? currentBlog.innerImg
+      : `${IMG_URL}${currentBlog.innerImg}`
+    : imgSource;
   const imgAlt = getBi(currentBlog.imgAlt, lang) || title;
 
   const bannerImg = banner?.img ? `${IMG_URL}${banner.img}` : "/assets/images/Untitled design (47).png";
@@ -312,7 +318,7 @@ const Blogsdetails = () => {
             {/* FEATURED IMAGE */}
             <div className="mb-10 overflow-hidden rounded-[20px] shadow-sm">
               <img
-                src={imgSource}
+                src={innerImgSource}
                 alt={imgAlt}
                 className="w-full h-auto max-h-[500px] object-cover"
               />

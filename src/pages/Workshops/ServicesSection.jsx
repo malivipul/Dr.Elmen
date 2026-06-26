@@ -100,23 +100,21 @@ const ServicesSection = () => {
 
   return (
     <section className="bg-[#f4f4f4] py-[60px]">
-      {/* TOP */}
-      <div className="max-w-[1300px] mx-auto px-[20px] md:px-[60px] text-center mb-10">
+      {/* TOP HEADER */}
+      <div className="max-w-[1300px] mx-auto px-[20px] md:px-[60px] text-center mb-12">
         <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
           {hSubtitle}
         </span>
-
         <h2 className="title-font text-2xl md:text-[36px] text-black mt-3 mb-3">
           {hTitle}
         </h2>
-
         <p className="text-[#0a3e40] text-[16px] max-w-2xl mx-auto leading-relaxed">
           {hDesc}
         </p>
       </div>
 
-      {/* SERVICES */}
-      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] space-y-6">
+      {/* SERVICES GRID (2 CARDS PER ROW) */}
+      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] grid grid-cols-1 md:grid-cols-2 gap-8">
         {formattedServices.map((service, index) => (
           <Link
             key={index}
@@ -127,53 +125,37 @@ const ServicesSection = () => {
                 behavior: "smooth",
               })
             }
-            className="block bg-white rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl transition duration-300"
+            className="flex flex-col bg-white rounded-[24px] overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group"
           >
-            <div
-              className={`grid md:grid-cols-2 items-stretch ${index % 2 !== 0 ? "md:[&>*:first-child]:order-2" : ""}`}
-            >
-              {/* IMAGE */}
-              <div className="relative">
-                <img
-                  src={service.img}
-                  className="w-full h-full min-h-[240px] md:min-h-[260px] object-cover"
-                  alt={service.imgAlt}
-                  title={service.imgAlt}
-                />
+            {/* IMAGE (TOP) */}
+            <div className="relative aspect-[16/10] w-full overflow-hidden">
+              <img
+                src={service.img}
+                className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+                alt={service.imgAlt}
+                title={service.imgAlt}
+              />
+              {/* NUMBER BADGE */}
+              <div className="absolute top-4 right-4 w-[42px] h-[42px] rounded-[12px] bg-[#0a3e40] border border-white/20 shadow-lg flex items-center justify-center z-10">
+                <span className="text-white text-[13px] font-semibold">
+                  {service.number}
+                </span>
               </div>
+            </div>
 
-              {/* CONTENT */}
-              <div className="relative p-6 md:p-8 flex flex-col justify-center">
-                {/* NUMBER */}
-                <div className="absolute top-5 right-5 w-[42px] h-[42px] rounded-[12px] bg-[#0a3e40] border border-white/20 shadow-lg flex items-center justify-center">
-                  <span className="text-white text-[13px] font-semibold">
-                    {service.number}
-                  </span>
-                </div>
-
-                {/* TITLE */}
-                <h3 className="title-font text-[24px] md:text-[30px] leading-tight text-black mb-5 pr-[70px]">
+            {/* CONTENT (BOTTOM) */}
+            <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
+              {/* 1 ROW: LEFT TITLE & RIGHT BUTTON */}
+              <div className="flex flex-row items-center justify-between gap-4 mt-auto w-full">
+                {/* LEFT TITLE */}
+                <h3 className="title-font text-[20px] md:text-[24px] leading-tight text-black font-medium group-hover:text-[#b8965a] transition duration-300 flex-grow max-w-[70%]">
                   {service.title}
                 </h3>
 
-                {/* POINTS */}
-                {/* <div className="space-y-3 text-[16px] text-[#0a3e40] leading-relaxed">
-                  {service.points.map((p, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <span className="text-[#b8965a] mt-[2px] text-[14px]">
-                        ✔
-                      </span>
-
-                      <p>{p}</p>
-                    </div>
-                  ))}
-                </div> */}
-
-                {/* BUTTON */}
-                <div className="mt-6">
-                  <span className="inline-flex items-center gap-2 px-7 font-bold py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300">
+                {/* RIGHT BUTTON */}
+                <div className="flex-shrink-0">
+                  <span className="inline-flex items-center gap-2 px-5 py-3 font-bold rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] group-hover:bg-transparent group-hover:text-[#b8965a] transition duration-300 whitespace-nowrap">
                     {lang === "EN" ? "Learn More" : "Mehr erfahren"}
-
                     <Icon name="arrow-right" className="text-[12px]" />
                   </span>
                 </div>
@@ -181,17 +163,16 @@ const ServicesSection = () => {
             </div>
           </Link>
         ))}
+
         {formattedServices.length === 0 && (
-          <div className="text-center py-20 bg-white rounded-[24px] border border-dashed border-[#ddd]">
-            <p className="text-gray-400 italic">
-              No items currently listed.
-            </p>
+          <div className="col-span-1 md:col-span-2 text-center py-20 bg-white rounded-[24px] border border-dashed border-[#ddd]">
+            <p className="text-gray-400 italic">No items currently listed.</p>
           </div>
         )}
       </div>
 
       {/* LETS WORK TOGETHER CTA */}
-      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] mt-10">
+      <div className="max-w-[1200px] mx-auto px-[20px] md:px-[60px] mt-16">
         <div className="relative overflow-hidden rounded-[24px] min-h-[320px] flex items-center ">
           {/* BG IMAGE */}
           <div className="absolute inset-0">
@@ -212,11 +193,8 @@ const ServicesSection = () => {
                 <div className="w-[44px] h-[44px] rounded-full bg-[#0a3e40] flex items-center justify-center text-white text-[22px] shadow-lg">
                   <Icon name="reg-calendar" />
                 </div>
-
                 <h3 className="title-font text-2xl md:text-[36px] leading-tight text-black font-semibold">
-                  {lang === "EN"
-                    ? "Let’s work together"
-                    : "Let’s work together"}
+                  {lang === "EN" ? "Let’s work together" : "Let’s work together"}
                 </h3>
               </div>
 
@@ -231,10 +209,9 @@ const ServicesSection = () => {
               <div className="mt-7">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 px-7 font-bold py-3 rounded-full bg-[#b8965a] text-white text-sm  border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
+                  className="inline-flex items-center gap-2 px-7 font-bold py-3 rounded-full bg-[#b8965a] text-white text-sm border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300"
                 >
                   {lang === "EN" ? "Learn More" : "Mehr erfahren"}
-
                   <Icon name="arrow-right" className="text-[12px]" />
                 </Link>
               </div>

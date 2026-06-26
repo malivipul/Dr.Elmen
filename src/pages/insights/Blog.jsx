@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   getBlogs,
   getBlogHeader,
@@ -56,13 +56,14 @@ const getReadTime = (content, currentLang) => {
 };
 
 const BlogSection = ({ setIsOpen }) => {
-  const [active, setActive] = useState("all");
+  const { lang } = useLanguage();
+  const location = useLocation();
+  const [active, setActive] = useState(location.state?.category || "all");
   const [currentPage, setCurrentPage] = useState(1);
   const [blogList, setBlogList] = useState([]);
   const [header, setHeader] = useState(null);
   const [likedArticles, setLikedArticles] = useState([]);
   const [readArticles, setReadArticles] = useState([]);
-  const { lang } = useLanguage();
 
   const handlePageChange = (pageNum) => {
     setCurrentPage(pageNum);
@@ -218,6 +219,33 @@ const BlogSection = ({ setIsOpen }) => {
   // REMAINING BLOGS
   const recentArticles =
     currentPage === 1 ? paginatedBlogs.slice(1) : paginatedBlogs;
+
+  const displayedRecentArticles = [...recentArticles];
+  if (active === "all" && currentPage === 1) {
+    const archiveCardItem = {
+      _id: "archive-card-special",
+      isArchiveCard: true,
+      category: "archive",
+      displayCategory: lang === "EN" ? "Archive" : "Archiv",
+      title: lang === "EN" ? "Archive" : "Archiv",
+      desc: lang === "EN" 
+        ? "Explore our collection of past articles, insights, and publications." 
+        : "Entdecken Sie unsere Sammlung vergangener Artikel, Einblicke und Publikationen.",
+      img: "/assets/images/blog2.png",
+      imgAlt: lang === "EN" ? "Archive" : "Archiv",
+      date: "",
+      read: "",
+      link: "#",
+      likes: 0,
+      isRead: false,
+      lang: lang,
+    };
+    if (displayedRecentArticles.length >= 2) {
+      displayedRecentArticles.splice(2, 0, archiveCardItem);
+    } else {
+      displayedRecentArticles.push(archiveCardItem);
+    }
+  }
 
   // COLLECT ALL BLOG CATEGORIES FROM BACKEND
   const dynamicCategoriesSet = new Set();
@@ -421,12 +449,22 @@ const BlogSection = ({ setIsOpen }) => {
         {/* ALL BLOGS */}
         {filtered.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-            {recentArticles.map((item, i) => (
+            {displayedRecentArticles.map((item, i) => (
               <Card
                 key={i}
                 item={item}
                 isLiked={likedArticles.includes(item._id)}
                 onLike={(e) => handleLike(e, item._id)}
+                onArchiveClick={() => {
+                  setActive("archive");
+                  setCurrentPage(1);
+                  setTimeout(() => {
+                    const sectionElement = document.getElementById("articles-section");
+                    if (sectionElement) {
+                      sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }, 50);
+                }}
               />
             ))}
           </div>
@@ -552,65 +590,116 @@ const BlogSection = ({ setIsOpen }) => {
   );
 };
 
-const Card = ({ item, isLiked, onLike }) => (
-  <Link
-    to={item.link}
-    className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 block"
-  >
-    {/* IMAGE */}
-    <div className="overflow-hidden relative">
-      <img
-        src={item.img}
-        alt={item.imgAlt}
-        title={item.imgAlt}
-        className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
-      />
-      {item.isRead && (
-        <div className="absolute top-3 left-3 bg-[#b8965a] text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-10 uppercase tracking-wider">
-          Read
+const Card = ({ item, isLiked, onLike, onArchiveClick }) => {
+  if (item.isArchiveCard) {
+    return (
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          if (onArchiveClick) onArchiveClick();
+        }}
+        className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 flex flex-col justify-between h-full text-left w-full cursor-pointer"
+      >
+        <div>
+          {/* IMAGE */}
+          <div className="overflow-hidden relative">
+            <img
+              src={item.img}
+              alt={item.imgAlt}
+              title={item.imgAlt}
+              className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
+            />
+          </div>
+
+          {/* CONTENT */}
+          <div className="p-4">
+            {/* CATEGORY */}
+            <span className="text-[11px] text-[#b8965a] uppercase tracking-[2px] font-semibold">
+              {item.displayCategory}
+            </span>
+
+            {/* TITLE */}
+            <h3 className="title-font text-[22px] font-normal text-black mt-3 leading-[1.4]">
+              {item.title}
+            </h3>
+
+            {/* DESC */}
+            <p className="text-gray-500 text-sm mt-2 line-clamp-2">
+              {item.desc}
+            </p>
+          </div>
         </div>
-      )}
-    </div>
 
-    {/* CONTENT */}
-    <div className="p-4">
-      {/* CATEGORY + LIKE */}
-      <div className="flex items-center justify-between">
-        <span className="text-[11px] text-[#b8965a] uppercase tracking-[2px] font-semibold">
-          {item.displayCategory}
-        </span>
-        <button
-          onClick={onLike}
-          className={`flex items-center gap-1.5 text-xs font-bold transition-all ${isLiked ? "text-[#b8965a]" : "text-gray-300 hover:text-[#b8965a]"}`}
-        >
-          {item.likes}
-          <Icon name={isLiked ? "heart" : "reg-heart"} />
-        </button>
+        {/* LINK */}
+        <div className="p-4 pt-0">
+          <div className="flex items-center gap-2 mt-2 text-[#b8965a] text-sm font-semibold">
+            <span>{item.lang === "EN" ? "Explore Archive" : "Archiv durchsuchen"}</span>
+            <Icon name="arrow-right" />
+          </div>
+        </div>
+      </button>
+    );
+  }
+
+  return (
+    <Link
+      to={item.link}
+      className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 flex flex-col justify-between h-full text-left"
+    >
+      <div>
+        {/* IMAGE */}
+        <div className="overflow-hidden relative">
+          <img
+            src={item.img}
+            alt={item.imgAlt}
+            title={item.imgAlt}
+            className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
+          />
+          {item.isRead && (
+            <div className="absolute top-3 left-3 bg-[#b8965a] text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-10 uppercase tracking-wider">
+              Read
+            </div>
+          )}
+        </div>
+
+        {/* CONTENT */}
+        <div className="p-4">
+          {/* CATEGORY + LIKE */}
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-[#b8965a] uppercase tracking-[2px] font-semibold">
+              {item.displayCategory}
+            </span>
+            <button
+              onClick={onLike}
+              className={`flex items-center gap-1.5 text-xs font-bold transition-all ${isLiked ? "text-[#b8965a]" : "text-gray-300 hover:text-[#b8965a]"}`}
+            >
+              {item.likes}
+              <Icon name={isLiked ? "heart" : "reg-heart"} />
+            </button>
+          </div>
+
+          {/* TITLE */}
+          <h3 className="title-font text-[22px] font-normal text-black mt-3 leading-[1.4] line-clamp-2">
+            {item.title}
+          </h3>
+        </div>
       </div>
-
-      {/* TITLE */}
-      <h3 className="title-font text-[22px] font-normal text-black mt-3 leading-[1.4]">
-        {item.title}
-      </h3>
-
-      {/* DESC */}
-      {/* <p className="text-[#0a3e40] text-[15px] mt-3 leading-[1.7] line-clamp-2">
-        {item.desc}
-      </p> */}
 
       {/* DATE + READ */}
-      <div className="flex items-center gap-3 mt-5 text-[#7b7b7b] text-[13px]">
-        <span>{item.date}</span>
+      <div className="p-4 pt-0">
+        <div className="flex items-center gap-3 mt-2 text-[#7b7b7b] text-[13px]">
+          <span>{item.date}</span>
 
-        {item.isRead && (
-          <>
-            <span>•</span>
-            <span>{item.read}</span>
-          </>
-        )}
+          {item.isRead && (
+            <>
+              <span>•</span>
+              <span>{item.read}</span>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 export default BlogSection;

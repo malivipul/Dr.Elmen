@@ -157,6 +157,33 @@ const BlogSection = ({ setIsOpen }) => {
   // NEXT BLOGS
   const recentArticles = filtered.slice(1, 6);
 
+  const displayedRecentArticles = [...recentArticles];
+  if (active === "all") {
+    const archiveCardItem = {
+      _id: "archive-card-special",
+      isArchiveCard: true,
+      category: "archive",
+      displayCategory: lang === "EN" ? "Archive" : "Archiv",
+      title: lang === "EN" ? "Archive" : "Archiv",
+      desc: lang === "EN" 
+        ? "Explore our collection of past articles, insights, and publications." 
+        : "Entdecken Sie unsere Sammlung vergangener Artikel, Einblicke und Publikationen.",
+      img: "/assets/images/blog2.png",
+      imgAlt: lang === "EN" ? "Archive" : "Archiv",
+      date: "",
+      read: "",
+      link: "#",
+      likes: 0,
+      isRead: false,
+      lang: lang,
+    };
+    if (displayedRecentArticles.length >= 2) {
+      displayedRecentArticles.splice(2, 0, archiveCardItem);
+    } else {
+      displayedRecentArticles.push(archiveCardItem);
+    }
+  }
+
   // COLLECT DYNAMIC CATEGORIES FROM BACKEND
   const dynamicCategoriesSet = new Set();
   formattedBlogs.forEach((b) => {
@@ -364,8 +391,8 @@ const BlogSection = ({ setIsOpen }) => {
                     },
                   }}
                 >
-                  {recentArticles.slice(0, 3).map((item, i) => (
-                    <SwiperSlide key={i}>
+                  {displayedRecentArticles.slice(0, 3).map((item, i) => (
+                    <SwiperSlide key={i} className="!h-auto flex">
                       <Card item={item} />
                     </SwiperSlide>
                   ))}
@@ -421,57 +448,108 @@ const BlogSection = ({ setIsOpen }) => {
   );
 };
 
-const Card = ({ item }) => (
-  <Link
-    to={item.link}
-    className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 block"
-  >
-    {/* IMAGE */}
-    <div className="overflow-hidden relative">
-      <img
-        src={item.img}
-        alt={item.imgAlt}
-        title={item.imgAlt}
-        className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
-      />
-      {item.isRead && (
-        <div className="absolute top-3 left-3 bg-[#b8965a] text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-10 uppercase tracking-wider">
-          Read
+const Card = ({ item }) => {
+  if (item.isArchiveCard) {
+    return (
+      <Link
+        to="/insights"
+        state={{ category: "archive" }}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 flex flex-col justify-between h-full text-left"
+      >
+        <div>
+          {/* IMAGE */}
+          <div className="overflow-hidden relative">
+            <img
+              src={item.img}
+              alt={item.imgAlt}
+              title={item.imgAlt}
+              className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition"></div>
+          </div>
+
+          {/* CONTENT */}
+          <div className="p-4">
+            {/* CATEGORY */}
+            <span className="text-[11px] text-[#b8965a] uppercase tracking-[2px] font-semibold">
+              {item.displayCategory}
+            </span>
+
+            {/* TITLE */}
+            <h3 className="title-font text-[22px] font-normal text-black mt-3 leading-[1.4]">
+              {item.title}
+            </h3>
+
+            {/* DESC */}
+            <p className="text-gray-500 text-sm mt-2 line-clamp-2">
+              {item.desc}
+            </p>
+          </div>
         </div>
-      )}
-      <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition"></div>
-    </div>
 
-    {/* CONTENT */}
-    <div className="p-4">
-      {/* CATEGORY */}
-      <span className="text-[11px] text-[#b8965a] uppercase tracking-[2px] font-semibold">
-        {item.displayCategory}
-      </span>
+        {/* LINK */}
+        <div className="p-4 pt-0">
+          <div className="flex items-center gap-2 mt-2 text-[#b8965a] text-sm font-semibold">
+            <span>{item.lang === "EN" ? "Explore Archive" : "Archiv durchsuchen"}</span>
+            <Icon name="arrow-right" />
+          </div>
+        </div>
+      </Link>
+    );
+  }
 
-      {/* TITLE */}
-      <h3 className="title-font text-[22px] font-normal text-black mt-3 leading-[1.4]">
-        {item.title}
-      </h3>
+  return (
+    <Link
+      to={item.link}
+      className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 flex flex-col justify-between h-full text-left"
+    >
+      <div>
+        {/* IMAGE */}
+        <div className="overflow-hidden relative">
+          <img
+            src={item.img}
+            alt={item.imgAlt}
+            title={item.imgAlt}
+            className="w-full h-[220px] object-cover transition duration-500 group-hover:scale-110"
+          />
+          {item.isRead && (
+            <div className="absolute top-3 left-3 bg-[#b8965a] text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-md z-10 uppercase tracking-wider">
+              Read
+            </div>
+          )}
+          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition"></div>
+        </div>
 
-      {/* DESC */}
-      {/* <p className="text-[#0a3e40] text-[15px] mt-3 leading-[1.7] line-clamp-2">
-        {item.desc}
-      </p> */}
+        {/* CONTENT */}
+        <div className="p-4">
+          {/* CATEGORY */}
+          <span className="text-[11px] text-[#b8965a] uppercase tracking-[2px] font-semibold">
+            {item.displayCategory}
+          </span>
+
+          {/* TITLE */}
+          <h3 className="title-font text-[22px] font-normal text-black mt-3 leading-[1.4] line-clamp-2">
+            {item.title}
+          </h3>
+        </div>
+      </div>
 
       {/* DATE + READ */}
-      <div className="flex items-center gap-3 mt-5 text-[#7b7b7b] text-[13px]">
-        <span>{item.date}</span>
+      <div className="p-4 pt-0">
+        <div className="flex items-center gap-3 mt-2 text-[#7b7b7b] text-[13px]">
+          <span>{item.date}</span>
 
-        {item.isRead && (
-          <>
-            <span>•</span>
-            <span>{item.read}</span>
-          </>
-        )}
+          {item.isRead && (
+            <>
+              <span>•</span>
+              <span>{item.read}</span>
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 export default BlogSection;
