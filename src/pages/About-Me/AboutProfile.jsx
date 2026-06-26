@@ -98,12 +98,11 @@ const AboutSection = () => {
               {/* BG SHAPE */}
               {/* <div className="absolute -top-5 -right-5 w-[100px] md:w-[120px] h-[100px] md:h-[120px] rounded-full bg-[#b8965a]/15 blur-3xl z-10"></div> */}
 
-              {/* IMAGE */}
-              <img
-                src={imageUrl}
-                alt={title}
-                className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-105"
-              />
+           <img
+  src={imageUrl}
+  alt={title}
+  className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105"
+/>
 
               {/* OVERLAY */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent"></div>
