@@ -24,6 +24,13 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
 
   if (!isOpen) return null;
 
+  const handleClose = () => {
+    setIsOpen(false);
+    setEmail("");
+    setConsent(false);
+    setStatus({ success: null, message: "" });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!consent) {
@@ -55,8 +62,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
           setConsent(false);
           // Close modal after 3 seconds on success
           setTimeout(() => {
-            setIsOpen(false);
-            setStatus({ success: null, message: "" });
+            handleClose();
           }, 3000);
         } else {
           setStatus({
@@ -89,7 +95,7 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
       <div className="relative w-full max-w-[460px] h-auto max-h-[90vh] overflow-y-auto rounded-[24px] bg-white p-6 md:p-8 shadow-2xl animate-fadeIn border border-[#ece6dc]">
         {/* CLOSE BUTTON */}
         <button
-          onClick={() => setIsOpen(false)}
+          onClick={handleClose}
           className="absolute right-3 md:right-5 md:top-5 top-3 text-[20px] text-black hover:rotate-90 transition duration-300 cursor-pointer"
         >
           <Icon name="xmark" />

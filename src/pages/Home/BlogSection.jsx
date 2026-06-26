@@ -159,6 +159,13 @@ const BlogSection = ({ setIsOpen }) => {
 
   const displayedRecentArticles = [...recentArticles];
   if (active === "all") {
+    const archiveBlog = formattedBlogs.find((item) => {
+      const cats = (item.category || "")
+        .split(",")
+        .map((c) => c.trim().toLowerCase());
+      return cats.includes("archive") || cats.includes("archiv");
+    });
+
     const archiveCardItem = {
       _id: "archive-card-special",
       isArchiveCard: true,
@@ -168,11 +175,11 @@ const BlogSection = ({ setIsOpen }) => {
       desc: lang === "EN" 
         ? "Explore our collection of past articles, insights, and publications." 
         : "Entdecken Sie unsere Sammlung vergangener Artikel, Einblicke und Publikationen.",
-      img: "/assets/images/blog2.png",
+      img: archiveBlog ? archiveBlog.img : "/assets/images/blog2.png",
       imgAlt: lang === "EN" ? "Archive" : "Archiv",
       date: "",
       read: "",
-      link: "#",
+      link: archiveBlog ? archiveBlog.link : "/insights",
       likes: 0,
       isRead: false,
       lang: lang,
@@ -450,10 +457,11 @@ const BlogSection = ({ setIsOpen }) => {
 
 const Card = ({ item }) => {
   if (item.isArchiveCard) {
+    const isDirectLink = item.link && item.link !== "/insights";
     return (
       <Link
-        to="/insights"
-        state={{ category: "archive" }}
+        to={item.link}
+        state={isDirectLink ? undefined : { category: "archive" }}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 flex flex-col justify-between h-full text-left"
       >
@@ -488,13 +496,7 @@ const Card = ({ item }) => {
           </div>
         </div>
 
-        {/* LINK */}
-        <div className="p-4 pt-0">
-          <div className="flex items-center gap-2 mt-2 text-[#b8965a] text-sm font-semibold">
-            <span>{item.lang === "EN" ? "Explore Archive" : "Archiv durchsuchen"}</span>
-            <Icon name="arrow-right" />
-          </div>
-        </div>
+        
       </Link>
     );
   }

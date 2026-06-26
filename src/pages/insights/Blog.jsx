@@ -186,14 +186,12 @@ const BlogSection = ({ setIsOpen }) => {
   // FILTER — match against both Category and Tags
   const filtered =
     active === "all"
-      ? formattedBlogs.filter(
-          (item) => {
-            const cats = (item.category || "")
-              .split(",")
-              .map((c) => c.trim().toLowerCase());
-            return !cats.includes("archive") && !cats.includes("archiv");
-          }
-        )
+      ? formattedBlogs.filter((item) => {
+          const cats = (item.category || "")
+            .split(",")
+            .map((c) => c.trim().toLowerCase());
+          return !cats.includes("archive") && !cats.includes("archiv");
+        })
       : formattedBlogs.filter((item) => {
           // Check category
           const cats = (item.category || "")
@@ -222,16 +220,24 @@ const BlogSection = ({ setIsOpen }) => {
 
   const displayedRecentArticles = [...recentArticles];
   if (active === "all" && currentPage === 1) {
+    const archiveBlog = formattedBlogs.find((item) => {
+      const cats = (item.category || "")
+        .split(",")
+        .map((c) => c.trim().toLowerCase());
+      return cats.includes("archive") || cats.includes("archiv");
+    });
+
     const archiveCardItem = {
       _id: "archive-card-special",
       isArchiveCard: true,
       category: "archive",
       displayCategory: lang === "EN" ? "Archive" : "Archiv",
       title: lang === "EN" ? "Archive" : "Archiv",
-      desc: lang === "EN" 
-        ? "Explore our collection of past articles, insights, and publications." 
-        : "Entdecken Sie unsere Sammlung vergangener Artikel, Einblicke und Publikationen.",
-      img: "/assets/images/blog2.png",
+      desc:
+        lang === "EN"
+          ? "Explore our collection of past articles, insights, and publications."
+          : "Entdecken Sie unsere Sammlung vergangener Artikel, Einblicke und Publikationen.",
+      img: archiveBlog ? archiveBlog.img : "/assets/images/blog2.png",
       imgAlt: lang === "EN" ? "Archive" : "Archiv",
       date: "",
       read: "",
@@ -459,9 +465,13 @@ const BlogSection = ({ setIsOpen }) => {
                   setActive("archive");
                   setCurrentPage(1);
                   setTimeout(() => {
-                    const sectionElement = document.getElementById("articles-section");
+                    const sectionElement =
+                      document.getElementById("articles-section");
                     if (sectionElement) {
-                      sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                      sectionElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
                     }
                   }, 50);
                 }}
@@ -592,11 +602,19 @@ const BlogSection = ({ setIsOpen }) => {
 
 const Card = ({ item, isLiked, onLike, onArchiveClick }) => {
   if (item.isArchiveCard) {
+    const isDirectLink = item.link && item.link !== "#";
+    const CardContainer = isDirectLink ? Link : "button";
+
     return (
-      <button
+      <CardContainer
+        to={isDirectLink ? item.link : undefined}
         onClick={(e) => {
-          e.preventDefault();
-          if (onArchiveClick) onArchiveClick();
+          if (!isDirectLink) {
+            e.preventDefault();
+            if (onArchiveClick) onArchiveClick();
+          } else {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }
         }}
         className="group bg-white rounded-[18px] overflow-hidden border border-[#e6dfd5] hover:-translate-y-1 transition duration-300 flex flex-col justify-between h-full text-left w-full cursor-pointer"
       >
@@ -629,15 +647,7 @@ const Card = ({ item, isLiked, onLike, onArchiveClick }) => {
             </p>
           </div>
         </div>
-
-        {/* LINK */}
-        <div className="p-4 pt-0">
-          <div className="flex items-center gap-2 mt-2 text-[#b8965a] text-sm font-semibold">
-            <span>{item.lang === "EN" ? "Explore Archive" : "Archiv durchsuchen"}</span>
-            <Icon name="arrow-right" />
-          </div>
-        </div>
-      </button>
+      </CardContainer>
     );
   }
 
