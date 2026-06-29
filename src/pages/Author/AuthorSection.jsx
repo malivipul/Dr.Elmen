@@ -78,73 +78,103 @@ const AuthorSection = () => {
   const desc = getBi(header?.description, lang);
 
   return (
-    <section id="publications-section" className="bg-white py-[60px]">
-      <div className="max-w-[1420px] mx-auto px-[20px] md:px-[40px]">
-        {/* TITLE */}
-        <div className="text-center mb-14">
-          <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
-            {label}
-          </span>
+   <section id="publications-section" className="bg-white py-[60px]">
+  <div className="max-w-[1420px] mx-auto px-[20px] md:px-[40px]">
 
-          <h2 className="title-font text-3xl md:text-4xl text-black py-4">
-            {title}
-          </h2>
+    {/* TITLE */}
+    <div className="text-center mb-14">
+      <span className="text-[#b8965a] text-xs tracking-[3px] uppercase">
+        {label}
+      </span>
 
+      <h2 className="title-font text-3xl md:text-4xl text-black py-4">
+        {title}
+      </h2>
+
+      <div
+        className="rich-text text-[#0a3e40] max-w-[850px] w-full mx-auto text-[16px] leading-relaxed"
+        dangerouslySetInnerHTML={{ __html: desc }}
+      />
+    </div>
+
+    {/* BOOKS GRID */}
+    <div className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        {formattedBooks.map((book, i) => (
           <div
-            className="rich-text text-[#0a3e40] max-w-[850px] w-full mx-auto text-[16px] leading-relaxed transition-all duration-300"
-            dangerouslySetInnerHTML={{ __html: desc }}
-          />
-        </div>
+            key={i}
+            onClick={() => handleClick(i)}
+            className="
+              group
+              relative
+              rounded-[28px]
+              overflow-hidden
+              cursor-pointer
+              w-full
 
-        {/* BOOKS GRID */}
-        <div className="w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {formattedBooks.map((book, i) => (
+              h-[620px]
+              min-[600px]:h-[820px]
+              min-[636px]:h-[620px]
+
+              md:h-[580px]
+              lg:h-[580px]
+
+              shadow-sm
+              hover:shadow-xl
+              transition-all
+              duration-500
+            "
+          >
+            {/* IMAGE */}
+            <img
+              src={book.img}
+              alt={book.title || "book"}
+              className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-110"
+            />
+
+            {/* OVERLAY */}
+            <div
+              className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+                activeIndex === i
+                  ? "opacity-100"
+                  : "opacity-0 group-hover:opacity-100"
+              } bg-black/20`}
+            >
+              {/* BLUR BOX */}
               <div
-                key={i}
-                onClick={() => handleClick(i)}
-                className="group relative rounded-[28px] overflow-hidden cursor-pointer w-full h-[620px] md:h-[580px] lg:h-[580px] shadow-sm hover:shadow-xl transition-all duration-500"               >
-                {/* IMAGE */}
-                <img
-                  src={book.img}
-                  alt={book.title || "book"}
-                  className="w-full h-full object-cover transition duration-500 group-hover:scale-110"
-                />
-
-                {/* OVERLAY */}
-                <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${activeIndex === i
-                      ? "opacity-100"
-                      : "opacity-0 group-hover:opacity-100"
-                    } bg-black/20`}
+                className={`bg-white/30 backdrop-blur-md border border-white/20 rounded-[24px] shadow-[0_10px_35px_rgba(0,0,0,0.18)] w-[calc(100%-40px)] h-[calc(100%-40px)] flex flex-col items-center justify-center p-6 text-center transition-all duration-500 ${
+                  activeIndex === i
+                    ? "scale-100"
+                    : "scale-95 group-hover:scale-100"
+                }`}
+              >
+                <Link
+                  to={book.link}
+                  target="_blank"
+                  rel="noreferrer"
                 >
-                  {/* BLUR BOX */}
-                  <div
-                    className={`bg-white/30 backdrop-blur-md border border-white/20 rounded-[24px] shadow-[0_10px_35px_rgba(0,0,0,0.18)] w-[calc(100%-40px)] h-[calc(100%-40px)] flex flex-col items-center justify-center p-6 text-center transition-all duration-500 ${activeIndex === i
-                        ? "scale-100"
-                        : "scale-95 group-hover:scale-100"
-                      }`}
-                  >
-                    {/* BUTTON */}
-                    <Link to={book.link} target="_blank" rel="noreferrer">
-                      <span className="px-6 py-2.5 rounded-full bg-[#b8965a] text-white text-xs font-bold border border-[#b8965a] hover:bg-white hover:text-[#b8965a] transition duration-300 inline-block">
-                        {lang === "EN" ? "Order now →" : "Jetzt bestellen →"}
-                      </span>
-                    </Link>
-                  </div>
-                </div>
+                  <span className="px-6 py-2.5 rounded-full bg-[#b8965a] text-white text-xs font-bold border border-[#b8965a] hover:bg-white hover:text-[#b8965a] transition duration-300 inline-block">
+                    {lang === "EN"
+                      ? "Order now →"
+                      : "Jetzt bestellen →"}
+                  </span>
+                </Link>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-
-        {bookList.length === 0 && (
-          <div className="text-center py-20 bg-gray-50 rounded-[30px] border border-dashed border-gray-200">
-            <p className="text-gray-400 italic">No publications found.</p>
-          </div>
-        )}
+        ))}
       </div>
-    </section>
+    </div>
+
+    {bookList.length === 0 && (
+      <div className="text-center py-20 bg-gray-50 rounded-[30px] border border-dashed border-gray-200">
+        <p className="text-gray-400 italic">
+          No publications found.
+        </p>
+      </div>
+    )}
+  </div>
+</section>
   );
 };
 
