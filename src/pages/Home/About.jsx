@@ -99,14 +99,13 @@ const About = () => {
             <div className="flex flex-col lg:flex-row items-center justify-center lg:items-start gap-8">
               {/* LEFT SIDE */}
               <div className="w-full flex flex-col items-center">
-                {/* IMAGE */}
-                <div className="w-full  h-[330px] rounded-[20px]  shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
-                  <img
-                    src={imgUrl}
-                    className="w-full h-full object-cover"
-                    alt="Dr. Raphael Edlmann Profile Photo"
-                  />
-                </div>
+                <div className="w-full h-[330px] min-[700px]:h-[520px] md:h-[650px] lg:h-[330px] rounded-[20px] overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.18)]">
+  <img
+    src={imgUrl}
+    className="w-full h-full object-cover object-top"
+    alt="Dr. Raphael Edlmann Profile Photo"
+  />
+</div>
 
                 {/* BUTTONS */}
                 <div className="flex flex-col gap-3 mt-6 w-full">
