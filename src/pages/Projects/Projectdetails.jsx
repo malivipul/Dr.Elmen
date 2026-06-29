@@ -119,12 +119,12 @@ export default function ProjectsSection() {
                   setFlippedCard(flippedCard === index ? null : index)
                 }
               >
-                {/* FLIP CARD */}
+                {/* FLIP CARD CONTAINER */}
                 <div
                   className={`
                     relative w-full
                     transition-all duration-700
-                    h-auto min-h-[300px md:min-h-[350px]
+                    h-auto min-h-[300px] md:min-h-[350px]
                     [transform-style:preserve-3d]
                     lg:group-hover:[transform:rotateY(180deg)]
 
@@ -143,13 +143,17 @@ export default function ProjectsSection() {
                       overflow-hidden
 
                       md:absolute md:inset-0
+                      
+                      /* Safari Fixes */
                       [backface-visibility:hidden]
+                      [-webkit-backface-visibility:hidden]
+                      [transform:translateZ(0)]
 
                       ${flippedCard === index ? "hidden md:block" : "block"}
                     `}
                   >
-                    {/* LOGOS */}
-                    <div className="flex items-center gap-2 md:gap-3 flex-nowrap mb-7 relative z-10 overflow-x-auto scrollbar-hide">
+                    {/* LOGOS - Added [transform:translateZ(1px)] for Safari */}
+                    <div className="flex items-center gap-2 md:gap-3 flex-nowrap mb-7 relative z-10 overflow-x-auto scrollbar-hide [transform:translateZ(1px)]">
                       {itemLogos.map((logo, i) => (
                         <div
                           key={i}
@@ -159,28 +163,21 @@ export default function ProjectsSection() {
                             src={getLogoUrl(logo)}
                             alt="logo"
                             className="h-[32px] md:h-[46px] w-auto object-contain"
+                            style={{ WebkitBackfaceVisibility: "hidden" }}
                           />
                         </div>
                       ))}
                     </div>
 
-                    {/* TITLE */}
-                    <h3 className="title-font text-[20px] md:text-[26px] text-black leading-[1.45] mb-4 relative z-10">
+                    {/* TITLE - Added [transform:translateZ(1px)] */}
+                    <h3 className="title-font text-[20px] md:text-[26px] text-black leading-[1.45] mb-4 relative z-10 [transform:translateZ(1px)]">
                       {itemTitle}
                     </h3>
 
-                    {/* ROLE */}
-                    <p className="text-[13px] uppercase tracking-[2px] text-[#b8965a] mb-5 relative z-10">
+                    {/* ROLE - Added [transform:translateZ(1px)] */}
+                    <p className="text-[13px] uppercase tracking-[2px] text-[#b8965a] mb-5 relative z-10 [transform:translateZ(1px)]">
                       {itemRole}
                     </p>
-
-                    {/* LINE */}
-                    {/* <div className="w-full h-[1px] bg-[#ece6dc] mb-5"></div> */}
-
-                    {/* DESCRIPTION */}
-                    {/* <p className="text-[16px] text-[#0a3e40] leading-[29px] relative z-10">
-                      {itemDesc}
-                    </p> */}
                   </div>
 
                   {/* BACK SIDE */}
@@ -200,7 +197,10 @@ export default function ProjectsSection() {
                       md:h-full
                       md:overflow-y-auto md:overflow-x-hidden scrollbar-hide
                       [transform:rotateY(180deg)]
+                      
+                      /* Safari Fixes */
                       [backface-visibility:hidden]
+                      [-webkit-backface-visibility:hidden]
 
                       ${flippedCard === index ? "block" : "hidden md:block"}
                     `}

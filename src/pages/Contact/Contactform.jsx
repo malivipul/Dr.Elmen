@@ -485,7 +485,7 @@ const ContactForm = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center h-[46px] px-7 gap-3 rounded-full bg-[#b8965a] border border-[#b8965a] text-white text-[13px] font-bold tracking-[1.5px] hover:bg-transparent hover:text-[#b8965a] transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center justify-center h-[46px] px-7 gap-3 rounded-full bg-[#b8965a] border border-[#b8965a] text-white text-[13px] font-bold  hover:bg-transparent hover:text-[#b8965a] transition-all duration-300 disabled:opacity-50 cursor-pointer"
                 >
                   {submitting
                     ? lang === "EN"
