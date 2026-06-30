@@ -116,9 +116,11 @@ const About = () => {
                     {lang === "EN" ? "Contact Me" : "Kontakt  "}
                   </Link>
 
-                  {/* DOWNLOAD CV */}
+                {/* DOWNLOAD CV */}
                   <a
                     href={cvUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     download={
                       lang === "EN"
                         ? "Dr_Raphael_Edlmann_CV_EN.pdf"
