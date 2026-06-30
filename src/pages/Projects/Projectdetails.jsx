@@ -124,7 +124,7 @@ export default function ProjectsSection() {
                   className={`
                     relative w-full
                     transition-all duration-700
-                    h-auto min-h-[300px] md:min-h-[350px]
+                    h-auto min-h-0 md:min-h-[350px]
                     [transform-style:preserve-3d]
                     lg:group-hover:[transform:rotateY(180deg)]
 

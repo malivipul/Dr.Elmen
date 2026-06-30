@@ -275,10 +275,12 @@ const VitaTimeline = () => {
             <div className="custom-dots flex items-center justify-center gap-2"></div>
           </div>
 
-          {/* RIGHT SIDE */}
+        {/* RIGHT SIDE */}
           <div className="z-20">
             <a
               href={cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               download={
                 lang === "EN"
                   ? "Dr_Raphael_Edlmann_CV_EN.pdf"
