@@ -19,6 +19,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Imprint = lazy(() => import("./pages/Imprint"));
 const PrivacyPolicy = lazy(() => import("./pages/Privacy-policy"));
 const SubscribeConfirm = lazy(() => import("./pages/SubscribeConfirm"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe"));
 
 /* HASH SCROLL */
 function ScrollToHash() {
@@ -103,6 +104,7 @@ function App() {
           <Route path="/imprint" element={<Imprint />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/subscribe-confirm" element={<SubscribeConfirm />} />
+          <Route path="/unsubscribe" element={<Unsubscribe />} />
 
           <Route
             path="/workshops-details/:slug"
