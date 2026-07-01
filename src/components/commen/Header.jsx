@@ -87,13 +87,13 @@ const Header = () => {
                   ${hoverIndex === "insights" ? "font-['Caveat']" : ""}
                 `}
               >
-                Future of Work Insights
+                Future of Work
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                Future of Work Insights
+               Future of Work
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                Future of Work Insights
+                Future of Work
               </span>
               <span
                 className={`
@@ -557,7 +557,7 @@ const Header = () => {
                   }
                 `}
               >
-                Future of Work Insights
+Future of Work
               </span>
             </Link>
 

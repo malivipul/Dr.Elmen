@@ -65,8 +65,8 @@ const Footer = () => {
             {/* TEXT */}
             <p className="text-sm text-white/60 leading-relaxed max-w-[320px] text-center md:text-left">
               {lang === "EN"
-                ? "Interim Manager | AI, HR & Digital Transformation Expert"
-                : "Interim Manager | Experte für KI, HR & Digitale Transformation"}
+                ? "Interim Manager | HR & Digital Transformation Expert"
+                : " Interim Manager | Experte für HR & Digitale Transformation"}
             </p>
 
             {/* SOCIAL */}
@@ -148,8 +148,8 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                  Future of Work Insights
-                </Link>
+                  Future of
+                  Work                </Link>
               </li>
 
               <li>

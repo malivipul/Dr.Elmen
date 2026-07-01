@@ -17,7 +17,7 @@ const AboutBanner = () => {
     });
   }, []);
 
-  const title = getBi(banner?.title, lang) || (lang === "EN" ? "Future of Work Insights" : "Future of Work Insights");
+  const title = getBi(banner?.title, lang) || (lang === "EN" ? "Future of Work" : "Future of Work");
   const bannerImg = banner?.img ? `${IMG_URL}${banner.img}` : "/assets/images/Untitled design (47).png";
 
   return (
