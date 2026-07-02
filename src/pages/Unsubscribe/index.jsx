@@ -28,8 +28,8 @@ const Unsubscribe = () => {
       setStatus("success");
       setMessage(
         lang === "EN"
-          ? "You have been successfully unsubscribed from our newsletter."
-          : "Sie wurden erfolgreich von unserem Newsletter abgemeldet."
+          ? "We've removed you from our list.\nYou'll no longer receive our newsletter. If you'd like to reconnect in the future, you're always welcome."
+          : "Sie erhalten unseren Newsletter ab sofort nicht mehr. Wenn Sie sich in Zukunft wieder anmelden möchten, freuen wir uns, Sie jederzeit wieder begrüßen zu dürfen.",
       );
       return;
     }
@@ -40,7 +40,7 @@ const Unsubscribe = () => {
       setMessage(
         lang === "EN"
           ? "No subscriber email address was provided in the unsubscribe link."
-          : "Im Abmeldelink wurde keine E-Mail-Adresse des Abonnenten angegeben."
+          : "Im Abmeldelink wurde keine E-Mail-Adresse des Abonnenten angegeben.",
       );
       return;
     }
@@ -51,8 +51,8 @@ const Unsubscribe = () => {
           setStatus("success");
           setMessage(
             lang === "EN"
-              ? "You have been successfully unsubscribed from our newsletter."
-              : "Sie wurden erfolgreich von unserem Newsletter abgemeldet."
+              ? "We've removed you from our list.\nYou'll no longer receive our newsletter. If you'd like to reconnect in the future, you're always welcome."
+              : "Sie erhalten unseren Newsletter ab sofort nicht mehr. Wenn Sie sich in Zukunft wieder anmelden möchten, freuen wir uns, Sie jederzeit wieder begrüßen zu dürfen.",
           );
         } else {
           setStatus("error");
@@ -60,7 +60,7 @@ const Unsubscribe = () => {
             res.data?.message ||
               (lang === "EN"
                 ? "Failed to unsubscribe. The link might be invalid or expired."
-                : "Abmeldung fehlgeschlagen. Der Link ist möglicherweise ungültig oder abgelaufen.")
+                : "Abmeldung fehlgeschlagen. Der Link ist möglicherweise ungültig oder abgelaufen."),
           );
         }
       })
@@ -71,7 +71,7 @@ const Unsubscribe = () => {
           err.response?.data?.message ||
             (lang === "EN"
               ? "An error occurred while processing your unsubscribe request. Please try again later."
-              : "Bei der Bearbeitung Ihrer Abmeldung ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.")
+              : "Bei der Bearbeitung Ihrer Abmeldung ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."),
         );
       });
   }, [email, isDirectSuccess, directError, lang]);
@@ -79,10 +79,8 @@ const Unsubscribe = () => {
   return (
     <>
       <SEO page="privacy-policy" /> {/* Fallback layout metadata */}
-      
       <section className="bg-[#f5f3ef] min-h-[70vh] flex items-center justify-center py-20 px-4">
         <div className="w-full max-w-[500px] bg-white rounded-[32px] p-8 md:p-12 shadow-xl border border-[#ece6dc] text-center animate-fadeIn">
-          
           {/* LOADING STATE */}
           {status === "loading" && (
             <div className="space-y-6">
@@ -154,7 +152,6 @@ const Unsubscribe = () => {
               </div>
             </div>
           )}
-
         </div>
       </section>
     </>
