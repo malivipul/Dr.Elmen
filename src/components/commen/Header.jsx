@@ -25,7 +25,7 @@ const Header = () => {
       {/* HEADER */}
       <div className="max-w-[1450px] mx-auto px-[20px] md:px-[40px] py-6 flex items-center justify-start lg:justify-between relative">
         {/* LEFT MENU */}
-        <div className="hidden lg:flex items-center gap-6 flex-1 justify-end">
+        <div className="hidden lg:flex items-center gap-8 flex-1 justify-end">
           {/* About Me */}
           <Link
             to="/about"
@@ -205,7 +205,7 @@ const Header = () => {
         </div>
 
         {/* RIGHT MENU */}
-        <div className="hidden lg:flex items-center gap-6 flex-1 justify-start">
+        <div className="hidden lg:flex items-center gap-8 flex-1 justify-start">
           {/* Vita */}
           <Link
             to="/vita"

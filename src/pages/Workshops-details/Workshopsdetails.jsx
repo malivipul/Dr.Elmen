@@ -322,8 +322,8 @@ export default function WorkshopDetailsPage() {
               {/* TITLE */}
               <h3 className="title-font text-[24px] md:text-[26px] text-black mb-5 relative z-10 leading-[1.3]">
                 {lang === "EN"
-                  ? "Workshops & Consulting"
-                  : "Workshops & Beratung"}
+                  ? "Consulting"
+                  : "Consulting"}
               </h3>
  
               {/* SERVICES */}
