@@ -90,14 +90,14 @@ const ServicesSection = () => {
   const hTitle = header
     ? getBi(header.title, lang)
     : lang === "EN"
-      ? "Workshops & Consulting"
-      : "Workshops & Consulting";
-  const hDesc = header
-    ? getBi(header.description, lang)
-    : lang === "EN"
-      ? "From strategic advisory to hands-on implementation — I deliver across the full transformation lifecycle."
-      : "Von der strategischen Beratung bis zur operativen Umsetzung – ich begleite Transformation über den gesamten Veränderungsprozess hinweg.";
+      ? "Consulting"
+      : "Consulting";
+ const rawDesc = header ? getBi(header.description, lang) : (lang === "EN" 
+  ? "From strategic advisory to hands-on implementation — I deliver across the full transformation lifecycle." 
+  : "Von der strategischen Beratung bis zur operativen Umsetzung – ich begleite Transformation über den gesamten Veränderungsprozess hinweg.");
 
+// This removes <p> or any other HTML tags
+const hDesc = rawDesc.replace(/<\/?[^>]+(>|$)/g, "");
   return (
     <section className="bg-[#f4f4f4] py-[60px]">
       {/* TOP HEADER */}

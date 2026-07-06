@@ -32,7 +32,7 @@ const AboutBanner = () => {
   }
 
   const bannerTitle =
-    getBi(banner?.title, lang) || (lang === "EN" ? "Workshops" : "Workshops");
+    getBi(banner?.title, lang) || (lang === "EN" ? " Consulting" : " Consulting");
   const bannerImg = banner?.img;
   const imageUrl = bannerImg
     ? `${IMG_URL}${bannerImg}`

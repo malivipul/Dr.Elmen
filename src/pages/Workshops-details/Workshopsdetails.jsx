@@ -255,8 +255,8 @@ export default function WorkshopDetailsPage() {
                   ←
                 </span>
                 {lang === "EN"
-                  ? "Back to Workshops"
-                  : "Zurück zu den Workshops"}
+                  ? "Back to Consulting"
+                  : "Zurück zu den Consulting"}
               </Link>
  
               {/* BG EFFECT */}

@@ -217,7 +217,7 @@ const Footer = () => {
                   }
                   className="hover:text-[#b8965a] transition"
                 >
-                  Workshops
+                   Consulting
                 </Link>
               </li>
 

@@ -309,13 +309,13 @@ const Header = () => {
                   ${hoverIndex === "workshops" ? "font-['Caveat']" : ""}
                 `}
               >
-                Workshops
+                 Consulting
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-semibold tracking-wide whitespace-nowrap">
-                Workshops
+                 Consulting
               </span>
               <span className="invisible block h-0 select-none text-[16px] font-['Caveat'] tracking-wide whitespace-nowrap">
-                Workshops
+                 Consulting
               </span>
               <span
                 className={`

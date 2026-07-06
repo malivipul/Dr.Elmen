@@ -4,6 +4,7 @@ import { useEffect, lazy, Suspense } from "react";
 import Header from "./components/commen/Header";
 import Footer from "./components/commen/Footer";
 import ScrollToTop from "./components/commen/ScrollToTop";
+import CookieModal from "./components/model/CookieModal";
 
 // Pages
 const Home = lazy(() => import("./pages/Home"));
@@ -115,6 +116,9 @@ function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Cookie Modal */}
+      <CookieModal />
     </>
   );
 }

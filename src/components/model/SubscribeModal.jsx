@@ -106,8 +106,8 @@ const SubscribeModal = ({ isOpen, setIsOpen }) => {
           {/* TITLE */}
           <h2 className="title-font text-[24px] md:text-[28px] leading-tight text-black">
             {lang === "EN"
-              ? "Subscribe to Future of Work Insights"
-              : "Future of Work Insights abonnieren"}
+              ? "Subscribe to Future of Work"
+              : "Future of Work abonnieren"}
           </h2>
 
           {/* DESC */}
