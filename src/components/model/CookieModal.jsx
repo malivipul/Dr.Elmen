@@ -5,7 +5,7 @@ import { saveCookieConsent, getCookieConsent } from "../../api/api";
 const translations = {
   EN: {
     title: "We Value Your Privacy",
-    description: "We use cookies and other tracking technologies to improve your browsing experience on our website, to show you personalized content and targeted ads, to analyze our website traffic, and to understand where our visitors are coming from. You can customize your preferences below.",
+    description: "We use cookies and other tracking technologies to improve your browsing experience on our website, to show you personalised content and targeted advertisements, to analyse our website traffic, and to understand where our visitors are coming from.",
     agree: "I agree",
     decline: "I decline",
     customize: "Change my preferences",
@@ -35,7 +35,7 @@ const translations = {
   },
   DE: {
     title: "Wir schätzen Ihre Privatsphäre",
-    description: "Wir verwenden Cookies und andere Tracking-Technologien, um Ihr Surferlebnis auf unserer Website zu verbessern, personalisierte Inhalte und zielgerichtete Werbung anzuzeigen, unseren Website-Verkehr zu analysieren und zu verstehen, woher unsere Besucher kommen. Sie können Ihre Einstellungen unten anpassen.",
+    description: "Wir verwenden Cookies und andere Tracking-Technologien, um Ihr Nutzungserlebnis auf unserer Website zu verbessern, Ihnen personalisierte Inhalte und gezielte Werbung anzuzeigen, den Datenverkehr auf unserer Website zu analysieren und nachzuvollziehen, woher unsere Besucher kommen.",
     agree: "Ich stimme zu",
     decline: "Ich lehne ab",
     customize: "Meine Einstellungen ändern",
@@ -325,7 +325,7 @@ const CookieModal = () => {
             >
               {t.savePreferences}
             </button>
-            
+
           </div>
         </>
       )}
