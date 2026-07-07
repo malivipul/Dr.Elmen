@@ -316,7 +316,7 @@ const BlogSection = ({ setIsOpen }) => {
         </div>
         {/* LATEST ARTICLE HEADING */}
         <h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
-          Latest Article
+          {lang === "EN" ? "Latest Article" : "Neuester Artikel"}
         </h3>
         {/* LATEST ARTICLE */}
         {latestArticle ? (
@@ -353,7 +353,7 @@ const BlogSection = ({ setIsOpen }) => {
                       to={latestArticle.link}
                       className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2 cursor-pointer"
                     >
-                      Read Article
+                      {lang === "EN" ? "Read Article" : "Artikel lesen"}
                       <Icon name="arrow-right" />
                     </Link>
                   </div>
@@ -375,7 +375,7 @@ const BlogSection = ({ setIsOpen }) => {
             {recentArticles.length > 0 && (
               <div className="mb-10">
                 <h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
-                  Recent Articles
+                  {lang === "EN" ? "Recent Articles" : "Aktuelle Artikel"}
                 </h3>
 
                 <Swiper
@@ -411,7 +411,7 @@ const BlogSection = ({ setIsOpen }) => {
                 to="/insights"
                 className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center justify-center"
               >
-                View More Articles
+                {lang === "EN" ? "View More Articles" : "Weitere Artikel anzeigen"}
               </Link>
             </div>
           </>

@@ -379,7 +379,7 @@ const BlogSection = ({ setIsOpen }) => {
         </div>
         {/* LATEST ARTICLE HEADING */}
         <h3 className="text-left text-[#b8965a] text-[16px]  font-bold mb-5">
-          Latest Article
+          {lang === "EN" ? "Latest Article" : "Neuester Artikel"}
         </h3>
         {/* BIG BLOG */}
         {currentPage === 1 && latestArticle && (
@@ -411,10 +411,6 @@ const BlogSection = ({ setIsOpen }) => {
                   {latestArticle.title}
                 </h3>
 
-                {/* <p className="text-[#0a3e40] text-[16px] leading-[1.9] mt-4 max-w-[500px] line-clamp-3">
-                  {latestArticle.desc}
-                </p> */}
-
                 <div className="flex items-center gap-4 mt-5 text-[#7b7b7b] text-sm">
                   <span>{latestArticle.date}</span>
 
@@ -431,7 +427,7 @@ const BlogSection = ({ setIsOpen }) => {
                     to={latestArticle.link}
                     className="px-8 py-3 rounded-full bg-[#b8965a] text-white text-sm font-bold border border-[#b8965a] hover:bg-transparent hover:text-[#b8965a] transition duration-300 inline-flex items-center gap-2"
                   >
-                    Read Article
+                    {lang === "EN" ? "Read Article" : "Artikel lesen"}
                     <Icon name="arrow-right" />
                   </Link>
                 </div>
@@ -452,30 +448,35 @@ const BlogSection = ({ setIsOpen }) => {
 
         {/* ALL BLOGS */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-            {displayedRecentArticles.map((item, i) => (
-              <Card
-                key={i}
-                item={item}
-                isLiked={likedArticles.includes(item._id)}
-                onLike={(e) => handleLike(e, item._id)}
-                onArchiveClick={() => {
-                  setActive("archive");
-                  setCurrentPage(1);
-                  setTimeout(() => {
-                    const sectionElement =
-                      document.getElementById("articles-section");
-                    if (sectionElement) {
-                      sectionElement.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                    }
-                  }, 50);
-                }}
-              />
-            ))}
-          </div>
+          <>
+            <h3 className="text-left text-[#b8965a] text-[16px] font-bold mb-5">
+              {lang === "EN" ? "Recent Articles" : "Aktuelle Artikel"}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+              {displayedRecentArticles.map((item, i) => (
+                <Card
+                  key={i}
+                  item={item}
+                  isLiked={likedArticles.includes(item._id)}
+                  onLike={(e) => handleLike(e, item._id)}
+                  onArchiveClick={() => {
+                    setActive("archive");
+                    setCurrentPage(1);
+                    setTimeout(() => {
+                      const sectionElement =
+                        document.getElementById("articles-section");
+                      if (sectionElement) {
+                        sectionElement.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                      }
+                    }, 50);
+                  }}
+                />
+              ))}
+            </div>
+          </>
         ) : (
           <div className="py-20 text-center ">
             <div className="w-16 h-16 bg-[#f5f3ef] rounded-full flex items-center justify-center mx-auto mb-4 text-[#b8965a]">
@@ -507,7 +508,7 @@ const BlogSection = ({ setIsOpen }) => {
                 }}
                 className="mt-6 text-[#b8965a] font-bold text-sm hover:underline cursor-pointer"
               >
-                {lang === "EN" ? "Show all articles" : "Alle Artikel anzeigen"}
+                {lang === "EN" ? "View More Articles" : "Weitere Artikel anzeigen"}
               </button>
             )}
           </div>
