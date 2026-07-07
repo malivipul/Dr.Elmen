@@ -449,33 +449,37 @@ const BlogSection = ({ setIsOpen }) => {
         {/* ALL BLOGS */}
         {filtered.length > 0 ? (
           <>
-            <h3 className="text-left text-[#b8965a] text-[16px] font-bold mb-5">
-              {lang === "EN" ? "Recent Articles" : "Aktuelle Artikel"}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-              {displayedRecentArticles.map((item, i) => (
-                <Card
-                  key={i}
-                  item={item}
-                  isLiked={likedArticles.includes(item._id)}
-                  onLike={(e) => handleLike(e, item._id)}
-                  onArchiveClick={() => {
-                    setActive("archive");
-                    setCurrentPage(1);
-                    setTimeout(() => {
-                      const sectionElement =
-                        document.getElementById("articles-section");
-                      if (sectionElement) {
-                        sectionElement.scrollIntoView({
-                          behavior: "smooth",
-                          block: "start",
-                        });
-                      }
-                    }, 50);
-                  }}
-                />
-              ))}
-            </div>
+            {displayedRecentArticles.length > 0 && (
+              <>
+                <h3 className="text-left text-[#b8965a] text-[16px] font-bold mb-5">
+                  {lang === "EN" ? "Recent Articles" : "Aktuelle Artikel"}
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+                  {displayedRecentArticles.map((item, i) => (
+                    <Card
+                      key={i}
+                      item={item}
+                      isLiked={likedArticles.includes(item._id)}
+                      onLike={(e) => handleLike(e, item._id)}
+                      onArchiveClick={() => {
+                        setActive("archive");
+                        setCurrentPage(1);
+                        setTimeout(() => {
+                          const sectionElement =
+                            document.getElementById("articles-section");
+                          if (sectionElement) {
+                            sectionElement.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
+                          }
+                        }, 50);
+                      }}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </>
         ) : (
           <div className="py-20 text-center ">
