@@ -41,7 +41,7 @@ const translations = {
     decline: "Ich lehne ab",
     customize: "Meine Einstellungen ändern",
     preferences: "Cookie-Einstellungen",
-    prefDescription: "Sie können auswählen, welche Cookies Sie zulassen möchten. Notwendige Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.",
+    prefDescription: "Cookie-Einstellungen Sie können auswählen, welche Cookies Sie zulassen möchten. Notwendige Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.",
     acceptAll: "Alle akzeptieren",
     rejectAll: "Alle ablehnen",
     savePreferences: "Einstellungen speichern",
