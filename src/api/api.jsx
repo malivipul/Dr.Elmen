@@ -124,4 +124,9 @@ export const getSettings = () => api.get("/settings/get");
 // --- META ---
 export const getMetaByPage = (page) => api.get(`/meta/${page}`);
 
+// --- COOKIE CONSENT ---
+export const saveCookieConsent = (data) => api.post("/v1/cookies/consent", data);
+export const getCookieConsent = (visitorId) => api.get(`/v1/cookies/consent/${visitorId}`);
+export const updateCookieConsent = (visitorId, data) => api.put(`/v1/cookies/consent/${visitorId}`, data);
+
 export default api;
