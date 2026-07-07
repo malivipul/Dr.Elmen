@@ -10,6 +10,7 @@ const translations = {
     decline: "I decline",
     customize: "Change my preferences",
     preferences: "Cookie Preferences",
+    prefDescription: "You can choose which cookies you would like to allow. Strictly necessary cookies are required for the website to function properly and cannot be disabled.",
     acceptAll: "Accept All",
     rejectAll: "Reject All",
     savePreferences: "Save Preferences",
@@ -17,19 +18,19 @@ const translations = {
     categories: {
       necessary: {
         title: "Strictly Necessary Cookies",
-        desc: "These cookies are essential for the website to function properly. They cannot be disabled."
+        // desc: "These cookies are essential for the website to function properly. They cannot be disabled."
       },
       preferences: {
         title: "Preference Cookies",
-        desc: "These cookies enable the website to remember information that changes the way the website behaves or looks, like your preferred language."
+        // desc: "These cookies enable the website to remember information that changes the way the website behaves or looks, like your preferred language."
       },
       analytics: {
         title: "Analytics Cookies",
-        desc: "These cookies help us understand how visitors interact with the website by collecting and reporting information anonymously."
+        // desc: "These cookies help us understand how visitors interact with the website by collecting and reporting information anonymously."
       },
       marketing: {
         title: "Marketing Cookies",
-        desc: "These cookies are used to track visitors across websites to allow publishers to display relevant and engaging ads."
+        // desc: "These cookies are used to track visitors across websites to allow publishers to display relevant and engaging ads."
       }
     }
   },
@@ -40,6 +41,7 @@ const translations = {
     decline: "Ich lehne ab",
     customize: "Meine Einstellungen ändern",
     preferences: "Cookie-Einstellungen",
+    prefDescription: "Sie können auswählen, welche Cookies Sie zulassen möchten. Notwendige Cookies sind für den Betrieb der Website erforderlich und können nicht deaktiviert werden.",
     acceptAll: "Alle akzeptieren",
     rejectAll: "Alle ablehnen",
     savePreferences: "Einstellungen speichern",
@@ -47,19 +49,19 @@ const translations = {
     categories: {
       necessary: {
         title: "Unbedingt erforderliche Cookies",
-        desc: "Diese Cookies sind für das ordnungsgemäße Funktionieren der Website unerlässlich. Sie können nicht deaktiviert werden."
+        // desc: "Diese Cookies sind für das ordnungsgemäße Funktionieren der Website unerlässlich. Sie können nicht deaktiviert werden."
       },
       preferences: {
         title: "Präferenz-Cookies",
-        desc: "Diese Cookies ermöglichen es der Website, sich an Informationen zu erinnern, die das Verhalten oder Aussehen der Website verändern, wie z. B. Ihre bevorzugte Sprache."
+        // desc: "Diese Cookies ermöglichen es der Website, sich an Informationen zu erinnern, die das Verhalten oder Aussehen der Website verändern, wie z. B. Ihre bevorzugte Sprache."
       },
       analytics: {
         title: "Analyse-Cookies",
-        desc: "Diese Cookies helfen uns zu verstehen, wie Besucher mit der Website interagieren, indem sie Informationen anonym sammeln und melden."
+        // desc: "Diese Cookies helfen uns zu verstehen, wie Besucher mit der Website interagieren, indem sie Informationen anonym sammeln und melden."
       },
       marketing: {
         title: "Marketing-Cookies",
-        desc: "Diese Cookies werden verwendet, um Besuchern über Websites hinweg zu folgen, damit Publisher relevante und ansprechende Werbung anzeigen können."
+        // desc: "Diese Cookies werden verwendet, um Besuchern über Websites hinweg zu folgen, damit Publisher relevante und ansprechende Werbung anzeigen können."
       }
     }
   }
@@ -229,6 +231,12 @@ const CookieModal = () => {
         {showPreferences ? t.preferences : t.title}
       </h3>
 
+      {showPreferences && (
+        <p className="text-gray-300 text-[14px] md:text-[15px] leading-relaxed mb-2">
+          {t.prefDescription}
+        </p>
+      )}
+
       {!showPreferences ? (
         <>
           <p className="text-gray-300 text-[14px] md:text-[15px] leading-relaxed mb-2">
@@ -262,51 +270,59 @@ const CookieModal = () => {
         <>
           <div className="space-y-4 my-2 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
             {/* Strictly Necessary */}
-            <div className="flex items-start justify-between gap-2 p-2 mb-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
+            <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
               <div className="flex-1 pr-2">
                 <h4 className="text-[14px] font-bold text-[#b8965a]">{t.categories.necessary.title}</h4>
-                <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.necessary.desc}</p>
+                {t.categories.necessary.desc && (
+                  <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.necessary.desc}</p>
+                )}
               </div>
-              <div className="pt-1">
+              <div className="flex-shrink-0">
                 <Toggle checked={true} disabled={true} onChange={() => { }} />
               </div>
             </div>
 
             {/* Preferences */}
-            <div className="flex items-start justify-between gap-2 p-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
+            <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
               <div className="flex-1 pr-2">
                 <h4 className="text-[14px] font-bold text-white">{t.categories.preferences.title}</h4>
-                <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.preferences.desc}</p>
+                {t.categories.preferences.desc && (
+                  <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.preferences.desc}</p>
+                )}
               </div>
-              <div className="pt-1">
+              <div className="flex-shrink-0">
                 <Toggle checked={preferences} onChange={setPreferences} />
               </div>
             </div>
 
             {/* Analytics */}
-            <div className="flex items-start justify-between gap-2 p-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
+            <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
               <div className="flex-1 pr-2">
                 <h4 className="text-[14px] font-bold text-white">{t.categories.analytics.title}</h4>
-                <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.analytics.desc}</p>
+                {t.categories.analytics.desc && (
+                  <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.analytics.desc}</p>
+                )}
               </div>
-              <div className="pt-1">
+              <div className="flex-shrink-0">
                 <Toggle checked={analytics} onChange={setAnalytics} />
               </div>
             </div>
 
             {/* Marketing */}
-            <div className="flex items-start justify-between gap-2 p-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
+            <div className="flex items-center justify-between gap-2 p-2 mb-2 rounded-lg bg-[#222222]/50 border border-[#2d2d2d]/30">
               <div className="flex-1 pr-2">
                 <h4 className="text-[14px] font-bold text-white">{t.categories.marketing.title}</h4>
-                <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.marketing.desc}</p>
+                {t.categories.marketing.desc && (
+                  <p className="text-gray-400 text-xs mt-1 leading-normal">{t.categories.marketing.desc}</p>
+                )}
               </div>
-              <div className="pt-1">
+              <div className="flex-shrink-0">
                 <Toggle checked={marketing} onChange={setMarketing} />
               </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-[#2d2d2d]">
+          <div className="flex flex-wrap gap-3 ">
             <button
               onClick={handleAgreeAll}
               className="bg-[#b8965a] border border-[#b8965a] text-white hover:bg-transparent hover:text-[#b8965a] font-semibold px-5 py-2.5 rounded-full transition-all duration-300 cursor-pointer text-sm"
