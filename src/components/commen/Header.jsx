@@ -293,7 +293,7 @@ const Header = () => {
           {/* Workshops */}
           <Link
             to="/workshops"
-            onMouseEnter={() => setHoverIndex("workshops")}
+            onMouseEnter={() => setHoverIndex("Consulting")}
             onMouseLeave={() => setHoverIndex(null)}
             className="relative flex items-center justify-center h-[30px]"
           >
@@ -306,7 +306,7 @@ const Header = () => {
                   whitespace-nowrap
                   transition-all
                   duration-300
-                  ${hoverIndex === "workshops" ? "font-['Caveat']" : ""}
+                  ${hoverIndex === "Consulting" ? "font-['Caveat']" : ""}
                 `}
               >
                  Consulting
@@ -326,7 +326,7 @@ const Header = () => {
                   bg-white
                   transition-all
                   duration-300
-                  ${hoverIndex === "workshops" ? "w-full" : "w-0"}
+                  ${hoverIndex === "Consulting" ? "w-full" : "w-0"}
                 `}
               ></span>
             </span>
@@ -752,7 +752,7 @@ Future of Work
                   }
                 `}
               >
-                Workshops
+                Consulting
               </span>
             </Link>
 
